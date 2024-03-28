@@ -3,3 +3,27 @@ body {
   background-color: #f6f7f8;
   font-family: 'Inter';
 }
+
+.mainSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25em;
+  height: 70vh;
+  border-radius: 30px;
+  background-color: #ffffff;
+}
+
+.logInForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
