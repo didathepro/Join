@@ -14,9 +14,9 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  width: 25em;
+  width: 396px;
   height: 70vh;
   border-radius: 30px;
   background-color: #ffffff;
@@ -24,6 +24,14 @@ body {
 
 .logInForm {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  width: 364px;
+  height: 152px;
+}
+
+.inputs {
+  width: 364px;
+  height: 48px;
+  border-radius: 10px;
+  margin-bottom: 16px;
 }

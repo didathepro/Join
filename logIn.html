@@ -12,11 +12,19 @@
       <div class="content">
         <h2>Log in</h2>
         <form id="logIn" class="logInForm">
-          <input type="email" placeholder="Email" />
-          <input type="password" placeholder="Password" />
-          <input type="checkbox" /><label>Remember me</label>
-          <button>Log in</button>
-          <button>Guest Log in</button>
+          <div class="formInputs">
+            <input type="email" placeholder="Email" class="inputs" />
+            <input type="password" placeholder="Password" class="inputs" />
+            <div class="checkbox">
+              <input type="checkbox" id="checkbox" /><label for="checkbox"
+                >Remember me</label
+              >
+            </div>
+          </div>
+          <div>
+            <button>Log in</button>
+            <button>Guest Log in</button>
+          </div>
         </form>
       </div>
     </section>
