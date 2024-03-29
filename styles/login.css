@@ -4,6 +4,22 @@ body {
   font-family: 'Inter';
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.underline {
+  width: 70%;
+  border-bottom: 3px solid #29abe2;
+}
+
+.title h1 {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
 .mainSection {
   display: flex;
   justify-content: center;
@@ -14,10 +30,10 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   width: 396px;
-  height: 70vh;
+  height: 85vh;
   border-radius: 30px;
   background-color: #ffffff;
 }
@@ -27,11 +43,41 @@ body {
   flex-direction: column;
   width: 364px;
   height: 152px;
+  margin-top: 32px;
 }
 
 .inputs {
   width: 364px;
   height: 48px;
   border-radius: 10px;
+  margin-bottom: 32px;
+}
+
+.btnLog {
+  border: unset;
+  background-color: #2b3646;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 180px;
+  margin: 16px;
+}
+
+.formInputs {
   margin-bottom: 16px;
+}
+
+.btnGuest {
+  border: unset;
+  border: 1px solid #2b3646;
+  border-radius: 10px;
+  padding: 20px;
+  width: 180px;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
