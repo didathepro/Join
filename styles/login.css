@@ -4,6 +4,10 @@ body {
   font-family: 'Inter';
 }
 
+.top {
+  margin: 32px 0 32px 32px;
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -46,11 +50,34 @@ body {
   margin-top: 32px;
 }
 
+.email,
+.password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  height: 52px;
+  margin-bottom: 32px;
+}
+
+.email img,
+.password img {
+  width: 16px;
+  height: 16px;
+  margin: 16px;
+}
+
 .inputs {
-  width: 364px;
+  width: 320px;
   height: 48px;
   border-radius: 10px;
-  margin-bottom: 32px;
+  outline: none;
+  font-size: 24px;
+}
+
+.inputs::placeholder {
+  color: #d1d1d1;
 }
 
 .btnLog {
@@ -75,9 +102,41 @@ body {
   width: 180px;
 }
 
+.labelCheckbox {
+  margin-left: 16px;
+}
+
 .btns {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.registry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.signUp {
+  border: unset;
+  background-color: #2b3646;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 120px;
+  margin-left: 32px;
+}
+
+.terms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.terms p {
+  color: #a8a8a8;
+  margin-right: 32px;
 }

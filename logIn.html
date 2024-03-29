@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="styles/fonts.css" />
   </head>
   <body>
+    <section class="top">
+      <img src="assets/img/joinAnimation.png" alt="JoinLogo" />
+    </section>
     <section class="mainSection">
       <div class="content">
         <div class="title">
@@ -16,10 +19,28 @@
         </div>
         <form id="logIn" class="logInForm">
           <div class="formInputs">
-            <input type="email" placeholder="Email" class="inputs" />
-            <input type="password" placeholder="Password" class="inputs" />
+            <div class="email">
+              <input
+                type="email"
+                placeholder="Email"
+                class="inputs emaiInput"
+                style="border: none"
+              />
+              <img src="assets/img/mail.png" alt="email" />
+            </div>
+            <div class="password">
+              <input
+                type="password"
+                placeholder="Password"
+                class="inputs passwordInput"
+                style="border: none"
+              />
+              <img src="assets/img/lock.png" alt="lock" />
+            </div>
             <div class="checkbox">
-              <input type="checkbox" id="checkbox" /><label for="checkbox"
+              <input type="checkbox" id="checkbox" /><label
+                class="labelCheckbox"
+                for="checkbox"
                 >Remember me</label
               >
             </div>
@@ -30,6 +51,14 @@
           </div>
         </form>
       </div>
+    </section>
+    <section class="registry">
+      <p>Not a Join user?</p>
+      <button class="signUp">Sign up</button>
+    </section>
+    <section class="terms">
+      <p>Privacy Policy</p>
+      <p>Legal notice</p>
     </section>
   </body>
 </html>
