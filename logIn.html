@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="styles/fonts.css" />
   </head>
   <body>
-    <section class="top">
-      <img src="assets/img/joinAnimation.png" alt="JoinLogo" />
+    <section id="top">
+      <div class="logoImg"></div>
     </section>
     <section class="mainSection">
       <div class="content">
@@ -17,7 +17,7 @@
           <h1>Log in</h1>
           <div class="underline"></div>
         </div>
-        <form id="logIn" class="logInForm">
+        <form action="index.html" id="logIn" class="logInForm">
           <div class="formInputs">
             <div class="email">
               <input
@@ -25,6 +25,7 @@
                 placeholder="Email"
                 class="inputs emaiInput"
                 style="border: none"
+                autocomplete="username"
               />
               <img src="assets/img/mail.png" alt="email" />
             </div>
@@ -34,15 +35,16 @@
                 placeholder="Password"
                 class="inputs passwordInput"
                 style="border: none"
+                autocomplete="current-password"
               />
               <img src="assets/img/lock.png" alt="lock" />
             </div>
             <div class="checkbox">
-              <input type="checkbox" id="checkbox" /><label
-                class="labelCheckbox"
-                for="checkbox"
-                >Remember me</label
-              >
+              <input
+                type="checkbox"
+                id="checkbox"
+                class="inputCheckbox"
+              /><label class="labelCheckbox" for="checkbox">Remember me</label>
             </div>
           </div>
           <div class="btns">
@@ -54,11 +56,11 @@
     </section>
     <section class="registry">
       <p>Not a Join user?</p>
-      <button class="signUp">Sign up</button>
+      <a href="register.html"><button class="signUp">Sign up</button></a>
     </section>
     <section class="terms">
-      <p>Privacy Policy</p>
-      <p>Legal notice</p>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Legal notice</a>
     </section>
   </body>
 </html>

@@ -17,7 +17,21 @@ body {
   }
 }
 
+.leftArrow {
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 16px;
+}
+
 .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  margin-top: 32px;
+}
+
+.headline {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,8 +43,9 @@ body {
   border-bottom: 3px solid #29abe2;
 }
 
-.title h1 {
+.headline h1 {
   font-size: 48px;
+  margin-top: 0;
   margin-bottom: 16px;
 }
 .mainSection {
@@ -67,7 +82,7 @@ body {
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   height: 52px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .email img,
@@ -108,30 +123,28 @@ body {
   background-color: rgba(43, 54, 70, 0.9);
 }
 
-.formInputs {
-  margin-bottom: 16px;
-}
-
-.btnGuest {
-  border: unset;
-  border: 1px solid #2b3646;
-  border-radius: 10px;
-  padding: 20px;
-  width: 180px;
-  font-family: 'Inter';
-  font-weight: 700;
-  font-size: 16px;
-  color: #2b3646;
-  background-color: white;
-  cursor: pointer;
-}
-
 .btnGuest:hover {
   background-color: rgb(249, 249, 249);
 }
 
 .labelCheckbox {
   margin-left: 16px;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.labelCheckbox a {
+  text-decoration: none;
+  color: #29abe2;
+}
+
+.labelCheckbox a:hover {
+  color: rgba(41, 171, 226, 0.7);
 }
 
 .inputCheckbox {
@@ -143,25 +156,10 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 32px;
 }
 
-.registry {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.signUp {
-  border: unset;
-  background-color: #2b3646;
-  color: white;
-  border-radius: 10px;
-  padding: 20px;
-  width: 120px;
-  margin-left: 32px;
-  cursor: pointer;
+.formInputs {
+  margin-bottom: 16px;
 }
 
 .signUp:hover {
