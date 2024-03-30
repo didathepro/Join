@@ -9,12 +9,11 @@ body {
   animation-duration: 5s;
 }
 
-@keyframes bglogo {
-  0% {
-    position: absolute;
-    background-image: url('/assets/img/joinblue.png');
-    background-repeat: no-repeat;
-  }
+.logoImg {
+  position: relative;
+  top: 32px;
+  left: 32px;
+  margin-bottom: 32px;
 }
 
 .leftArrow {
