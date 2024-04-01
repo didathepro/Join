@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="styles/fonts.css" />
   </head>
   <body onload="init()">
-    <section id="top">
-      <div class="logoImg">
+    <script src="js/login.js"></script>
+    <script src="js/regestry.js"></script>
+    <section id="top" class="animation">
+      <div class="logoImg" id="logoImg">
         <img src="assets/img/joinblue.png" />
       </div>
     </section>
@@ -19,10 +21,11 @@
           <h1>Log in</h1>
           <div class="underline"></div>
         </div>
-        <form action="index.html" id="logIn" class="logInForm">
+        <form onsubmit="login(); return false" id="logIn" class="logInForm">
           <div class="formInputs">
             <div class="email">
               <input
+                id="email"
                 type="email"
                 placeholder="Email"
                 class="inputs emaiInput"
@@ -33,6 +36,7 @@
             </div>
             <div class="password">
               <input
+                id="password"
                 type="password"
                 placeholder="Password"
                 class="inputs passwordInput"
@@ -50,7 +54,7 @@
             </div>
           </div>
           <div class="btns">
-            <button class="btnLog">Log in</button>
+            <button type="submit" id="logIn" class="btnLog">Log in</button>
             <button class="btnGuest">Guest Log in</button>
           </div>
         </form>

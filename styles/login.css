@@ -4,11 +4,6 @@ body {
   font-family: 'Inter';
 }
 
-#top {
-  animation-name: bglogo;
-  animation-duration: 5s;
-}
-
 .logoImg {
   position: relative;
   top: 32px;

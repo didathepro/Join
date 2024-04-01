@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/fonts.css" />
   </head>
   <body>
+    <script src="js/regestry.js"></script>
     <section id="top">
       <div class="logoImg">
         <img src="assets/img/joinblue.png" />
@@ -26,10 +27,11 @@
             <div class="underline"></div>
           </div>
         </div>
-        <form action="index.html" id="logIn" class="logInForm">
+        <form onsubmit="validate(); return false" id="logIn" class="logInForm">
           <div class="formInputs">
             <div class="email">
               <input
+                id="name"
                 type="text"
                 placeholder="Name"
                 class="inputs emaiInput"
