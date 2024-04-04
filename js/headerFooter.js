@@ -9,7 +9,8 @@ function addBg(){
         '/index.html' : ['summary'],
         '/addTask.html' : ['tasks'],
         '/board.html' : ['board'],
-        '/contacts.html' : ['contacts']
+        '/contacts.html' : ['contacts'],
+        '/help.html' : []
     };
 
     let ids = maps[currentPage];
@@ -44,5 +45,3 @@ function dropDown(){
     }
 });
 ;}
-
-//Edit

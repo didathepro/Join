@@ -1,0 +1,67 @@
+body {
+    margin:0;
+}
+
+.help-wrapper {
+    margin-left:30%;
+    margin-top:10%;
+    margin-right: 6%;
+}
+
+header h1 {
+    border-right: none !important;
+}
+
+header {
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header img {    
+    width:40px;
+    cursor: pointer;
+}
+
+header img:hover {
+    padding:3px;
+    border-radius: 50%;
+    background-color: #eeeeee;
+}
+
+.how-to {
+    display: flex;
+    align-items: center;
+    margin-top:20px;
+}
+
+.number {
+    font-size:45px;
+    font-weight: bold;
+    display: flex;
+    align-self:start;
+}
+
+.how-to p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.how-to h3 {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+}
+
+.bottom-h2 {
+    font-size:35px;
+}
+
+.text-right {
+    padding-left:35px;
+}
+
+b {
+    color:#29abe2;
+    font-weight: 500;
+}
