@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <script src="./js/include.js"></script>
+    <script src="./js/headerFooter.js" defer></script>
+    <script src="./js/contacts.js"></script>
+    <link rel="stylesheet" href="./styles/contacts.css">
+</head>
+<body onload="init();showContacts();">
+    <div w3-include-html="./templates/headerFooter.html"></div>
+    <div id="addContactContainer" class="hidden"></div>
+    <div class="contacts-wrapper">
+
+        <div id="contacts-bar" class="contacts-bar">
+            <button class="addContact" onclick="addNewContact();">Add new contact <img src="./assets/img/person_add.png"></button>
+            <div id="contactsMenu"></div>
+        </div>
+        
+        <div class="right-contacts">
+            <header><h1>Contacts</h1><h4>Better with a team</h4></header>
+
+            <div id="contact-container"></div>
+        </div>
+
+    </div>
+</body>
+</html>
