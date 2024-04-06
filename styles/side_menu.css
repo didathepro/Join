@@ -178,6 +178,7 @@ h4 {
 }
 
 .mid-container-responsive {
+    z-index:2;
     position:fixed;
     bottom:0;
     width:100%;
@@ -221,7 +222,7 @@ h4 {
     }
     .dark-blueBg {
         border-radius: 15px;
-        background-color: #091931;
+        background-color: #091931 !important;
         padding: 20px 10px;
     }
 }

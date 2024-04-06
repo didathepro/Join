@@ -176,6 +176,7 @@ function showInfo(contact) {
 
     let content = document.getElementById('contact-container');
     content.classList.remove('hidden');
+    document.getElementById('right-contacts').style.display = 'block';
     content.innerHTML ='';
 
     content.innerHTML += returnContactInfo(name,email,phone,color,firstLetter,secondLetter,contact);
@@ -207,6 +208,7 @@ function returnContactInfo(name,email,phone,color,firstLetter,secondLetter,conta
             <p>${phone}</p>
         </div>
     </div>
+    <button class="editContactIcon" onclick="editContact(${contact});"><img src="./assets/img/more_vert.png"></button>
     `;
 }
 
@@ -321,7 +323,11 @@ function addNewContact() {
         </div>
     </div>
     `;
-
+    document.addEventListener('mouseup', function(e) {
+        if (!content.contains(e.target)) {
+        content.classList.add('hidden');
+        }
+    });
 }
 
 function closeContainer(id) {
