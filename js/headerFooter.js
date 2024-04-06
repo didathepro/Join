@@ -3,21 +3,54 @@ async function init(){
     addBg();
 }
 
-function addBg(){
+function addBg() {
     let currentPage = window.location.pathname;
+    
+    // Define the mapping of page names to IDs
     let maps = {
-        '/index.html' : ['summary'],
-        '/addTask.html' : ['tasks'],
-        '/board.html' : ['board'],
-        '/contacts.html' : ['contacts'],
-        '/help.html' : []
+        '/index.html': {
+            'default': ['summary'],
+            'responsive': ['summaryRes']
+        },
+        '/addTask.html': {
+            'default': ['tasks'],
+            'responsive': ['tasksRes']
+        },
+        '/board.html': {
+            'default': ['board'],
+            'responsive': ['boardRes']
+        },
+        '/contacts.html': {
+            'default': ['contacts'],
+            'responsive': ['contactsRes']
+        },
+        '/help.html': {
+            'default': [],
+            'responsive': []
+        }
     };
 
-    let ids = maps[currentPage];
-    ids.forEach(element => {
+    // Get the appropriate IDs based on the current page
+    let ids = maps[currentPage] || { 'default': [], 'responsive': [] };
+    let defaultIds = ids['default'];
+    let responsiveIds = ids['responsive'];
+
+    // Add the class to elements in the default container
+    defaultIds.forEach(element => {
         let elementRef = document.getElementById(element);
-        elementRef.classList.add("dark-blueBg");
-        elementRef.style.pointerEvents = "none"; // Enable pointer events for all elements
+        if (elementRef) {
+            elementRef.classList.add("dark-blueBg");
+            elementRef.style.pointerEvents = "none"; // Enable pointer events for all elements
+        }
+    });
+
+    // Add the class to elements in the responsive container
+    responsiveIds.forEach(element => {
+        let elementRef = document.getElementById(element);
+        if (elementRef) {
+            elementRef.classList.add("dark-blueBg");
+            elementRef.style.pointerEvents = "none"; // Enable pointer events for all elements
+        }
     });
 }
 

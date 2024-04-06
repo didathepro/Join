@@ -171,3 +171,67 @@ h4 {
 .mid-wrapper {
     width:75%;
 }
+
+.mid-navbar img {
+    width:50px;
+    padding-top:0;
+}
+
+.mid-container-responsive {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    height:100px;
+    background-color: #2a3647;
+    display: flex;
+    align-items: center;
+}
+
+.mid-container-responsive {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-around; 
+}
+
+.mid-container-responsive a {
+    text-decoration: none;
+    color:white;
+}
+
+.mini-wrapper-res {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
+
+@media (max-width:1000px){
+    .side-bar {
+        display:none;
+    }
+    .mid-navbar h3 {
+        display:none;
+    }
+    .mid-navbar .helpSign {
+        display: none;
+    }
+    .help-wrapper {
+        margin-left:5%;
+        margin-top:100px;
+    }
+    .dark-blueBg {
+        border-radius: 15px;
+        background-color: #091931;
+        padding: 20px 10px;
+    }
+}
+
+
+@media (min-width:1000px){
+    .mid-navbar .logo {
+        display:none;
+    }
+    .mid-container-responsive {
+        display:none;
+    }
+}
