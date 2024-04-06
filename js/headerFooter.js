@@ -65,8 +65,8 @@ function dropDown(){
 
     content.innerHTML +=`
         <div class="dropdown-container">
-            <a href="#">Legal Notice</a>     
-            <a href="#">Privacy Policy</a>     
+            <a href="../legalNotice.html">Legal Notice</a>     
+            <a href="../privacyPolicy.html">Privacy Policy</a>     
             <a href="#">Log out</a>     
         </div>
     `;
