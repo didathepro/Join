@@ -6,9 +6,13 @@ body {
 
 .logoImg {
   position: relative;
-  top: 32px;
+  top: 64px;
   left: 32px;
   margin-bottom: 32px;
+}
+
+.animation {
+  margin-bottom: 64px;
 }
 
 .title {
@@ -39,8 +43,8 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 396px;
-  height: 90vh;
+  width: 90%;
+  height: 85vh;
   border-radius: 30px;
   background-color: #ffffff;
 }
@@ -48,7 +52,7 @@ body {
 .logInForm {
   display: flex;
   flex-direction: column;
-  width: 364px;
+  width: 70%;
   height: 152px;
   margin-top: 32px;
 }
@@ -72,7 +76,7 @@ body {
 }
 
 .inputs {
-  width: 320px;
+  width: 70%;
   height: 48px;
   border-radius: 10px;
   outline: none;
@@ -99,7 +103,8 @@ body {
 }
 
 .btnLog:hover {
-  background-color: rgba(43, 54, 70, 0.9);
+  background-color: #29abe2;
+  box-shadow: 1px 1px #2b3646;
 }
 
 .formInputs {
@@ -121,7 +126,9 @@ body {
 }
 
 .btnGuest:hover {
-  background-color: rgb(249, 249, 249);
+  color: #29abe2;
+  border-color: #29abe2;
+  box-shadow: 1px 1px #2b3646;
 }
 
 .labelCheckbox {
@@ -130,6 +137,10 @@ body {
 
 .inputCheckbox {
   cursor: pointer;
+}
+
+.inputCheckbox:hover {
+  box-shadow: 0.6px 0.6px #2b3646;
 }
 
 .btns {
@@ -159,7 +170,8 @@ body {
 }
 
 .signUp:hover {
-  background-color: rgba(43, 54, 70, 0.9);
+  background-color: #29abe2;
+  box-shadow: 1px 1px #2b3646;
 }
 
 .terms {
@@ -177,5 +189,28 @@ body {
 }
 
 .terms a:hover {
-  color: rgba(168, 168, 168, 0.7);
+  color: #29abe2;
+}
+
+@media (min-width: 768px) {
+  .btns {
+    flex-direction: row;
+  }
+
+  .registry {
+    position: absolute;
+    width: 280px;
+    height: 48px;
+    top: 64px;
+    right: 5%;
+  }
+
+  .content {
+    width: 60%;
+  }
+
+  .imgJoin {
+    width: 100.03px;
+    height: 121.97px;
+  }
 }
