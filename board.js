@@ -1,122 +1,120 @@
+// const tasks = {
+//     "tasksToDo": undefined,
+//     "tasksInProgress": {
+//         "title": 'Contact Form & Imprint',
+//         "description": 'Create a contact form and imprint page...',
+//         "category": 'User Story',
+//         "subtasks": [
+//             { one: true },
+//             { two: false }
+//         ],
+//         "assigned": ['AS', 'DE', 'EF'],
+//         "priority": 'Urgent'
+//         },
+//     "tasksAwaitFeedback": undefined,
+//     "tasksDone": undefined
+// };
+
 let tasksToDo;
 let tasksInProgress = [
     {
-        title: 'Conntact Form & Imprint',
-        description: 'Create a conntact form and imprint page...',
-        category: 'User Story',
-        subtasks: [
-            {one: true},
-            {two: false}
+        "title": 'Contact Form & Imprint',
+        "description": 'Create a contact form and imprint page...',
+        "category": 'User Story',
+        "subtasks": [
+            { one: true },
+            { two: false }
         ],
-        assigned: ['AS', 'DE', 'EF'],
-        priority: 'Urgent'
-    }
-]
-
+        "assigned": ['AS', 'DE', 'EF'],
+        "priority": 'Urgent'
+    },
+];
 let tasksAwaitFeedback;
 let tasksDone;
 
-const taskColors = {
-    userStory: '#0038FF',
-    technicalTask: '#1FD7C1'
-}
-
-// const boardInProgress = document.getElementById('boardInProgress');
-
-function includeHTML() {
-    var z, i, elmnt, file, xhttp;
-    /* Loop through a collection of all HTML elements: */
-    z = document.getElementsByTagName("*");
-    for (i = 0; i < z.length; i++) {
-      elmnt = z[i];
-      /*search for elements with a certain atrribute:*/
-      file = elmnt.getAttribute("w3-include-html");
-      if (file) {
-        /* Make an HTTP request using the attribute value as the file name: */
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-            if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-            /* Remove the attribute, and call this function once more: */
-            elmnt.removeAttribute("w3-include-html");
-            includeHTML();
-          }
-        }
-        xhttp.open("GET", file, true);
-        xhttp.send();
-        /* Exit the function: */
-        return;
-      }
-    }
-  }
-
 function boardInit() {
+    // iterateTaskTypes();
     loadBoardToDo();
     loadBoardInProgress();
     loadBoardAwaitFeedback();
     loadBoardDone();
 }
 
+// function iterateTaskTypes() {
+//     for (let i = 0; i < tasks.length; i++) {
+//         iterateTasks(tasks.objects[i]);
+//     }
+// }
+
 function loadBoardToDo() {
-    const boardToDo = document.getElementById('boardToDo');
-    boardToDo.innerHTML = '';
     if (tasksToDo) {
-        boardToDo.innerHTML += `${generateTasksToDoHtml()}`
+        iterateTasks(tasksToDo);
     }
     else {
-        boardToDo.innerHTML += `${generateNoTasksHtml()}`
+        document.getElementById('tasksToDo').innerHTML += generateNoTasksHtml();
     };
 }
 
 function loadBoardInProgress() {
-    const boardInProgress = document.getElementById('boardInProgress');
-    boardInProgress.innerHTML = '';
     if (tasksInProgress) {
-        generateTasksInProgress();
+        iterateTasks(tasksInProgress);
     }
     else {
-        boardInProgress.innerHTML += generateNoTasksHtml();
+        document.getElementById('tasksInProgress').innerHTML += generateNoTasksHtml();
     };
 }
 
-function generateTasksInProgress() {
-    const boardInProgress = document.getElementById('boardInProgress');
-    for (let i = 0; i < tasksInProgress.length; i++) {
-        boardInProgress.innerHTML += generateTasksInProgressHtml(i);
-    }
-}
-
-function generateTasksInProgressHtml(i) {
-    return /*html*/`
-        <div class="task d-flex justify-content-center flex-column">
-            <div class="taskCategory">${tasksInProgress[i].category}</div>
-            <p>${tasksInProgress[i].title}</p>
-            <p>${tasksInProgress[i].description}</p>
-            <div>
-                <p>${tasksInProgress[i].assigned}</p>
-                <img src="img/icon/priority${tasksInProgress[i].priority}.svg" alt="Priority">
-            </div>
-        </div>
-    `
-}
-
 function loadBoardAwaitFeedback() {
-    const boardAwaitFeedback = document.getElementById('boardAwaitFeedback');
-    boardAwaitFeedback.innerHTML = '';
-    if (tasksAwaitFeedback) {}
+    if (tasksAwaitFeedback) {
+        iterateTasks(tasksAwaitFeedback);
+    }
     else {
-        boardAwaitFeedback.innerHTML += generateNoTasksHtml();
+        document.getElementById('tasksAwaitFeedback').innerHTML += generateNoTasksHtml();
     };
 }
 
 function loadBoardDone() {
-    const boardDone = document.getElementById('boardDone');
-    boardDone.innerHTML = '';
-    if (tasksDone) {}
+    if (tasksDone) {
+        iterateTasks(tasksDone);
+    }
     else {
-        boardDone.innerHTML += generateNoTasksHtml();
+        document.getElementById('tasksDone').innerHTML += generateNoTasksHtml();
     };
+}
+
+// function iterateTasks(taskType) {
+// const boardTaskType = document.getElementById(taskType);
+//     if (taskType) {
+//         for (let i = 0; i < taskType.length; i++) {
+//             boardTaskType.innerHtml += generateTaskHtml(taskType, i);
+//         };
+//     }
+//     else {
+//         generateNoTasksHtml();
+//     };
+// }
+
+function iterateTasks(taskType) {
+    // const taskTypeString = Object.keys({taskType})[0];
+    // let boardTaskType = document.getElementById(`${taskTypeString}`);
+    for (let i = 0; i < taskType.length; i++) {
+        // boardTaskType.innerHtml += generateTaskHtml(taskType, i);
+        document.getElementById('tasksInProgress').innerHTML += generateTaskHtml(taskType, i);
+    };
+}
+
+function generateTaskHtml(taskType, i) {
+    return /*html*/`
+        <div class="task d-flex justify-content-center flex-column">
+            <div class="taskCategory d-flex align-items-center" id="${taskType[i]}">${taskType[i].category}</div>
+            <p class="taskTitle">${taskType[i].title}</p>
+            <p class="taskDescription">${taskType[i].description}</p>
+            <div>
+                <p>${taskType[i].assigned}</p>
+                <img src="img/icon/priority${taskType[i].priority}.svg" alt="Priority">
+            </div>
+        </div>
+    `
 }
 
 function generateNoTasksHtml() {
@@ -125,4 +123,14 @@ function generateNoTasksHtml() {
             <p>No tasks To do</p>
         </div>
     `
+}
+
+function setTaskColor(task) {
+    let taskbg = document.getElementById(`${task}`);
+    if (task.category == 'User Story') {
+        taskbg.style.background = '#0038FF';
+    }
+    else {
+        taskbg.style.background = '#1FD7C1';
+    };
 }

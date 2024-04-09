@@ -4,12 +4,6 @@ body {
     width: 1440px;
 }
 
-header {
-    margin-left: 232px;
-    background: #fff;
-    height: 100px;
-}
-
 h1 {
     font-size: 61px !important;
     font-weight: 700 !important;
@@ -19,95 +13,6 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.headerTitle {
-    margin-left: 128px;
-    font-size: 24px;
-}
-
-.sidebar {
-    width: 232px;
-    height: 1024px;
-    background-color: #2a3647;
-    position: absolute;
-    top: 0;
-    padding-top: 64px;
-    padding-bottom: 64px;
-}
-
-.sidebarText {
-    color: #cdcdcd;
-}
-
-.sidebarItem {
-    width: 232px;
-    gap: 8px;
-    height: 46px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 56px;
-    padding-right: 56px;
-    display: flex;
-}
-
-.sidebarItem:hover .sidebarIcon {
-    filter: brightness(1.5);
-}
-
-.sidebarItem:hover .sidebarText {
-    color: #fff;
-}
-
-.sidebarItems {
-    margin-top: 128px;
-    height: 229px;
-}
-
-.sidebarIcon {
-    max-width: 25px;
-    max-height: 25px;
-    object-fit: scale-down;
-}
-
-.iconBox {
-    height: 30px;
-    width: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-.sidebarItem:hover {
-    background-color: #091931;
-}
-
-.sidebarInfo {
-    height: 317px;
-    margin-top: 128px;
-}
-
-.sidebarInfoLink {
-    color: #a8a8a8;
-    text-decoration: none;
-}
-
-.headerProfile {
-    margin-right: 48px;
-    display: flex;
-    align-items: center;
-    width: 104px;
-    height: 56px;
-    gap: 16px;
-}
-
-.helpIcon {
-    width: 20px;
-    height: 20px;
-}
-
-.helpIconBox {
-    width: 32px;
-    height: 32px;
 }
 
 .boardHeader {
@@ -240,4 +145,29 @@ button {
 .emptyTask p {
     margin: 0;
     color: #a8a8a8;
+}
+
+.task {
+    background: #fff;
+    box-shadow: 0px 0px 10px 3px #00000014;
+    border-radius: 24px;
+    padding: 16px;
+}
+
+.taskCategory {
+    padding: 4px 16px 4px 16px;
+    border-radius: 8px;
+    background: #aaa;
+    width: fit-content;
+    color: #fff;
+}
+
+.taskTitle {
+    margin: 16px 0px 0px 0px;
+    font-weight: 700;
+    color: #2A3647;
+}
+
+.taskDescription {
+    color: #A8A8A8;
 }

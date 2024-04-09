@@ -6,55 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join (m10) - Board</title>
     <script src="board.js"></script>
+    <script src="headerSidebar.js"></script>
     <link rel="stylesheet" href="board.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="headerSidebar.css">
 </head>
 
 <body class="m-0" onload="boardInit()">
-    <!-- <header class="d-flex align-items-center justify-content-between">
-        <p class="headerTitle">Kanban Project Management Tool</p>
-        <div class="headerProfile">
-            <div class="helpIconBox">
-                <img src="img/icon/help.svg" alt="Help" class="helpIcon">
-            </div>
-            <img src="img/icon/profile-sm.svg" alt="Profil SM" class="profileIcon">
-        </div>
-    </header>
-    <div class="sidebar d-flex flex-column align-items-center">
-        <img src="img/logo.svg" alt="Join Logo">
-        <div class="sidebarItems d-flex flex-column align-items-center gap-3">
-            <div class="sidebarItem">
-                <div class="iconBox">
-                    <img src="img/icon/summary.svg" alt="Summary" class="sidebarIcon">
-                </div>
-                <p class="sidebarText">Summary</p>
-            </div>
-            <div class="sidebarItem">
-                <div class="iconBox">
-                    <img src="img/icon/add-task.svg" alt="Add Task" class="sidebarIcon">
-                </div>
-                <p class="sidebarText">Add Task</p>
-            </div>
-            <div class="sidebarItem">
-                <div class="iconBox">
-                    <img src="img/icon/board.svg" alt="Board" class="sidebarIcon">
-                </div>
-                <p class="sidebarText">Board</p>
-            </div>
-            <div class="sidebarItem">
-                <div class="iconBox">
-                    <img src="img/icon/contacts.svg" alt="Contacts" class="sidebarIcon">
-                </div>
-                <p class="sidebarText">Contacts</p>
-            </div>
-        </div>
-        <div class="sidebarInfo d-flex flex-column justify-content-end gap-3">
-            <a href="#privacy" class="sidebarInfoLink">Privacy Policy</a>
-            <a href="#legal" class="sidebarInfoLink">Legal notice</a>
-        </div>
-    </div> -->
     <div w3-include-html="headerSidebar.html"></div>
     <div class="boardHeader">
         <div class="boardHeaderMiddle d-flex align-items-center justify-content-between">
@@ -105,10 +65,10 @@
         </div>
     </div>
     <div class="boardContent d-flex justify-content-between">
-        <div class="boardColumn" id="boardToDo"></div>
-        <div class="boardColumn" id="boardInProgress"></div>
-        <div class="boardColumn" id="boardAwaitFeedback"></div>
-        <div class="boardColumn" id="boardDone"></div>
+        <div class="boardColumn" id="tasksToDo"></div>
+        <div class="boardColumn" id="tasksInProgress"></div>
+        <div class="boardColumn" id="tasksAwaitFeedback"></div>
+        <div class="boardColumn" id="tasksDone"></div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
