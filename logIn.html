@@ -6,67 +6,74 @@
     <title>Login</title>
     <link rel="stylesheet" href="styles/login.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
-  </head>
-  <body onload="init()">
     <script src="js/login.js"></script>
     <script src="js/regestry.js"></script>
-    <section id="top" class="animation">
-      <div class="logoImg" id="logoImg">
-        <img src="assets/img/joinblue.png" class="imgJoin" />
-      </div>
-    </section>
-    <section class="mainSection">
-      <div class="content">
-        <div class="title">
-          <h1>Log in</h1>
-          <div class="underline"></div>
+    <script src="js/storage.js"></script>
+  </head>
+  <body onload="init()">
+    <div class="logoBox" id="logoBox">
+      <img src="assets/img/joinblue.png" class="imgJoin" id="imgJoin" />
+    </div>
+    <div id="topBox" style="display: none" class="topBox"></div>
+    <section class="body" id="bodyAnimation">
+      <section class="mainSection" id="mainSection">
+        <div class="content">
+          <div class="title">
+            <h1>Log in</h1>
+            <div class="underline"></div>
+          </div>
+          <form onsubmit="login(); return false" id="logIn" class="logInForm">
+            <div class="formInputs">
+              <div class="email">
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  class="inputs emaiInput"
+                  style="border: none"
+                  autocomplete="username"
+                  required
+                />
+                <img src="assets/img/mail.png" alt="email" />
+              </div>
+              <div class="password">
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  class="inputs passwordInput"
+                  style="border: none"
+                  autocomplete="current-password"
+                  required
+                />
+                <img src="assets/img/lock.png" alt="lock" />
+              </div>
+              <div class="checkbox">
+                <input
+                  type="checkbox"
+                  id="checkbox"
+                  class="inputCheckbox"
+                  required
+                /><label class="labelCheckbox" for="checkbox"
+                  >Remember me</label
+                >
+              </div>
+            </div>
+            <div class="btns">
+              <button type="submit" id="logIn" class="btnLog">Log in</button>
+              <button class="btnGuest">Guest Log in</button>
+            </div>
+          </form>
         </div>
-        <form onsubmit="login(); return false" id="logIn" class="logInForm">
-          <div class="formInputs">
-            <div class="email">
-              <input
-                id="email"
-                type="email"
-                placeholder="Email"
-                class="inputs emaiInput"
-                style="border: none"
-                autocomplete="username"
-              />
-              <img src="assets/img/mail.png" alt="email" />
-            </div>
-            <div class="password">
-              <input
-                id="password"
-                type="password"
-                placeholder="Password"
-                class="inputs passwordInput"
-                style="border: none"
-                autocomplete="current-password"
-              />
-              <img src="assets/img/lock.png" alt="lock" />
-            </div>
-            <div class="checkbox">
-              <input
-                type="checkbox"
-                id="checkbox"
-                class="inputCheckbox"
-              /><label class="labelCheckbox" for="checkbox">Remember me</label>
-            </div>
-          </div>
-          <div class="btns">
-            <button type="submit" id="logIn" class="btnLog">Log in</button>
-            <button class="btnGuest">Guest Log in</button>
-          </div>
-        </form>
-      </div>
-    </section>
-    <section class="registry">
-      <p>Not a Join user?</p>
-      <a href="register.html"><button class="signUp">Sign up</button></a>
-    </section>
-    <section class="terms">
-      <a href="#">Privacy Policy</a>
-      <a href="#">Legal notice</a>
+      </section>
+      <section class="registry">
+        <p>Not a Join user?</p>
+        <a href="register.html"><button class="signUp">Sign up</button></a>
+      </section>
+      <section class="terms">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal notice</a>
+      </section>
     </section>
   </body>
 </html>
