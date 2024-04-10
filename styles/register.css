@@ -145,6 +145,7 @@ body {
 
 .labelCheckbox a:hover {
   color: rgba(41, 171, 226, 0.7);
+  text-decoration: underline;
 }
 
 .inputCheckbox {
