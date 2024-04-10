@@ -1,117 +1,87 @@
-// const tasks = {
-//     "tasksToDo": undefined,
-//     "tasksInProgress": {
-//         "title": 'Contact Form & Imprint',
-//         "description": 'Create a contact form and imprint page...',
-//         "category": 'User Story',
-//         "subtasks": [
-//             { one: true },
-//             { two: false }
-//         ],
-//         "assigned": ['AS', 'DE', 'EF'],
-//         "priority": 'Urgent'
-//         },
-//     "tasksAwaitFeedback": undefined,
-//     "tasksDone": undefined
-// };
-
-let tasksToDo;
-let tasksInProgress = [
-    {
-        "title": 'Contact Form & Imprint',
-        "description": 'Create a contact form and imprint page...',
-        "category": 'User Story',
-        "subtasks": [
-            { one: true },
-            { two: false }
+const tasks = {
+    "tasksToDo": undefined,
+    "tasksInProgress":
+        [
+            {
+                "title": 'Contact Form & Imprint',
+                "description": 'Create a contact form and imprint page...',
+                "category": 'User Story',
+                "subtasks": [{ one: true }, { two: false }],
+                "assigned": ['AS', 'DE', 'EF'],
+                "priority": 'Urgent'
+            },
         ],
-        "assigned": ['AS', 'DE', 'EF'],
-        "priority": 'Urgent'
-    },
-];
-let tasksAwaitFeedback;
-let tasksDone;
+    "tasksAwaitFeedback":
+        [
+            {
+                "title": 'HTML Base Template Creation',
+                "description": 'Create reusable HTML base templates...',
+                "category": 'Technical Task',
+                "subtasks": undefined,
+                "assigned": ['DE', 'BZ', 'AS'],
+                "priority": 'Low'
+            },
+            {
+                "title": 'Daily Kochwelt Recipe',
+                "description": 'Implement daily recipe and portion calculator...',
+                "category": 'User Story',
+                "subtasks": undefined,
+                "assigned": ['EF', 'AS', 'TW'],
+                "priority": 'Medium'
+            },
+        ],
+    "tasksDone":
+        [
+            {
+                "title": 'CSS Architecture Planning',
+                "description": 'Define CSS naming conventions and structure...',
+                "category": 'Technical Task',
+                "subtasks": [{ one: true }, { two: true }],
+                "assigned": ['SM', 'BZ'],
+                "priority": 'Urgent'
+            },
+        ],
+};
+
+const taskTypesKeys = Object.keys(tasks);
 
 function boardInit() {
-    // iterateTaskTypes();
-    loadBoardToDo();
-    loadBoardInProgress();
-    loadBoardAwaitFeedback();
-    loadBoardDone();
+    iterateTaskTypes();
 }
 
-// function iterateTaskTypes() {
-//     for (let i = 0; i < tasks.length; i++) {
-//         iterateTasks(tasks.objects[i]);
-//     }
-// }
+function iterateTaskTypes() {
+    for (let i = 0; i < taskTypesKeys.length; i++) {
+        if (tasks[taskTypesKeys[i]] == undefined) {
+            console.log(`No tasks in "${taskTypesKeys[i]}"`);
+            document.getElementById(`${taskTypesKeys[i]}`).innerHTML = generateNoTasksHtml();
+        }
+        else {
+            iterateTasks(tasks[taskTypesKeys[i]], i);
+        }
 
-function loadBoardToDo() {
-    if (tasksToDo) {
-        iterateTasks(tasksToDo);
     }
-    else {
-        document.getElementById('tasksToDo').innerHTML += generateNoTasksHtml();
+}
+
+function iterateTasks(taskType, i) {
+    const taskTypeKeys = Object.keys(taskType);
+    console.log(`Recieved for task iteration of "${taskTypesKeys[i]}":`, taskType);
+    let boardTaskType = document.getElementById(taskTypesKeys[i]);
+    for (let j = 0; j < taskTypeKeys.length; j++) {
+        boardTaskType.innerHTML += generateTaskHtml(taskType, i, j);
+        setTaskColor(i, j);
     };
 }
 
-function loadBoardInProgress() {
-    if (tasksInProgress) {
-        iterateTasks(tasksInProgress);
-    }
-    else {
-        document.getElementById('tasksInProgress').innerHTML += generateNoTasksHtml();
-    };
-}
-
-function loadBoardAwaitFeedback() {
-    if (tasksAwaitFeedback) {
-        iterateTasks(tasksAwaitFeedback);
-    }
-    else {
-        document.getElementById('tasksAwaitFeedback').innerHTML += generateNoTasksHtml();
-    };
-}
-
-function loadBoardDone() {
-    if (tasksDone) {
-        iterateTasks(tasksDone);
-    }
-    else {
-        document.getElementById('tasksDone').innerHTML += generateNoTasksHtml();
-    };
-}
-
-// function iterateTasks(taskType) {
-// const boardTaskType = document.getElementById(taskType);
-//     if (taskType) {
-//         for (let i = 0; i < taskType.length; i++) {
-//             boardTaskType.innerHtml += generateTaskHtml(taskType, i);
-//         };
-//     }
-//     else {
-//         generateNoTasksHtml();
-//     };
-// }
-
-function iterateTasks(taskType) {
-    // const taskTypeString = Object.keys({taskType})[0];
-    // let boardTaskType = document.getElementById(`${taskTypeString}`);
-    for (let i = 0; i < taskType.length; i++) {
-        // boardTaskType.innerHtml += generateTaskHtml(taskType, i);
-        document.getElementById('tasksInProgress').innerHTML += generateTaskHtml(taskType, i);
-    };
-}
-
-function generateTaskHtml(taskType, i) {
+function generateTaskHtml(taskType, i, j) {
+    const taskTypeString = taskTypesKeys[i];
     return /*html*/`
         <div class="task d-flex justify-content-center flex-column">
-            <div class="taskCategory d-flex align-items-center" id="${taskType[i]}">${taskType[i].category}</div>
-            <p class="taskTitle">${taskType[i].title}</p>
-            <p class="taskDescription">${taskType[i].description}</p>
+            <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
+            <p class="taskTitle">${taskType[j].title}</p>
+            <p class="taskDescription">${taskType[j].description}</p>
             <div>
-                <p>${taskType[i].assigned}</p>
-                <img src="img/icon/priority${taskType[i].priority}.svg" alt="Priority">
+                <p>${taskType[j].assigned}</p>
+                <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
             </div>
         </div>
     `
@@ -125,9 +95,10 @@ function generateNoTasksHtml() {
     `
 }
 
-function setTaskColor(task) {
-    let taskbg = document.getElementById(`${task}`);
-    if (task.category == 'User Story') {
+function setTaskColor(i, j) {
+    const taskTypeString = taskTypesKeys[i];
+    let taskbg = document.getElementById(`${taskTypeString}Category${j}`);
+    if (tasks[taskTypeString][j].category == 'User Story') {
         taskbg.style.background = '#0038FF';
     }
     else {
