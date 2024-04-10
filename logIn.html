@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/fonts.css" />
     <script src="js/login.js"></script>
     <script src="js/regestry.js"></script>
+    <script src="js/storage.js"></script>
   </head>
   <body onload="init()">
     <div class="logoBox" id="logoBox">
@@ -31,6 +32,7 @@
                   class="inputs emaiInput"
                   style="border: none"
                   autocomplete="username"
+                  required
                 />
                 <img src="assets/img/mail.png" alt="email" />
               </div>
@@ -42,6 +44,7 @@
                   class="inputs passwordInput"
                   style="border: none"
                   autocomplete="current-password"
+                  required
                 />
                 <img src="assets/img/lock.png" alt="lock" />
               </div>
@@ -50,6 +53,7 @@
                   type="checkbox"
                   id="checkbox"
                   class="inputCheckbox"
+                  required
                 /><label class="labelCheckbox" for="checkbox"
                   >Remember me</label
                 >
