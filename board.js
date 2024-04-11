@@ -6,7 +6,16 @@ const tasks = {
                 "title": 'Contact Form & Imprint',
                 "description": 'Create a contact form and imprint page...',
                 "category": 'User Story',
-                "subtasks": [{ one: true }, { two: false }],
+                "subtasks": [
+                    { 
+                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+                        done: true    
+                    },
+                    {
+                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+                        done: false
+                    }
+                ],
                 "assigned": ['AS', 'DE', 'EF'],
                 "priority": 'Urgent'
             },
@@ -36,7 +45,16 @@ const tasks = {
                 "title": 'CSS Architecture Planning',
                 "description": 'Define CSS naming conventions and structure...',
                 "category": 'Technical Task',
-                "subtasks": [{ one: true }, { two: true }],
+                "subtasks": [
+                    { 
+                        title: 'Establish CSS Methodology',
+                        done: true    
+                    },
+                    {
+                        title: 'Setup Base Styles',
+                        done: true
+                    }
+                ],
                 "assigned": ['SM', 'BZ'],
                 "priority": 'Urgent'
             },
@@ -52,7 +70,6 @@ function boardInit() {
 function iterateTaskTypes() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
         if (tasks[taskTypesKeys[i]] == undefined) {
-            console.log(`No tasks in "${taskTypesKeys[i]}"`);
             document.getElementById(`${taskTypesKeys[i]}`).innerHTML = generateNoTasksHtml();
         }
         else {
@@ -64,23 +81,28 @@ function iterateTaskTypes() {
 
 function iterateTasks(taskType, i) {
     const taskTypeKeys = Object.keys(taskType);
-    console.log(`Recieved for task iteration of "${taskTypesKeys[i]}":`, taskType);
     let boardTaskType = document.getElementById(taskTypesKeys[i]);
     for (let j = 0; j < taskTypeKeys.length; j++) {
         boardTaskType.innerHTML += generateTaskHtml(taskType, i, j);
         setTaskColor(i, j);
+        insertTaskAssigned(i, j);
+        insertTaskProgress(i, j);
     };
 }
 
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column">
+        <div class="task d-flex justify-content-center flex-column mb-3">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle">${taskType[j].title}</p>
             <p class="taskDescription">${taskType[j].description}</p>
-            <div>
-                <p>${taskType[j].assigned}</p>
+            <!-- <div class="d-flex gap-3 align-items-center"> -->
+                    <div id="${taskTypeString}Progress${j}"></div>
+                    <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
+            <!-- </div> -->
+            <div class="d-flex justify-content-between">
+                <div id="${taskTypeString}Assigned${j}" class="d-flex"></div>
                 <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
             </div>
         </div>
@@ -97,11 +119,45 @@ function generateNoTasksHtml() {
 
 function setTaskColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
-    let taskbg = document.getElementById(`${taskTypeString}Category${j}`);
+    const taskCategoryBg = document.getElementById(`${taskTypeString}Category${j}`);
     if (tasks[taskTypeString][j].category == 'User Story') {
-        taskbg.style.background = '#0038FF';
+        taskCategoryBg.style.background = '#0038FF';
     }
     else {
-        taskbg.style.background = '#1FD7C1';
+        taskCategoryBg.style.background = '#1FD7C1';
     };
+}
+
+function insertTaskAssigned(i, j) {
+    const taskTypeString = taskTypesKeys[i];
+    const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
+    for (let k = 0; k < tasks[taskTypeString][j].assigned.length; k++) {
+        taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, k);
+    };
+}
+
+function generateTaskAssignedHtml(i, j, k) {
+    const taskTypeString = taskTypesKeys[i];
+    return /*html*/`
+        <div class="taskAssigned d-flex justify-content-center align-items-center" id="${taskTypeString}Assigned${j}_${k}">
+            ${tasks[taskTypeString][j].assigned[k]}
+        </div>
+    `
+}
+
+function insertTaskProgress(i, j) {
+    const taskTypeString = taskTypesKeys[i];
+    const taskProgress = document.getElementById(`${taskTypeString}Progress${j}`);
+    let subtasksDone = 0;
+    if (tasks[taskTypeString][j].subtasks) {
+        taskProgress.classList.add('progress');
+        for (let k = 0; k < tasks[taskTypeString][j].subtasks.length; k++) {
+            if (tasks[taskTypeString][j].subtasks[k].done == true) {subtasksDone++}
+        }
+        progressPercent = (subtasksDone / tasks[taskTypeString][j].subtasks.length) * 100;   
+        taskProgress.innerHTML = /*html*/`
+                        <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="progressPercent" aria-valuemin="0" aria-valuemax="100"></div>
+        `
+        document.getElementById(`${taskTypeString}ProgressText${j}`).innerHTML = `${subtasksDone}/${tasks[taskTypeString][j].subtasks.length} Subtasks`
+        };
 }

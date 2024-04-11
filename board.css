@@ -171,3 +171,23 @@ button {
 .taskDescription {
     color: #A8A8A8;
 }
+
+.taskAssigned {
+    height: 30px;
+    width: 30px;
+    background: #000;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 100%;
+    border: 1px solid #fff;
+    margin-right: -8px;
+}
+
+.progress {
+    height: 8px !important;
+    margin-bottom: 16px;
+}
+
+.progressText {
+    font-size: 12px;
+}
