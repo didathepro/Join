@@ -6,10 +6,10 @@
     <title>Sign up</title>
     <link rel="stylesheet" href="styles/register.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
-  </head>
-  <body>
     <script src="js/regestry.js"></script>
     <script src="/js/storage.js"></script>
+  </head>
+  <body onload="initReg()">
     <section id="top">
       <div class="logoImg">
         <img src="assets/img/joinblue.png" class="imgJoin" />
@@ -28,11 +28,11 @@
             <div class="underline"></div>
           </div>
         </div>
-        <form onsubmit="validate(); return false" id="logIn" class="logInForm">
+        <form onsubmit="register(); return false" id="logIn" class="logInForm">
           <div class="formInputs">
             <div class="email">
               <input
-                id="name"
+                id="names"
                 type="text"
                 placeholder="Name"
                 class="inputs emaiInput"
@@ -44,6 +44,7 @@
             </div>
             <div class="email">
               <input
+                id="email"
                 type="email"
                 placeholder="Email"
                 class="inputs emaiInput"
@@ -55,6 +56,7 @@
             </div>
             <div class="password">
               <input
+                id="password"
                 type="password"
                 placeholder="Password"
                 class="inputs passwordInput"
@@ -62,10 +64,16 @@
                 autocomplete="current-password"
                 required
               />
-              <img src="assets/img/lock.png" alt="lock" />
+              <img
+                id="passwordImg"
+                src="assets/img/lock.png"
+                alt="lock"
+                onclick="showPassword()"
+              />
             </div>
             <div class="password">
               <input
+                id="passwordConfirm"
                 type="password"
                 placeholder="Confirm Password"
                 class="inputs passwordInput"
@@ -73,7 +81,12 @@
                 autocomplete="current-password"
                 required
               />
-              <img src="assets/img/lock.png" alt="lock" />
+              <img
+                id="passwordImgConfirm"
+                src="assets/img/lock.png"
+                alt="lock"
+                onclick="showPasswordConfirm()"
+              />
             </div>
             <div class="checkbox">
               <input
@@ -88,7 +101,7 @@
             </div>
           </div>
           <div class="btns">
-            <button class="btnLog">Sign</button>
+            <button id="signBtn" class="btnLog">Sign</button>
           </div>
         </form>
       </div>
@@ -97,5 +110,6 @@
       <a href="#">Privacy Policy</a>
       <a href="#">Legal notice</a>
     </section>
+    <div id="msgBox" class="msgBox" style="display: none"></div>
   </body>
 </html>

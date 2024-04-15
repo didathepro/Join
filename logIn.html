@@ -46,7 +46,12 @@
                   autocomplete="current-password"
                   required
                 />
-                <img src="assets/img/lock.png" alt="lock" />
+                <img
+                  id="passwordImg"
+                  src="assets/img/lock.png"
+                  alt="lock"
+                  onclick="showPassword()"
+                />
               </div>
               <div class="checkbox">
                 <input
@@ -60,8 +65,10 @@
               </div>
             </div>
             <div class="btns">
-              <button type="submit" id="logIn" class="btnLog">Log in</button>
-              <button class="btnGuest">Guest Log in</button>
+              <button type="submit" id="logInBtn" class="btnLog">Log in</button>
+              <button class="btnGuest" id="btnGuest" onclick="loginGuest()">
+                Guest Log in
+              </button>
             </div>
           </form>
         </div>

@@ -4,11 +4,84 @@ let users = [{
     password: 'est123'
 }]
 
-function validate() {
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
-    let name = document.getElementById('name');
-    users.push({ name: name.value, email: email.value, password: password.value })
-    // weiterleitung als eingeloggter Benutzer an die Login Site
-    window.location.href = 'login.html?msg=Du hast dich Erfolgreich regestriert'
+async function initReg() {
+    loadUsers();
 }
+
+async function loadUsers() {
+    try {
+        users = JSON.parse(await getItem('users'));
+    } catch (e) {
+        console.error('Loading error:', e);
+    }
+}
+
+
+async function register() {
+    // if (passwords !== passwordConfirms) {
+    //     alert('Passwords are not the same');
+    //     return;
+    // }
+
+    signBtn.disabled = true;
+    users.push({
+        name: names.value,
+        email: email.value,
+        password: password.value,
+    });
+    await setItem('users', JSON.stringify(users));
+
+    msg();
+    resetForm();
+    backToLogin();
+
+}
+
+function msg() {
+    document.getElementById('msgBox').innerHTML = 'You Signed Up successfully';
+    document.getElementById('msgBox').style.display = 'flex';
+
+}
+
+function backToLogin() {
+    setTimeout(function () {
+        window.location.href = "login.html";
+    }, 3000);
+
+}
+
+function resetForm() {
+    names.value = ''
+    email.value = '';
+    password.value = '';
+    passwordConfirm.value = '';
+    signBtn.disabled = false;
+}
+
+function showPassword() {
+    let password = document.getElementById('password');
+
+    if (password.type === 'password') {
+        password.type = 'text';
+        document.getElementById('passwordImg').src = "./assets/img/visibility_off.png"
+
+    }
+    else {
+        password.type = 'password';
+        document.getElementById('passwordImg').src = "./assets/img/lock.png"
+    }
+}
+
+function showPasswordConfirm() {
+    let passwordConfirm = document.getElementById('passwordConfirm');
+
+    if (passwordConfirm.type === 'password') {
+        passwordConfirm.type = 'text';
+        document.getElementById('passwordImgConfirm').src = "./assets/img/visibility_off.png"
+    }
+    else {
+        passwordConfirm.type = 'password';
+        document.getElementById('passwordImgConfirm').src = "./assets/img/lock.png";
+    }
+}
+

@@ -1,7 +1,4 @@
 const urlParams = new URLSearchParams(window.location.search);
-const msg = urlParams.get('msg');
-const STORAGE_TOKEN = 'K9SFYBX0R1WD1NS9ZKIOB4W1CL157WB4C579A62K';
-const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 function init() {
     document.getElementById('imgJoin');
@@ -23,19 +20,26 @@ function show() {
     }, 1500)
 };
 
-
-if (msg) {
-    msgBox.innerHTML = msg;
-} else {
-    //display none;
-}
-
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let user = users.find(u => u.email == email.value && u.password == password.value)
     if (user) {
-        console.log('User Gefunden');
+        loginGuest()
+    } else {
+        console.log('User not found');
     }
+    emptyForm();
 }
+
+function loginGuest() {
+    window.location.href = "board.html";
+}
+
+function emptyForm() {
+    document.getElementById('email').value = '';
+    document.getElementById('password').value = '';
+}
+
+
 
