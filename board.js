@@ -97,13 +97,15 @@ function generateTaskHtml(taskType, i, j) {
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle">${taskType[j].title}</p>
             <p class="taskDescription">${taskType[j].description}</p>
-            <!-- <div class="d-flex gap-3 align-items-center"> -->
-                    <div id="${taskTypeString}Progress${j}"></div>
+            <div class="d-flex gap-3 align-items-baseline">
+                    <div id="${taskTypeString}Progress${j}" style="width: 128px;"></div>
                     <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
-            <!-- </div> -->
+            </div>
             <div class="d-flex justify-content-between">
                 <div id="${taskTypeString}Assigned${j}" class="d-flex"></div>
-                <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+                <div class="iconBox32">
+                    <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+                </div>
             </div>
         </div>
     `
