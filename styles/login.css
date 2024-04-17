@@ -18,7 +18,7 @@ body {
 }
 
 .imgJoin {
-  max-width: 274px;
+  max-width: 100px;
   height: auto;
   position: absolute;
   top: 50%;
@@ -243,5 +243,16 @@ body.animation .imgJoin {
 
   .content {
     width: 60%;
+  }
+
+  .imgJoin {
+    max-width: 274px;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: all 1s ease-in-out;
+    transform-origin: top left;
+    z-index: 2;
   }
 }

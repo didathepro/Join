@@ -11,16 +11,43 @@ async function init() {
 function show() {
     let box = document.getElementById('topBox');
     let bodyAnimation = document.getElementById('bodyAnimation');
-    setTimeout(() => {
-        bodyAnimation.style.display = 'none'
-    }, 0)
-    setTimeout(() => {
-        box.style.display = 'flex';
-    }, 1000);
-    setTimeout(() => {
-        bodyAnimation.style.display = 'block'
-    }, 1500)
+    let img = document.getElementById('imgJoin');
+    const mediaQuery = window.matchMedia('(max-width: 768px)')
+    // let imgBlue = document.getElementById('imgJoin').src = './assets/img/joinblue.png';
+    if (mediaQuery.matches) {
+        setTimeout(() => {
+            bodyAnimation.style.display = 'none'
+
+        }, 0);
+        setTimeout(() => {
+            document.body.style.backgroundColor = "#2b3646";
+            img.src = './assets/img/joinwhite.png'
+        }, 10);
+        setTimeout(() => {
+            box.style.display = 'flex';
+            document.body.style.backgroundColor = '#f6f7f8';
+            img.src = './assets/img/joinblue.png'
+
+        }, 1000);
+        setTimeout(() => {
+            bodyAnimation.style.display = 'block'
+        }, 1500)
+
+    } else {
+        setTimeout(() => {
+            bodyAnimation.style.display = 'none'
+        }, 0)
+        setTimeout(() => {
+            box.style.display = 'flex';
+        }, 1000);
+        setTimeout(() => {
+            bodyAnimation.style.display = 'block'
+        }, 1500)
+    }
+
 };
+
+
 
 function login() {
     let email = document.getElementById('email');
