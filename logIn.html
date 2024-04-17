@@ -6,9 +6,9 @@
     <title>Login</title>
     <link rel="stylesheet" href="styles/login.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
+    <script src="js/storage.js"></script>
     <script src="js/login.js"></script>
     <script src="js/regestry.js"></script>
-    <script src="js/storage.js"></script>
   </head>
   <body onload="init()">
     <div class="logoBox" id="logoBox">
@@ -58,7 +58,6 @@
                   type="checkbox"
                   id="checkbox"
                   class="inputCheckbox"
-                  required
                 /><label class="labelCheckbox" for="checkbox"
                   >Remember me</label
                 >
@@ -82,5 +81,6 @@
         <a href="#">Legal notice</a>
       </section>
     </section>
+    <div id="msgBoxLogin" class="msgBoxLogin" style="display: none"></div>
   </body>
 </html>

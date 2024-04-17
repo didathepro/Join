@@ -4,6 +4,8 @@ let users = [{
     password: 'est123'
 }]
 
+let passwordConfirm = document.getElementById('passwordConfirm');
+
 async function initReg() {
     loadUsers();
 }
@@ -18,10 +20,10 @@ async function loadUsers() {
 
 
 async function register() {
-    // if (passwords !== passwordConfirms) {
-    //     alert('Passwords are not the same');
-    //     return;
-    // }
+    if (password !== passwordConfirm) {
+        alert('Passwords are not the same');
+        return;
+    }
 
     signBtn.disabled = true;
     users.push({

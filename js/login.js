@@ -1,9 +1,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 
-function init() {
+async function init() {
     document.getElementById('imgJoin');
     document.body.classList.add('animation');
+    await loadUsers();
     show();
+    autoFillForm();
 }
 
 function show() {
@@ -27,8 +29,11 @@ function login() {
     if (user) {
         loginGuest()
     } else {
-        console.log('User not found');
+        document.getElementById('msgBoxLogin').innerHTML = 'Email or Password Incorect!!!';
+        document.getElementById('msgBoxLogin').style.display = 'flex';
+
     }
+    rememberMe()
     emptyForm();
 }
 
@@ -41,5 +46,26 @@ function emptyForm() {
     document.getElementById('password').value = '';
 }
 
+
+function rememberMe() {
+    let rememberCheckbox = document.getElementById('checkbox');
+    if (rememberCheckbox.checked) {
+        localStorage.setItem('rememberEmail', document.getElementById('email').value);
+        localStorage.setItem('rememberPassword', document.getElementById('password').value);
+    } else {
+        localStorage.removeItem('rememberEmail');
+        localStorage.removeItem('rememberPassword');
+    }
+}
+
+function autoFillForm() {
+    let rememberedEmail = localStorage.getItem('rememberEmail');
+    let rememberedPassword = localStorage.getItem('rememberPassword');
+    if (rememberedEmail && rememberedPassword) {
+        document.getElementById('email').value = rememberedEmail;
+        document.getElementById('password').value = rememberedPassword;
+        document.getElementById('checkbox').checked = true;
+    }
+}
 
 
