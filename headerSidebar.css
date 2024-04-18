@@ -4,6 +4,10 @@ header {
     height: 100px;
 }
 
+header p {
+    margin: 0;
+}
+
 .headerTitle {
     margin-left: 128px;
     font-size: 24px;
@@ -32,6 +36,7 @@ header {
     padding-left: 56px;
     padding-right: 56px;
     display: flex;
+    text-decoration: none;
 }
 
 .sidebarItem:hover .sidebarIcon {

@@ -1,3 +1,9 @@
+body {
+    background: #f6f7f8 !important;
+    height: 1024px;
+    width: 1440px;
+}
+
 h1 {
     font-size: 61px !important;
     font-weight: 700 !important;
@@ -5,7 +11,7 @@ h1 {
 
 .addTaskContent {
     margin-left: 232px;
-    padding: 64px;
+    padding: 128px;
     background: #f6f7f8;
     height: 924px;
 }
@@ -16,7 +22,7 @@ h1 {
     background: #D1D1D1;
 }
 .addTaskContent p {
-    margin: 0;
+    margin: 0px 0px 8px 0px;
 }
 
 .addTaskContentLeft {
@@ -30,4 +36,28 @@ h1 {
 .addTaskInput {
     width: 440px;
     border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    height: 48px;
+    padding: 0px 16px 0px 16px;
+}
+
+.addTaskInputText {
+    height: 120px;
+    padding-top: 8px;
+}
+
+.addTaskButton {
+    background: #fff;
+    width: 136px;
+    height: 56px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.addTaskButton p {
+    margin: 0;
 }
