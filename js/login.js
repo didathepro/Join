@@ -1,5 +1,10 @@
 const urlParams = new URLSearchParams(window.location.search);
-
+/**
+ * Initialiert body onload
+ * start Intro Animation of Join Logo
+ * load User from Localstorage
+ * load Autofill when already have account and set up "RememberMe"
+ */
 async function init() {
     document.getElementById('imgJoin');
     document.body.classList.add('animation');
@@ -7,7 +12,9 @@ async function init() {
     show();
     autoFillForm();
 }
-
+/**
+ * loading Animation with a TimeOut Function for Desktop and Mobile
+ */
 function show() {
     let box = document.getElementById('topBox');
     let bodyAnimation = document.getElementById('bodyAnimation');
@@ -46,8 +53,9 @@ function show() {
 
 };
 
-
-
+/**
+ * this function checks when User already SignUp and is email and password correct
+ */
 function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
@@ -63,16 +71,24 @@ function login() {
     emptyForm();
 }
 
+/**
+ * when you choose the Guest LogIn then you will directly come to the Board.html
+ */
 function loginGuest() {
     window.location.href = "board.html";
 }
 
+/**
+ * clears all Input after submit the Form
+ */
 function emptyForm() {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
 }
 
-
+/**
+ * first check when rememberMe is checked, when yes then save Data in LocalStorage, otherwise none
+ */
 function rememberMe() {
     let rememberCheckbox = document.getElementById('checkbox');
     if (rememberCheckbox.checked) {
@@ -84,6 +100,9 @@ function rememberMe() {
     }
 }
 
+/**
+ * when remeberMe was Checked the Autofill will automatic saved on your Computer LocalStorage
+ */
 function autoFillForm() {
     let rememberedEmail = localStorage.getItem('rememberEmail');
     let rememberedPassword = localStorage.getItem('rememberPassword');
