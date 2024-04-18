@@ -13,7 +13,6 @@ function show() {
     let bodyAnimation = document.getElementById('bodyAnimation');
     let img = document.getElementById('imgJoin');
     const mediaQuery = window.matchMedia('(max-width: 768px)')
-    // let imgBlue = document.getElementById('imgJoin').src = './assets/img/joinblue.png';
     if (mediaQuery.matches) {
         setTimeout(() => {
             bodyAnimation.style.display = 'none'
