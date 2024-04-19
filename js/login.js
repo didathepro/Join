@@ -8,8 +8,8 @@ const urlParams = new URLSearchParams(window.location.search);
 async function init() {
     document.getElementById('imgJoin');
     document.body.classList.add('animation');
-    await loadUsers();
     show();
+    await loadUsers();
     autoFillForm();
 }
 /**
