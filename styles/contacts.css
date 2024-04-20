@@ -408,6 +408,10 @@ header h4 {
 }
 
 @media (max-width:1000px) {
+    body {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
     .right-contacts {
         display: none;
         position: absolute;
@@ -517,7 +521,9 @@ header h4 {
     .cancel {
         display: none;
     }
-
+    .right-add svg {
+        margin-left:0;
+    }
 }
 
 @media (min-width:1000px) {

@@ -8,7 +8,7 @@ function addBg() {
     
     // Define the mapping of page names to IDs
     let maps = {
-        '/index.html': {
+        '/summary.html': {
             'default': ['summary'],
             'responsive': ['summaryRes']
         },
