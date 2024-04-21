@@ -11,7 +11,7 @@ h1 {
 
 .addTaskContent {
     margin-left: 232px;
-    padding: 128px;
+    padding: 128px 0px 0px 128px;
     background: #f6f7f8;
     height: 924px;
 }
@@ -39,6 +39,7 @@ h1 {
     border-radius: 10px;
     height: 48px;
     padding: 0px 16px 0px 16px;
+    font-size: 20px;
 }
 
 .addTaskInputText {
@@ -46,7 +47,7 @@ h1 {
     padding-top: 8px;
 }
 
-.addTaskButton {
+.addTaskPriorityButton {
     background: #fff;
     width: 136px;
     height: 56px;
@@ -56,8 +57,65 @@ h1 {
     justify-content: center;
     align-items: center;
     gap: 8px;
+    font-size: 20px;
 }
 
-.addTaskButton p {
+.addTaskPriorityButton:hover {
+    cursor: pointer;
+}
+
+.addTaskPriorityButton p {
     margin: 0;
+}
+
+.priorityUrgentActive {
+    background: #ff3d00;
+    color: #fff;
+}
+
+.priorityMediumActive {
+    background: #FFA800;
+    color: #fff;
+}
+
+.priorityLowActive {
+    background: #7ae229;
+    color: #fff;
+}
+
+.footnote {
+    color: #ff8190;
+}
+
+.clearButton {
+    height: 56px;
+    width: 110px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.clearButton p {
+    font-size: 20px;
+    color: #2A3647;
+    margin: 0;
+}
+
+.createTaskButton {
+    height: 56px;
+    width: 183px;
+    background-color: #2A3647;
+    border-radius: 10px;
+}
+
+.createTaskButton p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.addTaskContentBottom {
+    margin-top: 128px;
+    width: 977px;
 }
