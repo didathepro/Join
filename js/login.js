@@ -75,7 +75,7 @@ function login() {
  * when you choose the Guest LogIn then you will directly come to the Board.html
  */
 function loginGuest() {
-    window.location.href = "board.html";
+    window.location.href = "summary.html";
 }
 
 /**
