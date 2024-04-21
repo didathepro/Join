@@ -312,7 +312,7 @@ header h4 {
 .lock-icon {
     position: absolute;
     right: 18px;
-    top: 25%;
+    top: 17px;
     cursor: pointer;
 }
 
@@ -415,16 +415,16 @@ header h4 {
     .right-contacts {
         display: none;
         position: absolute;
-        top: 0;
+        top: -4px;
         left: 0;
-        height: 77%;
-        width:95vw;
-        margin-top:93px;
-        margin-left:0;
-        padding-left:20px;
+        height: 79%;
+        width: 100vw;
+        margin-top: 93px;
+        margin-left: 0;
+        padding-left: 20px;
         background-color: #f6f7f8;
         z-index: 1;
-        padding-top:20px;
+        padding-top: 20px;
     }
     .contacts-bar {
         width:100%;
@@ -523,6 +523,12 @@ header h4 {
     }
     .right-add svg {
         margin-left:0;
+    }
+    .contact-img {
+        gap:18px;
+    }
+    .contact-img h2 {
+        padding:5px;
     }
 }
 
