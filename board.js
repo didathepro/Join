@@ -62,6 +62,8 @@ const tasks = {
 };
 
 const taskTypesKeys = Object.keys(tasks);
+let currentlyDraggedCategory;
+let currentlyDraggedId;
 
 function boardInit() {
     iterateTaskTypes();
@@ -93,7 +95,7 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column mb-3">
+        <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle">${taskType[j].title}</p>
             <p class="taskDescription">${taskType[j].description}</p>
@@ -162,4 +164,20 @@ function insertTaskProgress(i, j) {
         `
         document.getElementById(`${taskTypeString}ProgressText${j}`).innerHTML = `${subtasksDone}/${tasks[taskTypeString][j].subtasks.length} Subtasks`
         };
+}
+
+function startDragging(i,  j) {
+    currentlyDraggedCategory = i;
+    currentlyDraggedId = j;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    const taskTypeString = taskTypesKeys[currentlyDraggedCategory];
+    const removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1);
+    console.log(removedTask);
+    tasks[taskTypeString][category].push(removedTask);
 }

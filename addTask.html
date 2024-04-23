@@ -19,87 +19,90 @@
   <div class="addTaskContent">
     <h1 class="mb-5">Add Task</h1>
     <div class="d-flex flex-column">
-      <div class="d-flex gap-5">
-        <div class="addTaskContentLeft d-flex flex-column gap-4">
-          <div>
-            <div class="d-flex">
-              <p>Title</p>
-              <p class="footnote">*</p>
-            </div>
-            <input type="text" placeholder="Enter a title" class="addTaskInput" />
-          </div>
-          <div>
-            <p>Description</p>
-            <textarea placeholder="Enter a description" class="addTaskInput addTaskInputText"></textarea>
-          </div>
-          <div>
-            <p>Assigned to</p>
-            <select name="" id="" placeholder="" class="addTaskInput">
-              <option disabled selected value="">
-                Select contacts to assign
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <div class="addTaskSeperator"></div>
-        <div class="addTaskContentRight d-flex flex-column gap-4">
-          <div>
-            <div class="d-flex">
-              <p>Due date</p>
-              <p class="footnote">*</p>
-            </div>
-            <input type="date" name="" id="" class="addTaskInput">
-          </div>
-          <div>
-            <p>Prio</p>
-            <div class="d-flex justify-content-between">
-              <div class="addTaskPriorityButton" id="addTaskPriorityUrgent" onclick="selectActivePriority('Urgent')">
-                <p>Urgent</p>
-                <img src="img/icon/priorityUrgent.svg" alt="Urgent" id="addTaskPriorityUrgentIcon">
+      <form onsubmit="">
+        <div class="d-flex gap-5">
+          <div class="addTaskContentLeft d-flex flex-column gap-4">
+            <div>
+              <div class="d-flex">
+                <p>Title</p>
+                <p class="footnote">*</p>
               </div>
-              <div class="addTaskPriorityButton priorityMediumActive" id="addTaskPriorityMedium"
-                onclick="selectActivePriority('Medium')">
-                <p>Medium</p>
-                <img src="img/icon/priorityMediumWhite.svg" alt="Medium" id="addTaskPriorityMediumIcon">
-              </div>
-              <div class="addTaskPriorityButton" id="addTaskPriorityLow" onclick="selectActivePriority('Low')">
-                <p>Low</p>
-                <img src="img/icon/priorityLow.svg" alt="Low" id="addTaskPriorityLowIcon">
-              </div>
+              <input type="text" placeholder="Enter a title" class="addTaskInput" required minlength="3" />
+            </div>
+            <div>
+              <p>Description</p>
+              <textarea placeholder="Enter a description" class="addTaskInput addTaskInputText"></textarea>
+            </div>
+            <div>
+              <p>Assigned to</p>
+              <select name="" id="" placeholder="" class="addTaskInput">
+                <option disabled selected value="">
+                  Select contacts to assign
+                </option>
+              </select>
             </div>
           </div>
-          <div>
-            <div class="d-flex">
-              <p>Category</p>
-              <p class="footnote">*</p>
+          <div class="addTaskSeperator"></div>
+          <div class="addTaskContentRight d-flex flex-column gap-4">
+            <div>
+              <div class="d-flex">
+                <p>Due date</p>
+                <p class="footnote">*</p>
+              </div>
+              <input type="date" name="" id="" class="addTaskInput" required>
             </div>
-            <select name="" id="" class="addTaskInput">
-              <option disabled selected value="">Select task category</option>
-            </select>
-          </div>
-          <div>
-            <p>Subtasks</p>
-            <input type="text" name="" id="" placeholder="Add new subtask" class="addTaskInput">
+            <div>
+              <p>Prio</p>
+              <div class="d-flex justify-content-between">
+                <div class="addTaskPriorityButton" id="addTaskPriorityUrgent" onclick="selectActivePriority('Urgent')">
+                  <p>Urgent</p>
+                  <img src="img/icon/priorityUrgent.svg" alt="Urgent" id="addTaskPriorityUrgentIcon">
+                </div>
+                <div class="addTaskPriorityButton priorityMediumActive" id="addTaskPriorityMedium"
+                  onclick="selectActivePriority('Medium')">
+                  <p>Medium</p>
+                  <img src="img/icon/priorityMediumWhite.svg" alt="Medium" id="addTaskPriorityMediumIcon">
+                </div>
+                <div class="addTaskPriorityButton" id="addTaskPriorityLow" onclick="selectActivePriority('Low')">
+                  <p>Low</p>
+                  <img src="img/icon/priorityLow.svg" alt="Low" id="addTaskPriorityLowIcon">
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="d-flex">
+                <p>Category</p>
+                <p class="footnote">*</p>
+              </div>
+              <select name="" id="" class="addTaskInput" required>
+                <option disabled selected value="">Select task category</option>
+                <option value="Technical Task">Technical Task</option>
+                <option value="User Story">User Story</option>
+              </select>
+            </div>
+            <div>
+              <p>Subtasks</p>
+              <input type="text" name="" id="" placeholder="Add new subtask" class="addTaskInput">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="d-flex justify-content-between addTaskContentBottom">
-        <div class="d-flex">
-          <p class="footnote">*</p>
-          <p>This field is required</p>
-        </div>
-        <div class="d-flex align-items-end gap-3">
-          <a href="/addTask.html" class="d-flex justify-content-center align-items-center clearButton">
-            <p>Clear</p>
-            <img src="/img/icon/cross.svg" alt="Cross">
-          </a>
-          <div class="d-flex justify-content-center align-items-center createTaskButton">
-            <p>Create Task</p>
-            <img src="/img/icon/checkmark.svg" alt="Checkmark">
+        <div class="d-flex justify-content-between addTaskContentBottom">
+          <div class="d-flex">
+            <p class="footnote">*</p>
+            <p>This field is required</p>
+          </div>
+          <div class="d-flex align-items-end gap-3">
+            <a href="/addTask.html" class="d-flex justify-content-center align-items-center clearButton">
+              <p>Clear</p>
+              <img src="/img/icon/cross.svg" alt="Cross">
+            </a>
+            <button class="d-flex justify-content-center align-items-center createTaskButton">
+              <p>Create Task</p>
+              <img src="/img/icon/checkmark.svg" alt="Checkmark">
+            </button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

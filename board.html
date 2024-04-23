@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="boardContent d-flex justify-content-between">
-      <div class="boardColumn" id="tasksToDo"></div>
+      <div class="boardColumn" id="tasksToDo" ondrop="moveTo('tasksToDo')" ondragover="allowDrop(event)"></div>
       <div class="boardColumn" id="tasksInProgress"></div>
       <div class="boardColumn" id="tasksAwaitFeedback"></div>
       <div class="boardColumn" id="tasksDone"></div>
