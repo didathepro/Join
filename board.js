@@ -1,5 +1,5 @@
 const tasks = {
-    "tasksToDo": undefined,
+    "tasksToDo": [],
     "tasksInProgress":
         [
             {
@@ -66,7 +66,14 @@ let currentlyDraggedCategory;
 let currentlyDraggedId;
 
 function boardInit() {
+    clearBoard();
     iterateTaskTypes();
+}
+
+function clearBoard() {
+    for (let i = 0; i < taskTypesKeys.length; i++) {
+        document.getElementById(taskTypesKeys[i]).innerHTML = '';
+    }
 }
 
 function iterateTaskTypes() {
@@ -177,7 +184,7 @@ function allowDrop(ev) {
 
 function moveTo(category) {
     const taskTypeString = taskTypesKeys[currentlyDraggedCategory];
-    const removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1);
-    console.log(removedTask);
-    tasks[taskTypeString][category].push(removedTask);
+    removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1)[0];
+    tasks[category].push(removedTask);
+    boardInit();
 }
