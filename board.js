@@ -78,7 +78,7 @@ function clearBoard() {
 
 function iterateTaskTypes() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
-        if (tasks[taskTypesKeys[i]] == undefined) {
+        if (tasks[taskTypesKeys[i]].length <= 0) {
             document.getElementById(`${taskTypesKeys[i]}`).innerHTML = generateNoTasksHtml();
         }
         else {
