@@ -23,8 +23,10 @@ function addNewTask() {
     const newTaskDate = document.getElementById('newTaskDate').value;
     const newTaskPriority = selectedPriority;
     const newTaskCategory = document.getElementById('newTaskCategory').value;
-    const newTaskSubtasks = document.getElementById('newTaskSubtasks').value;
-    addNewTaskJSON(newTaskTitle, newTaskDescription, newTaskAssigned, newTaskDate, newTaskPriority, newTaskCategory, newTaskSubtasks);
+    // const newTaskSubtasks = document.getElementById('newTaskSubtasks').value;
+    addNewTaskJSON(newTaskTitle, newTaskDescription, newTaskAssigned, newTaskDate, newTaskPriority, newTaskCategory,
+        // newTaskSubtasks
+    );
 }
 
 function addNewTaskJSON(newTaskTitle, newTaskDescription, newTaskAssigned, newTaskDate, newTaskPriority, newTaskCategory, newTaskSubtasks) {

@@ -7,9 +7,9 @@ const tasks = {
                 "description": 'Create a contact form and imprint page...',
                 "category": 'User Story',
                 "subtasks": [
-                    { 
+                    {
                         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: true    
+                        done: true
                     },
                     {
                         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
@@ -46,9 +46,9 @@ const tasks = {
                 "description": 'Define CSS naming conventions and structure...',
                 "category": 'Technical Task',
                 "subtasks": [
-                    { 
+                    {
                         title: 'Establish CSS Methodology',
-                        done: true    
+                        done: true
                     },
                     {
                         title: 'Setup Base Styles',
@@ -163,17 +163,17 @@ function insertTaskProgress(i, j) {
     if (tasks[taskTypeString][j].subtasks) {
         taskProgress.classList.add('progress');
         for (let k = 0; k < tasks[taskTypeString][j].subtasks.length; k++) {
-            if (tasks[taskTypeString][j].subtasks[k].done == true) {subtasksDone++}
+            if (tasks[taskTypeString][j].subtasks[k].done == true) { subtasksDone++ }
         }
-        progressPercent = (subtasksDone / tasks[taskTypeString][j].subtasks.length) * 100;   
+        progressPercent = (subtasksDone / tasks[taskTypeString][j].subtasks.length) * 100;
         taskProgress.innerHTML = /*html*/`
                         <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="progressPercent" aria-valuemin="0" aria-valuemax="100"></div>
         `
         document.getElementById(`${taskTypeString}ProgressText${j}`).innerHTML = `${subtasksDone}/${tasks[taskTypeString][j].subtasks.length} Subtasks`
-        };
+    };
 }
 
-function startDragging(i,  j) {
+function startDragging(i, j) {
     currentlyDraggedCategory = i;
     currentlyDraggedId = j;
 }
@@ -187,4 +187,9 @@ function moveTo(category) {
     removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1)[0];
     tasks[category].push(removedTask);
     boardInit();
+}
+
+function showAddTaskFloating() {
+    document.getElementById('addTaskFloating').classList.remove('d-none');
+    document.getElementById('addTaskFloatingBg').classList.remove('d-none');
 }
