@@ -192,14 +192,12 @@ button {
     font-size: 12px;
 }
 
-.addTastContent {
-    position: absolute;
-    padding: 0 !important;
-    margin: 64px, 74px, 64px, 74px !important;
-    border-radius: 30px !important;
-    height: auto !important;
-    /* top: 0; */
-    /* left: 0; */
+.addTaskFloating {
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    padding: 64px 74px 0px 74px;
+    background: #f6f7f8;
+    height: 870px;
+    border-radius: 30px;
 }
 
 .addTaskFloatingBg {

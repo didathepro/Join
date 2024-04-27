@@ -9,10 +9,10 @@ h1 {
     font-weight: 700 !important;
 }
 
-.addTaskContent {
+.addTaskTemplate {
     margin-left: 232px;
     padding: 128px 0px 0px 128px;
-    background: #f6f7f8;
+    /* background: #f6f7f8; */
     height: 924px;
 }
 
@@ -119,4 +119,12 @@ h1 {
 .addTaskContentBottom {
     margin-top: 128px;
     width: 977px;
+}
+
+.closeIcon:hover {
+    cursor: pointer;
+}
+
+.clearButton:hover {
+    cursor: pointer;
 }

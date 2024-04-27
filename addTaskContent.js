@@ -41,3 +41,14 @@ function addNewTaskJSON(newTaskTitle, newTaskDescription, newTaskAssigned, newTa
     };
     tasks['tasksToDo'].push(newTask);
 }
+
+function addTaskClear() {
+    document.getElementById('newTaskTitle').value = '';
+    document.getElementById('newTaskDescription').value = '';
+    document.getElementById('newTaskAssigned').selectedIndex = 0;
+    document.getElementById('newTaskDescription').value = '';
+    document.getElementById('newTaskDate').value = '';
+    document.getElementById('newTaskAssigned').selectedIndex = 0;
+    document.getElementById('newTaskSubtasks').value = '';
+    selectActivePriority('Medium');
+}

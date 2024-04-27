@@ -192,4 +192,11 @@ function moveTo(category) {
 function showAddTaskFloating() {
     document.getElementById('addTaskFloating').classList.remove('d-none');
     document.getElementById('addTaskFloatingBg').classList.remove('d-none');
+    document.getElementById('closeIcon').classList.remove('d-none');
+}
+
+function hideAddTaskFloating() {
+    document.getElementById('addTaskFloating').classList.add('d-none');
+    document.getElementById('addTaskFloatingBg').classList.add('d-none');
+    document.getElementById('closeIcon').classList.add('d-none');
 }
