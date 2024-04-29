@@ -200,3 +200,17 @@ function hideAddTaskFloating() {
     document.getElementById('addTaskFloatingBg').classList.add('d-none');
     document.getElementById('closeIcon').classList.add('d-none');
 }
+
+function search() {
+    let search = document.getElementById('searchInput').value.toLowerCase();
+    let searchArray = [];
+    clearBoard()
+    for (let i = 0; i < tasks.length; i++) {
+        const element = tasks[i];
+        if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
+            searchArray.push(element);
+
+        }
+    }
+
+}
