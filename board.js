@@ -131,20 +131,35 @@ function generateNoTasksHtml() {
 function setTaskColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskCategoryBg = document.getElementById(`${taskTypeString}Category${j}`);
-    if (tasks[taskTypeString][j].category == 'User Story') {
-        taskCategoryBg.style.background = '#0038FF';
+    if (taskCategoryBg && tasks[taskTypeString] && tasks[taskTypeString][j]) {
+        const taskPriority = tasks[taskTypeString][j].priority;
+        if (taskPriority !== undefined) {
+            if (taskPriority === 'Urgent') {
+                taskCategoryBg.style.background = '#FF0000';
+            } else if (taskPriority === 'Medium') {
+                taskCategoryBg.style.background = '#FFA500';
+            } else {
+                const taskCategory = tasks[taskTypeString][j].category;
+                if (taskCategory === 'User Story') {
+                    taskCategoryBg.style.background = '#0038FF';
+                } else {
+                    taskCategoryBg.style.background = '#1FD7C1';
+                }
+            }
+        } else {
+            taskCategoryBg.style.background = '#CCCCCC';
+        }
     }
-    else {
-        taskCategoryBg.style.background = '#1FD7C1';
-    };
 }
 
 function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
-    for (let k = 0; k < tasks[taskTypeString][j].assigned.length; k++) {
-        taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, k);
-    };
+    if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
+        tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
+            taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
+        });
+    }
 }
 
 function generateTaskAssignedHtml(i, j, k) {
@@ -159,19 +174,26 @@ function generateTaskAssignedHtml(i, j, k) {
 function insertTaskProgress(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskProgress = document.getElementById(`${taskTypeString}Progress${j}`);
-    let subtasksDone = 0;
-    if (tasks[taskTypeString][j].subtasks) {
-        taskProgress.classList.add('progress');
-        for (let k = 0; k < tasks[taskTypeString][j].subtasks.length; k++) {
-            if (tasks[taskTypeString][j].subtasks[k].done == true) { subtasksDone++ }
+    if (taskProgress) {
+        const task = tasks[taskTypeString][j];
+        if (task && task.subtasks) {
+            let subtasksDone = 0;
+            taskProgress.classList.add('progress');
+            for (let k = 0; k < task.subtasks.length; k++) {
+                if (task.subtasks[k].done === true) { subtasksDone++; }
+            }
+            const progressPercent = (subtasksDone / task.subtasks.length) * 100;
+            taskProgress.innerHTML = `
+                <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="${progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>
+            `;
+            const progressTextElement = document.getElementById(`${taskTypeString}ProgressText${j}`);
+            if (progressTextElement) {
+                progressTextElement.innerHTML = `${subtasksDone}/${task.subtasks.length} Subtasks`;
+            }
         }
-        progressPercent = (subtasksDone / tasks[taskTypeString][j].subtasks.length) * 100;
-        taskProgress.innerHTML = /*html*/`
-                        <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="progressPercent" aria-valuemin="0" aria-valuemax="100"></div>
-        `
-        document.getElementById(`${taskTypeString}ProgressText${j}`).innerHTML = `${subtasksDone}/${tasks[taskTypeString][j].subtasks.length} Subtasks`
-    };
+    }
 }
+
 
 function startDragging(i, j) {
     currentlyDraggedCategory = i;
@@ -202,15 +224,24 @@ function hideAddTaskFloating() {
 }
 
 function search() {
-    let search = document.getElementById('searchInput').value.toLowerCase();
-    let searchArray = [];
-    clearBoard()
-    for (let i = 0; i < tasks.length; i++) {
-        const element = tasks[i];
-        if (element['title'].toLowerCase().includes(search) || element['description'].toLowerCase().includes(search)) {
-            searchArray.push(element);
-
-        }
+    let search = document.getElementById('searchInput').value.trim().toLowerCase();
+    clearBoard();
+    if (search === '') {
+        iterateTaskTypes();
+    } else {
+        taskTypesKeys.forEach(function (taskTypeKey) {
+            tasks[taskTypeKey].forEach(function (task, index) {
+                if (task.title.toLowerCase().includes(search) || (task.description && task.description.toLowerCase().includes(search))) {
+                    document.getElementById(taskTypeKey).innerHTML += generateTaskHtml(tasks[taskTypeKey], taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    setTaskColor(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    insertTaskAssigned(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    insertTaskProgress(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                }
+            });
+        });
     }
-
 }
+
+
+
+
