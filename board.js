@@ -143,7 +143,7 @@ function setTaskColor(i, j) {
                 if (taskCategory === 'User Story') {
                     taskCategoryBg.style.background = '#0038FF';
                 } else {
-                    taskCategoryBg.style.background = '#CCCCCC';
+                    taskCategoryBg.style.background = '#1CD7C1';
                 }
             }
         } else {
