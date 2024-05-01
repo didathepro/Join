@@ -76,6 +76,7 @@ function login() {
  */
 function loginGuest() {
     window.location.href = "summary.html";
+    users.name = 'guest'
 }
 
 /**

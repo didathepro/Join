@@ -135,15 +135,15 @@ function setTaskColor(i, j) {
         const taskPriority = tasks[taskTypeString][j].priority;
         if (taskPriority !== undefined) {
             if (taskPriority === 'Urgent') {
-                taskCategoryBg.style.background = '#FF0000';
+                taskCategoryBg.style.background = '#1CD7C1';
             } else if (taskPriority === 'Medium') {
-                taskCategoryBg.style.background = '#FFA500';
+                taskCategoryBg.style.background = '#0038FF';
             } else {
                 const taskCategory = tasks[taskTypeString][j].category;
                 if (taskCategory === 'User Story') {
                     taskCategoryBg.style.background = '#0038FF';
                 } else {
-                    taskCategoryBg.style.background = '#1FD7C1';
+                    taskCategoryBg.style.background = '#CCCCCC';
                 }
             }
         } else {
@@ -156,9 +156,12 @@ function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
     if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
-        tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
-            taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
-        });
+        const assignedElements = taskAssigned.getElementsByClassName('taskAssigned');
+        if (assignedElements.length === 0) {
+            tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
+                taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
+            });
+        }
     }
 }
 

@@ -1,5 +1,19 @@
 const STORAGE_TOKEN = 'K9SFYBX0R1WD1NS9ZKIOB4W1CL157WB4C579A62K';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
+const guestH2 = document.querySelector('#navHeader');
+
+
+let users = [{
+    name: 'test',
+    email: 'test@gmail.com',
+    password: 'est123'
+},
+
+{
+    name: 'guest',
+    email: 'guest123@da.de',
+    password: '123',
+}]
 
 
 async function setItem(key, value) {
@@ -16,3 +30,11 @@ async function getItem(key) {
         } throw `Could not find data with key "${key}".`;
     });
 }
+
+function logGuest() {
+    if (users.name === 'guest') {
+        guestH2.text.charAt[0].toUpperCase();
+    }
+}
+
+

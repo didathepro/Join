@@ -1,11 +1,24 @@
-async function init(){
+async function init() {
     await includeHTML();
     addBg();
+    logGuest()
 }
+
+let users = [{
+    name: 'test',
+    email: 'test@gmail.com',
+    password: 'est123'
+},
+
+{
+    name: 'guest',
+    email: 'guest123@da.de',
+    password: '123'
+}];
 
 function addBg() {
     let currentPage = window.location.pathname;
-    
+
     // Define the mapping of page names to IDs
     let maps = {
         '/summary.html': {
@@ -29,6 +42,7 @@ function addBg() {
             'responsive': []
         }
     };
+
 
     // Get the appropriate IDs based on the current page
     let ids = maps[currentPage] || { 'default': [], 'responsive': [] };
@@ -55,26 +69,33 @@ function addBg() {
 }
 
 // Dropdown Menu On click
-function dropDown(){
+function dropDown() {
 
     let content = document.getElementById("dropdown");
 
-    if(content.classList.contains("d-none")){
+    if (content.classList.contains("d-none")) {
         content.classList.remove("d-none");
     }
 
-    content.innerHTML +=`
+    content.innerHTML += `
         <div class="dropdown-container">
             <a href="../legalNotice.html">Legal Notice</a>     
             <a href="../privacyPolicy.html">Privacy Policy</a>     
-            <a href="#">Log out</a>     
+            <a href="../login.html">Log out</a>     
         </div>
     `;
 
     //Close dropown when clicked outside of dropdown menu
-    document.addEventListener('mouseup', function(e) {
-    if (!content.contains(e.target)) {
-    content.classList.add('d-none');
-    }
-});
-;}
+    document.addEventListener('mouseup', function (e) {
+        if (!content.contains(e.target)) {
+            content.classList.add('d-none');
+        }
+    });
+    ;
+}
+function logGuest() {
+    loginGuest()
+    if (users['name'] == 'guest')
+        document.getElementById('navHeader').innerHTML = ' G ';
+    guestH2.textChar(0)
+}

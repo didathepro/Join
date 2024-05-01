@@ -1,9 +1,3 @@
-let users = [{
-    name: 'test',
-    email: 'test@gmail.com',
-    password: 'est123'
-}]
-
 let passwordConfirm = document.getElementById('passwordConfirm');
 
 /**
