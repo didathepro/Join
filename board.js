@@ -61,6 +61,8 @@ const tasks = {
         ],
 };
 
+const subtasks = ['Contact Form', 'Write Legal Imprint'];
+
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;

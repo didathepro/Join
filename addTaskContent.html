@@ -11,9 +11,7 @@
   <div class="addTaskContent">
     <div class="d-flex justify-content-between align-items-start">
       <h1 class="mb-5">Add Task</h1>
-      <!-- <button id="closeButton" class="d-none d-flex justify-content-center align-items-center" onclick="hideAddTaskFloating()"> -->
-        <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon" onclick="hideAddTaskFloating()">
-      <!-- </button> -->
+      <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon d-none" onclick="hideAddTaskFloating()">
     </div>
     <div class="d-flex flex-column">
       <form onsubmit="addNewTask(); return false;">
@@ -81,7 +79,17 @@
             </div>
             <div>
               <p>Subtasks</p>
-              <input type="text" name="" placeholder="Add new subtask" class="addTaskInput" id="newTaskSubtasks">
+              <!-- <input type="text" name="" placeholder="Add new subtask" class="addTaskInput" id="newTaskSubtasks"> -->
+              <div class="addTaskInput addTaskSubtasks d-flex justify-content-between align-items-center">
+                <p id="subtasksField">Add new task</p>
+                <div>
+                  <img src="img/icon/cross.svg" alt="Cross" onclick="clearSubTask()" class="d-none" id="subtasksCross">
+                  <img src="img/icon/checkmark_dark.svg" alt="Checkmark" onclick="addSubTask()" class="d-none" id="subtasksCheckmark">
+                  <img src="img/icon/plus-dark.svg" alt="Plus" onclick="loadSubTask()" id="subtasksPlus">
+                </div>
+              </div>
+              <div class="addedSubTasks" id="addedSubTasks">
+              </div>
             </div>
           </div>
         </div>

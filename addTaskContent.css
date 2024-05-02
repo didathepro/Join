@@ -128,3 +128,21 @@ h1 {
 .clearButton:hover {
     cursor: pointer;
 }
+
+.addTaskSubtasks {
+    background: #fff;
+}
+
+.addTaskSubtasks p {
+    color: #D1D1D1;
+    margin: 0;
+}
+
+.addTaskSubtasks img {
+    height: 14px;
+    width: 14px;
+}
+
+.addTaskSubtasks img:hover {
+    cursor: pointer;
+}

@@ -1,4 +1,5 @@
 let selectedPriority = 'Medium';
+let selectedSubtask = 0;
 
 function selectActivePriority(priority) {
     clearActivePriority();
@@ -51,4 +52,29 @@ function addTaskClear() {
     document.getElementById('newTaskAssigned').selectedIndex = 0;
     document.getElementById('newTaskSubtasks').value = '';
     selectActivePriority('Medium');
+}
+
+function loadSubTask() {
+    if (subtasks[selectedSubtask]) {
+        document.getElementById('subtasksField').innerHTML = `<p>${subtasks[selectedSubtask]}</p>`;
+        document.getElementById('subtasksPlus').classList.add('d-none');
+        document.getElementById('subtasksCross').classList.remove('d-none');
+        document.getElementById('subtasksCheckmark').classList.remove('d-none');
+    }
+}
+
+function addSubTask() {
+    document.getElementById('addedSubTasks').innerHTML += `<p>${subtasks[selectedSubtask]}</p>`;
+    document.getElementById('subtasksPlus').classList.remove('d-none');
+    document.getElementById('subtasksCross').classList.add('d-none');
+    document.getElementById('subtasksCheckmark').classList.add('d-none');
+    document.getElementById('subtasksField').innerHTML = `Add new task`;
+    selectedSubtask++;
+}
+
+function clearSubTask() {
+    document.getElementById('subtasksPlus').classList.remove('d-none');
+    document.getElementById('subtasksCross').classList.add('d-none');
+    document.getElementById('subtasksCheckmark').classList.add('d-none');
+    document.getElementById('subtasksField').innerHTML = `Add new task`;
 }
