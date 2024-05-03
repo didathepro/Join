@@ -1,22 +1,19 @@
-let passwordConfirm = document.getElementById('passwordConfirm');
+let passwordReg = document.getElementById('passwordInput');
+let passwordConfirmReg = document.getElementById('passwordConfirmInput');
+let namesReg = document.getElementById('namesInput');
+let emailReg = document.getElementById('emailInput');
+
 
 /**
  * Inizialiesiert Body Onload and load UserData
  */
 async function initReg() {
-    loadUsers();
+    await loadUsers();
 }
 
 /**
  * load Usere from LocalStorageServer
  */
-async function loadUsers() {
-    try {
-        users = JSON.parse(await getItem('users'));
-    } catch (e) {
-        console.error('Loading error:', e);
-    }
-}
 
 /**
  * checked first password and passwordConfirm are the Same
@@ -24,6 +21,11 @@ async function loadUsers() {
  * when all Correct, Data will be Saved on LocalStorage to a JSON;
  */
 async function register() {
+    const password = passwordReg.value;
+    const passwordConfirm = passwordConfirmReg.value;
+    const name = namesReg.value;
+    const email = emailReg.value;
+
     if (password !== passwordConfirm) {
         alert('Passwords are not the same');
         return;
@@ -31,16 +33,15 @@ async function register() {
 
     signBtn.disabled = true;
     users.push({
-        name: names.value,
-        email: email.value,
-        password: password.value,
+        name: name,
+        email: email,
+        password: password,
     });
     await setItem('users', JSON.stringify(users));
 
     msg();
     resetForm();
     backToLogin();
-
 }
 
 /**
@@ -66,11 +67,11 @@ function backToLogin() {
  * after submit succesfull the Form, all Inputs will be rested
  */
 function resetForm() {
-    names.value = ''
-    email.value = '';
-    password.value = '';
-    passwordConfirm.value = '';
-    signBtn.disabled = false;
+    namesReg.value = ''
+    emailReg.value = '';
+    passwordReg.value = '';
+    passwordConfirmReg.value = '';
+    signBtn.disabledReg = false;
 }
 
 /**

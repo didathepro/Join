@@ -1,20 +1,10 @@
 async function init() {
     await includeHTML();
     addBg();
-    logGuest()
+    await loadUsers();
+    await loadOnlineStatus()
+    currentUser()
 }
-
-let users = [{
-    name: 'test',
-    email: 'test@gmail.com',
-    password: 'est123'
-},
-
-{
-    name: 'guest',
-    email: 'guest123@da.de',
-    password: '123'
-}];
 
 function addBg() {
     let currentPage = window.location.pathname;
@@ -81,7 +71,7 @@ function dropDown() {
         <div class="dropdown-container">
             <a href="../legalNotice.html">Legal Notice</a>     
             <a href="../privacyPolicy.html">Privacy Policy</a>     
-            <a href="../login.html">Log out</a>     
+            <a id="logOut" onclick="logOut()"href="../login.html">Log out</a>     
         </div>
     `;
 
@@ -93,9 +83,24 @@ function dropDown() {
     });
     ;
 }
-function logGuest() {
-    loginGuest()
-    if (users['name'] == 'guest')
-        document.getElementById('navHeader').innerHTML = ' G ';
-    guestH2.textChar(0)
+
+async function logOut() {
+    if (confirm("Are you sure you want to log out?")) {
+        try {
+            loggedInUsers.length = 0;
+            await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
+            // Weiterleitung zur Login-Seite
+            window.location.href = "../login.html";
+        } catch (error) {
+            console.error("Logout failed:", error);
+            alert("Logout failed. Please try again.");
+        }
+    }
+}
+
+function currentUser() {
+    let name = document.getElementById('nameSummary');
+    let iconName = document.getElementById('navHeader');
+    name.innerHTML = loggedInUsers[0];
+    iconName.innerHTML = loggedInUsers[0].charAt(0).toUpperCase()
 }

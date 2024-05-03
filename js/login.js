@@ -5,13 +5,16 @@ const urlParams = new URLSearchParams(window.location.search);
  * load User from Localstorage
  * load Autofill when already have account and set up "RememberMe"
  */
+
 async function init() {
     document.getElementById('imgJoin');
     document.body.classList.add('animation');
     show();
     await loadUsers();
+    await loadOnlineStatus();
     autoFillForm();
 }
+
 /**
  * loading Animation with a TimeOut Function for Desktop and Mobile
  */
@@ -56,17 +59,20 @@ function show() {
 /**
  * this function checks when User already SignUp and is email and password correct
  */
-function login() {
+async function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let user = users.find(u => u.email == email.value && u.password == password.value)
     if (user) {
-        loginGuest()
+        loggedInUsers.unshift(user.name);
+        await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
+        window.location.href = "summary.html";
+
     } else {
         document.getElementById('msgBoxLogin').innerHTML = 'Email or Password Incorect!!!';
         document.getElementById('msgBoxLogin').style.display = 'flex';
-
     }
+
     rememberMe()
     emptyForm();
 }
@@ -74,9 +80,16 @@ function login() {
 /**
  * when you choose the Guest LogIn then you will directly come to the Board.html
  */
-function loginGuest() {
+async function loginGuest() {
+    const guestEmail = 'guest123@da.de';
+    const guestPassword = '123';
+    let user = users.find(u => u.email == email.value && u.password == password.value)
+    document.getElementById('email').value = guestEmail;
+    document.getElementById('password').value = guestPassword;
+    loggedInUsers.unshift(user.name);
+    await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
     window.location.href = "summary.html";
-    users.name = 'guest'
+    emptyForm();
 }
 
 /**
@@ -113,5 +126,3 @@ function autoFillForm() {
         document.getElementById('checkbox').checked = true;
     }
 }
-
-
