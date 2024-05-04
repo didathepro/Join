@@ -289,10 +289,7 @@ header h4 {
 }
 
 .email-container {
-    position: relative;
-}
-
-.input_field {
+    display:flex;
     cursor: pointer;
     margin-top: 10px;
     border-radius: 10px;
@@ -300,21 +297,13 @@ header h4 {
     border: 1px solid rgba(0, 0, 0, 0.1);
     margin-bottom: 15px;
     width: 90%;
+    justify-content: space-between;
 }
 
-.mail-icon {
-    position: absolute;
-    right: 18px;
-    top: 32%;
-    cursor: pointer;
+.input_field {
+    border:none;
 }
 
-.lock-icon {
-    position: absolute;
-    right: 18px;
-    top: 17px;
-    cursor: pointer;
-}
 
 .name:focus {
     outline-color: #43b5e5;
