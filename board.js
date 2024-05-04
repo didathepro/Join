@@ -1,5 +1,5 @@
 const tasks = {
-    "tasksToDo": undefined,
+    "tasksToDo": [],
     "tasksInProgress":
         [
             {
@@ -7,9 +7,9 @@ const tasks = {
                 "description": 'Create a contact form and imprint page...',
                 "category": 'User Story',
                 "subtasks": [
-                    { 
+                    {
                         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: true    
+                        done: true
                     },
                     {
                         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
@@ -46,9 +46,9 @@ const tasks = {
                 "description": 'Define CSS naming conventions and structure...',
                 "category": 'Technical Task',
                 "subtasks": [
-                    { 
+                    {
                         title: 'Establish CSS Methodology',
-                        done: true    
+                        done: true
                     },
                     {
                         title: 'Setup Base Styles',
@@ -61,15 +61,26 @@ const tasks = {
         ],
 };
 
+const subtasks = ['Contact Form', 'Write Legal Imprint'];
+
 const taskTypesKeys = Object.keys(tasks);
+let currentlyDraggedCategory;
+let currentlyDraggedId;
 
 function boardInit() {
+    clearBoard();
     iterateTaskTypes();
+}
+
+function clearBoard() {
+    for (let i = 0; i < taskTypesKeys.length; i++) {
+        document.getElementById(taskTypesKeys[i]).innerHTML = '';
+    }
 }
 
 function iterateTaskTypes() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
-        if (tasks[taskTypesKeys[i]] == undefined) {
+        if (tasks[taskTypesKeys[i]].length <= 0) {
             document.getElementById(`${taskTypesKeys[i]}`).innerHTML = generateNoTasksHtml();
         }
         else {
@@ -93,7 +104,7 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column mb-3">
+        <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle">${taskType[j].title}</p>
             <p class="taskDescription">${taskType[j].description}</p>
@@ -122,20 +133,38 @@ function generateNoTasksHtml() {
 function setTaskColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskCategoryBg = document.getElementById(`${taskTypeString}Category${j}`);
-    if (tasks[taskTypeString][j].category == 'User Story') {
-        taskCategoryBg.style.background = '#0038FF';
+    if (taskCategoryBg && tasks[taskTypeString] && tasks[taskTypeString][j]) {
+        const taskPriority = tasks[taskTypeString][j].priority;
+        if (taskPriority !== undefined) {
+            if (taskPriority === 'Urgent') {
+                taskCategoryBg.style.background = '#1CD7C1';
+            } else if (taskPriority === 'Medium') {
+                taskCategoryBg.style.background = '#0038FF';
+            } else {
+                const taskCategory = tasks[taskTypeString][j].category;
+                if (taskCategory === 'User Story') {
+                    taskCategoryBg.style.background = '#0038FF';
+                } else {
+                    taskCategoryBg.style.background = '#1CD7C1';
+                }
+            }
+        } else {
+            taskCategoryBg.style.background = '#CCCCCC';
+        }
     }
-    else {
-        taskCategoryBg.style.background = '#1FD7C1';
-    };
 }
 
 function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
-    for (let k = 0; k < tasks[taskTypeString][j].assigned.length; k++) {
-        taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, k);
-    };
+    if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
+        const assignedElements = taskAssigned.getElementsByClassName('taskAssigned');
+        if (assignedElements.length === 0) {
+            tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
+                taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
+            });
+        }
+    }
 }
 
 function generateTaskAssignedHtml(i, j, k) {
@@ -150,16 +179,74 @@ function generateTaskAssignedHtml(i, j, k) {
 function insertTaskProgress(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskProgress = document.getElementById(`${taskTypeString}Progress${j}`);
-    let subtasksDone = 0;
-    if (tasks[taskTypeString][j].subtasks) {
-        taskProgress.classList.add('progress');
-        for (let k = 0; k < tasks[taskTypeString][j].subtasks.length; k++) {
-            if (tasks[taskTypeString][j].subtasks[k].done == true) {subtasksDone++}
+    if (taskProgress) {
+        const task = tasks[taskTypeString][j];
+        if (task && task.subtasks) {
+            let subtasksDone = 0;
+            taskProgress.classList.add('progress');
+            for (let k = 0; k < task.subtasks.length; k++) {
+                if (task.subtasks[k].done === true) { subtasksDone++; }
+            }
+            const progressPercent = (subtasksDone / task.subtasks.length) * 100;
+            taskProgress.innerHTML = `
+                <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="${progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>
+            `;
+            const progressTextElement = document.getElementById(`${taskTypeString}ProgressText${j}`);
+            if (progressTextElement) {
+                progressTextElement.innerHTML = `${subtasksDone}/${task.subtasks.length} Subtasks`;
+            }
         }
-        progressPercent = (subtasksDone / tasks[taskTypeString][j].subtasks.length) * 100;   
-        taskProgress.innerHTML = /*html*/`
-                        <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="progressPercent" aria-valuemin="0" aria-valuemax="100"></div>
-        `
-        document.getElementById(`${taskTypeString}ProgressText${j}`).innerHTML = `${subtasksDone}/${tasks[taskTypeString][j].subtasks.length} Subtasks`
-        };
+    }
 }
+
+
+function startDragging(i, j) {
+    currentlyDraggedCategory = i;
+    currentlyDraggedId = j;
+}
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function moveTo(category) {
+    const taskTypeString = taskTypesKeys[currentlyDraggedCategory];
+    removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1)[0];
+    tasks[category].push(removedTask);
+    boardInit();
+}
+
+function showAddTaskFloating() {
+    document.getElementById('addTaskFloating').classList.remove('d-none');
+    document.getElementById('addTaskFloatingBg').classList.remove('d-none');
+    document.getElementById('closeIcon').classList.remove('d-none');
+}
+
+function hideAddTaskFloating() {
+    document.getElementById('addTaskFloating').classList.add('d-none');
+    document.getElementById('addTaskFloatingBg').classList.add('d-none');
+    document.getElementById('closeIcon').classList.add('d-none');
+}
+
+function search() {
+    let search = document.getElementById('searchInput').value.trim().toLowerCase();
+    clearBoard();
+    if (search === '') {
+        iterateTaskTypes();
+    } else {
+        taskTypesKeys.forEach(function (taskTypeKey) {
+            tasks[taskTypeKey].forEach(function (task, index) {
+                if (task.title.toLowerCase().includes(search) || (task.description && task.description.toLowerCase().includes(search))) {
+                    document.getElementById(taskTypeKey).innerHTML += generateTaskHtml(tasks[taskTypeKey], taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    setTaskColor(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    insertTaskAssigned(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    insertTaskProgress(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                }
+            });
+        });
+    }
+}
+
+
+
+

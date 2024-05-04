@@ -1,11 +1,15 @@
-async function init(){
+async function init() {
     await includeHTML();
     addBg();
+    await loadUsers();
+    await loadOnlineStatus()
+    currentUser()
+    greet()
 }
 
 function addBg() {
     let currentPage = window.location.pathname;
-    
+
     // Define the mapping of page names to IDs
     let maps = {
         '/summary.html': {
@@ -29,6 +33,7 @@ function addBg() {
             'responsive': []
         }
     };
+
 
     // Get the appropriate IDs based on the current page
     let ids = maps[currentPage] || { 'default': [], 'responsive': [] };
@@ -55,26 +60,77 @@ function addBg() {
 }
 
 // Dropdown Menu On click
-function dropDown(){
+function dropDown() {
 
     let content = document.getElementById("dropdown");
 
-    if(content.classList.contains("d-none")){
+    if (content.classList.contains("d-none")) {
         content.classList.remove("d-none");
     }
 
-    content.innerHTML +=`
+    content.innerHTML += `
         <div class="dropdown-container">
             <a href="../legalNotice.html">Legal Notice</a>     
             <a href="../privacyPolicy.html">Privacy Policy</a>     
-            <a href="#">Log out</a>     
+            <a id="logOut" onclick="logOut()"href="../login.html">Log out</a>     
         </div>
     `;
 
     //Close dropown when clicked outside of dropdown menu
-    document.addEventListener('mouseup', function(e) {
-    if (!content.contains(e.target)) {
-    content.classList.add('d-none');
+    document.addEventListener('mouseup', function (e) {
+        if (!content.contains(e.target)) {
+            content.classList.add('d-none');
+        }
+    });
+    ;
+}
+
+async function logOut() {
+    if (confirm("Are you sure you want to log out?")) {
+        try {
+            loggedInUsers.length = 0;
+            await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
+            // Weiterleitung zur Login-Seite
+            window.location.href = "../login.html";
+        } catch (error) {
+            console.error("Logout failed:", error);
+            alert("Logout failed. Please try again.");
+        }
     }
-});
-;}
+}
+
+function currentUser() {
+    let name = document.getElementById('nameSummary');
+    let iconName = document.getElementById('navHeader');
+    name.innerHTML = loggedInUsers[0];
+    iconName.innerHTML = loggedInUsers[0].charAt(0).toUpperCase()
+}
+
+function greet() {
+    let greeting = defineDayTime();
+
+    let message = document.getElementById('greetingTime');
+    message.innerHTML = greeting;
+
+}
+
+function defineDayTime() {
+    let today = new Date();
+    let time = today.getHours();
+    let greeting;
+
+    if (time < 6) {
+        greeting = 'Good night,&nbsp;';
+    } else if (time < 12) {
+        greeting = 'Good morning,&nbsp;';
+    } else if (time < 18) {
+        greeting = 'Good afternoon,&nbsp;';
+    } else if (time < 24) {
+        greeting = 'Good evening,&nbsp;';
+    };
+    return greeting;
+}
+
+function contentToBoard() {
+    window.location.href = '../board.html'
+}

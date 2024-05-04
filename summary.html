@@ -3,8 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="js/storage.js"></script>
     <script src="./js/include.js"></script>
     <script src="./js/headerFooter.js" defer></script>
+    <script src="./js/loadData.js"></script>
     <link rel="stylesheet" href="./styles/summary.css" />
     <title>Summary</title>
     <link rel="icon" href="assets/img/joinblue.png" sizes="128x128" />
@@ -17,7 +19,7 @@
         <h1>Join 360</h1>
         <h4>Key Metrics at a Glance</h4>
       </header>
-      <div class="container">
+      <div class="container" onclick="contentToBoard()">
         <div class="left-content">
           <div class="first-container">
             <div class="mini-container">
@@ -101,7 +103,8 @@
         </div>
 
         <div class="right-content">
-          <h1>Good morning,<br /><b class="blue">Sofia Müller</b></h1>
+          <h1 class="greetingTime" id="greetingTime"><br /></h1>
+          <h1><b id="nameSummary" class="blue"></b></h1>
         </div>
       </div>
     </div>

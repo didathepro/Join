@@ -1,0 +1,148 @@
+body {
+    background: #f6f7f8 !important;
+    height: 1024px;
+    width: 1440px;
+}
+
+h1 {
+    font-size: 61px !important;
+    font-weight: 700 !important;
+}
+
+.addTaskTemplate {
+    margin-left: 232px;
+    padding: 128px 0px 0px 128px;
+    /* background: #f6f7f8; */
+    height: 924px;
+}
+
+.addTaskSeperator {
+    width: 1px;
+    height: 424px;
+    background: #D1D1D1;
+}
+
+.addTaskContent p {
+    margin: 0px 0px 8px 0px;
+}
+
+.addTaskContentLeft {
+    width: 440px;
+}
+
+.addTaskContentRight {
+    width: 440px;
+}
+
+.addTaskInput {
+    width: 440px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    height: 48px;
+    padding: 0px 16px 0px 16px;
+    font-size: 20px;
+}
+
+.addTaskInputText {
+    height: 120px;
+    padding-top: 8px;
+}
+
+.addTaskPriorityButton {
+    background: #fff;
+    width: 136px;
+    height: 56px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 4px 0px #0000001A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+}
+
+.addTaskPriorityButton:hover {
+    cursor: pointer;
+}
+
+.addTaskPriorityButton p {
+    margin: 0;
+}
+
+.priorityUrgentActive {
+    background: #ff3d00;
+    color: #fff;
+}
+
+.priorityMediumActive {
+    background: #FFA800;
+    color: #fff;
+}
+
+.priorityLowActive {
+    background: #7ae229;
+    color: #fff;
+}
+
+.footnote {
+    color: #ff8190;
+}
+
+.clearButton {
+    height: 56px;
+    width: 110px;
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.clearButton p {
+    font-size: 20px;
+    color: #2A3647;
+    margin: 0;
+}
+
+.createTaskButton {
+    height: 56px;
+    width: 183px;
+    background-color: #2A3647;
+    border-radius: 10px;
+}
+
+.createTaskButton p {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.addTaskContentBottom {
+    margin-top: 128px;
+    width: 977px;
+}
+
+.closeIcon:hover {
+    cursor: pointer;
+}
+
+.clearButton:hover {
+    cursor: pointer;
+}
+
+.addTaskSubtasks {
+    background: #fff;
+}
+
+.addTaskSubtasks p {
+    color: #D1D1D1;
+    margin: 0;
+}
+
+.addTaskSubtasks img {
+    height: 14px;
+    width: 14px;
+}
+
+.addTaskSubtasks img:hover {
+    cursor: pointer;
+}

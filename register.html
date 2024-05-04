@@ -7,8 +7,7 @@
     <link rel="icon" href="assets/img/joinblue.png" sizes="128x128" />
     <link rel="stylesheet" href="styles/register.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
-    <script src="js/regestry.js"></script>
-    <script src="/js/storage.js"></script>
+    <script src="/js/loadData.js"></script>
   </head>
   <body onload="initReg()">
     <section id="top">
@@ -33,36 +32,33 @@
           <div class="formInputs">
             <div class="email">
               <input
-                id="names"
+                id="namesInput"
                 type="text"
                 placeholder="Name"
                 class="inputs emaiInput"
                 style="border: none"
-                autocomplete="username"
                 required
               />
               <img src="assets/img/person.png" alt="person" />
             </div>
             <div class="email">
               <input
-                id="email"
+                id="emailInput"
                 type="email"
                 placeholder="Email"
                 class="inputs emaiInput"
                 style="border: none"
-                autocomplete="username"
                 required
               />
               <img src="assets/img/mail.png" alt="email" />
             </div>
             <div class="password">
               <input
-                id="password"
+                id="passwordInput"
                 type="password"
                 placeholder="Password"
                 class="inputs passwordInput"
                 style="border: none"
-                autocomplete="current-password"
                 required
               />
               <img
@@ -74,12 +70,11 @@
             </div>
             <div class="password">
               <input
-                id="passwordConfirm"
+                id="passwordConfirmInput"
                 type="password"
                 placeholder="Confirm Password"
                 class="inputs passwordInput"
                 style="border: none"
-                autocomplete="current-password"
                 required
               />
               <img
@@ -112,5 +107,7 @@
       <a href="#">Legal notice</a>
     </section>
     <div id="msgBox" class="msgBox" style="display: none"></div>
+    <script src="/js/storage.js"></script>
+    <script src="js/regestry.js"></script>
   </body>
 </html>

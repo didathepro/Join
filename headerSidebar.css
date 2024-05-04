@@ -1,99 +1,100 @@
 header {
-    margin-left: 232px;
-    background: #fff;
-    height: 100px;
+  margin-left: 232px;
+  background: #fff;
+  height: 100px;
+  width: 1208px;
 }
 
 header p {
-    margin: 0;
+  margin: 0;
 }
 
 .headerTitle {
-    margin-left: 128px;
-    font-size: 24px;
+  margin-left: 128px;
+  font-size: 24px;
 }
 
 .sidebar {
-    width: 232px;
-    height: 1024px;
-    background-color: #2a3647;
-    position: absolute;
-    top: 0;
-    padding-top: 64px;
-    padding-bottom: 64px;
+  width: 232px;
+  height: 1024px;
+  background-color: #2a3647;
+  position: absolute;
+  top: 0;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 
 .sidebarText {
-    color: #cdcdcd;
+  color: #cdcdcd;
 }
 
 .sidebarItem {
-    width: 232px;
-    gap: 8px;
-    height: 46px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 56px;
-    padding-right: 56px;
-    display: flex;
-    text-decoration: none;
+  width: 232px;
+  gap: 8px;
+  height: 46px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 56px;
+  padding-right: 56px;
+  display: flex;
+  text-decoration: none;
 }
 
 .sidebarItem:hover .sidebarIcon {
-    filter: brightness(1.5);
+  filter: brightness(1.5);
 }
 
 .sidebarItem:hover .sidebarText {
-    color: #fff;
+  color: #fff;
 }
 
 .sidebarItems {
-    margin-top: 128px;
-    height: 229px;
+  margin-top: 128px;
+  height: 229px;
 }
 
 .sidebarIcon {
-    max-width: 25px;
-    max-height: 25px;
-    object-fit: scale-down;
+  max-width: 25px;
+  max-height: 25px;
+  object-fit: scale-down;
 }
 
 .iconBox {
-    height: 30px;
-    width: 30px;
-    display: flex;
-    justify-content: center;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .sidebarItem:hover {
-    background-color: #091931;
+  background-color: #091931;
 }
 
 .sidebarInfo {
-    height: 317px;
-    margin-top: 128px;
+  height: 317px;
+  margin-top: 128px;
 }
 
 .sidebarInfoLink {
-    color: #a8a8a8;
-    text-decoration: none;
+  color: #a8a8a8;
+  text-decoration: none;
 }
 
 .headerProfile {
-    margin-right: 48px;
-    display: flex;
-    align-items: center;
-    width: 104px;
-    height: 56px;
-    gap: 16px;
+  margin-right: 48px;
+  display: flex;
+  align-items: center;
+  width: 104px;
+  height: 56px;
+  gap: 16px;
 }
 
 .helpIcon {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .helpIconBox {
-    width: 32px;
-    height: 32px;
+  width: 32px;
+  height: 32px;
 }
