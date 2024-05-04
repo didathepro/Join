@@ -218,7 +218,20 @@ function editContact(contact) {
     
     content.classList.remove('hidden');
     content.innerHTML = "";
-    content.innerHTML += `
+    content.innerHTML += showContactHTML(contact,firstLetter,secondLetter);
+    document.getElementById('name').value = contacts[contact].name;
+    document.getElementById('email').value = contacts[contact].email;
+    document.getElementById('phone').value = contacts[contact].phone;
+    document.addEventListener('mouseup', function(e) {
+        if (!content.contains(e.target)) {
+        content.classList.add('hidden');
+        }
+    });
+    showContacts();
+}
+
+function showContactHTML(contact,firstLetter,secondLetter) {
+    return `
     <div class="left-add">
         <img src="../assets/img/Capa 1.png">
         <h4>Edit contact</h4>
@@ -251,15 +264,6 @@ function editContact(contact) {
         </div>
     </div>
     `;
-    document.getElementById('name').value = contacts[contact].name;
-    document.getElementById('email').value = contacts[contact].email;
-    document.getElementById('phone').value = contacts[contact].phone;
-    document.addEventListener('mouseup', function(e) {
-        if (!content.contains(e.target)) {
-        content.classList.add('hidden');
-        }
-    });
-    showContacts();
 }
 
 function addBgColor(index) {
@@ -284,7 +288,16 @@ function addNewContact() {
     content.classList.remove('hidden');
     content.innerHTML = "";
 
-    content.innerHTML += `
+    content.innerHTML += addNewContactHTML();
+    document.addEventListener('mouseup', function(e) {
+        if (!content.contains(e.target)) {
+        content.classList.add('hidden');
+        }
+    });
+}
+
+function addNewContactHTML() {
+    return `
     <div class="left-add">
         <img src="../assets/img/Capa 1.png">
         <h4>Add contact</h4>
@@ -323,11 +336,6 @@ function addNewContact() {
         </div>
     </div>
     `;
-    document.addEventListener('mouseup', function(e) {
-        if (!content.contains(e.target)) {
-        content.classList.add('hidden');
-        }
-    });
 }
 
 function closeContainer(id) {
