@@ -50,13 +50,18 @@ function addTaskClear() {
     document.getElementById('newTaskDescription').value = '';
     document.getElementById('newTaskDate').value = '';
     document.getElementById('newTaskAssigned').selectedIndex = 0;
-    document.getElementById('newTaskSubtasks').value = '';
+    document.getElementById('addedSubTasks').innerHTML = '';
+    document.getElementById('newTaskCategory').value = 'Select task category';
+    selectedSubtask = 0;
+    clearSubTask();
+    resetSubtaskIcons();
     selectActivePriority('Medium');
 }
 
 function loadSubTask() {
     if (subtasks[selectedSubtask]) {
-        document.getElementById('subtasksField').innerHTML = `<p>${subtasks[selectedSubtask]}</p>`;
+        document.getElementById('subtasksField').style.color = '#000';
+        document.getElementById('subtasksField').innerHTML = `${subtasks[selectedSubtask]}`;
         document.getElementById('subtasksPlus').classList.add('d-none');
         document.getElementById('subtasksCross').classList.remove('d-none');
         document.getElementById('subtasksCheckmark').classList.remove('d-none');
@@ -65,16 +70,22 @@ function loadSubTask() {
 
 function addSubTask() {
     document.getElementById('addedSubTasks').innerHTML += `<p>${subtasks[selectedSubtask]}</p>`;
-    document.getElementById('subtasksPlus').classList.remove('d-none');
-    document.getElementById('subtasksCross').classList.add('d-none');
-    document.getElementById('subtasksCheckmark').classList.add('d-none');
+    document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
+    resetSubtaskIcons();
     selectedSubtask++;
 }
 
 function clearSubTask() {
-    document.getElementById('subtasksPlus').classList.remove('d-none');
+    resetSubtaskIcons();
+    document.getElementById('subtasksField').style.color = '#D1D1D1';
+    document.getElementById('subtasksField').innerHTML = `Add new task`;
+}
+
+function resetSubtaskIcons() {
+    if (selectedSubtask < (subtasks.length - 1)) {
+        document.getElementById('subtasksPlus').classList.remove('d-none');
+    }
     document.getElementById('subtasksCross').classList.add('d-none');
     document.getElementById('subtasksCheckmark').classList.add('d-none');
-    document.getElementById('subtasksField').innerHTML = `Add new task`;
 }
