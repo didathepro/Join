@@ -3,6 +3,10 @@ header {
   background: #fff;
   height: 100px;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
+  z-index:2;
+  position: fixed;
+  width: 88%;
+  top:0;
 }
 
 header p {
