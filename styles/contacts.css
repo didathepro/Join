@@ -304,13 +304,13 @@ header h4 {
     border:none;
 }
 
-
-.name:focus {
-    outline-color: #43b5e5;
+.input_field:focus {
+    outline:none;
 }
 
-.email:focus {
-    outline-color: #43b5e5;
+.email-container:focus,
+.email-container:focus-within {
+    outline: 2px solid #43b5e5;
 }
 
 .buttons-container {
