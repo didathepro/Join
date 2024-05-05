@@ -1,27 +1,150 @@
-function includeHTML() {
-    var z, i, elmnt, file, xhttp;
-    /* Loop through a collection of all HTML elements: */
-    z = document.getElementsByTagName("*");
-    for (i = 0; i < z.length; i++) {
-      elmnt = z[i];
-      /*search for elements with a certain atrribute:*/
-      file = elmnt.getAttribute("w3-include-html");
-      if (file) {
-        /* Make an HTTP request using the attribute value as the file name: */
-        xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-          if (this.readyState == 4) {
-            if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-            if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-            /* Remove the attribute, and call this function once more: */
-            elmnt.removeAttribute("w3-include-html");
-            includeHTML();
-          }
+async function init() {
+    await includeHTML();
+    addBg();
+    await loadUsers();
+    await loadOnlineStatus()
+    currentUser()
+    greet()
+}
+
+function addBg() {
+    let currentPage = window.location.pathname;
+
+    // Define the mapping of page names to IDs
+    let maps = {
+        '/summary.html': {
+            'default': ['summary'],
+            'responsive': ['summaryRes']
+        },
+        '/addTask.html': {
+            'default': ['tasks'],
+            'responsive': ['tasksRes']
+        },
+        '/board.html': {
+            'default': ['board'],
+            'responsive': ['boardRes']
+        },
+        '/contacts.html': {
+            'default': ['contacts'],
+            'responsive': ['contactsRes']
+        },
+        '/help.html': {
+            'default': [],
+            'responsive': []
         }
-        xhttp.open("GET", file, true);
-        xhttp.send();
-        /* Exit the function: */
-        return;
-      }
+    };
+
+
+    // Get the appropriate IDs based on the current page
+    let ids = maps[currentPage] || { 'default': [], 'responsive': [] };
+    let defaultIds = ids['default'];
+    let responsiveIds = ids['responsive'];
+
+    // Add the class to elements in the default container
+    defaultIds.forEach(element => {
+        let elementRef = document.getElementById(element);
+        if (elementRef) {
+            elementRef.classList.add("dark-blueBg");
+            elementRef.style.pointerEvents = "none"; // Enable pointer events for all elements
+        }
+    });
+
+    // Add the class to elements in the responsive container
+    responsiveIds.forEach(element => {
+        let elementRef = document.getElementById(element);
+        if (elementRef) {
+            elementRef.classList.add("dark-blueBg");
+            elementRef.style.pointerEvents = "none"; // Enable pointer events for all elements
+        }
+    });
+}
+
+function dropDown() {
+
+    let content = document.getElementById("dropdown");
+    content.innerHTML = "";
+    if (content.classList.contains("d-none")) {
+        content.classList.remove("d-none");
     }
+    content.innerHTML += `
+        <div class="dropdown-container">
+            <a href="./help.html">Help</a>
+            <a href="../legalNotice.html">Legal Notice</a>     
+            <a href="../privacyPolicy.html">Privacy Policy</a>     
+            <a id="logOut" onclick="logOut()"href="../login.html">Log out</a>     
+        </div>
+    `;
+
+    //Close dropown when clicked outside of dropdown menu
+    document.addEventListener('mouseup', function (e) {
+        if (!content.contains(e.target)) {
+            content.classList.add('d-none');
+        }
+    });
+    ;
+}
+
+
+async function includeHTML() {
+  let includeElements = document.querySelectorAll('[w3-include-html]');
+  for (let i = 0; i < includeElements.length; i++) {
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html"); // "includes/header.html"
+      let resp = await fetch(file);
+      if (resp.ok) {
+          element.innerHTML = await resp.text();
+      } else {
+          element.innerHTML = 'Page not found';
+      }
   }
+}
+
+  async function logOut() {
+    if (confirm("Are you sure you want to log out?")) {
+        try {
+            loggedInUsers.length = 0;
+            await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
+            // Weiterleitung zur Login-Seite
+            window.location.href = "../login.html";
+        } catch (error) {
+            console.error("Logout failed:", error);
+            alert("Logout failed. Please try again.");
+        }
+    }
+}
+
+function currentUser() {
+    let name = document.getElementById('nameSummary');
+    let iconName = document.getElementById('navHeader');
+    name.innerHTML = loggedInUsers[0];
+    iconName.innerHTML = loggedInUsers[0].charAt(0).toUpperCase()
+}
+
+function greet() {
+    let greeting = defineDayTime();
+
+    let message = document.getElementById('greetingTime');
+    message.innerHTML = greeting;
+
+}
+
+function defineDayTime() {
+    let today = new Date();
+    let time = today.getHours();
+    let greeting;
+
+    if (time < 6) {
+        greeting = 'Good night,&nbsp;';
+    } else if (time < 12) {
+        greeting = 'Good morning,&nbsp;';
+    } else if (time < 18) {
+        greeting = 'Good afternoon,&nbsp;';
+    } else if (time < 24) {
+        greeting = 'Good evening,&nbsp;';
+    };
+    return greeting;
+}
+
+function contentToBoard() {
+    window.location.href = '../board.html'
+}

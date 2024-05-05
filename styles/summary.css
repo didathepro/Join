@@ -4,12 +4,13 @@ body {
 }
 
 .summaryWrapper {
-  margin-left: 25%;
-  margin-top: 150px;
+  margin-left: 300px;
+  margin-top: 80px;
 }
 
-.container {
+.main-container {
   display: flex;
+  padding:0 !important;
 }
 
 .left-content {
@@ -34,27 +35,27 @@ body {
   color: #29abe2;
 }
 
-header {
+.main-header {
   display: flex;
   align-items: center;
+  margin-bottom:35px;
 }
 
-header h1 {
+.main-header h1 {
   border-right: 4px solid #29abe2;
   padding-right: 20px;
   font-weight: bold;
   font-size: 50px;
 }
 
-header h4 {
+.main-header h4 {
   padding-left: 20px;
   color: black;
 }
 
 .first-container svg {
   background-color: #2a3647;
-  padding: 16px 20px;
-  height: 40px;
+  padding: 1px 20px;
   border-radius: 50%;
 }
 
@@ -112,8 +113,8 @@ header h4 {
   background-color: #ff3d00;
   border-radius: 50%;
   padding: 16px;
-  height: 35px;
-  width: 35px;
+  height: 60px;
+  width: 60px;
 }
 
 .right-mini {
@@ -187,12 +188,15 @@ header h4 {
     height: 60vh;
   }
   .summaryWrapper {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 130px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top:70px;
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .main-header h1 {
+    font-size:2.3rem;
   }
 }
 
@@ -215,12 +219,12 @@ header h4 {
     flex-direction: column;
     align-items: center;
   }
-  header {
+  .main-header {
     flex-direction: column;
     align-self: flex-start;
     margin-left: 6vw;
   }
-  header h1 {
+  .main-header h1 {
     border-right: none;
     margin-block-start: 0;
     margin-left: -15px;
@@ -228,14 +232,14 @@ header h4 {
     padding-right: 0;
     font-size: 38px;
   }
-  header h4 {
+  .main-header h4 {
     margin-bottom: 20px;
     padding-left: 0;
     padding-bottom: 15px;
     position: relative;
     font-size: 16px;
   }
-  header h4::after {
+  .main-header h4::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -269,7 +273,7 @@ header h4 {
   .third-mini {
     padding: 10px 25px;
   }
-  .container {
+  .main-container {
     justify-content: center;
   }
 }

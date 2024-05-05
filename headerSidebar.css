@@ -28,6 +28,11 @@ header p {
   color: #cdcdcd;
 }
 
+.dark-blueBg {
+  background-color: #091931;
+}
+
+
 .sidebarItem {
   width: 232px;
   gap: 8px;
@@ -97,4 +102,126 @@ header p {
 .helpIconBox {
   width: 32px;
   height: 32px;
+}
+
+.d-none {
+  display:none;
+}
+
+.dropdown-container {
+  width:180px;
+  background-color: #2a3647;
+  border-radius:20px 0px 20px 20px;
+  display:flex;
+  flex-direction: column;
+  position:absolute;
+  right:30px;
+  margin-top:25px;
+  gap:2px;
+  padding:10px 4px;
+}
+
+.dropdown-container a {
+  width:100%;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #cdcdcd;
+  padding: 5px 20px;
+}
+
+.dropdown-container a:hover {
+  background-color: #2a3d59;
+}
+
+#navHeader {
+  color: #29abe2;
+  border: 3px solid black;
+  border-radius: 50%;
+  padding: 5px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position:fixed;
+  margin-left:40px;
+}
+
+.mid-container-responsive {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: space-around;
+}
+
+.mid-container-responsive {
+  z-index: 2;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 140px;
+  background-color: #2a3647;
+  display: flex;
+  align-items: center;
+}
+
+.mid-container-responsive a {
+  text-decoration: none;
+  color: white;
+}
+
+.mini-wrapper-res {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.mid-container-responsive h4 {
+  color: #cdcdcd;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-weight: 400;
+  font-size: 24px;
+}
+
+@media (max-width: 1150px) {
+  .resLogo {
+    margin-left:50px;
+    height:50px;
+  }
+  header {
+    align-items: center;
+    margin:0;
+    width:100vw;
+  }
+  #sidebar {
+    display: none !important;
+  }
+  .headerTitle {
+    display: none;
+  }
+  .helpIcon {
+    display: none;
+  }
+  .help-wrapper {
+    margin-left: 5%;
+    margin-top: 100px;
+  }
+  .dark-blueBg {
+    border-radius: 15px;
+    background-color: #091931 !important;
+    padding: 20px 10px;
+  }
+  .dropdown-container {
+    left: -50px;
+    width: 110px;
+    top: 70px;
+  }
+}
+
+@media (min-width: 1150px) {
+ .resLogo {
+    display: none;
+  }
+  .mid-container-responsive {
+    display: none;
+  }
 }

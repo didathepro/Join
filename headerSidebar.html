@@ -3,33 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./js/storage.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/js/regestry.js"></script>
     <title>Header/Sidebar</title>
   </head>
 
   <body>
     <header class="d-flex align-items-center justify-content-between">
       <p class="headerTitle">Kanban Project Management Tool</p>
+      <img class="resLogo" src="../assets/img/joinblue.png" alt="" />
       <div class="headerProfile">
         <div class="helpIconBox">
           <a href="help.html"><img src="img/icon/help.svg" alt="Help" class="helpIcon" /></a>
         </div>
-        <img
-          src="img/icon/profile-sm.svg"
-          alt="Profil SM"
-          class="profileIcon"
-        />
+        <h2 onclick="dropDown();" id="navHeader">SM</h2>
+        <div id="dropdown"></div>
       </div>
     </header>
-    <div class="sidebar d-flex flex-column align-items-center">
+    <div class="sidebar d-flex flex-column align-items-center" id="sidebar">
       <img src="img/logo.svg" alt="Join Logo" />
       <div class="sidebarItems d-flex flex-column align-items-center gap-3">
-        <a href="/summary.html" class="sidebarItem">
+        <a href="/summary.html" class="sidebarItem" id="summary">
           <div class="iconBox">
             <img src="img/icon/summary.svg" alt="Summary" class="sidebarIcon" />
           </div>
           <p class="sidebarText">Summary</p>
         </a>
-        <a href="/addTask.html" class="sidebarItem">
+        <a href="/addTask.html" class="sidebarItem" id="tasks">
           <div class="iconBox">
             <img
               src="img/icon/add-task.svg"
@@ -39,13 +40,13 @@
           </div>
           <p class="sidebarText">Add Task</p>
         </a>
-        <a href="/board.html" class="sidebarItem">
+        <a href="/board.html" class="sidebarItem" id="board">
           <div class="iconBox">
             <img src="img/icon/board.svg" alt="Board" class="sidebarIcon" />
           </div>
           <p class="sidebarText">Board</p>
         </a>
-        <a href="/contacts.html" class="sidebarItem">
+        <a href="/contacts.html" class="sidebarItem" id="contacts">
           <div class="iconBox">
             <img
               src="img/icon/contacts.svg"
@@ -60,6 +61,43 @@
         <a href="/privacyPolicy.html" class="sidebarInfoLink">Privacy Policy</a>
         <a href="/legalNotice.html" class="sidebarInfoLink">Legal notice</a>
       </div>
+    </div>
+
+
+    
+    <div class="mid-container-responsive">
+      <a href="../summary.html" id="summaryRes"
+        ><div class="mid-container-res-wrapper">
+          <div class="mini-wrapper-res">
+            <img src="../assets/img/summary.png" />
+            <h4>Summary</h4>
+          </div>
+        </div></a
+      >
+      <a href="../board.html" id="boardRes"
+        ><div class="mid-container-res-wrapper">
+          <div class="mini-wrapper-res">
+            <img src="../assets/img/board.png" />
+            <h4>Board</h4>
+          </div>
+        </div></a
+      >
+      <a href="../addTask.html" id="tasksRes"
+        ><div class="mid-container-res-wrapper">
+          <div class="mini-wrapper-res">
+            <img src="../assets/img/edit_square.png" />
+            <h4>Add Task</h4>
+          </div>
+        </div></a
+      >
+      <a href="../contacts.html" id="contactsRes"
+        ><div class="mid-container-wrapper-res">
+          <div class="mini-wrapper-res">
+            <img src="../assets/img/perm_contact_calendar.png" />
+            <h4>Contacts</h4>
+          </div>
+        </div></a
+      >
     </div>
   </body>
 </html>
