@@ -56,7 +56,8 @@ const tasks = {
                     }
                 ],
                 "assigned": ['SM', 'BZ'],
-                "priority": 'Urgent'
+                "priority": 'Urgent',
+                "date": '02/09/2023'
             },
         ],
 };
@@ -105,9 +106,7 @@ function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
         <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
-            <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">
-                ${taskType[j].category}
-            </div>
+            <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle">${taskType[j].title}</p>
             <p class="taskDescription">${taskType[j].description}</p>
             <div class="d-flex gap-3 align-items-baseline">
@@ -160,12 +159,12 @@ function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
     if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
-        const assignedElements = taskAssigned.getElementsByClassName('taskAssigned');
-        if (assignedElements.length === 0) {
-            tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
-                taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
-            });
-        }
+        // const assignedElements = taskAssigned.getElementsByClassName('taskAssigned');
+        // if (assignedElements.length === 0) {
+        tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
+            taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
+        });
+        // }
     }
 }
 
@@ -248,38 +247,57 @@ function search() {
 
 function showTaskOverlay(taskTypeString, i, j) {
     const taskType = tasks[taskTypesKeys[i]];
-    i = Number(i);
-    j = Number(j);
     document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
     document.getElementById('taskOverlay').classList.remove('d-none');
+    setTaskOverlayColor(i, j);
+    insertTaskOverlayAssigned(i, j);
+    insertOverlaySubtasks(taskType, i, j);
+}
+
+function hideTaskOverlay() {
+    document.getElementById('taskOverlay').classList.add('d-none');
 }
 
 function generateTaskOverlayHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
-            <div class="taskCategory d-flex align-items-center" id="taskOverlayCategory">
-                ${taskType[j].category}
+        <div class="taskOverlay d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="taskOverlayCategory" id="taskOverlayCategory">${taskType[j].category}</div>
+                <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()">
+            </div>    
+            <p class="taskOverlayTitle">${taskType[j].title}</p>
+            <p class="taskOverlayDescription">${taskType[j].description}</p>
+            <div class="d-flex gap-3">
+                <p class="taskOverlayTextGray">Due date:</p>
+                <p class="taskOverlayDate">${taskType[j].date}</p>
             </div>
-            <p class="taskTitle">${taskType[j].title}</p>
-            <p class="taskDescription">${taskType[j].description}</p>
-            <div class="d-flex gap-3 align-items-baseline">
-                <div id="taskOverlayProgress" style="width: 128px;"></div>
-                <p class="m-0 progressText" id="taskOverlayProgressText"></p>
+            <div class="d-flex gap-4">
+                <p class="taskOverlayTextGray">Priority:</p>
+                <div class="d-flex">
+                    <p>${taskType[j].priority}</p>
+                    <div class="iconBox32">
+                        <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <p class="taskOverlayTextGray">Assigned to:</p>
             </div>
             <div class="d-flex justify-content-between">
                 <div id="taskOverlayAssigned" class="d-flex"></div>
-                <div class="iconBox32">
-                    <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
-                </div>
+            </div>
+            <div>
+                <p class="taskOverlayTextGray">Subtasks</p>
+                <div id="taskOverlaySubtasks"></div>
             </div>
         </div>
     `
 }
 
-function setTaskOverlayColor() {
+function setTaskOverlayColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
-    const taskCategoryBg = document.getElementById(`${taskTypeString}Category${j}`);
+    const taskCategoryBg = document.getElementById(`taskOverlayCategory`);
     if (taskCategoryBg && tasks[taskTypeString] && tasks[taskTypeString][j]) {
         const taskPriority = tasks[taskTypeString][j].priority;
         if (taskPriority !== undefined) {
@@ -297,6 +315,35 @@ function setTaskOverlayColor() {
             }
         } else {
             taskCategoryBg.style.background = '#CCCCCC';
+        }
+    }
+}
+
+function insertTaskOverlayAssigned(i, j) {
+    const taskTypeString = taskTypesKeys[i];
+    const taskAssigned = document.getElementById(`taskOverlayAssigned`);
+    if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
+        tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
+            taskAssigned.innerHTML += generateTaskOverlayAssignedHtml(i, j, index);
+        });
+    }
+}
+
+function generateTaskOverlayAssignedHtml(i, j, k) {
+    const taskTypeString = taskTypesKeys[i];
+    return /*html*/`
+        <div class="taskAssigned d-flex justify-content-center align-items-center" id="${taskTypeString}Assigned${j}_${k}">
+            ${tasks[taskTypeString][j].assigned[k]}
+        </div>
+    `
+}
+
+function insertOverlaySubtasks(taskType, i, j) {
+    let taskOverlaySubtasks = document.getElementById('taskOverlaySubtasks');
+    taskOverlaySubtasks = '';
+    if (taskType[j].subtasks) {
+        for (let k = 0; k < taskType[j].subtasks.length; k++) {
+            taskOverlaySubtasks.innerHTML += `<p>${taskType[j].subtasks[k].title}</p>`
         }
     }
 }
