@@ -104,13 +104,15 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})">
-            <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
+        <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
+            <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">
+                ${taskType[j].category}
+            </div>
             <p class="taskTitle">${taskType[j].title}</p>
             <p class="taskDescription">${taskType[j].description}</p>
             <div class="d-flex gap-3 align-items-baseline">
-                    <div id="${taskTypeString}Progress${j}" style="width: 128px;"></div>
-                    <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
+                <div id="${taskTypeString}Progress${j}" style="width: 128px;"></div>
+                <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
             </div>
             <div class="d-flex justify-content-between">
                 <div id="${taskTypeString}Assigned${j}" class="d-flex"></div>
@@ -205,9 +207,7 @@ function startDragging(i, j) {
     currentlyDraggedId = j;
 }
 
-function allowDrop(ev) {
-    ev.preventDefault();
-}
+function allowDrop(ev) { ev.preventDefault(); }
 
 function moveTo(category) {
     const taskTypeString = taskTypesKeys[currentlyDraggedCategory];
@@ -231,9 +231,8 @@ function hideAddTaskFloating() {
 function search() {
     let search = document.getElementById('searchInput').value.trim().toLowerCase();
     clearBoard();
-    if (search === '') {
-        iterateTaskTypes();
-    } else {
+    if (search === '') { iterateTaskTypes(); }
+    else {
         taskTypesKeys.forEach(function (taskTypeKey) {
             tasks[taskTypeKey].forEach(function (task, index) {
                 if (task.title.toLowerCase().includes(search) || (task.description && task.description.toLowerCase().includes(search))) {
@@ -247,6 +246,57 @@ function search() {
     }
 }
 
+function showTaskOverlay(taskTypeString, i, j) {
+    const taskType = tasks[taskTypesKeys[i]];
+    i = Number(i);
+    j = Number(j);
+    document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
+    document.getElementById('taskOverlay').classList.remove('d-none');
+}
 
+function generateTaskOverlayHtml(taskType, i, j) {
+    const taskTypeString = taskTypesKeys[i];
+    return /*html*/`
+        <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
+            <div class="taskCategory d-flex align-items-center" id="taskOverlayCategory">
+                ${taskType[j].category}
+            </div>
+            <p class="taskTitle">${taskType[j].title}</p>
+            <p class="taskDescription">${taskType[j].description}</p>
+            <div class="d-flex gap-3 align-items-baseline">
+                <div id="taskOverlayProgress" style="width: 128px;"></div>
+                <p class="m-0 progressText" id="taskOverlayProgressText"></p>
+            </div>
+            <div class="d-flex justify-content-between">
+                <div id="taskOverlayAssigned" class="d-flex"></div>
+                <div class="iconBox32">
+                    <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+                </div>
+            </div>
+        </div>
+    `
+}
 
-
+function setTaskOverlayColor() {
+    const taskTypeString = taskTypesKeys[i];
+    const taskCategoryBg = document.getElementById(`${taskTypeString}Category${j}`);
+    if (taskCategoryBg && tasks[taskTypeString] && tasks[taskTypeString][j]) {
+        const taskPriority = tasks[taskTypeString][j].priority;
+        if (taskPriority !== undefined) {
+            if (taskPriority === 'Urgent') {
+                taskCategoryBg.style.background = '#1CD7C1';
+            } else if (taskPriority === 'Medium') {
+                taskCategoryBg.style.background = '#0038FF';
+            } else {
+                const taskCategory = tasks[taskTypeString][j].category;
+                if (taskCategory === 'User Story') {
+                    taskCategoryBg.style.background = '#0038FF';
+                } else {
+                    taskCategoryBg.style.background = '#1CD7C1';
+                }
+            }
+        } else {
+            taskCategoryBg.style.background = '#CCCCCC';
+        }
+    }
+}
