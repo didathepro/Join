@@ -37,7 +37,7 @@
             </div>
           </div>
         </div>
-        <button class="addTask gap-2" onclick="showAddTaskFloating()">
+        <button class="addTask gap-2" onclick="showAddTaskFloating('tasksToDo')">
           <p class="mb-0">Add task</p>
           <div class="iconBox32">
             <img src="" alt="" />
@@ -49,19 +49,19 @@
     <div class="boardHeaderBottom d-flex justify-content-between gap-2">
       <div class="addCategory">
         <p>To do</p>
-        <button class="addButton">
+        <button class="addButton" onclick="showAddTaskFloating('tasksToDo')">
           <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
         </button>
       </div>
       <div class="addCategory">
         <p>In progress</p>
-        <button class="addButton">
+        <button class="addButton" onclick="showAddTaskFloating('tasksInProgress')">
           <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
         </button>
       </div>
       <div class="addCategory">
         <p>Await feedback</p>
-        <button class="addButton">
+        <button class="addButton" onclick="showAddTaskFloating('tasksAwaitFeedback')">
           <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
         </button>
       </div>

@@ -215,10 +215,11 @@ function moveTo(category) {
     boardInit();
 }
 
-function showAddTaskFloating() {
+function showAddTaskFloating(type) {
     document.getElementById('addTaskFloating').classList.remove('d-none');
     document.getElementById('addTaskFloatingBg').classList.remove('d-none');
     document.getElementById('closeIcon').classList.remove('d-none');
+    selectedType = type;
 }
 
 function hideAddTaskFloating() {

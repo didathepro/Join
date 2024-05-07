@@ -1,5 +1,6 @@
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
+let selectedType = 'tasksToDo';
 
 function selectActivePriority(priority) {
     clearActivePriority();
@@ -18,29 +19,16 @@ function clearActivePriority() {
 }
 
 function addNewTask() {
-    const newTaskTitle = document.getElementById('newTaskTitle').value;
-    const newTaskDescription = document.getElementById('newTaskDescription').value;
-    const newTaskAssigned = document.getElementById('newTaskAssigned').value;
-    const newTaskDate = document.getElementById('newTaskDate').value;
-    const newTaskPriority = selectedPriority;
-    const newTaskCategory = document.getElementById('newTaskCategory').value;
-    // const newTaskSubtasks = document.getElementById('newTaskSubtasks').value;
-    addNewTaskJSON(newTaskTitle, newTaskDescription, newTaskAssigned, newTaskDate, newTaskPriority, newTaskCategory,
-        // newTaskSubtasks
-    );
-}
-
-function addNewTaskJSON(newTaskTitle, newTaskDescription, newTaskAssigned, newTaskDate, newTaskPriority, newTaskCategory, newTaskSubtasks) {
     let newTask = {
-        "title": newTaskTitle,
-        "description": newTaskDescription,
-        "category": newTaskCategory,
-        "subtasks": newTaskSubtasks,
-        "assigned": newTaskAssigned,
-        "priority": newTaskPriority,
-        "date": newTaskDate
+        "title": document.getElementById('newTaskTitle').value,
+        "description": document.getElementById('newTaskDescription').value,
+        "category": document.getElementById('newTaskCategory').value,
+        // "subtasks": newTaskSubtasks,
+        "assigned": document.getElementById('newTaskAssigned').value,
+        "priority": selectedPriority,
+        "date": document.getElementById('newTaskDate').value
     };
-    tasks['tasksToDo'].push(newTask);
+    tasks[selectedType].push(newTask);
 }
 
 function addTaskClear() {
