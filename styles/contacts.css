@@ -284,7 +284,7 @@ body {
 .right-add svg {
     margin-left: 50px;
     background-color: #d1d1d1;
-    padding: 25px;
+    padding: 5px;
     border-radius: 50%;
     outline:5px solid rgba(255, 255, 255, 1);
     box-shadow:1px 1px 10px rgb(152, 152, 152);
@@ -300,6 +300,7 @@ body {
     margin-bottom: 15px;
     width: 90%;
     justify-content: space-between;
+    align-items: center;
 }
 
 .input_field {
@@ -398,7 +399,7 @@ body {
     width:28vw;
 }
 
-@media (max-width:1000px) {
+@media (max-width:1150px) {
     body {
         overflow-y: hidden;
         overflow-x: hidden;
@@ -408,7 +409,7 @@ body {
         position: absolute;
         top: -4px;
         left: 0;
-        height: 79%;
+        height: 100vh;
         width: 100vw;
         margin-top: 93px;
         margin-left: 0;
@@ -474,7 +475,7 @@ body {
     }
     .editContactIcon {
         position: absolute;
-        bottom: 6vh;
+        bottom: 25vh;
         right: 8vw;
         border-radius: 50%;
         padding: 15px 25px;
@@ -521,9 +522,12 @@ body {
     .contact-img h2 {
         padding:5px;
     }
+    #contactsMenu {
+        margin-bottom: 150px;
+    }
 }
 
-@media (min-width:1000px) {
+@media (min-width:1150px) {
     .addContactIcon {
         display:none;
     }
