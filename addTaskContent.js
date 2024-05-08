@@ -23,10 +23,10 @@ function addNewTask() {
         "title": document.getElementById('newTaskTitle').value,
         "description": document.getElementById('newTaskDescription').value,
         "category": document.getElementById('newTaskCategory').value,
-        // "subtasks": newTaskSubtasks,
         "assigned": document.getElementById('newTaskAssigned').value,
         "priority": selectedPriority,
-        "date": document.getElementById('newTaskDate').value
+        "date": document.getElementById('newTaskDate').value,
+        "subtasks": getAddedSubtasks()
     };
     tasks[selectedType].push(newTask);
 }
@@ -57,7 +57,7 @@ function loadSubTask() {
 }
 
 function addSubTask() {
-    document.getElementById('addedSubTasks').innerHTML += `<p>${subtasks[selectedSubtask]}</p>`;
+    document.getElementById('addedSubTasks').innerHTML += `<li>${subtasks[selectedSubtask]}</li>`;
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
     resetSubtaskIcons();
@@ -76,4 +76,8 @@ function resetSubtaskIcons() {
     }
     document.getElementById('subtasksCross').classList.add('d-none');
     document.getElementById('subtasksCheckmark').classList.add('d-none');
+}
+
+function getAddedSubtasks() {
+    return subtasks.slice(0, selectedSubtask);
 }

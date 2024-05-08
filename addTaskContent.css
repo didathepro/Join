@@ -146,3 +146,11 @@ h1 {
 .addTaskSubtasks img:hover {
     cursor: pointer;
 }
+
+.addedSubTasks {
+    padding: 20px;
+}
+
+.addedSubTasks li {
+    margin: 8px 0px 8px;
+}
