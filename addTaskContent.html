@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Task Content</title>
+  <script src="addTaskContent.js"></script>
+  <link rel="stylesheet" href="addTaskContent.css" />
 </head>
 
 <body>
@@ -33,9 +35,7 @@
             <div>
               <p>Assigned to</p>
               <select name="" id="newTaskAssigned" placeholder="" class="addTaskInput">
-                <option disabled selected value="">
-                  Select contacts to assign
-                </option>
+                <option disabled selected value="">Select contacts to assign</option>
               </select>
             </div>
           </div>
@@ -83,7 +83,8 @@
                 <p id="subtasksField">Add new task</p>
                 <div>
                   <img src="img/icon/cross.svg" alt="Cross" onclick="clearSubTask()" class="d-none" id="subtasksCross">
-                  <img src="img/icon/checkmark_dark.svg" alt="Checkmark" onclick="addSubTask()" class="d-none" id="subtasksCheckmark">
+                  <img src="img/icon/checkmark_dark.svg" alt="Checkmark" onclick="addSubTask()" class="d-none"
+                    id="subtasksCheckmark">
                   <img src="img/icon/plus-dark.svg" alt="Plus" onclick="loadSubTask()" id="subtasksPlus">
                 </div>
               </div>

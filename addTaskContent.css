@@ -154,3 +154,12 @@ h1 {
 .addedSubTasks li {
     margin: 8px 0px 8px;
 }
+
+.contactInitials {
+    font-size: 12px;
+    height: 42px;
+    width: 42px;
+    border-radius: 100%;
+    background: #000;
+    border: 2px solid #fff;
+}

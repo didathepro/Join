@@ -2,6 +2,74 @@ let selectedPriority = 'Medium';
 let selectedSubtask = 0;
 let selectedType = 'tasksToDo';
 
+let addTaskContacts = [
+    {
+        name: 'Sofia Müller',
+        color: '#00bee8',
+        initials: 'SM'
+    },
+    {
+        name: 'Anton Meyer',
+        color: '#ff7a00',
+        initials: 'AM'
+    },
+    {
+        name: 'Anja Schulz',
+        color: '#9327ff',
+        initials: 'AS'
+    },
+    {
+        name: 'Benedikt Ziegler',
+        color: '#6e52ff',
+        initials: 'BZ'
+    },
+    {
+        name: 'David Eisenberg',
+        color: '#fc71ff',
+        initials: 'DE'
+    },
+    {
+        name: 'Eva Fischer',
+        color: '#ffbb2b',
+        initials: 'EF'
+    },
+    {
+        name: 'Emmanuel Mauer',
+        color: '#1fd7c1',
+        initials: 'EM'
+    },
+    {
+        name: 'Marcel Bauer',
+        color: '#462f8a',
+        initials: 'MB'
+    },
+    {
+        name: 'Tatjana Wolf',
+        color: '#ff4646',
+        initials: 'TW'
+    }
+]
+
+function insertContacts() {
+    if (addTaskContacts) {
+        for (let i = 0; i < addTaskContacts.length; i++) {
+            document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
+        };
+    };
+}
+
+function insertContactsHtml(i) {
+    return /*html*/`
+        <option value="contact${i}" class="d-flex justify-content-between">
+            <div>
+                <div class="contactInitials">${addTaskContacts[i].initials}</div>
+                <p>${addTaskContacts[i].name}</p>
+            </div>
+            <img src="/img/icon/checkbox.svg" alt="Checkbox">
+        </option>
+    `
+}
+
 function selectActivePriority(priority) {
     clearActivePriority();
     selectedPriority = priority;
