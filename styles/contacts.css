@@ -319,6 +319,7 @@ body {
 .buttons-container {
     margin-top:40px;
     display: flex;
+    align-items: center;
     gap:20px;
 }
 
@@ -353,7 +354,7 @@ body {
     border-radius:8px;
     border:none;
     height:44px;
-    padding:0 10px;
+    padding:26px 20px;
 }
 
 .create:hover {

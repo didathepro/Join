@@ -297,7 +297,7 @@ function addNewContact() {
 }
 
 function addNewContactHTML() {
-    return `
+    return /*html*/`
     <div class="left-add">
         <img src="../assets/img/Capa 1.png">
         <h4>Add contact</h4>
@@ -312,7 +312,7 @@ function addNewContactHTML() {
             <section class="logInContainer">
                 <form id="addContactForm">
                     <div class="email-container">
-                        <input id="name" class="input_field name" placeholder="Name">
+                        <input id="name" class="input_field name" placeholder="Name" required type="text">
                         <img class="lock-icon" src="../assets/img/person.png" alt="">
                     </div>
                     <div class="email-container">
@@ -343,11 +343,14 @@ function closeContainer(id) {
 }
 
 function addContactToArray() {
-    
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let phone = document.getElementById("phone").value;
 
+    if(name.length === 0 || email.length === 0 || phone.length === 0) {
+        alert("Please fill in all fields.");
+        return;
+    }
     // Create a new contact object
     let newContact = {
         name: name,
