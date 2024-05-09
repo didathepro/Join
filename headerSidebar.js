@@ -5,6 +5,7 @@ async function init() {
     await loadOnlineStatus()
     currentUser()
     greet()
+    showSummaryName()
 }
 
 function addBg() {
@@ -114,37 +115,9 @@ async function includeHTML() {
 }
 
 function currentUser() {
-    let name = document.getElementById('nameSummary');
     let iconName = document.getElementById('navHeader');
-    name.innerHTML = loggedInUsers[0];
     iconName.innerHTML = loggedInUsers[0].charAt(0).toUpperCase()
 }
-
-function greet() {
-    let greeting = defineDayTime();
-
-    let message = document.getElementById('greetingTime');
-    message.innerHTML = greeting;
-
-}
-
-function defineDayTime() {
-    let today = new Date();
-    let time = today.getHours();
-    let greeting;
-
-    if (time < 6) {
-        greeting = 'Good night,&nbsp;';
-    } else if (time < 12) {
-        greeting = 'Good morning,&nbsp;';
-    } else if (time < 18) {
-        greeting = 'Good afternoon,&nbsp;';
-    } else if (time < 24) {
-        greeting = 'Good evening,&nbsp;';
-    };
-    return greeting;
-}
-
 function contentToBoard() {
     window.location.href = '../board.html'
 }
