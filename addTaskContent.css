@@ -163,3 +163,7 @@ h1 {
     background: #000;
     border: 2px solid #fff;
 }
+
+.addTaskAssigned {
+    height: auto;
+}
