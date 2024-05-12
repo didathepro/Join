@@ -231,3 +231,15 @@ header p {
     display: none;
   }
 }
+
+@media(max-width: 485px) {
+  .mid-container-responsive h4 {
+    font-size:14px;
+  }
+  .dark-blueBg {
+    min-width:90px;
+  }
+  .mid-container-responsive {
+    height: 97px;
+  }
+}
