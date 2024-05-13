@@ -50,14 +50,6 @@ let addTaskContacts = [
     }
 ]
 
-function insertContacts() {
-    if (addTaskContacts) {
-        for (let i = 0; i < addTaskContacts.length; i++) {
-            document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
-        };
-    };
-}
-
 function insertContactsHtml(i) {
     return /*html*/`
         <option value="contact${i}" class="d-flex justify-content-between">
@@ -148,4 +140,12 @@ function resetSubtaskIcons() {
 
 function getAddedSubtasks() {
     return subtasks.slice(0, selectedSubtask);
+}
+
+function insertContacts() {
+    if (addTaskContacts) {
+        for (let i = 0; i < addTaskContacts.length; i++) {
+            document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
+        };
+    };
 }
