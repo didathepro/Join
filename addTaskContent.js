@@ -83,12 +83,13 @@ function addNewTask() {
         "title": document.getElementById('newTaskTitle').value,
         "description": document.getElementById('newTaskDescription').value,
         "category": document.getElementById('newTaskCategory').value,
-        "assigned": document.getElementById('newTaskAssigned').value,
+        "assigned": getSelectedAssigned(),
         "priority": selectedPriority,
         "date": document.getElementById('newTaskDate').value,
         "subtasks": getAddedSubtasks()
     };
     tasks[selectedType].push(newTask);
+    setItem('tasks', tasks);
 }
 
 function addTaskClear() {
@@ -149,3 +150,25 @@ function insertContacts() {
         };
     };
 }
+
+function getSelectedAssigned() {
+    const selectElement = document.getElementById('newTaskAssigned');
+    var selectedOptions = [];
+    for (var i = 0; i < selectElement.options.length; i++) {
+        const option = selectElement.options[i];
+        if (option.selected) {
+            selectedOptions.push(option.value);
+        }
+    }
+    return selectedOptions;
+}
+
+async function loadTasks() {
+    const loadedTasks = await getItem('tasks');
+    tasks = await JSON.parse(loadedTasks);
+}
+
+window.onload = async function() {
+    insertContacts();
+    loadTasks();
+  };

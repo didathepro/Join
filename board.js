@@ -1,4 +1,4 @@
-const tasks = {
+let tasks = {
     "tasksToDo": [],
     "tasksInProgress":
         [
@@ -68,7 +68,8 @@ const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
 
-function boardInit() {
+async function boardInit() {
+    await loadTasks();
     clearBoard();
     iterateTaskTypes();
 }
