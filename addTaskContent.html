@@ -1,12 +1,12 @@
 <div class="addTaskContent">
-    <div class="d-flex justify-content-between align-items-start">
-        <h1 class="mb-5">Add Task</h1>
+    <div class="d-flex justify-content-between align-items-start addTaskTop">
+        <h1 class="addNewTaskTitle">Add Task</h1>
         <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon d-none"
             onclick="hideAddTaskFloating()">
     </div>
     <div class="d-flex flex-column">
         <form onsubmit="addNewTask(); return false;">
-            <div class="d-flex gap-5">
+            <div class="d-flex addTaskRows">
                 <div class="addTaskContentLeft d-flex flex-column gap-4">
                     <div>
                         <div class="d-flex">
@@ -40,7 +40,7 @@
                     </div>
                     <div>
                         <p>Prio</p>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between addTaskPriority">
                             <div class="addTaskPriorityButton" id="addTaskPriorityUrgent"
                                 onclick="selectActivePriority('Urgent')">
                                 <p>Urgent</p>
@@ -58,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div class="mobileHidden">
                         <div class="d-flex">
                             <p>Category</p>
                             <p class="footnote">*</p>
@@ -69,7 +69,7 @@
                             <option value="User Story">User Story</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="mobileHidden">
                         <p>Subtasks</p>
                         <div class="addTaskInput addTaskSubtasks d-flex justify-content-between align-items-center">
                             <p id="subtasksField">Add new task</p>
@@ -92,7 +92,7 @@
                     <p>This field is required</p>
                 </div>
                 <div class="d-flex align-items-end gap-3">
-                    <a class="d-flex justify-content-center align-items-center clearButton gap-3"
+                    <a class="d-flex justify-content-center align-items-center clearButton gap-3 mobileHidden"
                         onclick="addTaskClear()">
                         <p>Clear</p>
                         <img src="/img/icon/cross.svg" alt="Cross">
