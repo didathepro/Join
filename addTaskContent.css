@@ -83,6 +83,7 @@ p {
 
 .priorityUrgentActive p {
     color: #fff;
+    font-weight: 700;
 }
 
 .priorityMediumActive {
@@ -91,6 +92,7 @@ p {
 
 .priorityMediumActive p {
     color: #fff;
+    font-weight: 700;
 }
 
 .priorityLowActive {
@@ -99,6 +101,7 @@ p {
 
 .priorityLowActive p {
     color: #fff;
+    font-weight: 700;
 }
 
 .footnote {
@@ -205,6 +208,10 @@ p {
         margin: 0;
     }
 
+    p {
+        font-size: 16px;
+    }
+
     .addTaskTemplate {
         margin: 0;
         padding: 0;
@@ -284,4 +291,7 @@ p {
         margin: 0;
     }
 
+    .footnoteText {
+        font-size: 18px;
+    }
 }
