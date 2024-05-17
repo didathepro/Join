@@ -79,16 +79,25 @@ p {
 
 .priorityUrgentActive {
     background: #ff3d00;
+}
+
+.priorityUrgentActive p {
     color: #fff;
 }
 
 .priorityMediumActive {
     background: #FFA800;
+}
+
+.priorityMediumActive p {
     color: #fff;
 }
 
 .priorityLowActive {
     background: #7ae229;
+}
+
+.priorityLowActive p {
     color: #fff;
 }
 
@@ -208,8 +217,9 @@ p {
 
     .addTaskRows {
         flex-direction: column;
-        width: 396px;
-        padding-left: 16px;
+        width: 100%;
+        justify-content: center;
+        padding: 0 16px 0 16px;
     }
 
     .addNewTaskTitle {
@@ -229,11 +239,11 @@ p {
     }
 
     .addTaskContentLeft {
-        width: auto;
+        width: 100%;
     }
 
     .addTaskContentRight {
-        width: auto;
+        width: 100%;
     }
 
     .addTaskInputText {
