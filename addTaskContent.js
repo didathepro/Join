@@ -134,7 +134,9 @@ function insertContactsHtml(i) {
     return /*html*/`
         <option value="${addTaskContacts[i].name}" class="d-flex justify-content-between">
             <div>
-                <div class="contactInitials">${addTaskContacts[i].initials}</div>
+                <div class="contactInitials">
+                    ${getInitials(addTaskContacts[i].name)}
+                </div>
                 <p>${addTaskContacts[i].name}</p>
             </div>
             <img src="/img/icon/checkbox.svg" alt="Checkbox">
@@ -157,6 +159,12 @@ function getSelectedAssigned() {
 async function loadTasks() {
     const loadedTasks = await getItem('tasks');
     tasks = await JSON.parse(loadedTasks);
+}
+
+
+function getInitials(name) {
+    const firstLetters = name.match(/\b(\w)/g);
+    return firstLetters.join('');
 }
 
 window.onload = async function() {

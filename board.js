@@ -162,27 +162,14 @@ function insertTaskAssigned(i, j) {
     if (tasks[taskTypeString][j].assigned) {
         tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
             taskAssigned.innerHTML += /*html*/`
-                <div class="taskAssigned d-flex justify-content-center align-items-center">${getInitials(i, j, k)}</div>
+                <div class="taskAssigned d-flex justify-content-center align-items-center">
+                    ${getInitials(tasks[taskTypeString][j].assigned[k])}
+                </div>
             `
         }
         );
     };
 }
-
-function getInitials(i, j, k) {
-    const taskTypeString = taskTypesKeys[i];
-    const firstLetters = tasks[taskTypeString][j].assigned[k].match(/\b(\w)/g);
-    return firstLetters.join('');
-}
-
-// function generateTaskAssignedHtml(i, j, k) {
-//     const taskTypeString = taskTypesKeys[i];
-//     return /*html*/`
-//         <div class="taskAssigned d-flex justify-content-center align-items-center" id="${taskTypeString}Assigned${j}_${k}">
-//             ${tasks[taskTypeString][j].assigned[k]}
-//         </div>
-//     `
-// }
 
 function insertTaskProgress(i, j) {
     const taskTypeString = taskTypesKeys[i];
@@ -333,20 +320,13 @@ function insertTaskOverlayAssigned(i, j) {
     if (tasks[taskTypeString][j].assigned) {
         tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
             taskAssigned.innerHTML += /*html*/`
-                <div class="taskAssigned d-flex justify-content-center align-items-center">${getInitials(i, j, k)}</div>
+                <div class="taskAssigned d-flex justify-content-center align-items-center">
+                    ${getInitials(tasks[taskTypeString][j].assigned[k])}
+                </div>
             `
         }
         );
     }
-}
-
-function generateTaskOverlayAssignedHtml(i, j, k) {
-    const taskTypeString = taskTypesKeys[i];
-    return /*html*/`
-        <div class="taskAssigned d-flex justify-content-center align-items-center" id="${taskTypeString}Assigned${j}_${k}">
-            ${tasks[taskTypeString][j].assigned[k]}
-        </div>
-    `
 }
 
 function insertOverlaySubtasks(taskType, i, j) {
