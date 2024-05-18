@@ -16,7 +16,7 @@ let tasks = {
                         done: false
                     }
                 ],
-                "assigned": ['AS', 'DE', 'EF'],
+                "assigned": ['Anja Schulz', 'David Eisenberg', 'Eva Fischer'],
                 "priority": 'Urgent'
             },
         ],
@@ -27,7 +27,7 @@ let tasks = {
                 "description": 'Create reusable HTML base templates...',
                 "category": 'Technical Task',
                 "subtasks": undefined,
-                "assigned": ['DE', 'BZ', 'AS'],
+                "assigned": ['David Eisenberg', 'Benedikt Ziegler', 'Anja Schulz'],
                 "priority": 'Low'
             },
             {
@@ -35,7 +35,7 @@ let tasks = {
                 "description": 'Implement daily recipe and portion calculator...',
                 "category": 'User Story',
                 "subtasks": undefined,
-                "assigned": ['EF', 'AS', 'TW'],
+                "assigned": ['Eva Fischer', 'Anja Schulz', 'Tatjana Wolf'],
                 "priority": 'Medium'
             },
         ],
@@ -55,7 +55,7 @@ let tasks = {
                         done: true
                     }
                 ],
-                "assigned": ['SM', 'BZ'],
+                "assigned": ['Sofia Müller', 'Benedikt Ziegler'],
                 "priority": 'Urgent',
                 "date": '02/09/2023'
             },
@@ -108,8 +108,8 @@ function generateTaskHtml(taskType, i, j) {
     return /*html*/`
         <div class="task d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
-            <p class="taskTitle">${taskType[j].title}</p>
-            <p class="taskDescription">${taskType[j].description}</p>
+            <p class="taskTitle text-break">${taskType[j].title}</p>
+            <p class="taskDescription text-break">${taskType[j].description}</p>
             <div class="d-flex gap-3 align-items-baseline">
                 <div id="${taskTypeString}Progress${j}" style="width: 128px;"></div>
                 <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
@@ -159,24 +159,30 @@ function setTaskColor(i, j) {
 function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
-    if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
-        // const assignedElements = taskAssigned.getElementsByClassName('taskAssigned');
-        // if (assignedElements.length === 0) {
-        tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
-            taskAssigned.innerHTML += generateTaskAssignedHtml(i, j, index);
-        });
-        // }
-    }
+    if (tasks[taskTypeString][j].assigned) {
+        tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
+            taskAssigned.innerHTML += /*html*/`
+                <div class="taskAssigned d-flex justify-content-center align-items-center">${getInitials(i, j, k)}</div>
+            `
+        }
+        );
+    };
 }
 
-function generateTaskAssignedHtml(i, j, k) {
+function getInitials(i, j, k) {
     const taskTypeString = taskTypesKeys[i];
-    return /*html*/`
-        <div class="taskAssigned d-flex justify-content-center align-items-center" id="${taskTypeString}Assigned${j}_${k}">
-            ${tasks[taskTypeString][j].assigned[k]}
-        </div>
-    `
+    const firstLetters = tasks[taskTypeString][j].assigned[k].match(/\b(\w)/g);
+    return firstLetters.join('');
 }
+
+// function generateTaskAssignedHtml(i, j, k) {
+//     const taskTypeString = taskTypesKeys[i];
+//     return /*html*/`
+//         <div class="taskAssigned d-flex justify-content-center align-items-center" id="${taskTypeString}Assigned${j}_${k}">
+//             ${tasks[taskTypeString][j].assigned[k]}
+//         </div>
+//     `
+// }
 
 function insertTaskProgress(i, j) {
     const taskTypeString = taskTypesKeys[i];
@@ -261,15 +267,15 @@ function hideTaskOverlay() {
 }
 
 function generateTaskOverlayHtml(taskType, i, j) {
-    const taskTypeString = taskTypesKeys[i];
+    // const taskTypeString = taskTypesKeys[i];
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="taskOverlayCategory" id="taskOverlayCategory">${taskType[j].category}</div>
                 <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()">
             </div>    
-            <p class="taskOverlayTitle">${taskType[j].title}</p>
-            <p class="taskOverlayDescription">${taskType[j].description}</p>
+            <p class="taskOverlayTitle text-break">${taskType[j].title}</p>
+            <p class="taskOverlayDescription text-break">${taskType[j].description}</p>
             <div class="d-flex gap-3">
                 <p class="taskOverlayTextGray">Due date:</p>
                 <p class="taskOverlayDate">${taskType[j].date}</p>
@@ -324,10 +330,13 @@ function setTaskOverlayColor(i, j) {
 function insertTaskOverlayAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`taskOverlayAssigned`);
-    if (taskAssigned && tasks[taskTypeString] && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
-        tasks[taskTypeString][j].assigned.forEach(function (assignee, index) {
-            taskAssigned.innerHTML += generateTaskOverlayAssignedHtml(i, j, index);
-        });
+    if (tasks[taskTypeString][j].assigned) {
+        tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
+            taskAssigned.innerHTML += /*html*/`
+                <div class="taskAssigned d-flex justify-content-center align-items-center">${getInitials(i, j, k)}</div>
+            `
+        }
+        );
     }
 }
 

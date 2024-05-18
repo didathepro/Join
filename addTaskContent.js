@@ -5,62 +5,41 @@ let selectedType = 'tasksToDo';
 let addTaskContacts = [
     {
         name: 'Sofia Müller',
-        color: '#00bee8',
-        initials: 'SM'
+        color: '#00bee8'
     },
     {
         name: 'Anton Meyer',
-        color: '#ff7a00',
-        initials: 'AM'
+        color: '#ff7a00'
     },
     {
         name: 'Anja Schulz',
-        color: '#9327ff',
-        initials: 'AS'
+        color: '#9327ff'
     },
     {
         name: 'Benedikt Ziegler',
-        color: '#6e52ff',
-        initials: 'BZ'
+        color: '#6e52ff'
     },
     {
         name: 'David Eisenberg',
-        color: '#fc71ff',
-        initials: 'DE'
+        color: '#fc71ff'
     },
     {
         name: 'Eva Fischer',
-        color: '#ffbb2b',
-        initials: 'EF'
+        color: '#ffbb2b'
     },
     {
         name: 'Emmanuel Mauer',
-        color: '#1fd7c1',
-        initials: 'EM'
+        color: '#1fd7c1'
     },
     {
         name: 'Marcel Bauer',
-        color: '#462f8a',
-        initials: 'MB'
+        color: '#462f8a'
     },
     {
         name: 'Tatjana Wolf',
-        color: '#ff4646',
-        initials: 'TW'
+        color: '#ff4646'
     }
 ]
-
-function insertContactsHtml(i) {
-    return /*html*/`
-        <option value="contact${i}" class="d-flex justify-content-between">
-            <div>
-                <div class="contactInitials">${addTaskContacts[i].initials}</div>
-                <p>${addTaskContacts[i].name}</p>
-            </div>
-            <img src="/img/icon/checkbox.svg" alt="Checkbox">
-        </option>
-    `
-}
 
 function selectActivePriority(priority) {
     clearActivePriority();
@@ -78,7 +57,7 @@ function clearActivePriority() {
     document.getElementById('addTaskPriorityLowIcon').src = '/img/icon/priorityLow.svg';
 }
 
-function addNewTask() {
+async function addNewTask() {
     let newTask = {
         "title": document.getElementById('newTaskTitle').value,
         "description": document.getElementById('newTaskDescription').value,
@@ -89,7 +68,7 @@ function addNewTask() {
         "subtasks": getAddedSubtasks()
     };
     tasks[selectedType].push(newTask);
-    setItem('tasks', tasks);
+    await setItem('tasks', tasks);
 }
 
 function addTaskClear() {
@@ -151,9 +130,21 @@ function insertContacts() {
     };
 }
 
+function insertContactsHtml(i) {
+    return /*html*/`
+        <option value="${addTaskContacts[i].name}" class="d-flex justify-content-between">
+            <div>
+                <div class="contactInitials">${addTaskContacts[i].initials}</div>
+                <p>${addTaskContacts[i].name}</p>
+            </div>
+            <img src="/img/icon/checkbox.svg" alt="Checkbox">
+        </option>
+    `
+}
+
 function getSelectedAssigned() {
     const selectElement = document.getElementById('newTaskAssigned');
-    var selectedOptions = [];
+    var selectedOptions;
     for (var i = 0; i < selectElement.options.length; i++) {
         const option = selectElement.options[i];
         if (option.selected) {
@@ -170,5 +161,5 @@ async function loadTasks() {
 
 window.onload = async function() {
     insertContacts();
-    loadTasks();
+    await loadTasks();
   };
