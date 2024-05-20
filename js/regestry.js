@@ -78,7 +78,7 @@ function resetForm() {
  * this function show up and visible your password while you type onclick on the Image
  */
 function showPassword() {
-    let password = document.getElementById('password');
+    let password = document.getElementById('passwordInput');
 
     if (password.type === 'password') {
         password.type = 'text';
@@ -95,7 +95,7 @@ function showPassword() {
  * this function is Similar to showPassword() function but only for the ConfirmPassword
  */
 function showPasswordConfirm() {
-    let passwordConfirm = document.getElementById('passwordConfirm');
+    let passwordConfirm = document.getElementById('passwordConfirmInput');
 
     if (passwordConfirm.type === 'password') {
         passwordConfirm.type = 'text';

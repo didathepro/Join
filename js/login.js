@@ -126,3 +126,37 @@ function autoFillForm() {
         document.getElementById('checkbox').checked = true;
     }
 }
+
+/**
+ * this function show up and visible your password while you type onclick on the Image
+ */
+function showPassword() {
+    let password = document.getElementById('password');
+
+    if (password.type === 'password') {
+        password.type = 'text';
+        document.getElementById('passwordImg').src = "./assets/img/visibility_off.png"
+
+    }
+    else {
+        password.type = 'password';
+        document.getElementById('passwordImg').src = "./assets/img/lock.png"
+    }
+}
+
+/**
+ * this function is Similar to showPassword() function but only for the ConfirmPassword
+ */
+function showPasswordConfirm() {
+    let passwordConfirm = document.getElementById('passwordConfirm');
+
+    if (passwordConfirm.type === 'password') {
+        passwordConfirm.type = 'text';
+        document.getElementById('passwordImgConfirm').src = "./assets/img/visibility_off.png"
+    }
+    else {
+        passwordConfirm.type = 'password';
+        document.getElementById('passwordImgConfirm').src = "./assets/img/lock.png";
+    }
+}
+
