@@ -97,8 +97,11 @@ function loadSubTask() {
 }
 
 function addSubTask() {
-    document.getElementById('addedSubTasks').innerHTML += `<li class="liSub">${subtasks[selectedSubtask]}
-    <div class="subImg"><img src="assets/img/edit.png"><img src="/assets/img/Vector 19.png"><img src="/assets/img/delete.png"></div></li>`;
+    document.getElementById('addedSubTasks').innerHTML += `<li id="liSub" class="liSub">${subtasks[selectedSubtask]}
+    <div class="subImg">
+    <img id="editSubtask" onclick="editSubtask()" src="assets/img/edit.png">
+    <img src="/assets/img/Vector 19.png">
+    <img id="deleteSubtask" onclick="deleteSubTask()" src="/assets/img/delete.png"></div></li>`;
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
     resetSubtaskIcons();
@@ -129,6 +132,12 @@ function insertContacts() {
             document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
         };
     };
+}
+
+function deleteSubTask (){
+    let li = document.getElementById('liSub');
+    li.parentNode.removeChild(li);
+    resetSubtaskIcons();
 }
 
 function insertContactsHtml(i) {
