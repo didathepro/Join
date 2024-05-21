@@ -222,6 +222,10 @@ p {
         font-size: 16px;
     }
 
+    h1 {
+        font-size: 47px !important;
+    }
+
     .addTaskTemplate {
         margin: 0;
         padding: 0;
@@ -242,7 +246,6 @@ p {
     .addNewTaskTitle {
         margin: 64px 0px 32px 0px;
         padding: 48px 0px 0px 16px;
-        font-size: 47px !important;
     }
 
     .addTaskTop {
@@ -304,4 +307,9 @@ p {
     .footnoteText {
         font-size: 18px;
     }
+
+    .addTaskButtonText {
+        display: none;
+    }
+
 }

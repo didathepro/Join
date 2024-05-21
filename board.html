@@ -25,9 +25,9 @@
   </div>
   <div class="d-none position-absolute top-50 start-50 translate-middle" id="taskOverlay"></div>
   <div class="boardHeader">
-    <div class="boardHeaderMiddle d-flex align-items-center justify-content-between">
+    <div class="boardHeaderMiddle d-flex justify-content-between">
       <h1>Board</h1>
-      <div class="d-flex">
+      <div class="d-flex searchAddArea">
         <div class="searchBackground d-flex align-items-center justify-content-center">
           <div class="searchContent d-flex justify-content-center align-items-center">
             <input id="searchInput" type="text" class="searchBar" placeholder="Find Task" onkeyup="search()" />
@@ -40,7 +40,7 @@
           </div>
         </div>
         <button class="addTask gap-2" onclick="showAddTaskFloating('tasksToDo')">
-          <p class="mb-0 text-light">Add task</p>
+          <p class="mb-0 text-light addTaskButtonText">Add task</p>
           <div class="iconBox32">
             <img src="" alt="" />
             <img src="img/icon/add.svg" alt="Add" />
