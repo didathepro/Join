@@ -200,6 +200,16 @@ p {
     gap: 48px
 }
 
+.liSub {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.subImg img{
+    margin-left: 8px;
+}
+
 @media only screen and (max-width: 428px) {
 
     body {

@@ -97,7 +97,8 @@ function loadSubTask() {
 }
 
 function addSubTask() {
-    document.getElementById('addedSubTasks').innerHTML += `<li>${subtasks[selectedSubtask]}</li>`;
+    document.getElementById('addedSubTasks').innerHTML += `<li class="liSub">${subtasks[selectedSubtask]}
+    <div class="subImg"><img src="assets/img/edit.png"><img src="/assets/img/Vector 19.png"><img src="/assets/img/delete.png"></div></li>`;
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
     resetSubtaskIcons();
