@@ -104,8 +104,8 @@ function addSubTask() {
     <img id="deleteSubtask" onclick="deleteSubTask()" src="/assets/img/delete.png"></div></li>`;
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
-    resetSubtaskIcons();
     selectedSubtask++;
+    resetSubtaskIcons();
 }
 
 function clearSubTask() {
@@ -115,7 +115,7 @@ function clearSubTask() {
 }
 
 function resetSubtaskIcons() {
-    if (selectedSubtask < (subtasks.length - 1)) {
+    if (selectedSubtask <= (subtasks.length - 1)) {
         document.getElementById('subtasksPlus').classList.remove('d-none');
     }
     document.getElementById('subtasksCross').classList.add('d-none');
@@ -137,6 +137,7 @@ function insertContacts() {
 function deleteSubTask (){
     let li = document.getElementById('liSub');
     li.parentNode.removeChild(li);
+    selectedSubtask--;
     resetSubtaskIcons();
 }
 
