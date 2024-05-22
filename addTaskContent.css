@@ -312,4 +312,21 @@ p {
         display: none;
     }
 
+    .addCategory {
+        width: 100%;
+    }
+
+    .addCategory p {
+        font-size: 27px;
+    }
+
+    .addButton {
+        height: 30px;
+        width: 30px;
+    }
+
+    .addButtonImg {
+        height: 15px;
+        width: 15px;
+    }
 }

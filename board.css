@@ -73,6 +73,7 @@ button {
     height: 48px;
     background: white;
     margin-right: 32px;
+    justify-content: center;
 }
 
 .searchSeperator {
@@ -243,11 +244,23 @@ button {
     color: #42526E;
 }
 
+.addTaskSmall {
+    display: none;
+    background: #2a3647;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    border: none;
+    width: 40;
+    height: 40px;
+    border-radius: 10px;
+}
+
 @media only screen and (max-width: 428px) {
 
     .boardHeader {
         margin: 128px 0 0 16px;
-        padding: 0;
+        padding: 0 16px 0 0;
     }
 
     .boardContent {
@@ -259,11 +272,15 @@ button {
         align-items: start;
         gap: 16px;
         width: auto;
+        flex-direction: column;
     }
 
     .addTask {
-        width: 40px;
-        height: 40px;
+        display: none;
+    }
+
+    .addTaskSmall {
+        display: block;
     }
 
     .searchAddArea {
@@ -278,10 +295,29 @@ button {
 
     .boardContent {
         flex-direction: column;
+        padding: 0 16px 0 16px;
     }
 
     .taskOverlay {
         max-width: 396px;
+    }
+
+    .titleAddTaskSmall {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .searchAddArea {
+        width: 100%;
+    }
+
+    .searchBackground {
+        width: 100%;
+        margin: 0;
+    }
+
+    .searchContent {
+        width: 100%;
     }
 
 }
