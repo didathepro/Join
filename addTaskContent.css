@@ -206,7 +206,7 @@ p {
     align-items: center;
 }
 
-.subImg img{
+.subImg img {
     margin-left: 8px;
 }
 
@@ -253,7 +253,7 @@ p {
     }
 
     .addTaskInput {
-        width: 100%; 
+        width: 100%;
         height: 40px;
         font-size: 16px;
     }
@@ -269,7 +269,7 @@ p {
     .addTaskInputText {
         height: 88px;
     }
-    
+
     .addTaskPriorityButton {
         height: 41px;
         font-size: 16px;
@@ -329,4 +329,5 @@ p {
         height: 15px;
         width: 15px;
     }
+
 }
