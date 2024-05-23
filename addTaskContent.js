@@ -97,30 +97,15 @@ function loadSubTask() {
 }
 
 function addSubTask() {
-    document.getElementById('addedSubTasks').innerHTML += `<li id="liSub${selectedSubtask}" class="liSub">
-    <span id="subtaskText${selectedSubtask}">${subtasks[selectedSubtask]}</span>
+    document.getElementById('addedSubTasks').innerHTML += `<li id="liSub" class="liSub">${subtasks[selectedSubtask]}
     <div class="subImg">
-    <img src="assets/img/edit.png" class="editSubtask" data-id="${selectedSubtask}">
+    <img id="editSubtask" onclick="editSubtask()" src="assets/img/edit.png">
     <img src="/assets/img/Vector 19.png">
-    <img src="/assets/img/delete.png" class="deleteSubtask" data-id="${selectedSubtask}">
-    </div>    
-        </li>`;
-
-
-    document.querySelectorAll(`.editSubtask[data-id="${selectedSubtask}"]`).forEach(el => {
-        el.addEventListener('click', function() {
-            editSubtask(this.getAttribute('data-id'));
-            });
-        });
-    document.querySelectorAll(`.deleteSubtask[data-id="${selectedSubtask}"]`).forEach(el => {
-        el.addEventListener('click', function() {
-            deleteSubTask(this.getAttribute('data-id'));
-            });
-        });
+    <img id="deleteSubtask" onclick="deleteSubTask()" src="/assets/img/delete.png"></div></li>`;
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
-    resetSubtaskIcons();
     selectedSubtask++;
+    resetSubtaskIcons();
 }
 
 function clearSubTask() {
@@ -130,7 +115,7 @@ function clearSubTask() {
 }
 
 function resetSubtaskIcons() {
-    if (selectedSubtask < (subtasks.length - 1)) {
+    if (selectedSubtask <= (subtasks.length - 1)) {
         document.getElementById('subtasksPlus').classList.remove('d-none');
     }
     document.getElementById('subtasksCross').classList.add('d-none');
@@ -149,42 +134,11 @@ function insertContacts() {
     };
 }
 
-function editSubtask(id) {
-    const subtaskElement = document.getElementById(`subtaskText${id}`);
-    const currentText = subtaskElement.innerText;
-    subtaskElement.outerHTML = `<input type="text" id="subtaskInput${id}" value="${currentText}" onblur="saveSubtask(${id})" onkeypress="handleKeyPress(event, ${id})" />`;
-    document.getElementById(`subtaskInput${id}`).focus();
-}
-
-function saveSubtask(id) {
-    const inputElement = document.getElementById(`subtaskInput${id}`);
-    const newText = inputElement.value;
-    const liElement = inputElement.closest('li');
-    liElement.innerHTML = `<span id="subtaskText${id}" onclick="editSubtask(${id})">${newText}</span>
-                           <div class="subImg">
-                               <img src="assets/img/edit.png" class="editSubtask" data-id="${id}">
-                               <img src="/assets/img/Vector 19.png">
-                               <img src="/assets/img/delete.png" class="deleteSubtask" data-id="${id}">
-                           </div>`;
-    subtasks[id] = newText;
-
-    liElement.querySelector('.editSubtask').addEventListener('click', function() {
-        editSubtask(this.getAttribute('data-id'));
-    });
-    liElement.querySelector('.deleteSubtask').addEventListener('click', function() {
-        deleteSubTask(this.getAttribute('data-id'));
-    });
-}
-
-function handleKeyPress(event, id) {
-    if (event.key === 'Enter') {
-        saveSubtask(id);
-    }
-}
-
-function deleteSubTask(id) {
-    const liElement = document.getElementById(`liSub${id}`);
-    liElement.parentNode.removeChild(liElement);
+function deleteSubTask (){
+    let li = document.getElementById('liSub');
+    li.parentNode.removeChild(li);
+    selectedSubtask--;
+    resetSubtaskIcons();
 }
 
 function insertContactsHtml(i) {
