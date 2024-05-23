@@ -259,15 +259,18 @@ button {
 
 @media only screen and (max-width: 428px) {
 
+
     .boardHeader {
         margin: 128px 0 0 16px;
         padding: 0 16px 0 0;
+        height: 144px;
     }
 
     .boardContent {
         margin: 0;
-        padding: 0;
         height: auto;
+        flex-direction: column;
+        padding: 0 16px 0 16px;
     }
 
     .boardHeaderMiddle {
@@ -295,11 +298,6 @@ button {
         width: 100%;
     }
 
-    .boardContent {
-        flex-direction: column;
-        padding: 0 16px 0 16px;
-    }
-
     .taskOverlay {
         max-width: 396px;
     }
@@ -319,16 +317,23 @@ button {
     }
 
     .searchContent {
+        justify-content: space-between;
         width: 100%;
+        padding: 0 8px 0 8px;
     }
 
     .boardColumn {
         display: flex;
         gap: 10px;
+        width: auto;
     }
 
     .task {
         width: 252px !important;
+    }
+
+    .scroll-container::-webkit-scrollbar {
+        display: none; /* Hide scrollbar for Webkit browsers */
     }
 
 }

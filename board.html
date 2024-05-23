@@ -35,7 +35,7 @@
                 </button>
             </div>
             <div class="d-flex searchAddArea">
-                <div class="searchBackground d-flex align-items-center justify-content-center">
+                <div class="searchBackground d-flex align-items-center">
                     <div class="searchContent d-flex align-items-center">
                         <input id="searchInput" type="text" class="searchBar" placeholder="Find Task"
                             onkeyup="search()" />
@@ -64,7 +64,7 @@
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn" id="tasksToDo" ondrop="moveTo('tasksToDo')" ondragover="allowDrop(event)"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksToDo" ondrop="moveTo('tasksToDo')" ondragover="allowDrop(event)"></div>
         </div>
         <div>
             <div class="addCategory">
@@ -73,7 +73,7 @@
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn" id="tasksInProgress" ondrop="moveTo('tasksInProgress')"
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksInProgress" ondrop="moveTo('tasksInProgress')"
                 ondragover="allowDrop(event)">
             </div>
         </div>
@@ -84,14 +84,14 @@
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn" id="tasksAwaitFeedback" ondrop="moveTo('tasksAwaitFeedback')"
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksAwaitFeedback" ondrop="moveTo('tasksAwaitFeedback')"
                 ondragover="allowDrop(event)"></div>
         </div>
         <div>
             <div class="addCategory">
                 <p>Done</p>
             </div>
-            <div class="boardColumn" id="tasksDone" ondrop="moveTo('tasksDone')" ondragover="allowDrop(event)"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksDone" ondrop="moveTo('tasksDone')" ondragover="allowDrop(event)"></div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
