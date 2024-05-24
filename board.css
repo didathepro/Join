@@ -329,11 +329,19 @@ button {
     }
 
     .task {
-        width: 252px !important;
+        min-width: 252px;
+        max-width: 252px;
+    }
+
+    .scroll-container {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        /* white-space: nowrap; */
+        cursor: grab;
     }
 
     .scroll-container::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for Webkit browsers */
+        display: none;
     }
 
 }

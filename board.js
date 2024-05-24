@@ -67,6 +67,10 @@ const subtasks = ['Contact Form', 'Write Legal Imprint'];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
+const scrollContainer = document.querySelector('.scroll-container');
+let isDragged = false;
+let scrollscrollStartX;
+let scrollLeft;
 
 async function boardInit() {
     await loadTasks();
@@ -338,3 +342,33 @@ function insertOverlaySubtasks(taskType, i, j) {
         }
     }
 }
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const scrollContainer = document.querySelector('.scroll-container');
+
+    scrollContainer.addEventListener('mousedown', (e) => {
+        isDragged = true;
+        scrollContainer.classList.add('active');
+        scrollStartX = e.pageX - scrollContainer.offsetLeft;
+        scrollLeft = scrollContainer.scrollLeft;
+    });
+
+    scrollContainer.addEventListener('mouseleave', () => {
+        isDragged = false;
+        scrollContainer.classList.remove('active');
+    });
+
+    scrollContainer.addEventListener('mouseup', () => {
+        isDragged = false;
+        scrollContainer.classList.remove('active');
+    });
+
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDragged) return;
+        e.preventDefault();
+        const x = e.pageX - scrollContainer.offsetLeft;
+        const walk = (x - scrollStartX) * 3; //scroll-fast
+        scrollContainer.scrollLeft = scrollLeft - walk;
+    });
+
+});
