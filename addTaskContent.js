@@ -96,30 +96,40 @@ function loadSubTask() {
     }
 }
 
+function resetSubtaskIcons() {
+    if (selectedSubtask < (subtasks.length - 1)) {
+        document.getElementById('subtasksPlus').classList.remove('d-none');
+    }
+    document.getElementById('subtasksCross').classList.add('d-none');
+    document.getElementById('subtasksCheckmark').classList.add('d-none');
+}
+
 function addSubTask() {
-    document.getElementById('addedSubTasks').innerHTML += `<li id="liSub" class="liSub">${subtasks[selectedSubtask]}
-    <div class="subImg">
-    <img id="editSubtask" onclick="editSubtask()" src="assets/img/edit.png">
-    <img src="/assets/img/Vector 19.png">
-    <img id="deleteSubtask" onclick="deleteSubTask()" src="/assets/img/delete.png"></div></li>`;
+    console.log("Adding subtask:", selectedSubtask);
+    document.getElementById('addedSubTasks').innerHTML += `
+        <li id="liSub${selectedSubtask}" class="liSub">
+            <span id="subtaskText${selectedSubtask}">${subtasks[selectedSubtask]}</span>
+            <div class="subImg">
+                <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
+                <img src="/assets/img/Vector 19.png">
+                <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="/assets/img/delete.png">
+            </div>
+        </li>`;
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
+    if (typeof resetSubtaskIcons === 'function') {
+        resetSubtaskIcons();
+    } else {
+        console.error("resetSubtaskIcons is not defined or not a function");
+    }
     selectedSubtask++;
-    resetSubtaskIcons();
+    console.log("Subtask added successfully.");
 }
 
 function clearSubTask() {
     resetSubtaskIcons();
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
-}
-
-function resetSubtaskIcons() {
-    if (selectedSubtask <= (subtasks.length - 1)) {
-        document.getElementById('subtasksPlus').classList.remove('d-none');
-    }
-    document.getElementById('subtasksCross').classList.add('d-none');
-    document.getElementById('subtasksCheckmark').classList.add('d-none');
 }
 
 function getAddedSubtasks() {
@@ -134,12 +144,38 @@ function insertContacts() {
     };
 }
 
-function deleteSubTask (){
-    let li = document.getElementById('liSub');
-    li.parentNode.removeChild(li);
-    selectedSubtask--;
-    resetSubtaskIcons();
+function editSubtask(id) {
+    const subtaskElement = document.getElementById(`subtaskText${id}`);
+    let imgCheck = document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
+    const currentText = subtaskElement.innerText;
+    subtaskElement.outerHTML = `<input type="text" id="subtaskInput${id}" value="${currentText}" onblur="saveSubtask(${id})" onkeypress="handleKeyPress(event, ${id})" />`;
+    document.getElementById(`subtaskInput${id}`).focus();
 }
+
+function saveSubtask(id) {
+    const inputElement = document.getElementById(`subtaskInput${id}`);
+    const newText = inputElement.value;
+    const liElement = inputElement.closest('li');
+    liElement.innerHTML = `<span id="subtaskText${id}" onclick="editSubtask(${id})">${newText}</span>
+                           <div class="subImg">
+                               <img src="assets/img/edit.png" onclick="editSubtask(${id})">
+                               <img src="/assets/img/Vector 19.png">
+                               <img src="/assets/img/delete.png" onclick="deleteSubTask(${id})">
+                           </div>`;
+    subtasks[id] = newText;
+}
+
+function handleKeyPress(event, id) {
+    if (event.key === imgCheck) {
+        saveSubtask(id);
+    }
+}
+
+function deleteSubTask(id) {
+    const liElement = document.getElementById(`liSub${id}`);
+    liElement.parentNode.removeChild(liElement);
+}
+
 
 function insertContactsHtml(i) {
     return /*html*/`
