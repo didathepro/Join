@@ -69,6 +69,7 @@ async function addNewTask() {
     };
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
+    addedTaskAnimation();
 }
 
 function addTaskClear() {
@@ -105,7 +106,6 @@ function resetSubtaskIcons() {
 }
 
 function addSubTask() {
-    console.log("Adding subtask:", selectedSubtask);
     document.getElementById('addedSubTasks').innerHTML += `
         <li id="liSub${selectedSubtask}" class="liSub">
             <span id="subtaskText${selectedSubtask}">${subtasks[selectedSubtask]}</span>
@@ -123,7 +123,6 @@ function addSubTask() {
         console.error("resetSubtaskIcons is not defined or not a function");
     }
     selectedSubtask++;
-    console.log("Subtask added successfully.");
 }
 
 function clearSubTask() {
@@ -212,6 +211,15 @@ async function loadTasks() {
 function getInitials(name) {
     const firstLetters = name.match(/\b(\w)/g);
     return firstLetters.join('');
+}
+
+function addedTaskAnimation() {
+    document.getElementById('taskAdded').classList.remove('d-none');
+    setTimeout(redirectBoard, 3000);
+}
+
+function redirectBoard() {
+    window.location.href = "board.html";
 }
 
 window.onload = async function() {

@@ -252,7 +252,7 @@ button {
     font-size: 21px;
     font-weight: 700;
     border: none;
-    width: 40;
+    width: 40px;
     height: 40px;
     border-radius: 10px;
 }
@@ -285,7 +285,7 @@ button {
     }
 
     .addTaskSmall {
-        display: block;
+        display: flex;
     }
 
     .searchAddArea {
