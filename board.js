@@ -110,7 +110,7 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
+        <div class="task d-flex justify-content-center flex-column" draggable="false" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle text-break">${taskType[j].title}</p>
             <p class="taskDescription text-break">${taskType[j].description}</p>
@@ -343,32 +343,37 @@ function insertOverlaySubtasks(taskType, i, j) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const scrollContainer = document.querySelector('.scroll-container');
+document.addEventListener('DOMContentLoaded', function(event) {
+    const scrollContainers = document.querySelectorAll('.scroll-container');
 
-    scrollContainer.addEventListener('mousedown', (e) => {
-        isDragged = true;
-        scrollContainer.classList.add('active');
-        scrollStartX = e.pageX - scrollContainer.offsetLeft;
-        scrollLeft = scrollContainer.scrollLeft;
+    scrollContainers.forEach(function(scrollContainer) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        scrollContainer.addEventListener('mousedown', function(e) {
+            isDown = true;
+            scrollContainer.classList.add('active');
+            startX = e.pageX - scrollContainer.offsetLeft;
+            scrollLeft = scrollContainer.scrollLeft;
+        });
+
+        scrollContainer.addEventListener('mouseleave', function() {
+            isDown = false;
+            scrollContainer.classList.remove('active');
+        });
+
+        scrollContainer.addEventListener('mouseup', function() {
+            isDown = false;
+            scrollContainer.classList.remove('active');
+        });
+
+        scrollContainer.addEventListener('mousemove', function(e) {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - scrollContainer.offsetLeft;
+            const walk = (x - startX) * 1;
+            scrollContainer.scrollLeft = scrollLeft - walk;
+        });
     });
-
-    scrollContainer.addEventListener('mouseleave', () => {
-        isDragged = false;
-        scrollContainer.classList.remove('active');
-    });
-
-    scrollContainer.addEventListener('mouseup', () => {
-        isDragged = false;
-        scrollContainer.classList.remove('active');
-    });
-
-    scrollContainer.addEventListener('mousemove', (e) => {
-        if (!isDragged) return;
-        e.preventDefault();
-        const x = e.pageX - scrollContainer.offsetLeft;
-        const walk = (x - scrollStartX) * 3; //scroll-fast
-        scrollContainer.scrollLeft = scrollLeft - walk;
-    });
-
 });

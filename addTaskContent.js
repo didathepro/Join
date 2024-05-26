@@ -193,7 +193,7 @@ function insertContactsHtml(i) {
 
 function getSelectedAssigned() {
     const selectElement = document.getElementById('newTaskAssigned');
-    var selectedOptions;
+    var selectedOptions = [];
     for (var i = 0; i < selectElement.options.length; i++) {
         const option = selectElement.options[i];
         if (option.selected) {
