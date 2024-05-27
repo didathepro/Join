@@ -67,10 +67,6 @@ const subtasks = ['Contact Form', 'Write Legal Imprint'];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
-// const scrollContainer = document.querySelector('.scroll-container');
-// let isDragged = false;
-// let scrollscrollStartX;
-// let scrollLeft;
 let isDragging = false;
 
 
