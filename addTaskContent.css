@@ -226,6 +226,60 @@ p {
     font-size: 20px;
 }
 
+.customDropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    max-height: 200px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.dropdownMenu div {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.dropdownMenu div:hover {
+    background-color: #f1f1f1;
+}
+
+.contact-initials {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin-right: 10px;
+}
+
+.selectedContacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.selectedContacts div {
+    background-color: #f0f0f0;
+    border-radius: 12px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
 @media only screen and (max-width: 428px) {
 
     body {

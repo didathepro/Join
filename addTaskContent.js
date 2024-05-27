@@ -135,14 +135,41 @@ function getAddedSubtasks() {
     return subtasks.slice(0, selectedSubtask);
 }
 
-function insertContacts() {
-    if (addTaskContacts) {
-        for (let i = 0; i < addTaskContacts.length; i++) {
-            document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
-        };
-    };
-}
+// function insertContacts() {
+//     if (addTaskContacts) {
+//         for (let i = 0; i < addTaskContacts.length; i++) {
+//             document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
+//         };
+//     };
+// }
 
+function insertContacts() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownMenu.innerHTML = ''; // Clear any existing options
+    addTaskContacts.forEach(contact => {
+        const optionDiv = document.createElement('div');
+        const initialsDiv = document.createElement('div');
+        const checkbox = document.createElement('input');
+        const label = document.createElement('label');
+
+        initialsDiv.className = 'contact-initials';
+        initialsDiv.style.backgroundColor = contact.color;
+        initialsDiv.innerText = getInitials(contact.name);
+
+        checkbox.type = 'checkbox';
+        checkbox.value = contact.name;
+        checkbox.id = contact.name;
+
+        label.htmlFor = contact.name;
+        label.innerText = contact.name;
+
+        optionDiv.appendChild(initialsDiv);
+        optionDiv.appendChild(label);
+        optionDiv.appendChild(checkbox);
+
+        dropdownMenu.appendChild(optionDiv);
+    });
+}
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
     let imgCheck = document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
@@ -190,15 +217,42 @@ function insertContactsHtml(i) {
     `
 }
 
+// function getSelectedAssigned() {
+//     const selectElement = document.getElementById('newTaskAssigned');
+//     var selectedOptions = [];
+//     for (var i = 0; i < selectElement.options.length; i++) {
+//         const option = selectElement.options[i];
+//         if (option.selected) {
+//             selectedOptions.push(option.value);
+//         }
+//     }
+//     return selectedOptions;
+// }
+
 function getSelectedAssigned() {
-    const selectElement = document.getElementById('newTaskAssigned');
-    var selectedOptions = [];
-    for (var i = 0; i < selectElement.options.length; i++) {
-        const option = selectElement.options[i];
-        if (option.selected) {
-            selectedOptions.push(option.value);
-        }
-    }
+    const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
+    const selectedOptions = Array.from(checkboxes).map(checkbox => checkbox.value);
+    const selectedContactsDiv = document.getElementById('selectedContacts');
+    
+    // Clear previous selections
+    selectedContactsDiv.innerHTML = '';
+
+    // Display selected contacts
+    selectedOptions.forEach(name => {
+        const contact = addTaskContacts.find(contact => contact.name === name);
+        const contactDiv = document.createElement('div');
+        const initialsDiv = document.createElement('div');
+        
+        initialsDiv.className = 'contact-initials';
+        initialsDiv.style.backgroundColor = contact.color;
+        initialsDiv.innerText = getInitials(contact.name);
+
+        contactDiv.appendChild(initialsDiv);
+        contactDiv.appendChild(document.createTextNode(contact.name));
+
+        selectedContactsDiv.appendChild(contactDiv);
+    });
+    console.log(selectedOptions);
     return selectedOptions;
 }
 
@@ -208,9 +262,19 @@ async function loadTasks() {
 }
 
 
+// function getInitials(name) {
+//     const firstLetters = name.match(/\b(\w)/g);
+//     return firstLetters.join('');
+// }
+
 function getInitials(name) {
-    const firstLetters = name.match(/\b(\w)/g);
-    return firstLetters.join('');
+    const names = name.split(' ');
+    return names.map(n => n[0]).join('');
+}
+
+function toggleDropdown() {
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
 }
 
 function addedTaskAnimation() {

@@ -27,12 +27,23 @@
                     </div>
                     <div>
                         <p>Assigned to</p>
+                        <div id="customDropdown" class="customDropdown">
+                            <div id="selectedContacts" class="selectedContacts"></div>
+                            <button onclick="toggleDropdown()">Select contacts to assign</button>
+                            <div id="dropdownMenu" class="dropdownMenu">
+                                <!-- Contacts will be dynamically inserted here -->
+                            </div>
+                        </div>
+                        <button onclick="getSelectedAssigned()">Get Selected Contacts</button>
+                    </div>                    
+                    <!-- <div>
+                        <p>Assigned to</p>
                         <select name="" id="newTaskAssigned" placeholder="" class="addTaskInput addTaskAssigned"
                             multiple>
                             <option disabled value="">Select contacts to assign</option>
                         </select>
                         <button onclick="insertContacts()">Dev: insert contacts</button>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="addTaskSeperator"></div>
                 <div class="addTaskContentRight d-flex flex-column gap-4">
