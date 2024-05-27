@@ -151,6 +151,7 @@ function insertContacts() {
         const initialsDiv = document.createElement('div');
         const checkbox = document.createElement('input');
         const label = document.createElement('label');
+        label.className = 'labelEl'
 
         initialsDiv.className = 'contact-initials';
         initialsDiv.style.backgroundColor = contact.color;
@@ -233,7 +234,6 @@ function getSelectedAssigned() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
     const selectedOptions = Array.from(checkboxes).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
-    
     // Clear previous selections
     selectedContactsDiv.innerHTML = '';
 
@@ -242,7 +242,7 @@ function getSelectedAssigned() {
         const contact = addTaskContacts.find(contact => contact.name === name);
         const contactDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
-        
+
         initialsDiv.className = 'contact-initials';
         initialsDiv.style.backgroundColor = contact.color;
         initialsDiv.innerText = getInitials(contact.name);

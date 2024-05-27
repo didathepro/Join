@@ -236,6 +236,8 @@ p {
     position: absolute;
     background-color: white;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     z-index: 1;
     max-height: 200px;
     overflow-y: auto;
@@ -245,23 +247,45 @@ p {
 .dropdownMenu div {
     display: flex;
     align-items: center;
+    justify-content: left;
     padding: 8px 16px;
     cursor: pointer;
 }
 
+.selectedContactsBtn {
+    border: unset;
+    width: 440px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    height: 48px;
+    padding: 0px 16px 0px 16px;
+    font-size: 20px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .dropdownMenu div:hover {
-    background-color: #f1f1f1;
+    background-color: #b0aeae;
 }
 
 .contact-initials {
-    width: 24px;
-    height: 24px;
+    height: 48px;
     border-radius: 50%;
     display: flex;
     align-items: center;
-    justify-content: center;
     color: white;
-    margin-right: 10px;
+    margin-right: 20px;
+}
+
+.labelEl {
+    font-size: 24px;
+} 
+
+input[type='checkbox'] {
+position: absolute;
+right: 32px;
 }
 
 .selectedContacts {
