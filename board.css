@@ -331,6 +331,7 @@ button {
     .task {
         min-width: 252px;
         max-width: 252px;
+        user-select: none;
     }
 
     .scroll-container {

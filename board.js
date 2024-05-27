@@ -67,15 +67,18 @@ const subtasks = ['Contact Form', 'Write Legal Imprint'];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
-const scrollContainer = document.querySelector('.scroll-container');
-let isDragged = false;
-let scrollscrollStartX;
-let scrollLeft;
+// const scrollContainer = document.querySelector('.scroll-container');
+// let isDragged = false;
+// let scrollscrollStartX;
+// let scrollLeft;
+let isDragging = false;
+
 
 async function boardInit() {
     await loadTasks();
     clearBoard();
     iterateTaskTypes();
+    updateDraggableAttribute();
 }
 
 function clearBoard() {
@@ -110,7 +113,7 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column" draggable="false" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
+        <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle text-break">${taskType[j].title}</p>
             <p class="taskDescription text-break">${taskType[j].description}</p>
@@ -245,12 +248,14 @@ function search() {
 }
 
 function showTaskOverlay(taskTypeString, i, j) {
-    const taskType = tasks[taskTypesKeys[i]];
-    document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
-    document.getElementById('taskOverlay').classList.remove('d-none');
-    setTaskOverlayColor(i, j);
-    insertTaskOverlayAssigned(i, j);
-    insertOverlaySubtasks(taskType, i, j);
+    if (!isDragging == true) {
+        const taskType = tasks[taskTypesKeys[i]];
+        document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
+        document.getElementById('taskOverlay').classList.remove('d-none');
+        setTaskOverlayColor(i, j);
+        insertTaskOverlayAssigned(i, j);
+        insertOverlaySubtasks(taskType, i, j);
+    }
 }
 
 function hideTaskOverlay() {
@@ -343,37 +348,69 @@ function insertOverlaySubtasks(taskType, i, j) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function(event) {
+document.addEventListener('DOMContentLoaded', function (event) {
     const scrollContainers = document.querySelectorAll('.scroll-container');
 
-    scrollContainers.forEach(function(scrollContainer) {
+    scrollContainers.forEach(function (scrollContainer) {
         let isDown = false;
         let startX;
         let scrollLeft;
 
-        scrollContainer.addEventListener('mousedown', function(e) {
+        scrollContainer.addEventListener('mousedown', function (event) {
             isDown = true;
+            isDragging = false;
             scrollContainer.classList.add('active');
-            startX = e.pageX - scrollContainer.offsetLeft;
+            startX = event.pageX - scrollContainer.offsetLeft;
             scrollLeft = scrollContainer.scrollLeft;
         });
 
-        scrollContainer.addEventListener('mouseleave', function() {
+        scrollContainer.addEventListener('mouseleave', function () {
             isDown = false;
             scrollContainer.classList.remove('active');
         });
 
-        scrollContainer.addEventListener('mouseup', function() {
+        scrollContainer.addEventListener('mouseup', function (event) {
+            if (!isDragging) {
+                itemClicked(event);
+            }
             isDown = false;
+            isDragging = false;
             scrollContainer.classList.remove('active');
         });
 
-        scrollContainer.addEventListener('mousemove', function(e) {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - scrollContainer.offsetLeft;
-            const walk = (x - startX) * 1;
-            scrollContainer.scrollLeft = scrollLeft - walk;
+        scrollContainer.addEventListener('mousemove', function (event) {
+            if (isDown) {
+                isDragging = true;
+                event.preventDefault();
+                const x = event.pageX - scrollContainer.offsetLeft;
+                const walk = (x - startX) * 1;
+                scrollContainer.scrollLeft = scrollLeft - walk;
+            }
         });
     });
+
+    document.querySelectorAll('.task').forEach(function (item) {
+        item.addEventListener('click', function (event) {
+            if (isDragging) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+    });
+});
+
+function updateDraggableAttribute() {
+    const elements = document.querySelectorAll('.task');
+    elements.forEach(function (element) {
+        if (window.matchMedia("(max-width: 428px)").matches) {
+            element.setAttribute('draggable', 'false');
+        }
+        else {
+            element.setAttribute('draggable', 'true');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    window.addEventListener('resize', updateDraggableAttribute);
 });
