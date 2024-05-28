@@ -161,6 +161,8 @@ function insertContacts() {
         checkbox.value = contact.name;
         checkbox.id = contact.name;
 
+        checkbox.addEventListener('change', updateSelectedContacts);
+
         label.htmlFor = contact.name;
         label.innerText = contact.name;
 
@@ -171,6 +173,30 @@ function insertContacts() {
         dropdownMenu.appendChild(optionDiv);
     });
 }
+
+function updateSelectedContacts() {
+    const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
+    const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+    const selectedContactsDiv = document.getElementById('selectedContacts');
+    
+    selectedContactsDiv.innerHTML = '';
+
+    selectedOptions.forEach(name => {
+        const contact = addTaskContacts.find(contact => contact.name === name);
+        const contactDiv = document.createElement('div');
+        const initialsDiv = document.createElement('div');
+        
+        initialsDiv.className = 'contact-initials';
+        initialsDiv.style.backgroundColor = contact.color;
+        initialsDiv.innerText = getInitials(contact.name);
+
+        contactDiv.appendChild(initialsDiv);
+
+        selectedContactsDiv.appendChild(contactDiv);
+    });
+}
+
+
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
     let imgCheck = document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
