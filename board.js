@@ -75,6 +75,7 @@ async function boardInit() {
     clearBoard();
     iterateTaskTypes();
     updateDraggableAttribute();
+    insertContacts();
 }
 
 function clearBoard() {
@@ -416,3 +417,8 @@ function updateDraggableAttribute() {
 document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', updateDraggableAttribute);
 });
+
+window.onload = async function() {
+    insertContacts();
+    await loadTasks();
+  };

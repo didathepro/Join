@@ -2,11 +2,10 @@ async function init() {
     await includeHTML();
     addBg();
     await loadUsers();
-    await loadOnlineStatus()
-    insertContacts();
-    currentUser()
-    greet()
-    showSummaryName()
+    await loadOnlineStatus();
+    currentUser();
+    greet();
+    showSummaryName();
 }
 
 function addBg() {
