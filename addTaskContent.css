@@ -317,8 +317,12 @@ right: 32px;
     margin-bottom: 5px;
 }
 
+.customDropdown {
+    width: 100%;
+}
 
-@media only screen and (max-width: 428px) {
+
+@media only screen and (max-width: 1500px) {
 
     body {
         width: 100%;
@@ -347,6 +351,7 @@ right: 32px;
     .addTaskRows {
         flex-direction: column;
         width: 100%;
+        max-width: 428px;
         justify-content: center;
         padding: 0 16px 0 16px;
     }
@@ -436,6 +441,13 @@ right: 32px;
     .addButtonImg {
         height: 15px;
         width: 15px;
+    }
+
+
+    .selectedContactsBtn {
+        width: 100%;
+        max-width: 428px;
+        font-size: 16px;
     }
 
 }
