@@ -3,6 +3,7 @@ async function init() {
     addBg();
     await loadUsers();
     await loadOnlineStatus()
+    insertContacts();
     currentUser()
     greet()
     showSummaryName()
