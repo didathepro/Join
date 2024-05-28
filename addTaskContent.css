@@ -65,8 +65,12 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     font-size: 20px;
+}
+
+.addTaskPriorityButton img {
+    width: 18px;
 }
 
 .addTaskPriorityButton:hover {
@@ -321,7 +325,6 @@ right: 32px;
     width: 100%;
 }
 
-
 @media only screen and (max-width: 1500px) {
 
     body {
@@ -449,6 +452,15 @@ right: 32px;
         width: 100%;
         max-width: 428px;
         font-size: 16px;
+    }
+
+    .addNewTaskTitle {
+        max-width: 428px;
+        width: 100%;
+    }
+
+    .addTaskTop {
+        justify-content: center;
     }
 
 }

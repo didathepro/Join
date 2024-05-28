@@ -129,6 +129,7 @@ button {
     padding-left: 64px;
     padding-right: 64px;
     height: 686px;
+    gap: 24px;
 }
 
 .boardColumn {
@@ -257,8 +258,7 @@ button {
     border-radius: 10px;
 }
 
-@media only screen and (max-width: 428px) {
-
+@media only screen and (max-width: 1150px) {
 
     .boardHeader {
         margin: 128px 0 0 16px;
