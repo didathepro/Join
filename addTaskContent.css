@@ -398,6 +398,7 @@ right: 32px;
 
     .addTaskContentBottom {
         width: auto;
+        max-width: 428px;
     }
 
     .addTaskContentBottom {
