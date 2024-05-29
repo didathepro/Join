@@ -124,11 +124,12 @@ button {
 }
 
 .boardContent {
-    margin-left: 232px;
-    margin-top: 6px;
+    margin: 6px 0 0 232px;
+    /* margin-left: 232px; */
+    /* margin-top: 6px; */
     padding-left: 64px;
     padding-right: 64px;
-    height: 686px;
+    /* height: 686px; */
     gap: 24px;
 }
 
@@ -290,7 +291,7 @@ button {
 
     .searchAddArea {
         flex-direction: column-reverse;
-        align-items: end;
+        align-items: start;
         gap: 32px
     }
 
@@ -314,6 +315,7 @@ button {
     .searchBackground {
         width: 100%;
         margin: 0;
+        max-width: 520px;
     }
 
     .searchContent {
@@ -343,6 +345,10 @@ button {
 
     .scroll-container::-webkit-scrollbar {
         display: none;
+    }
+
+    .searchBar {
+        width: 100%;
     }
 
 }
