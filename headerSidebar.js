@@ -1,11 +1,16 @@
+async function initSummary(){
+    await init();
+    greet();
+    showSummaryName();
+}
+
 async function init() {
     await includeHTML();
     addBg();
     await loadUsers();
     await loadOnlineStatus();
     currentUser();
-    greet();
-    showSummaryName();
+    
 }
 
 function addBg() {
