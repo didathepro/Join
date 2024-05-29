@@ -27,7 +27,6 @@ button {
 
 .boardHeaderMiddle {
     width: 1056px;
-    height: 73px;
     align-items: center;
 }
 
@@ -89,7 +88,7 @@ button {
 .addTask {
     background: #2a3647;
     color: white;
-    font-size: 21px;
+    font-size: 21px !important;
     font-weight: 700;
     border: none;
     width: 160px;
@@ -259,12 +258,15 @@ button {
     border-radius: 10px;
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1500px) {
 
     .boardHeader {
-        margin: 128px 0 0 16px;
-        padding: 0 16px 0 0;
+        margin: 128px 0 32px 0;
+        padding: 0 16px 0 16px;
         height: 144px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 
     .boardContent {
@@ -272,13 +274,17 @@ button {
         height: auto;
         flex-direction: column;
         padding: 0 16px 0 16px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
     }
 
     .boardHeaderMiddle {
         align-items: start;
         gap: 16px;
-        width: auto;
         flex-direction: column;
+        width: 100%;
+        max-width: 960px;
     }
 
     .addTask {
@@ -291,7 +297,6 @@ button {
 
     .searchAddArea {
         flex-direction: column-reverse;
-        align-items: start;
         gap: 32px
     }
 
@@ -306,6 +311,7 @@ button {
     .titleAddTaskSmall {
         justify-content: space-between;
         width: 100%;
+        max-width: 428px;
     }
 
     .searchAddArea {
@@ -315,7 +321,7 @@ button {
     .searchBackground {
         width: 100%;
         margin: 0;
-        max-width: 520px;
+        max-width: 428px;
     }
 
     .searchContent {
@@ -327,7 +333,8 @@ button {
     .boardColumn {
         display: flex;
         gap: 10px;
-        width: auto;
+        max-width: 960px;
+        width: 100%;
     }
 
     .task {
@@ -349,6 +356,19 @@ button {
 
     .searchBar {
         width: 100%;
+    }
+
+    .addTaskButtonText {
+        display: none;
+    }
+
+    .addCategory {
+        max-width: 428px;
+    }
+
+    .boardCategory {
+        width: 100%;
+        max-width: 960px;
     }
 
 }

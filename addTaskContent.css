@@ -425,10 +425,6 @@ right: 32px;
         font-size: 18px;
     }
 
-    .addTaskButtonText {
-        display: none;
-    }
-
     .addCategory {
         width: 100%;
     }
