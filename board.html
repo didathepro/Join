@@ -20,7 +20,7 @@
 
 <body class="m-0" onload="boardInit();">
     <div w3-include-html="headerSidebar.html"></div>
-    <div class="d-none addTaskFloatingBg d-flex justify-content-center align-items-center" id="addTaskFloatingBg">
+    <div class="d-none addTaskFloatingBg d-flex justify-content-center align-items-center position-fixed" id="addTaskFloatingBg">
         <div w3-include-html="addTaskContent.html" class="d-none addTaskFloating" id="addTaskFloating"></div>
     </div>
     <div class="d-none position-fixed top-50 start-50 translate-middle" id="taskOverlay"></div>
@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="boardContent d-flex" id="boardContent">
-        <div class="boardCategory" ondrop="changeCategory('tasksToDo')" ondragover="allowDrop(event)">
+        <div class="boardCategory">
             <div class="addCategory">
                 <p>To do</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksToDo')">
