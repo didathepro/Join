@@ -57,41 +57,40 @@
         </div>
     </div>
     <div class="boardContent d-flex" id="boardContent">
-        <div class="boardCategory">
+        <div class="boardCategory" ondrop="changeCategory('tasksToDo')" ondragover="allowDrop(event)">
             <div class="addCategory">
                 <p>To do</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksToDo')">
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksToDo" ondrop="moveTo('tasksToDo')" ondragover="allowDrop(event)"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksToDo"></div>
         </div>
-        <div class="boardCategory">
+        <div class="boardCategory" ondrop="changeCategory('tasksInProgress')"  ondragover="allowDrop(event)">
             <div class="addCategory">
                 <p>In progress</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksInProgress')">
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksInProgress" ondrop="moveTo('tasksInProgress')"
-                ondragover="allowDrop(event)">
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksInProgress">
             </div>
         </div>
-        <div class="boardCategory">
+        <div class="boardCategory" ondrop="changeCategory('tasksAwaitFeedback')"
+        ondragover="allowDrop(event)">
             <div class="addCategory">
                 <p>Await feedback</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksAwaitFeedback')">
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksAwaitFeedback" ondrop="moveTo('tasksAwaitFeedback')"
-                ondragover="allowDrop(event)"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto sroll-container" id="tasksAwaitFeedback"></div>
         </div>
-        <div class="boardCategory">
+        <div class="boardCategory" ondrop="changeCategory('tasksDone')" ondragover="allowDrop(event)">
             <div class="addCategory">
                 <p>Done</p>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksDone" ondrop="moveTo('tasksDone')" ondragover="allowDrop(event)"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksDone"></div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

@@ -1,44 +1,16 @@
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
-let selectedType = 'tasksToDo';
 
 let addTaskContacts = [
-    {
-        name: 'Sofia Müller',
-        color: '#00bee8'
-    },
-    {
-        name: 'Anton Meyer',
-        color: '#ff7a00'
-    },
-    {
-        name: 'Anja Schulz',
-        color: '#9327ff'
-    },
-    {
-        name: 'Benedikt Ziegler',
-        color: '#6e52ff'
-    },
-    {
-        name: 'David Eisenberg',
-        color: '#fc71ff'
-    },
-    {
-        name: 'Eva Fischer',
-        color: '#ffbb2b'
-    },
-    {
-        name: 'Emmanuel Mauer',
-        color: '#1fd7c1'
-    },
-    {
-        name: 'Marcel Bauer',
-        color: '#462f8a'
-    },
-    {
-        name: 'Tatjana Wolf',
-        color: '#ff4646'
-    }
+    { name: 'Sofia Müller', color: '#00bee8' },
+    { name: 'Anton Meyer', color: '#ff7a00' },
+    { name: 'Anja Schulz', color: '#9327ff' },
+    { name: 'Benedikt Ziegler', color: '#6e52ff' },
+    { name: 'David Eisenberg', color: '#fc71ff' },
+    { name: 'Eva Fischer', color: '#ffbb2b' },
+    { name: 'Emmanuel Mauer', color: '#1fd7c1' },
+    { name: 'Marcel Bauer', color: '#462f8a' },
+    { name: 'Tatjana Wolf', color: '#ff4646' }
 ]
 
 function selectActivePriority(priority) {
@@ -178,14 +150,14 @@ function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
-    
+
     selectedContactsDiv.innerHTML = '';
 
     selectedOptions.forEach(name => {
         const contact = addTaskContacts.find(contact => contact.name === name);
         const contactDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
-        
+
         initialsDiv.className = 'contact-initials';
         initialsDiv.style.backgroundColor = contact.color;
         initialsDiv.innerText = getInitials(contact.name);
@@ -195,7 +167,6 @@ function updateSelectedContacts() {
         selectedContactsDiv.appendChild(contactDiv);
     });
 }
-
 
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
@@ -305,14 +276,14 @@ function toggleDropdown() {
 
 function addedTaskAnimation() {
     document.getElementById('taskAdded').classList.remove('d-none');
-    setTimeout(redirectBoard, 3000);
+    setTimeout(redirectBoard, 1000);
 }
 
 function redirectBoard() {
     window.location.href = "board.html";
 }
 
-window.onload = async function() {
+window.onload = async function () {
     insertContacts();
     await loadTasks();
-  };
+};

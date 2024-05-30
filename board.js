@@ -68,14 +68,14 @@ const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
 let isDragging = false;
-
+let selectedType = 'tasksToDo';
 
 async function boardInit() {
     await loadTasks();
     clearBoard();
     iterateTaskTypes();
-    updateDraggableAttribute();
     insertContacts();
+    // updateDraggableAttribute();
 }
 
 function clearBoard() {
@@ -198,18 +198,18 @@ function insertTaskProgress(i, j) {
     }
 }
 
-
 function startDragging(i, j) {
     currentlyDraggedCategory = i;
     currentlyDraggedId = j;
 }
 
-function allowDrop(ev) { ev.preventDefault(); }
+function allowDrop(event) { event.preventDefault(); }
 
-function moveTo(category) {
+async function changeCategory(category) {
     const taskTypeString = taskTypesKeys[currentlyDraggedCategory];
-    removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1)[0];
+    let removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1)[0];
     tasks[category].push(removedTask);
+    await setItem('tasks', tasks);
     boardInit();
 }
 
@@ -262,7 +262,7 @@ function hideTaskOverlay() {
 function generateTaskOverlayHtml(taskType, i, j) {
     // const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="taskOverlay d-flex justify-content-center flex-column mb-3" draggable="true" ondragstart="startDragging(${i}, ${j})">
+        <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="taskOverlayCategory" id="taskOverlayCategory">${taskType[j].category}</div>
                 <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()">
@@ -351,74 +351,74 @@ function insertOverlaySubtasks(taskType, i, j) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    const scrollContainers = document.querySelectorAll('.scroll-container');
+// document.addEventListener('DOMContentLoaded', function (event) {
+//     const scrollContainers = document.querySelectorAll('.scroll-container');
 
-    scrollContainers.forEach(function (scrollContainer) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+//     scrollContainers.forEach(function (scrollContainer) {
+//         let isDown = false;
+//         let startX;
+//         let scrollLeft;
 
-        scrollContainer.addEventListener('mousedown', function (event) {
-            isDown = true;
-            isDragging = false;
-            scrollContainer.classList.add('active');
-            startX = event.pageX - scrollContainer.offsetLeft;
-            scrollLeft = scrollContainer.scrollLeft;
-        });
+//         scrollContainer.addEventListener('mousedown', function (event) {
+//             isDown = true;
+//             isDragging = false;
+//             scrollContainer.classList.add('active');
+//             startX = event.pageX - scrollContainer.offsetLeft;
+//             scrollLeft = scrollContainer.scrollLeft;
+//         });
 
-        scrollContainer.addEventListener('mouseleave', function () {
-            isDown = false;
-            scrollContainer.classList.remove('active');
-        });
+//         scrollContainer.addEventListener('mouseleave', function () {
+//             isDown = false;
+//             scrollContainer.classList.remove('active');
+//         });
 
-        scrollContainer.addEventListener('mouseup', function (event) {
-            if (!isDragging) {
-                itemClicked(event);
-            }
-            isDown = false;
-            isDragging = false;
-            scrollContainer.classList.remove('active');
-        });
+//         scrollContainer.addEventListener('mouseup', function (event) {
+//             if (!isDragging) {
+//                 itemClicked(event);
+//             }
+//             isDown = false;
+//             isDragging = false;
+//             scrollContainer.classList.remove('active');
+//         });
 
-        scrollContainer.addEventListener('mousemove', function (event) {
-            if (isDown) {
-                isDragging = true;
-                event.preventDefault();
-                const x = event.pageX - scrollContainer.offsetLeft;
-                const walk = (x - startX) * 1;
-                scrollContainer.scrollLeft = scrollLeft - walk;
-            }
-        });
-    });
+//         scrollContainer.addEventListener('mousemove', function (event) {
+//             if (isDown) {
+//                 isDragging = true;
+//                 event.preventDefault();
+//                 const x = event.pageX - scrollContainer.offsetLeft;
+//                 const walk = (x - startX) * 1;
+//                 scrollContainer.scrollLeft = scrollLeft - walk;
+//             }
+//         });
+//     });
 
-    document.querySelectorAll('.task').forEach(function (item) {
-        item.addEventListener('click', function (event) {
-            if (isDragging) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        });
-    });
-});
+//     document.querySelectorAll('.task').forEach(function (item) {
+//         item.addEventListener('click', function (event) {
+//             if (isDragging) {
+//                 event.preventDefault();
+//                 event.stopPropagation();
+//             }
+//         });
+//     });
+// });
 
-function updateDraggableAttribute() {
-    const elements = document.querySelectorAll('.task');
-    elements.forEach(function (element) {
-        if (window.matchMedia("(max-width: 428px)").matches) {
-            element.setAttribute('draggable', 'false');
-        }
-        else {
-            element.setAttribute('draggable', 'true');
-        }
-    });
-}
+// function updateDraggableAttribute() {
+//     const elements = document.querySelectorAll('.task');
+//     elements.forEach(function (element) {
+//         if (window.matchMedia("(max-width: 428px)").matches) {
+//             element.setAttribute('draggable', 'false');
+//         }
+//         else {
+//             element.setAttribute('draggable', 'true');
+//         }
+//     });
+// }
 
-document.addEventListener('DOMContentLoaded', function () {
-    window.addEventListener('resize', updateDraggableAttribute);
-});
+// document.addEventListener('DOMContentLoaded', function () {
+//     window.addEventListener('resize', updateDraggableAttribute);
+// });
 
-window.onload = async function() {
-    insertContacts();
-    await loadTasks();
-  };
+// window.onload = async function() {
+//     insertContacts();
+//     await loadTasks();
+//   };

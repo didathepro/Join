@@ -5,8 +5,7 @@
 <div class="addTaskContent">
     <div class="d-flex align-items-start addTaskTop">
         <h1 class="addNewTaskTitle">Add Task</h1>
-        <!-- <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon d-none"
-            onclick="hideAddTaskFloating()"> -->
+        <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon d-none" onclick="hideAddTaskFloating()">
     </div>
     <div class="d-flex flex-column justify-content-center">
         <form onsubmit="addNewTask(); return false;" class="d-flex justify-content-center flex-column align-items-center">
@@ -56,44 +55,39 @@
                     <div>
                         <p>Prio</p>
                         <div class="d-flex justify-content-between addTaskPriority">
-                            <div class="addTaskPriorityButton" id="addTaskPriorityUrgent"
-                                onclick="selectActivePriority('Urgent')">
+                            <div class="addTaskPriorityButton" id="addTaskPriorityUrgent" onclick="selectActivePriority('Urgent')">
                                 <p>Urgent</p>
                                 <img src="img/icon/priorityUrgent.svg" alt="Urgent" id="addTaskPriorityUrgentIcon">
                             </div>
-                            <div class="addTaskPriorityButton priorityMediumActive" id="addTaskPriorityMedium"
-                                onclick="selectActivePriority('Medium')">
+                            <div class="addTaskPriorityButton priorityMediumActive" id="addTaskPriorityMedium" onclick="selectActivePriority('Medium')">
                                 <p>Medium</p>
                                 <img src="img/icon/priorityMediumWhite.svg" alt="Medium" id="addTaskPriorityMediumIcon">
                             </div>
-                            <div class="addTaskPriorityButton" id="addTaskPriorityLow"
-                                onclick="selectActivePriority('Low')">
+                            <div class="addTaskPriorityButton" id="addTaskPriorityLow" onclick="selectActivePriority('Low')">
                                 <p>Low</p>
                                 <img src="img/icon/priorityLow.svg" alt="Low" id="addTaskPriorityLowIcon">
                             </div>
                         </div>
                     </div>
-                    <div class="mobileHidden">
+                    <div>
                         <div class="d-flex">
                             <p>Category</p>
                             <p class="footnote">*</p>
                         </div>
                         <select name="" id="newTaskCategory" class="addTaskInput" required>
-                            <option disabled selected value="Select task category">Select task category</option>
+                            <option disabled selected value="">Select task category</option>
                             <option value="Technical Task">Technical Task</option>
                             <option value="User Story">User Story</option>
                         </select>
                     </div>
-                    <div class="mobileHidden">
+                    <div>
                         <p>Subtasks</p>
                         <div class="addTaskInput addTaskSubtasks d-flex justify-content-between align-items-center">
                             <p id="subtasksField">Add new task</p>
                             <div>
-                                <img src="img/icon/cross.svg" alt="Cross" onclick="clearSubTask()" class="d-none"
-                                    id="subtasksCross">
-                                <img src="img/icon/checkmark_dark.svg" alt="Checkmark" onclick="addSubTask()"
-                                    class="d-none" id="subtasksCheckmark">
-                                <img src="img/icon/plus-dark.svg" alt="Plus" onclick="loadSubTask()" id="subtasksPlus">
+                                <img src="img/icon/cross.svg" alt="Cross" onclick="clearSubTask()" class="d-none" id="subtasksCross">
+                                <img src="img/icon/checkmark_dark.svg" alt="Checkmark" onclick="addSubTask()" class="d-none" id="subtasksCheckmark">
+                                <img src="img/icon/plus-dark.svg" alt="Plus onclick="loadSubTask()" id="subtasksPlus">
                             </div>
                         </div>
                         <div class="addedSubTasks" id="addedSubTasks">

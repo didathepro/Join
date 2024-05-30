@@ -325,6 +325,10 @@ right: 32px;
     width: 100%;
 }
 
+.addTaskTop {
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 1500px) {
 
     body {
@@ -342,8 +346,8 @@ right: 32px;
     }
 
     .addTaskTemplate {
-        margin: 0;
-        padding: 0;
+        margin: 0 0 0 0;
+        padding: 0 0 128px 0;
         height: auto;
     }
 
@@ -366,6 +370,8 @@ right: 32px;
 
     .addTaskTop {
         justify-content: start;
+        width: 100%;
+        max-width: 428px;
     }
 
     .addTaskInput {
@@ -443,7 +449,6 @@ right: 32px;
         width: 15px;
     }
 
-
     .selectedContactsBtn {
         width: 100%;
         max-width: 428px;
@@ -455,8 +460,10 @@ right: 32px;
         width: 100%;
     }
 
-    .addTaskTop {
-        justify-content: center;
+    .addTaskContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
 }
