@@ -96,13 +96,6 @@ button {
     border-radius: 10px;
 }
 
-.boardHeaderBottom {
-    width: 100%;
-    height: 24px;
-    margin-top: 64px;
-    margin-bottom: 4px;
-}
-
 .boardHeaderBottom p {
     margin-bottom: 0;
 }
@@ -124,17 +117,7 @@ button {
 
 .boardContent {
     margin: 6px 0 0 232px;
-    /* margin-left: 232px; */
-    /* margin-top: 6px; */
-    padding-left: 64px;
-    padding-right: 64px;
-    /* height: 686px; */
-    gap: 24px;
-}
-
-.boardColumn {
-    height: 100%;
-    width: 252px;
+    padding: 0 64px 0 64px;
 }
 
 .emptyTask {
@@ -155,7 +138,8 @@ button {
     box-shadow: 0px 0px 10px 3px #00000014;
     border-radius: 24px;
     padding: 16px;
-    margin-bottom: 10px;
+    margin: 12px;
+    width: 252px;
 }
 
 .taskCategory {
@@ -258,6 +242,12 @@ button {
     border-radius: 10px;
 }
 
+.boardCategory {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 @media only screen and (max-width: 1500px) {
 
     .boardHeader {
@@ -332,7 +322,6 @@ button {
 
     .boardColumn {
         display: flex;
-        gap: 10px;
         max-width: 960px;
         width: 100%;
     }
@@ -341,11 +330,12 @@ button {
         min-width: 252px;
         max-width: 252px;
         user-select: none;
+        margin: 8px;
     }
 
     .scroll-container {
-        overflow-x: scroll;
-        overflow-y: hidden;
+        /* overflow-x: scroll; */
+        /* overflow-y: hidden; */
         /* white-space: nowrap; */
         cursor: grab;
     }
@@ -369,6 +359,7 @@ button {
     .boardCategory {
         width: 100%;
         max-width: 960px;
+        align-items: start;
     }
 
 }
