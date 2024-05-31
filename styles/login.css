@@ -65,7 +65,7 @@ body.animation .imgJoin {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 90%;
+  width: 396px;
   height: 85vh;
   border-radius: 30px;
   background-color: #ffffff;
@@ -242,7 +242,7 @@ body.animation .imgJoin {
   }
 
   .content {
-    width: 60%;
+    width: 652px;
   }
 
   .imgJoin {
