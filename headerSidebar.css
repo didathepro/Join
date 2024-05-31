@@ -192,7 +192,7 @@ header p {
   font-size: 24px;
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1500px) {
   .resLogo {
     margin-left:50px;
     height:50px;
@@ -223,7 +223,7 @@ header p {
   }
 }
 
-@media (min-width: 1150px) {
+@media (min-width: 1500px) {
  .resLogo {
     display: none;
   }
