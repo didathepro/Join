@@ -106,7 +106,6 @@ async function includeHTML() {
 }
 
   async function logOut() {
-    if (confirm("Are you sure you want to log out?")) {
         try {
             loggedInUsers.length = 0;
             await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
@@ -114,10 +113,9 @@ async function includeHTML() {
             window.location.href = "../login.html";
         } catch (error) {
             console.error("Logout failed:", error);
-            alert("Logout failed. Please try again.");
         }
     }
-}
+
 
 function currentUser() {
     let iconName = document.getElementById('navHeader');

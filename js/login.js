@@ -74,7 +74,7 @@ async function login() {
     }
 
     rememberMe()
-    emptyForm();
+    // emptyForm();
 }
 
 /**
