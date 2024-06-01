@@ -252,6 +252,21 @@ button {
     align-items: center;
 }
 
+.overlayEditImg, .overlayDeleteImg {
+    margin-left: 8px;
+}
+
+.overlayDelete, .overlayEdit {
+    border: unset;
+    margin: 8px;
+    background-color: #fff;
+}
+
+.overlaytasksBtns {
+    display: flex;
+    justify-content: end;
+}
+
 @media only screen and (max-width: 1500px) {
 
     .boardHeader {

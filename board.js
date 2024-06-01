@@ -284,11 +284,11 @@ function generateTaskOverlayHtml(taskType, i, j) {
             </div>
             <div class="d-flex flex-column">
                 <p class="taskOverlayTextGray">Assigned to:</p>
-                <div id="customDropdown" class="customDropdown">
+                <!-- <div id="customDropdown" class="customDropdown">
                             <button onclick="toggleDropdown()" class="selectedContactsBtn">Select contacts to assign<img  src="./assets/img/arrow_drop_down.png"></button>
                             <div id="dropdownMenu" class="dropdownMenu">
                             </div>
-                        </div>
+                        </div> -->
             </div>
             <div id="selectedContacts" class="selectedContacts"></div>
             <div class="d-flex justify-content-between">
@@ -297,6 +297,11 @@ function generateTaskOverlayHtml(taskType, i, j) {
             <div>
                 <p class="taskOverlayTextGray">Subtasks</p>
                 <div id="taskOverlaySubtasks"></div>
+            </div>
+            <div class="overlaytasksBtns">
+            <button class="overlayDelete">Delete  <img class="overlayDeleteImg" src="./assets/img/delete.png"></button>
+            <img src="./assets/img/Vector 3.png">
+            <button class="overlayEdit">Edit  <img class="overlayEditImg" src="./assets/img/edit.png"></button>
             </div>
         </div>
     `
