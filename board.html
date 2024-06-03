@@ -64,7 +64,7 @@
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksToDo"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto" id="tasksToDo"></div>
         </div>
         <div class="boardCategory" ondrop="changeCategory('tasksInProgress')"  ondragover="allowDrop(event)">
             <div class="addCategory">
@@ -73,7 +73,7 @@
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksInProgress">
+            <div class="boardColumn scroll-horizontal overflow-auto" id="tasksInProgress">
             </div>
         </div>
         <div class="boardCategory" ondrop="changeCategory('tasksAwaitFeedback')"
@@ -84,13 +84,13 @@
                     <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
                 </button>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto sroll-container" id="tasksAwaitFeedback"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto" id="tasksAwaitFeedback"></div>
         </div>
         <div class="boardCategory" ondrop="changeCategory('tasksDone')" ondragover="allowDrop(event)">
             <div class="addCategory">
                 <p>Done</p>
             </div>
-            <div class="boardColumn scroll-horizontal overflow-auto scroll-container" id="tasksDone"></div>
+            <div class="boardColumn scroll-horizontal overflow-auto" id="tasksDone"></div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

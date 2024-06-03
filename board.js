@@ -245,14 +245,12 @@ function search() {
 }
 
 function showTaskOverlay(taskTypeString, i, j) {
-    if (!isDragging == true) {
         const taskType = tasks[taskTypesKeys[i]];
         document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
         document.getElementById('taskOverlay').classList.remove('d-none');
         setTaskOverlayColor(i, j);
         insertTaskOverlayAssigned(i, j);
         insertOverlaySubtasks(taskType, i, j);
-    }
 }
 
 function hideTaskOverlay() {
@@ -260,7 +258,6 @@ function hideTaskOverlay() {
 }
 
 function generateTaskOverlayHtml(taskType, i, j) {
-    // const taskTypeString = taskTypesKeys[i];
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
@@ -295,7 +292,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
                 <div id="taskOverlayAssigned" class="d-flex"></div>
             </div>
             <div>
-                <p class="taskOverlayTextGray">Subtasks</p>
+                <p class="taskOverlayTextGray d-none mb-2" id="taskOverlaySubtasksTitle">Subtasks</p>
                 <div id="taskOverlaySubtasks"></div>
             </div>
             <div class="overlaytasksBtns">
@@ -325,7 +322,8 @@ function setTaskOverlayColor(i, j) {
                     taskCategoryBg.style.background = '#1CD7C1';
                 }
             }
-        } else {
+        } 
+        else {
             taskCategoryBg.style.background = '#CCCCCC';
         }
     }
@@ -347,83 +345,37 @@ function insertTaskOverlayAssigned(i, j) {
 }
 
 function insertOverlaySubtasks(taskType, i, j) {
-    let taskOverlaySubtasks = document.getElementById('taskOverlaySubtasks');
-    taskOverlaySubtasks = '';
-    if (taskType[j].subtasks) {
+    if (taskType[j].subtasks.length >= 1) {
         for (let k = 0; k < taskType[j].subtasks.length; k++) {
-            taskOverlaySubtasks.innerHTML += `<p>${taskType[j].subtasks[k].title}</p>`
+            if (taskType[j].subtasks[k].done == true) {
+                generateOverlaySubtasksHtmlDone(taskType, i, j, k);
+            }
+            else {
+                generateOverlaySubtasksHtmlNotDone(taskType, i, j, k);
+            }
         }
+        document.getElementById('taskOverlaySubtasksTitle').classList.remove('d-none');
+    }
+    else {
+        document.getElementById('taskOverlaySubtasksTitle').classList.add('d-none');
+
     }
 }
 
-// document.addEventListener('DOMContentLoaded', function (event) {
-//     const scrollContainers = document.querySelectorAll('.scroll-container');
+function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
+    document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
+    <div class="d-flex align-items-center gap-2 mb-1">
+        <img src="/img/icon/checkbox-checked.svg" alt="Clear checkbox">
+        <p>${taskType[j].subtasks[k].title}</p>
+    </div>
+        `
+}
 
-//     scrollContainers.forEach(function (scrollContainer) {
-//         let isDown = false;
-//         let startX;
-//         let scrollLeft;
-
-//         scrollContainer.addEventListener('mousedown', function (event) {
-//             isDown = true;
-//             isDragging = false;
-//             scrollContainer.classList.add('active');
-//             startX = event.pageX - scrollContainer.offsetLeft;
-//             scrollLeft = scrollContainer.scrollLeft;
-//         });
-
-//         scrollContainer.addEventListener('mouseleave', function () {
-//             isDown = false;
-//             scrollContainer.classList.remove('active');
-//         });
-
-//         scrollContainer.addEventListener('mouseup', function (event) {
-//             if (!isDragging) {
-//                 itemClicked(event);
-//             }
-//             isDown = false;
-//             isDragging = false;
-//             scrollContainer.classList.remove('active');
-//         });
-
-//         scrollContainer.addEventListener('mousemove', function (event) {
-//             if (isDown) {
-//                 isDragging = true;
-//                 event.preventDefault();
-//                 const x = event.pageX - scrollContainer.offsetLeft;
-//                 const walk = (x - startX) * 1;
-//                 scrollContainer.scrollLeft = scrollLeft - walk;
-//             }
-//         });
-//     });
-
-//     document.querySelectorAll('.task').forEach(function (item) {
-//         item.addEventListener('click', function (event) {
-//             if (isDragging) {
-//                 event.preventDefault();
-//                 event.stopPropagation();
-//             }
-//         });
-//     });
-// });
-
-// function updateDraggableAttribute() {
-//     const elements = document.querySelectorAll('.task');
-//     elements.forEach(function (element) {
-//         if (window.matchMedia("(max-width: 428px)").matches) {
-//             element.setAttribute('draggable', 'false');
-//         }
-//         else {
-//             element.setAttribute('draggable', 'true');
-//         }
-//     });
-// }
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     window.addEventListener('resize', updateDraggableAttribute);
-// });
-
-// window.onload = async function() {
-//     insertContacts();
-//     await loadTasks();
-//   };
+function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
+    document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
+    <div class="d-flex align-items-center gap-2 mb-1">
+        <img src="/img/icon/checkbox.svg" alt="Clear checkbox">
+        <p>${taskType[j].subtasks[k].title}</p>
+    </div>
+        `
+}
