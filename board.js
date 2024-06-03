@@ -216,14 +216,12 @@ async function changeCategory(category) {
 function showAddTaskFloating(type) {
     document.getElementById('addTaskFloating').classList.remove('d-none');
     document.getElementById('addTaskFloatingBg').classList.remove('d-none');
-    document.getElementById('closeIcon').classList.remove('d-none');
     selectedType = type;
 }
 
 function hideAddTaskFloating() {
     document.getElementById('addTaskFloating').classList.add('d-none');
     document.getElementById('addTaskFloatingBg').classList.add('d-none');
-    document.getElementById('closeIcon').classList.add('d-none');
 }
 
 function search() {
@@ -262,7 +260,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="taskOverlayCategory" id="taskOverlayCategory">${taskType[j].category}</div>
-                <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()">
+                <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
             </div>    
             <p class="taskOverlayTitle text-break">${taskType[j].title}</p>
             <p class="taskOverlayDescription text-break">${taskType[j].description}</p>

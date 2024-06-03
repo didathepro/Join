@@ -144,6 +144,10 @@ button {
     width: 252px;
 }
 
+.task:hover {
+    cursor: pointer;
+}
+
 .taskCategory {
     padding: 4px 16px 4px 16px;
     border-radius: 8px;
@@ -263,6 +267,10 @@ button {
 .overlaytasksBtns {
     display: flex;
     justify-content: end;
+}
+
+.closeIcon:hover {
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 1500px) {
