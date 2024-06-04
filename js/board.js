@@ -323,7 +323,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
     `
 }
 
-function deleteTask() {
+async function deleteTask() {
     if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
         console.error('Invalid task selection');
         return;
@@ -337,13 +337,15 @@ function deleteTask() {
         return;
     }
 
-    // Remove the task from the tasks array
     taskType.splice(selectedTaskIndex, 1);
 
-    // Update the UI
-    hideTaskOverlay();
+    await setItem('tasks', tasks);
+
     boardInit();
+
+    hideTaskOverlay();
 }
+
 
 function editTask(){
 
