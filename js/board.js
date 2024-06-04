@@ -69,6 +69,8 @@ let currentlyDraggedCategory;
 let currentlyDraggedId;
 let isDragging = false;
 let selectedType = 'tasksToDo';
+let selectedTaskTypeIndex;
+let selectedTaskIndex;
 
 async function boardInit() {
     await loadTasks();
@@ -242,14 +244,38 @@ function search() {
     }
 }
 
+// function showTaskOverlay(taskTypeString, i, j) {
+//         const taskType = tasks[taskTypesKeys[i]];
+//         document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
+//         document.getElementById('taskOverlay').classList.remove('d-none');
+//         setTaskOverlayColor(i, j);
+//         insertTaskOverlayAssigned(i, j);
+//         insertOverlaySubtasks(taskType, i, j);
+// }
+
 function showTaskOverlay(taskTypeString, i, j) {
-        const taskType = tasks[taskTypesKeys[i]];
-        document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
-        document.getElementById('taskOverlay').classList.remove('d-none');
-        setTaskOverlayColor(i, j);
-        insertTaskOverlayAssigned(i, j);
-        insertOverlaySubtasks(taskType, i, j);
+    if (!tasks || !taskTypesKeys || i >= taskTypesKeys.length || !tasks[taskTypesKeys[i]]) {
+        console.error('Invalid task type or index');
+        return;
+    }
+
+    const taskType = tasks[taskTypesKeys[i]];
+    if (j >= taskType.length) {
+        console.error('Invalid task index');
+        return;
+    }
+
+    selectedTaskTypeIndex = i;
+    selectedTaskIndex = j;
+
+    document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
+    document.getElementById('taskOverlay').classList.remove('d-none');
+
+    setTaskOverlayColor(i, j);
+    insertTaskOverlayAssigned(i, j);
+    insertOverlaySubtasks(taskType, i, j);
 }
+
 
 function hideTaskOverlay() {
     document.getElementById('taskOverlay').classList.add('d-none');
@@ -279,11 +305,6 @@ function generateTaskOverlayHtml(taskType, i, j) {
             </div>
             <div class="d-flex flex-column">
                 <p class="taskOverlayTextGray">Assigned to:</p>
-                <!-- <div id="customDropdown" class="customDropdown">
-                            <button onclick="toggleDropdown()" class="selectedContactsBtn">Select contacts to assign<img  src="./assets/img/arrow_drop_down.png"></button>
-                            <div id="dropdownMenu" class="dropdownMenu">
-                            </div>
-                        </div> -->
             </div>
             <div id="selectedContacts" class="selectedContacts"></div>
             <div class="d-flex justify-content-between">
@@ -294,12 +315,38 @@ function generateTaskOverlayHtml(taskType, i, j) {
                 <div id="taskOverlaySubtasks"></div>
             </div>
             <div class="overlaytasksBtns">
-            <button class="overlayDelete">Delete  <img class="overlayDeleteImg" src="./assets/img/delete.png"></button>
+            <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="./assets/img/delete.png"></button>
             <img src="./assets/img/Vector 3.png">
-            <button class="overlayEdit">Edit  <img class="overlayEditImg" src="./assets/img/edit.png"></button>
+            <button class="overlayEdit" onclick="editTask()">Edit  <img class="overlayEditImg" src="./assets/img/edit.png"></button>
             </div>
         </div>
     `
+}
+
+function deleteTask() {
+    if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
+        console.error('Invalid task selection');
+        return;
+    }
+
+    const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
+    const taskType = tasks[taskTypeKey];
+
+    if (!taskType || selectedTaskIndex >= taskType.length) {
+        console.error('Invalid task index');
+        return;
+    }
+
+    // Remove the task from the tasks array
+    taskType.splice(selectedTaskIndex, 1);
+
+    // Update the UI
+    hideTaskOverlay();
+    boardInit();
+}
+
+function editTask(){
+
 }
 
 function setTaskOverlayColor(i, j) {
