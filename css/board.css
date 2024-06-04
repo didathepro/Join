@@ -112,8 +112,8 @@ button {
 }
 
 .addButtonImg {
-    height: 8px;
-    width: 8px;
+    height: 8px !important;
+    width: 8px !important;
 }
 
 .boardContent {
@@ -273,6 +273,10 @@ button {
     cursor: pointer;
 }
 
+.addButtonMobile {
+    display: none;
+}
+
 @media only screen and (max-width: 1500px) {
 
     .boardHeader {
@@ -380,6 +384,20 @@ button {
         width: 100%;
         max-width: 960px;
         align-items: start;
+    }
+
+    .addButton {
+        display: none;
+    }
+
+    .addButtonMobile {
+        display: flex;
+        height: 24px;
+        width: 24px;
+        border: 2px solid #2a3647;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
     }
 
 }
