@@ -317,7 +317,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
             <div class="overlaytasksBtns">
             <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="./assets/img/delete.png"></button>
             <img src="./assets/img/Vector 3.png">
-            <button class="overlayEdit" onclick="editTask()">Edit  <img class="overlayEditImg" src="./assets/img/edit.png"></button>
+            <button class="overlayEdit" onclick="editTask()" id="editTaskButton">Edit  <img class="overlayEditImg" src="./assets/img/edit.png"></button>
             </div>
         </div>
     `
@@ -346,10 +346,90 @@ async function deleteTask() {
     hideTaskOverlay();
 }
 
-
 function editTask() {
+    const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
+    const task = tasks[taskTypeString][selectedTaskIndex];
 
+    document.getElementById('newTaskTitle').value = task.title;
+    document.getElementById('newTaskDescription').value = task.description;
+    document.getElementById('newTaskCategory').value = task.category;
+    document.getElementById('newTaskDate').value = task.date;
+    selectedPriority = task.priority;
+    clearActivePriority();
+    document.getElementById(`addTaskPriority${selectedPriority}`).classList.add(`priority${selectedPriority}Active`);
+    document.getElementById(`addTaskPriority${selectedPriority}Icon`).src = `img/icon/priority${selectedPriority}White.svg`;
+
+    const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
+    assignedCheckboxes.forEach(checkbox => {
+        checkbox.checked = task.assigned.includes(checkbox.value);
+    });
+
+    const selectedContactsDiv = document.getElementById('selectedContacts');
+    selectedContactsDiv.innerHTML = '';
+    task.assigned.forEach(name => {
+        const contact = addTaskContacts.find(contact => contact.name === name);
+        const contactDiv = document.createElement('div');
+        const initialsDiv = document.createElement('div');
+        initialsDiv.className = 'contact-initials';
+        initialsDiv.style.backgroundColor = contact.color;
+        initialsDiv.innerText = getInitials(contact.name);
+        contactDiv.appendChild(initialsDiv);
+        selectedContactsDiv.appendChild(contactDiv);
+    });
+
+    subtasks.length = 0; // Clear current subtasks
+    if (task.subtasks) {
+        task.subtasks.forEach(subtask => subtasks.push(subtask.title));
+    }
+
+    const addedSubTasks = document.getElementById('addedSubTasks');
+    addedSubTasks.innerHTML = '';
+    subtasks.forEach((subtask, index) => {
+        addedSubTasks.innerHTML += `
+            <li id="liSub${index}" class="liSub">
+                <span id="subtaskText${index}">${subtask}</span>
+                <div class="subImg">
+                    <img id="editSubtask${index}" onclick="editSubtask(${index})" src="assets/img/edit.png">
+                    <img src="/assets/img/Vector 19.png">
+                    <img id="deleteSubtask${index}" onclick="deleteSubTask(${index})" src="/assets/img/delete.png">
+                </div>
+            </li>`;
+    });
+
+    selectedSubtask = subtasks.length;
+    loadSubTask();
+    showAddTaskFloating(selectedType);
 }
+
+async function updateTask() {
+    const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
+    const task = tasks[taskTypeString][selectedTaskIndex];
+
+    task.title = document.getElementById('newTaskTitle').value;
+    task.description = document.getElementById('newTaskDescription').value;
+    task.category = document.getElementById('newTaskCategory').value;
+    task.date = document.getElementById('newTaskDate').value;
+    task.priority = selectedPriority;
+    task.assigned = getSelectedAssigned();
+    task.subtasks = subtasks.map((title, index) => ({
+        title,
+        done: task.subtasks ? task.subtasks[index]?.done : false,
+    }));
+
+    await setItem('tasks', tasks);
+
+    boardInit();
+    hideAddTaskFloating();
+}
+
+function addOrUpdateTask() {
+    if (selectedTaskTypeIndex !== undefined && selectedTaskIndex !== undefined) {
+        updateTask();
+    } else {
+        addNewTask();
+    }
+}
+
 
 function setTaskOverlayColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
