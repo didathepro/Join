@@ -98,6 +98,12 @@
         <div class="boardCategory" ondrop="changeCategory('tasksDone')" ondragover="allowDrop(event)">
             <div class="addCategory">
                 <p>Done</p>
+                <button class="addButton" onclick="showAddTaskFloating('tasksDone')">
+                    <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
+                </button>
+                <a class="addButtonMobile" href="addTask.html">
+                    <img src="img/icon/plus-dark.svg" alt="Add" class="addButtonImg" />
+                </a>
             </div>
             <div class="boardColumn scroll-horizontal overflow-auto" id="tasksDone"></div>
         </div>

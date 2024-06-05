@@ -358,6 +358,7 @@ button {
         max-width: 252px;
         user-select: none;
         margin: 8px;
+        justify-content: start;
     }
 
     .emptyTask {

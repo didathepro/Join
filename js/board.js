@@ -112,7 +112,7 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex justify-content-center flex-column pointer" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
+        <div class="task d-flex flex-column pointer" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle text-break">${taskType[j].title}</p>
             <p class="taskDescription text-break">${taskType[j].description}</p>
@@ -182,7 +182,7 @@ function insertTaskProgress(i, j) {
     const taskProgress = document.getElementById(`${taskTypeString}Progress${j}`);
     if (taskProgress) {
         const task = tasks[taskTypeString][j];
-        if (task && task.subtasks) {
+        if (task && task.subtasks.length >= 1) {
             let subtasksDone = 0;
             taskProgress.classList.add('progress');
             for (let k = 0; k < task.subtasks.length; k++) {
