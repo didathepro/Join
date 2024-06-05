@@ -17,12 +17,9 @@ button {
 }
 
 .boardHeader {
-    margin-left: 232px;
-    margin-top: 128px;
+    margin: 128px 0 0 232px;
     height: 232px;
-    padding-left: 64px;
-    padding-right: 64px;
-    padding-top: 64px;
+    padding: 64px 64px 0 64px;
 }
 
 .boardHeaderMiddle {
@@ -144,10 +141,6 @@ button {
     width: 252px;
 }
 
-.task:hover {
-    cursor: pointer;
-}
-
 .taskCategory {
     padding: 4px 16px 4px 16px;
     border-radius: 8px;
@@ -254,11 +247,13 @@ button {
     align-items: center;
 }
 
-.overlayEditImg, .overlayDeleteImg {
+.overlayEditImg,
+.overlayDeleteImg {
     margin-left: 8px;
 }
 
-.overlayDelete, .overlayEdit {
+.overlayDelete,
+.overlayEdit {
     border: unset;
     margin: 8px;
     background-color: #fff;
@@ -269,7 +264,7 @@ button {
     justify-content: end;
 }
 
-.closeIcon:hover {
+.pointer:hover {
     cursor: pointer;
 }
 
@@ -324,7 +319,8 @@ button {
     }
 
     .taskOverlay {
-        max-width: 396px;
+        min-width: 320px;
+        width: 100%;
     }
 
     .titleAddTaskSmall {
@@ -398,6 +394,11 @@ button {
         border-radius: 8px;
         justify-content: center;
         align-items: center;
+    }
+
+    .taskOverlayTitle {
+        line-height: normal;
+        font-size: 32px !important
     }
 
 }
