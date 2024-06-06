@@ -112,7 +112,7 @@ function iterateTasks(taskType, i) {
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-        <div class="task d-flex flex-column pointer" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
+        <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j})">
             <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
             <p class="taskTitle text-break">${taskType[j].title}</p>
             <p class="taskDescription text-break">${taskType[j].description}</p>
@@ -182,7 +182,7 @@ function insertTaskProgress(i, j) {
     const taskProgress = document.getElementById(`${taskTypeString}Progress${j}`);
     if (taskProgress) {
         const task = tasks[taskTypeString][j];
-        if (task && task.subtasks.length >= 1) {
+        if (task && task.subtasks) {
             let subtasksDone = 0;
             taskProgress.classList.add('progress');
             for (let k = 0; k < task.subtasks.length; k++) {
@@ -353,80 +353,95 @@ async function deleteTask() {
 }
 
 function editTask() {
-    const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
-    const task = tasks[taskTypeString][selectedTaskIndex];
+    const taskOverlay = document.getElementById('taskOverlay');
+    const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
 
-    document.getElementById('newTaskTitle').value = task.title;
-    document.getElementById('newTaskDescription').value = task.description;
-    document.getElementById('newTaskCategory').value = task.category;
-    document.getElementById('newTaskDate').value = task.date;
-    selectedPriority = task.priority;
-    clearActivePriority();
-    document.getElementById(`addTaskPriority${selectedPriority}`).classList.add(`priority${selectedPriority}Active`);
-    document.getElementById(`addTaskPriority${selectedPriority}Icon`).src = `img/icon/priority${selectedPriority}White.svg`;
-
-    const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
-    assignedCheckboxes.forEach(checkbox => {
-        checkbox.checked = task.assigned.includes(checkbox.value);
-    });
-
-    const selectedContactsDiv = document.getElementById('selectedContacts');
-    selectedContactsDiv.innerHTML = '';
-    task.assigned.forEach(name => {
-        const contact = addTaskContacts.find(contact => contact.name === name);
-        const contactDiv = document.createElement('div');
-        const initialsDiv = document.createElement('div');
-        initialsDiv.className = 'contact-initials';
-        initialsDiv.style.backgroundColor = contact.color;
-        initialsDiv.innerText = getInitials(contact.name);
-        contactDiv.appendChild(initialsDiv);
-        selectedContactsDiv.appendChild(contactDiv);
-    });
-
-    subtasks.length = 0; // Clear current subtasks
-    if (task.subtasks) {
-        task.subtasks.forEach(subtask => subtasks.push(subtask.title));
-    }
-
-    const addedSubTasks = document.getElementById('addedSubTasks');
-    addedSubTasks.innerHTML = '';
-    subtasks.forEach((subtask, index) => {
-        addedSubTasks.innerHTML += `
-            <li id="liSub${index}" class="liSub">
-                <span id="subtaskText${index}">${subtask}</span>
-                <div class="subImg">
-                    <img id="editSubtask${index}" onclick="editSubtask(${index})" src="assets/img/edit.png">
-                    <img src="/assets/img/Vector 19.png">
-                    <img id="deleteSubtask${index}" onclick="deleteSubTask(${index})" src="/assets/img/delete.png">
+    taskOverlay.innerHTML = /*html*/`
+        <div class="taskOverlay d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <input type="text" id="editTaskCategory" value="${task.category}" class="taskOverlayCategory form-control">
+                <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
+            </div>
+            <input type="text" id="editTaskTitle" value="${task.title}" class="taskOverlayTitle form-control mb-3">
+            <textarea id="editTaskDescription" class="taskOverlayDescription form-control mb-3">${task.description}</textarea>
+            <div class="d-flex gap-3 align-items-center mb-3">
+                <p class="taskOverlayTextGray mb-0">Due date:</p>
+                <input type="date" id="editTaskDate" value="${task.date}" class="taskOverlayDate form-control">
+            </div>
+            <div class="d-flex gap-3 align-items-center mb-3">
+                <p class="taskOverlayTextGray mb-0">Priority:</p>
+                <select id="editTaskPriority" class="form-control">
+                    <option value="Urgent" ${task.priority === 'Urgent' ? 'selected' : ''}>Urgent</option>
+                    <option value="Medium" ${task.priority === 'Medium' ? 'selected' : ''}>Medium</option>
+                    <option value="Low" ${task.priority === 'Low' ? 'selected' : ''}>Low</option>
+                </select>
+            </div>
+            <div>
+                <p>Assigned to:</p>
+                <div id="customDropdown" class="customDropdown">
+                    <button onclick="toggleDropdown()" class="selectedContactsBtn">Select contacts to assign<img src="./assets/img/arrow_drop_down.png"></button>
+                    <div id="dropdownMenu" class="dropdownMenu"></div>
                 </div>
-            </li>`;
-    });
+                <div id="selectedContacts" class="selectedContacts"></div>
+            </div>
+            <div class="mb-3">
+                <p class="taskOverlayTextGray mb-2">Subtasks</p>
+                <div id="editTaskSubtasks" class="d-flex flex-column gap-2">
+                    ${task.subtasks.map((subtask, index) => `
+                        <input type="text" value="${subtask.title}" data-index="${index}" class="form-control editSubtask">
+                    `).join('')}
+                </div>
+                <button class="btn btn-link p-0" onclick="addNewSubtaskField()">Add Subtask</button>
+            </div>
+            <div class="overlaytasksBtns d-flex justify-content-between">
+                <button class="btn btn-primary" onclick="saveEditedTask()">Save</button>
+                <button class="btn btn-secondary" onclick="hideTaskOverlay()">Cancel</button>
+            </div>
+        </div>
+    `;
+    console.log('Calling insertContacts with assigned contacts:', task.assigned);
+    // Füge die Kontaktelemente ein
+    getSelectedAssigned();
+    insertContacts(task.assigned);
 
-    selectedSubtask = subtasks.length;
-    loadSubTask();
-    showAddTaskFloating(selectedType);
+    // Zeige die ausgewählten Kontakte an
+    updateSelectedContacts();
 }
 
-async function updateTask() {
-    const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
-    const task = tasks[taskTypeString][selectedTaskIndex];
 
-    task.title = document.getElementById('newTaskTitle').value;
-    task.description = document.getElementById('newTaskDescription').value;
-    task.category = document.getElementById('newTaskCategory').value;
-    task.date = document.getElementById('newTaskDate').value;
-    task.priority = selectedPriority;
-    task.assigned = getSelectedAssigned();
-    task.subtasks = subtasks.map((title, index) => ({
-        title,
-        done: task.subtasks ? task.subtasks[index]?.done : false,
+
+// function addNewSubtaskField() {
+//     const subtasksContainer = document.getElementById('editTaskSubtasks');
+//     const newSubtaskField = document.createElement('input');
+//     newSubtaskField.type = 'text';
+//     newSubtaskField.classList.add('form-control', 'editSubtask');
+//     subtasksContainer.appendChild(newSubtaskField);
+// }
+
+
+async function saveEditedTask() {
+    const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
+
+    task.category = document.getElementById('editTaskCategory').value;
+    task.title = document.getElementById('editTaskTitle').value;
+    task.description = document.getElementById('editTaskDescription').value;
+    task.date = document.getElementById('editTaskDate').value;
+    task.priority = document.getElementById('editTaskPriority').value;
+
+    const assignedCheckboxes = document.querySelectorAll('#editTaskAssigned input[type="checkbox"]');
+    task.assigned = Array.from(assignedCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+
+    const subtasksInputs = document.querySelectorAll('.editSubtask');
+    task.subtasks = Array.from(subtasksInputs).map(input => ({
+        title: input.value,
+        done: false
     }));
 
     await setItem('tasks', tasks);
-
     boardInit();
-    hideAddTaskFloating();
+    hideTaskOverlay();
 }
+
 
 function addOrUpdateTask() {
     if (selectedTaskTypeIndex !== undefined && selectedTaskIndex !== undefined) {
@@ -455,7 +470,7 @@ function setTaskOverlayColor(i, j) {
                     taskCategoryBg.style.background = '#1CD7C1';
                 }
             }
-        }
+        } 
         else {
             taskCategoryBg.style.background = '#CCCCCC';
         }

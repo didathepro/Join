@@ -397,9 +397,4 @@ button {
         align-items: center;
     }
 
-    .taskOverlayTitle {
-        line-height: normal;
-        font-size: 32px !important
-    }
-
 }

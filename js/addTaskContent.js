@@ -146,7 +146,6 @@ function insertContacts() {
         dropdownMenu.appendChild(optionDiv);
     });
 }
-
 function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
@@ -164,6 +163,7 @@ function updateSelectedContacts() {
         initialsDiv.innerText = getInitials(contact.name);
 
         contactDiv.appendChild(initialsDiv);
+        contactDiv.appendChild(document.createTextNode(contact.name));
 
         selectedContactsDiv.appendChild(contactDiv);
     });
@@ -272,8 +272,13 @@ function getInitials(name) {
 
 function toggleDropdown() {
     const dropdownMenu = document.getElementById('dropdownMenu');
-    dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+    if (dropdownMenu) {
+        dropdownMenu.classList.toggle('show');
+    } else {
+    }
 }
+
+
 
 function addedTaskAnimation() {
     document.getElementById('taskAdded').classList.remove('d-none');
