@@ -219,11 +219,14 @@ function showAddTaskFloating(type) {
     document.getElementById('addTaskFloating').classList.remove('d-none');
     document.getElementById('addTaskFloatingBg').classList.remove('d-none');
     selectedType = type;
+    disableScrolling();
+    document.getElementById('closeIcon').classList.remove('d-none');
 }
 
 function hideAddTaskFloating() {
     document.getElementById('addTaskFloating').classList.add('d-none');
     document.getElementById('addTaskFloatingBg').classList.add('d-none');
+    enableScrolling();
 }
 
 function search() {
@@ -274,11 +277,14 @@ function showTaskOverlay(taskTypeString, i, j) {
     setTaskOverlayColor(i, j);
     insertTaskOverlayAssigned(i, j);
     insertOverlaySubtasks(taskType, i, j);
+    
+    disableScrolling();
 }
 
 
 function hideTaskOverlay() {
     document.getElementById('taskOverlay').classList.add('d-none');
+    enableScrolling();
 }
 
 function generateTaskOverlayHtml(taskType, i, j) {
@@ -505,4 +511,14 @@ function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
         <p>${taskType[j].subtasks[k].title}</p>
     </div>
         `
+}
+
+function disableScrolling() {
+    document.documentElement.style.overflow = 'hidden';
+    document.body.scroll = "no";
+}
+
+function enableScrolling() {
+    document.documentElement.style.overflow = 'scroll';
+    document.body.scroll = "yes";
 }
