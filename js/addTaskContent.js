@@ -108,14 +108,6 @@ function getAddedSubtasks() {
     return subtasks.slice(0, selectedSubtask);
 }
 
-// function insertContacts() {
-//     if (addTaskContacts) {
-//         for (let i = 0; i < addTaskContacts.length; i++) {
-//             document.getElementById('newTaskAssigned').innerHTML += insertContactsHtml(i);
-//         };
-//     };
-// }
-
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     dropdownMenu.innerHTML = ''; // Clear any existing options
@@ -216,18 +208,6 @@ function insertContactsHtml(i) {
     `
 }
 
-// function getSelectedAssigned() {
-//     const selectElement = document.getElementById('newTaskAssigned');
-//     var selectedOptions = [];
-//     for (var i = 0; i < selectElement.options.length; i++) {
-//         const option = selectElement.options[i];
-//         if (option.selected) {
-//             selectedOptions.push(option.value);
-//         }
-//     }
-//     return selectedOptions;
-// }
-
 function getSelectedAssigned() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
     const selectedOptions = Array.from(checkboxes).map(checkbox => checkbox.value);
@@ -259,12 +239,6 @@ async function loadTasks() {
     tasks = await JSON.parse(loadedTasks);
 }
 
-
-// function getInitials(name) {
-//     const firstLetters = name.match(/\b(\w)/g);
-//     return firstLetters.join('');
-// }
-
 function getInitials(name) {
     const names = name.split(' ');
     return names.map(n => n[0]).join('');
@@ -277,8 +251,6 @@ function toggleDropdown() {
     } else {
     }
 }
-
-
 
 function addedTaskAnimation() {
     document.getElementById('taskAdded').classList.remove('d-none');

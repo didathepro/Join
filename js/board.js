@@ -77,7 +77,6 @@ async function boardInit() {
     clearBoard();
     iterateTaskTypes();
     insertContacts();
-    // updateDraggableAttribute();
 }
 
 function clearBoard() {
@@ -90,8 +89,7 @@ function iterateTaskTypes() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
         if (tasks[taskTypesKeys[i]].length <= 0) {
             document.getElementById(`${taskTypesKeys[i]}`).innerHTML = generateNoTasksHtml();
-        }
-        else {
+        } else {
             iterateTasks(tasks[taskTypesKeys[i]], i);
         }
 
@@ -247,15 +245,6 @@ function search() {
     }
 }
 
-// function showTaskOverlay(taskTypeString, i, j) {
-//         const taskType = tasks[taskTypesKeys[i]];
-//         document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
-//         document.getElementById('taskOverlay').classList.remove('d-none');
-//         setTaskOverlayColor(i, j);
-//         insertTaskOverlayAssigned(i, j);
-//         insertOverlaySubtasks(taskType, i, j);
-// }
-
 function showTaskOverlay(taskTypeString, i, j) {
     if (!tasks || !taskTypesKeys || i >= taskTypesKeys.length || !tasks[taskTypesKeys[i]]) {
         console.error('Invalid task type or index');
@@ -277,10 +266,9 @@ function showTaskOverlay(taskTypeString, i, j) {
     setTaskOverlayColor(i, j);
     insertTaskOverlayAssigned(i, j);
     insertOverlaySubtasks(taskType, i, j);
-    
+
     disableScrolling();
 }
-
 
 function hideTaskOverlay() {
     document.getElementById('taskOverlay').classList.add('d-none');
@@ -344,11 +332,8 @@ async function deleteTask() {
     }
 
     taskType.splice(selectedTaskIndex, 1);
-
     await setItem('tasks', tasks);
-
     boardInit();
-
     hideTaskOverlay();
 }
 
@@ -408,17 +393,6 @@ function editTask() {
     updateSelectedContacts();
 }
 
-
-
-// function addNewSubtaskField() {
-//     const subtasksContainer = document.getElementById('editTaskSubtasks');
-//     const newSubtaskField = document.createElement('input');
-//     newSubtaskField.type = 'text';
-//     newSubtaskField.classList.add('form-control', 'editSubtask');
-//     subtasksContainer.appendChild(newSubtaskField);
-// }
-
-
 async function saveEditedTask() {
     const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
 
@@ -451,7 +425,6 @@ function addOrUpdateTask() {
     }
 }
 
-
 function setTaskOverlayColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskCategoryBg = document.getElementById(`taskOverlayCategory`);
@@ -470,7 +443,7 @@ function setTaskOverlayColor(i, j) {
                     taskCategoryBg.style.background = '#1CD7C1';
                 }
             }
-        } 
+        }
         else {
             taskCategoryBg.style.background = '#CCCCCC';
         }
