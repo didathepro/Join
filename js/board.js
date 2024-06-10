@@ -7,6 +7,9 @@ let isDragging = false;
 let selectedType = 'tasksToDo';
 let selectedTaskTypeIndex;
 let selectedTaskIndex;
+let editedTaskIndex;
+let isEditing = false; 
+
 
 async function boardInit() {
     await loadTasks();
@@ -201,93 +204,108 @@ async function deleteTask() {
     boardInit();
     hideTaskOverlay();
 }
-
 function editTask() {
-    const taskOverlay = document.getElementById('taskOverlay');
-    const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
+    hideTaskOverlay();
+    
+    // Überprüfe, ob die ausgewählten Task-Indizes gültig sind
+    if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
+        console.error('Ungültige Auswahl des Tasks');
+        return;
+    }
 
-    taskOverlay.innerHTML = /*html*/`
-        <div class="taskOverlay d-flex flex-column">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <input type="text" id="editTaskCategory" value="${task.category}" class="taskOverlayCategory form-control">
-                <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
-            </div>
-            <input type="text" id="editTaskTitle" value="${task.title}" class="taskOverlayTitle form-control mb-3">
-            <textarea id="editTaskDescription" class="taskOverlayDescription form-control mb-3">${task.description}</textarea>
-            <div class="d-flex gap-3 align-items-center mb-3">
-                <p class="taskOverlayTextGray mb-0">Due date:</p>
-                <input type="date" id="editTaskDate" value="${task.date}" class="taskOverlayDate form-control">
-            </div>
-            <div class="d-flex gap-3 align-items-center mb-3">
-                <p class="taskOverlayTextGray mb-0">Priority:</p>
-                <select id="editTaskPriority" class="form-control">
-                    <option value="Urgent" ${task.priority === 'Urgent' ? 'selected' : ''}>Urgent</option>
-                    <option value="Medium" ${task.priority === 'Medium' ? 'selected' : ''}>Medium</option>
-                    <option value="Low" ${task.priority === 'Low' ? 'selected' : ''}>Low</option>
-                </select>
-            </div>
-            <div>
-                <p>Assigned to:</p>
-                <div id="customDropdown" class="customDropdown">
-                    <button onclick="toggleDropdown()" class="selectedContactsBtn">Select contacts to assign<img src="./assets/img/arrow_drop_down.png"></button>
-                    <div id="dropdownMenu" class="dropdownMenu"></div>
-                </div>
-                <div id="selectedContacts" class="selectedContacts"></div>
-            </div>
-            <div class="mb-3">
-                <p class="taskOverlayTextGray mb-2">Subtasks</p>
-                <div id="editTaskSubtasks" class="d-flex flex-column gap-2">
-                    ${task.subtasks.map((subtask, index) => `
-                        <input type="text" value="${subtask.title}" data-index="${index}" class="form-control editSubtask">
-                    `).join('')}
-                </div>
-                <button class="btn btn-link p-0" onclick="addNewSubtaskField()">Add Subtask</button>
-            </div>
-            <div class="overlaytasksBtns d-flex justify-content-between">
-                <button class="btn btn-primary" onclick="saveEditedTask()">Save</button>
-                <button class="btn btn-secondary" onclick="hideTaskOverlay()">Cancel</button>
-            </div>
-        </div>
-    `;
-    console.log('Calling insertContacts with assigned contacts:', task.assigned);
-    // Füge die Kontaktelemente ein
-    getSelectedAssigned();
-    insertContacts(task.assigned);
+    // Hole den Schlüssel des ausgewählten Task-Typs
+    const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
+    // Hole das Array der ausgewählten Task-Typen
+    const taskType = tasks[taskTypeKey];
 
-    // Zeige die ausgewählten Kontakte an
-    updateSelectedContacts();
+    // Überprüfe, ob das Task-Array vorhanden ist und der ausgewählte Task-Index innerhalb des Arrays liegt
+    if (!taskType || selectedTaskIndex >= taskType.length) {
+        console.error('Ungültiger Task-Index');
+        return;
+    }
+
+    // Hole den ausgewählten Task
+    const selectedTask = taskType[selectedTaskIndex];
+
+    // Setze den ausgewählten Typ
+    selectedType = taskTypeKey;
+
+    // Zeige das Formular zum Bearbeiten des Tasks an
+    showAddTaskFloating(selectedType);
+
+    // Befülle die bearbeitbaren Felder mit den Daten des ausgewählten Tasks
+    document.getElementById('newTaskTitle').value = selectedTask.title;
+    document.getElementById('newTaskDescription').value = selectedTask.description;
+    document.getElementById('newTaskCategory').value = selectedTask.category;
+    document.getElementById('newTaskDate').value = selectedTask.date;
+    selectActivePriority(selectedTask.priority);
+
+    // Befülle die ausgewählten Kontaktanzeigen
+    selectedTask.assigned.forEach(name => {
+        const checkbox = document.getElementById(name);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+
+    // Befülle die hinzugefügten Unteraufgaben (falls vorhanden)
+    if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
+        selectedSubtask = selectedTask.subtasks.length;
+        selectedTask.subtasks.forEach(subtask => {
+            subtasks.push(subtask.title);
+            addSubTask();
+        });
+    }
+
+    // Ändere den Text des Buttons von "Create" zu "Save"
+    const saveButton = document.getElementById('createTaskButton');
+    saveButton.innerText = 'Save Task';
+    saveButton.onclick = function() {
+        saveEditedTask(taskTypeKey, selectedTaskIndex);
+    };
+
+    // Füge einen Cancel-Button hinzu
+    const cancelButton = document.createElement('button');
+    cancelButton.innerText = 'Cancel';
+    cancelButton.onclick = function() {
+        hideAddTaskFloating();
+    };
+    saveButton.parentElement.appendChild(cancelButton);
 }
 
+<<<<<<< HEAD
 async function saveEditedTask() {
     const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
+=======
 
-    task.category = document.getElementById('editTaskCategory').value;
-    task.title = document.getElementById('editTaskTitle').value;
-    task.description = document.getElementById('editTaskDescription').value;
-    task.date = document.getElementById('editTaskDate').value;
-    task.priority = document.getElementById('editTaskPriority').value;
 
-    const assignedCheckboxes = document.querySelectorAll('#editTaskAssigned input[type="checkbox"]');
+function addNewSubtaskField() {
+    const subtasksContainer = document.getElementById('editTaskSubtasks');
+    const newSubtaskField = document.createElement('input');
+    newSubtaskField.type = 'text';
+    newSubtaskField.classList.add('form-control', 'editSubtask');
+    subtasksContainer.appendChild(newSubtaskField);
+}
+
+
+async function saveEditedTask(taskTypeKey, taskIndex) {
+    const task = tasks[taskTypeKey][taskIndex];
+>>>>>>> d215c13 (update edit function)
+
+    task.title = document.getElementById('newTaskTitle').value;
+    task.description = document.getElementById('newTaskDescription').value;
+    task.category = document.getElementById('newTaskCategory').value;
+    task.date = document.getElementById('newTaskDate').value;
+    task.priority = selectedPriority;
+
+    const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     task.assigned = Array.from(assignedCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
 
-    const subtasksInputs = document.querySelectorAll('.editSubtask');
-    task.subtasks = Array.from(subtasksInputs).map(input => ({
-        title: input.value,
-        done: false
-    }));
+    task.subtasks = getAddedSubtasks();
 
     await setItem('tasks', tasks);
     boardInit();
-    hideTaskOverlay();
-}
-
-
-function addOrUpdateTask() {
-    if (selectedTaskTypeIndex !== undefined && selectedTaskIndex !== undefined) {
-        updateTask();
-    } else {
-        addNewTask();
-    }
+    hideAddTaskFloating();
 }
 
 function setTaskOverlayColor(i, j) {
