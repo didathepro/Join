@@ -142,8 +142,9 @@ p {
 }
 
 .addTaskContentBottom {
-    margin-top: 128px;
-    width: 977px;
+    position: relative;
+    bottom: 16px;
+    width: 877px;
 }
 
 .closeIcon:hover {
