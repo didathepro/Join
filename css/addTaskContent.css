@@ -131,6 +131,7 @@ p {
     width: 183px;
     background-color: #2A3647;
     border-radius: 10px;
+    color: #fff;
 }
 
 .createTaskButton p {

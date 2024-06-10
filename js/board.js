@@ -204,43 +204,34 @@ async function deleteTask() {
     boardInit();
     hideTaskOverlay();
 }
+
 function editTask() {
     hideTaskOverlay();
-    
-    // Überprüfe, ob die ausgewählten Task-Indizes gültig sind
+
     if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
         console.error('Ungültige Auswahl des Tasks');
         return;
     }
 
-    // Hole den Schlüssel des ausgewählten Task-Typs
     const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
-    // Hole das Array der ausgewählten Task-Typen
     const taskType = tasks[taskTypeKey];
 
-    // Überprüfe, ob das Task-Array vorhanden ist und der ausgewählte Task-Index innerhalb des Arrays liegt
     if (!taskType || selectedTaskIndex >= taskType.length) {
         console.error('Ungültiger Task-Index');
         return;
     }
 
-    // Hole den ausgewählten Task
     const selectedTask = taskType[selectedTaskIndex];
-
-    // Setze den ausgewählten Typ
     selectedType = taskTypeKey;
 
-    // Zeige das Formular zum Bearbeiten des Tasks an
-    showAddTaskFloating(selectedType);
+    showAddTaskFloating();
 
-    // Befülle die bearbeitbaren Felder mit den Daten des ausgewählten Tasks
     document.getElementById('newTaskTitle').value = selectedTask.title;
     document.getElementById('newTaskDescription').value = selectedTask.description;
     document.getElementById('newTaskCategory').value = selectedTask.category;
     document.getElementById('newTaskDate').value = selectedTask.date;
     selectActivePriority(selectedTask.priority);
 
-    // Befülle die ausgewählten Kontaktanzeigen
     selectedTask.assigned.forEach(name => {
         const checkbox = document.getElementById(name);
         if (checkbox) {
@@ -248,33 +239,30 @@ function editTask() {
         }
     });
 
-    // Befülle die hinzugefügten Unteraufgaben (falls vorhanden)
     if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
         selectedSubtask = selectedTask.subtasks.length;
         selectedTask.subtasks.forEach(subtask => {
-            subtasks.push(subtask.title);
+            subtasks.push(subtask);
             addSubTask();
         });
     }
 
-    // Ändere den Text des Buttons von "Create" zu "Save"
     const saveButton = document.getElementById('createTaskButton');
     saveButton.innerText = 'Save Task';
     saveButton.onclick = function() {
         saveEditedTask(taskTypeKey, selectedTaskIndex);
     };
 
-    // Füge einen Cancel-Button hinzu
     const cancelButton = document.createElement('button');
     cancelButton.innerText = 'Cancel';
+    cancelButton.classList.add('cancelButton');
     cancelButton.onclick = function() {
         hideAddTaskFloating();
     };
-    saveButton.parentElement.appendChild(cancelButton);
 }
 
-async function saveEditedTask() {
-    const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
+async function saveEditedTask(taskTypeKey, taskIndex) {
+    const task = tasks[taskTypeKey][taskIndex];
 
     task.title = document.getElementById('newTaskTitle').value;
     task.description = document.getElementById('newTaskDescription').value;
@@ -282,8 +270,8 @@ async function saveEditedTask() {
     task.date = document.getElementById('newTaskDate').value;
     task.priority = selectedPriority;
 
-    const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
-    task.assigned = Array.from(assignedCheckboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+    const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
+    task.assigned = Array.from(assignedCheckboxes).map(checkbox => checkbox.value);
 
     task.subtasks = getAddedSubtasks();
 
@@ -291,6 +279,7 @@ async function saveEditedTask() {
     boardInit();
     hideAddTaskFloating();
 }
+
 
 function setTaskOverlayColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
