@@ -273,24 +273,8 @@ function editTask() {
     saveButton.parentElement.appendChild(cancelButton);
 }
 
-<<<<<<< HEAD
 async function saveEditedTask() {
     const task = tasks[taskTypesKeys[selectedTaskTypeIndex]][selectedTaskIndex];
-=======
-
-
-function addNewSubtaskField() {
-    const subtasksContainer = document.getElementById('editTaskSubtasks');
-    const newSubtaskField = document.createElement('input');
-    newSubtaskField.type = 'text';
-    newSubtaskField.classList.add('form-control', 'editSubtask');
-    subtasksContainer.appendChild(newSubtaskField);
-}
-
-
-async function saveEditedTask(taskTypeKey, taskIndex) {
-    const task = tasks[taskTypeKey][taskIndex];
->>>>>>> d215c13 (update edit function)
 
     task.title = document.getElementById('newTaskTitle').value;
     task.description = document.getElementById('newTaskDescription').value;
