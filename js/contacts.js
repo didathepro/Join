@@ -1,4 +1,4 @@
-let contacts = [
+let contactsDefaultArray = [
     {
         name: 'Anja Schulz',
         email: 'schulz@gmail.com',
@@ -113,13 +113,16 @@ let contacts = [
     }
 ];
 
-
 function showContacts() {
     contacts = JSON.parse(localStorage.getItem('ContactsArray'));
+    if (!contacts || contacts.length === 0) {
+        contacts = contactsDefaultArray;
+    }
+    localStorage.setItem('ContactsArray', JSON.stringify(contacts));
     let content = document.getElementById('contactsMenu');
     content.innerHTML = '';
-
     sortContacts();
+    
     let currentLetter = '';
     contacts.forEach((contact, index) => {
         const [firstLetter, secondLetter] = findFirstLetters(index); // Destructuring assignment to get firstLetter and secondLetter
@@ -164,7 +167,7 @@ function findFirstLetters(contactIndex) {
     const lastName = nameParts[1];
     const firstLetter = firstName[0];
     const secondLetter = lastName ? lastName[0] : ''; // Handle cases where lastName might be undefined
-    return [firstLetter, secondLetter]; // Return as an array
+    return [firstLetter.toUpperCase(), secondLetter.toUpperCase()]; // Return as an array
 }
 
 function showInfo(contact) {
@@ -187,7 +190,7 @@ function returnContactInfo(name,email,phone,color,firstLetter,secondLetter,conta
         <div class="contact-img">
             <h2 style="background-color:${color}">${firstLetter}${secondLetter}</h2>
             <div class="name-container">
-                <h3>${name}</h3>
+                <h3>${name.charAt(0).toUpperCase()+name.slice(1)}</h3>
                 <div class="edit-delete">
                     <div class="edit" onclick="editContact(${contact})"><svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 17H3.4L12.025 8.375L10.625 6.975L2 15.6V17ZM16.3 6.925L12.05 2.725L13.45 1.325C13.8333 0.941667 14.3042 0.75 14.8625 0.75C15.4208 0.75 15.8917 0.941667 16.275 1.325L17.675 2.725C18.0583 3.10833 18.2583 3.57083 18.275 4.1125C18.2917 4.65417 18.1083 5.11667 17.725 5.5L16.3 6.925ZM14.85 8.4L4.25 19H0V14.75L10.6 4.15L14.85 8.4Z" fill="#2A3647"/>
