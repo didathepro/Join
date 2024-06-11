@@ -10,7 +10,6 @@ async function init() {
     await loadUsers();
     await loadOnlineStatus();
     currentUser();
-    showContacts();
 }
 
 function addBg() {
