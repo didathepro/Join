@@ -1,3 +1,4 @@
+/** The function `includeHTML` uses XMLHttpRequest to include HTML content into elements based on a specified attribute value. */
 function includeHTML() {
     var z, i, elmnt, file, xhttp;
     /* Loop through a collection of all HTML elements: */

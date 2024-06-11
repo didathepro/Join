@@ -1,6 +1,5 @@
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
-
 let addTaskContacts = [
     { name: 'Sofia Müller', color: '#00bee8' },
     { name: 'Anton Meyer', color: '#ff7a00' },
@@ -13,6 +12,8 @@ let addTaskContacts = [
     { name: 'Tatjana Wolf', color: '#ff4646' }
 ]
 
+
+/** The function `selectActivePriority` is used to set a priority as active by updating its styling and icon. */
 function selectActivePriority(priority) {
     clearActivePriority();
     selectedPriority = priority;
@@ -20,6 +21,8 @@ function selectActivePriority(priority) {
     document.getElementById(`addTaskPriority${priority}Icon`).src = `img/icon/priority${priority}White.svg`;
 }
 
+
+/** The function `clearActivePriority` removes all possible active priority classes and resets icons for task priorities. */
 function clearActivePriority() {
     document.getElementById('addTaskPriorityUrgent').classList.remove('priorityUrgentActive');
     document.getElementById('addTaskPriorityMedium').classList.remove('priorityMediumActive');
@@ -29,6 +32,8 @@ function clearActivePriority() {
     document.getElementById('addTaskPriorityLowIcon').src = '/img/icon/priorityLow.svg';
 }
 
+
+/** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
 async function addNewTask() {
     let newTask = {
         "title": document.getElementById('newTaskTitle').value,
@@ -45,6 +50,8 @@ async function addNewTask() {
     boardInit();
 }
 
+
+/** The function `addTaskClear` resets all input fields and selections related to adding a new task. */
 function addTaskClear() {
     document.getElementById('newTaskTitle').value = '';
     document.getElementById('newTaskDescription').value = '';
@@ -60,6 +67,8 @@ function addTaskClear() {
     selectActivePriority('Medium');
 }
 
+
+/** The function `loadSubTask` adds a subtast text to the input field and updates the visible buttons. */
 function loadSubTask() {
     if (subtasks[selectedSubtask]) {
         document.getElementById('subtasksField').style.color = '#000';
@@ -70,6 +79,8 @@ function loadSubTask() {
     }
 }
 
+
+/** The function `resetSubtaskIcons` restores the add button if there are subtasks left and hides the other buttons. */
 function resetSubtaskIcons() {
     if (selectedSubtask < (subtasks.length - 1)) {
         document.getElementById('subtasksPlus').classList.remove('d-none');
@@ -78,6 +89,8 @@ function resetSubtaskIcons() {
     document.getElementById('subtasksCheckmark').classList.add('d-none');
 }
 
+
+/** The `addSubTask` function dynamically adds a new subtask to a list with corresponding edit and delete icons. */
 function addSubTask() {
     document.getElementById('addedSubTasks').innerHTML += `
         <li id="liSub${selectedSubtask}" class="liSub">
@@ -98,16 +111,22 @@ function addSubTask() {
     selectedSubtask++;
 }
 
+
+/** The function clearSubTask resets subtask icons, changes the text color to gray, and sets the inner HTML to "Add new task". */
 function clearSubTask() {
     resetSubtaskIcons();
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
 }
 
+
+/** This function returns a subset of subtasks up to the selected subtask index. */
 function getAddedSubtasks() {
     return subtasks.slice(0, selectedSubtask);
 }
 
+
+/** The function `insertContacts` dynamically populates a dropdown menu with contacts, displaying their initials, names, and checkboxes. */
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     dropdownMenu.innerHTML = ''; // Clear any existing options
@@ -138,6 +157,9 @@ function insertContacts() {
         dropdownMenu.appendChild(optionDiv);
     });
 }
+
+
+/** The function `updateSelectedContacts` updates the list of selected contacts displayed on the webpage based on the checkboxes that are checked. */
 function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
@@ -161,6 +183,8 @@ function updateSelectedContacts() {
     });
 }
 
+
+/** The `editSubtask` function allows users to edit a subtask by replacing the text element with an input field. */
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
     let imgCheck = document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
@@ -169,6 +193,8 @@ function editSubtask(id) {
     document.getElementById(`subtaskInput${id}`).focus();
 }
 
+
+/** The `saveSubtask` function updates the text of a subtask element based on user input and saves the changes. */
 function saveSubtask(id) {
     const inputElement = document.getElementById(`subtaskInput${id}`);
     const newText = inputElement.value;
@@ -182,18 +208,23 @@ function saveSubtask(id) {
     subtasks[id] = newText;
 }
 
+
+/** The function `handleKeyPress` takes an event and an id as parameters, and if the key pressed is* equal to `imgCheck`, it calls the `saveSubtask` function with the provided id. */
 function handleKeyPress(event, id) {
     if (event.key === imgCheck) {
         saveSubtask(id);
     }
 }
 
+
+/** The function `deleteSubTask` removes a subtask element from the DOM based on its ID. */
 function deleteSubTask(id) {
     const liElement = document.getElementById(`liSub${id}`);
     liElement.parentNode.removeChild(liElement);
 }
 
 
+/** The function `insertContactsHtml` generates HTML options for a select element based on contact data. */
 function insertContactsHtml(i) {
     return /*html*/`
         <option value="${addTaskContacts[i].name}" class="d-flex justify-content-between">
@@ -208,6 +239,8 @@ function insertContactsHtml(i) {
     `
 }
 
+
+/** The function `getSelectedAssigned` retrieves the selected contacts from a dropdown menu and displays them with their initials in a separate div. */
 function getSelectedAssigned() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
     const selectedOptions = Array.from(checkboxes).map(checkbox => checkbox.value);
@@ -234,16 +267,22 @@ function getSelectedAssigned() {
     return selectedOptions;
 }
 
+
+/** The function `loadTasks` asynchronously loads tasks from local storage and parses them as JSON. */
 async function loadTasks() {
     const loadedTasks = await getItem('tasks');
     tasks = await JSON.parse(loadedTasks);
 }
 
+
+/** The function `getInitials` takes a name as input and returns the initials of each word in the name. */
 function getInitials(name) {
     const names = name.split(' ');
     return names.map(n => n[0]).join('');
 }
 
+
+/** * The function `toggleDropdown` toggles the visibility of a dropdown menu by adding or removing the 'show' class. */
 function toggleDropdown() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     if (dropdownMenu) {
@@ -252,15 +291,21 @@ function toggleDropdown() {
     }
 }
 
+
+/** The `addedTaskAnimation` function removes the 'd-none' class from an element with the id 'taskAdded' to display it, and then calls the `redirectBoard` function after a delay of 1000 milliseconds. */
 function addedTaskAnimation() {
     document.getElementById('taskAdded').classList.remove('d-none');
     setTimeout(redirectBoard, 1000);
 }
 
+
+/** The function `redirectBoard` redirects the user to the "board.html" page. */
 function redirectBoard() {
     window.location.href = "board.html";
 }
 
+
+/** When the window loads, it calls the `insertContacts()` function and then awaits the completion of the `loadTasks()` function. */
 window.onload = async function () {
     insertContacts();
     await loadTasks();

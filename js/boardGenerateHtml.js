@@ -1,3 +1,4 @@
+/*** The function `generateTaskHtml` generates HTML code for displaying a task based on the task type, index `i`, and index `j`. */
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
@@ -19,6 +20,8 @@ function generateTaskHtml(taskType, i, j) {
     `
 }
 
+
+/** The function `generateNoTasksHtml` returns HTML code for displaying a message when there are no tasks to do. */
 function generateNoTasksHtml() {
     return /*html*/`
         <div class="emptyTask d-flex justify-content-center align-items-center">
@@ -27,6 +30,8 @@ function generateNoTasksHtml() {
     `
 }
 
+
+/** The function `generateTaskOverlayHtml` returns HTML markup for displaying task details based on the task type, index `i`, and index `j`. */
 function generateTaskOverlayHtml(taskType, i, j) {
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">

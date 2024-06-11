@@ -1,5 +1,4 @@
 const subtasks = ['Contact Form', 'Write Legal Imprint'];
-
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
@@ -11,6 +10,7 @@ let editedTaskIndex;
 let isEditing = false; 
 
 
+/** The function `boardInit` initializes a board by loading tasks, clearing the board, iterating through task types, and inserting contacts. */
 async function boardInit() {
     await loadTasks();
     clearBoard();
@@ -18,12 +18,16 @@ async function boardInit() {
     insertContacts();
 }
 
+
+/** The `clearBoard` function clears the content of HTML elements identified by keys in the `taskTypesKeys` array. */
 function clearBoard() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
         document.getElementById(taskTypesKeys[i]).innerHTML = '';
     }
 }
 
+
+/** The function `iterateTaskTypes` iterates through task types and generates HTML based on the tasks associated with each type. */
 function iterateTaskTypes() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
         if (tasks[taskTypesKeys[i]].length <= 0) {
@@ -35,6 +39,8 @@ function iterateTaskTypes() {
     }
 }
 
+
+/** The function `iterateTasks` iterates over tasks from the given type and generates HTML elements for each task. */
 function iterateTasks(taskType, i) {
     const taskTypeKeys = Object.keys(taskType);
     let boardTaskType = document.getElementById(taskTypesKeys[i]);
@@ -46,6 +52,8 @@ function iterateTasks(taskType, i) {
     };
 }
 
+
+/** The function `setTaskColor` dynamically sets the background color of a task category element based on its priority and category. */
 function setTaskColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskCategoryBg = document.getElementById(`${taskTypeString}Category${j}`);
@@ -70,6 +78,8 @@ function setTaskColor(i, j) {
     }
 }
 
+
+/** The function `insertTaskAssigned` populates the assigned task section with initials of assignees for a specific task type and index. */
 function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
@@ -85,6 +95,8 @@ function insertTaskAssigned(i, j) {
     };
 }
 
+
+/** The function `insertTaskProgress` updates the progress bar and text for a specific task based on the completion status of its subtasks. */
 function insertTaskProgress(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskProgress = document.getElementById(`${taskTypeString}Progress${j}`);
@@ -108,13 +120,19 @@ function insertTaskProgress(i, j) {
     }
 }
 
+
+/** The function `startDragging` sets the currently dragged category and ID when an item is being dragged. */
 function startDragging(i, j) {
     currentlyDraggedCategory = i;
     currentlyDraggedId = j;
 }
 
+
+/** The function `allowDrop` prevents the default behavior of an event. */
 function allowDrop(event) { event.preventDefault(); }
 
+
+/** The function `changeCategory` moves a task from one category to another in a task management system. */
 async function changeCategory(category) {
     const taskTypeString = taskTypesKeys[currentlyDraggedCategory];
     let removedTask = tasks[taskTypeString].splice(currentlyDraggedId, 1)[0];
@@ -123,6 +141,8 @@ async function changeCategory(category) {
     boardInit();
 }
 
+
+/** The function `showAddTaskFloating` displays a floating element for adding a task based on the specified type. */
 function showAddTaskFloating(type) {
     document.getElementById('addTaskFloating').classList.remove('d-none');
     document.getElementById('addTaskFloatingBg').classList.remove('d-none');
@@ -131,12 +151,16 @@ function showAddTaskFloating(type) {
     document.getElementById('closeIcon').classList.remove('d-none');
 }
 
+
+/** The function `hideAddTaskFloating` hides the floating add task element and background. */
 function hideAddTaskFloating() {
     document.getElementById('addTaskFloating').classList.add('d-none');
     document.getElementById('addTaskFloatingBg').classList.add('d-none');
     enableScrolling();
 }
 
+
+/** The `search` function filters tasks based on a search input and displays matching tasks on the webpage. */
 function search() {
     let search = document.getElementById('searchInput').value.trim().toLowerCase();
     clearBoard();
@@ -155,6 +179,8 @@ function search() {
     }
 }
 
+
+/** The function `showTaskOverlay` displays task details based on the task type and index provided. */
 function showTaskOverlay(taskTypeString, i, j) {
     if (!tasks || !taskTypesKeys || i >= taskTypesKeys.length || !tasks[taskTypesKeys[i]]) {
         console.error('Invalid task type or index');
@@ -180,11 +206,15 @@ function showTaskOverlay(taskTypeString, i, j) {
     disableScrolling();
 }
 
+
+/** The function `hideTaskOverlay` hides the task overlay element and enables scrolling on the page. */
 function hideTaskOverlay() {
     document.getElementById('taskOverlay').classList.add('d-none');
     enableScrolling();
 }
 
+
+/** The `deleteTask` function deletes a selected task from the tasks list and updates the board display. */
 async function deleteTask() {
     if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
         console.error('Invalid task selection');
@@ -205,6 +235,8 @@ async function deleteTask() {
     hideTaskOverlay();
 }
 
+
+/** The `editTask` function is used to populate a form with the details of a selected task for editing. */
 function editTask() {
     hideTaskOverlay();
 
@@ -261,6 +293,8 @@ function editTask() {
     };
 }
 
+
+/** The function `saveEditedTask` updates the properties of a task object based on user input and saves the changes to local storage. */
 async function saveEditedTask(taskTypeKey, taskIndex) {
     const task = tasks[taskTypeKey][taskIndex];
 
@@ -281,6 +315,7 @@ async function saveEditedTask(taskTypeKey, taskIndex) {
 }
 
 
+/** The function `setTaskOverlayColor` sets the background color of a task overlay based on its priority and category. */
 function setTaskOverlayColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskCategoryBg = document.getElementById(`taskOverlayCategory`);
@@ -306,6 +341,8 @@ function setTaskOverlayColor(i, j) {
     }
 }
 
+
+/** The function `insertTaskOverlayAssigned` populates the taskAssigned element with initials of assignees for a specific task type and index. */
 function insertTaskOverlayAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`taskOverlayAssigned`);
@@ -321,6 +358,8 @@ function insertTaskOverlayAssigned(i, j) {
     }
 }
 
+
+/** The function `insertOverlaySubtasks` iterates through subtasks of a task type and generates HTML elements based on whether the subtask is done or not. */
 function insertOverlaySubtasks(taskType, i, j) {
     if (taskType[j].subtasks.length >= 1) {
         for (let k = 0; k < taskType[j].subtasks.length; k++) {
@@ -339,6 +378,8 @@ function insertOverlaySubtasks(taskType, i, j) {
     }
 }
 
+
+/** The function generates HTML code for displaying completed subtasks within an overlay for a specific task type. */
 function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
     <div class="d-flex align-items-center gap-2 mb-1">
@@ -348,6 +389,8 @@ function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
         `
 }
 
+
+/** The function generates HTML elements for displaying subtasks that are not done, using data from a specific task type. */
 function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
     <div class="d-flex align-items-center gap-2 mb-1">
@@ -357,11 +400,15 @@ function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
         `
 }
 
+
+/** The function `disableScrolling` disables scrolling on a webpage by setting the overflow style of the document element to 'hidden' and the scroll property of the body to 'no'. */
 function disableScrolling() {
     document.documentElement.style.overflow = 'hidden';
     document.body.scroll = "no";
 }
 
+
+/** The function `enableScrolling` sets the CSS `overflow` property of the `documentElement` to 'scroll' and enables scrolling on the body element. */
 function enableScrolling() {
     document.documentElement.style.overflow = 'scroll';
     document.body.scroll = "yes";
