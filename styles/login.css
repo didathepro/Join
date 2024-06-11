@@ -18,14 +18,15 @@ body {
 }
 
 .imgJoin {
-  max-width: 150px;
-  height: auto;
+  max-width: 100px;
+  height: 121px;
   position: absolute;
   top: 50%;
   left: 50%;
   transition: all 1s ease-in-out;
   transform-origin: top left;
   z-index: 2;
+  object-fit: fill;
 }
 
 body.animation .imgJoin {
@@ -56,7 +57,7 @@ body.animation .imgJoin {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 76vh;
   margin-top: 50px;
 }
 
@@ -66,7 +67,7 @@ body.animation .imgJoin {
   justify-content: flex-start;
   align-items: center;
   width: 396px;
-  height: 85vh;
+  height: 600px;
   border-radius: 30px;
   background-color: #ffffff;
 }

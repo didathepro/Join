@@ -254,7 +254,7 @@ header p {
 
 ::-webkit-scrollbar
 {
-	width: 10px;
+	width: 7px;
 	background-color: #F5F5F5;
 }
 
@@ -264,7 +264,7 @@ header p {
 	background-image: -webkit-gradient(linear,
 									   left bottom,
 									   left top,
-									   color-stop(0.44, #6380aa),
-									   color-stop(0.72, #4c617f),
-									   color-stop(0.86, #2b3646));
+									   color-stop(0.44, #acaeb1),
+									   color-stop(0.72, #acaeb1),
+									   color-stop(0.86, #acaeb1));
 }

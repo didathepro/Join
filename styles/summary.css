@@ -25,6 +25,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  margin-left: 5%;
 }
 
 .right-content h1 {

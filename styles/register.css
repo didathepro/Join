@@ -52,7 +52,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 .animation {
@@ -65,7 +65,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   width: 396px;
-  height: 90vh;
+  height: 650px;
   border-radius: 30px;
   background-color: #ffffff;
 }
