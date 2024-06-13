@@ -38,7 +38,7 @@
                 />
                 <img src="assets/img/mail.png" alt="email" />
               </div>
-              <div class="password">
+              <div class="password" id="pwError">
                 <input
                   id="password"
                   type="password"
@@ -55,6 +55,7 @@
                   onclick="showPassword()"
                 />
               </div>
+              <span id="msgBoxLogin" class="msgBoxLogin" style="display: none"></span>
               <div class="checkbox">
                 <input
                   type="checkbox"
@@ -83,6 +84,6 @@
         <a href="legalNotice.html">Legal notice</a>
       </section>
     </section>
-    <div id="msgBoxLogin" class="msgBoxLogin" style="display: none"></div>
+    <span id="msgBoxLogin" class="msgBoxLogin" style="display: none"></span>
   </body>
 </html>

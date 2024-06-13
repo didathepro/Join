@@ -69,8 +69,9 @@ async function login() {
         window.location.href = "summary.html";
 
     } else {
-        document.getElementById('msgBoxLogin').innerHTML = 'Email or Password Incorect!!!';
+        document.getElementById('msgBoxLogin').innerHTML = 'Password Incorrect!!!';
         document.getElementById('msgBoxLogin').style.display = 'flex';
+        document.getElementById('pwError').classList.add('pwError');
     }
 
     rememberMe()

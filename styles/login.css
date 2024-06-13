@@ -91,6 +91,11 @@ body.animation .imgJoin {
   margin-bottom: 32px;
 }
 
+.password {
+  margin-bottom: 8px;
+  /* margin-left: -8px; */
+}
+
 .email img,
 .password img {
   width: 16px;
@@ -216,17 +221,13 @@ body.animation .imgJoin {
 }
 
 .msgBoxLogin {
-  width: 240px;
-  height: 48px;
-  position: absolute;
-  top: 10%;
-  left: 40%;
-  border-radius: 20px;
-  background-color: rgb(221, 68, 68);
-  color: #ffffff;
-  font-size: 16px;
-  align-items: center;
-  justify-content: center;
+  display: flex;
+  color: red;
+  margin-bottom: 32px;
+}
+
+.pwError {
+  border: 1px solid red !important;
 }
 
 @media (min-width: 768px) {
