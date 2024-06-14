@@ -83,16 +83,15 @@ function setTaskColor(i, j) {
 function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
-    if (tasks[taskTypeString][j].assigned) {
+    if (taskAssigned && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
         tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
             taskAssigned.innerHTML += /*html*/`
                 <div class="taskAssigned d-flex justify-content-center align-items-center">
-                    ${getInitials(tasks[taskTypeString][j].assigned[k])}
+                    ${getInitials(assignee)}
                 </div>
-            `
-        }
-        );
-    };
+            `;
+        });
+    }
 }
 
 
@@ -164,15 +163,32 @@ function hideAddTaskFloating() {
 function search() {
     let search = document.getElementById('searchInput').value.trim().toLowerCase();
     clearBoard();
-    if (search === '') { iterateTaskTypes(); }
-    else {
+    if (search === '') {
+        iterateTaskTypes();
+    } else {
         taskTypesKeys.forEach(function (taskTypeKey) {
             tasks[taskTypeKey].forEach(function (task, index) {
                 if (task.title.toLowerCase().includes(search) || (task.description && task.description.toLowerCase().includes(search))) {
-                    document.getElementById(taskTypeKey).innerHTML += generateTaskHtml(tasks[taskTypeKey], taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                    setTaskColor(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                    insertTaskAssigned(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                    insertTaskProgress(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    const taskHtml = generateTaskHtml(tasks[taskTypeKey], taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    document.getElementById(taskTypeKey).innerHTML += taskHtml;
+
+                    // Task-Element-ID generieren
+                    const taskElementId = `${taskTypeKey}Category${index}`;
+                    const taskElement = document.getElementById(taskElementId);
+
+                    // Prüfen, ob das Task-Element bereits eine Farbe hat
+                    if (taskElement && !taskElement.dataset.colorSet) {
+                        setTaskColor(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                        taskElement.dataset.colorSet = 'true'; // Markieren, dass die Farbe gesetzt wurde
+                    }
+
+                    // Sicherstellen, dass die Task-Eigenschaften existieren, bevor sie verwendet werden
+                    if (task.assigned) {
+                        insertTaskAssigned(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    }
+                    if (task.progress) {
+                        insertTaskProgress(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+                    }
                 }
             });
         });
