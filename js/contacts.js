@@ -323,7 +323,7 @@ function addNewContactHTML() {
                         <img class="mail-icon" src="../assets/img/mail.png">
                     </div>
                     <div class="email-container">
-                        <input id="phone" class="input_field email" required type="phone" placeholder="Phone">
+                        <input id="phone" class="input_field email" required type="number" placeholder="Phone">
                         <img class="mail-icon" src="../assets/img/call.png">
                     </div>
 
