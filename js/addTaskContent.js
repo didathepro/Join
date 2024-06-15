@@ -32,25 +32,6 @@ function clearActivePriority() {
     document.getElementById('addTaskPriorityLowIcon').src = '/img/icon/priorityLow.svg';
 }
 
-
-/** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
-async function addNewTask() {
-    let newTask = {
-        "title": document.getElementById('newTaskTitle').value,
-        "description": document.getElementById('newTaskDescription').value,
-        "category": document.getElementById('newTaskCategory').value,
-        "assigned": getSelectedAssigned(),
-        "priority": selectedPriority,
-        "date": document.getElementById('newTaskDate').value,
-        "subtasks": getAddedSubtasks()
-    };
-    tasks[selectedType].push(newTask);
-    await setItem('tasks', tasks);
-    addedTaskAnimation();
-    boardInit();
-}
-
-
 /** The function `addTaskClear` resets all input fields and selections related to adding a new task. */
 function addTaskClear() {
     document.getElementById('newTaskTitle').value = '';
@@ -67,6 +48,23 @@ function addTaskClear() {
     selectActivePriority('Medium');
 }
 
+/** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
+async function addNewTask() {
+    addTaskClear()
+    let newTask = {
+        "title": document.getElementById('newTaskTitle').value,
+        "description": document.getElementById('newTaskDescription').value,
+        "category": document.getElementById('newTaskCategory').value,
+        "assigned": getSelectedAssigned(),
+        "priority": selectedPriority,
+        "date": document.getElementById('newTaskDate').value,
+        "subtasks": getAddedSubtasks()
+    };
+    tasks[selectedType].push(newTask);
+    await setItem('tasks', tasks);
+    addedTaskAnimation();
+    boardInit();
+}
 
 /** The function `loadSubTask` adds a subtast text to the input field and updates the visible buttons. */
 // function loadSubTask() {
