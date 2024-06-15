@@ -141,6 +141,10 @@ button {
     width: 252px;
 }
 
+.task:active {
+transform: rotate(10deg);
+}
+
 .taskCategory {
     padding: 4px 16px 4px 16px;
     border-radius: 8px;

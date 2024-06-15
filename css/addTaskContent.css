@@ -291,11 +291,13 @@ p {
 
 .labelEl {
     font-size: 24px;
+    cursor: pointer;
 } 
 
 input[type='checkbox'] {
 position: absolute;
 right: 32px;
+cursor: pointer;
 }
 
 .selectedContacts {

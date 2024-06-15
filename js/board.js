@@ -78,6 +78,10 @@ function setTaskColor(i, j) {
     }
 }
 
+function getContactColor(name) {
+    const contact = addTaskContacts.find(contact => contact.name === name);
+    return contact ? contact.color : '#000'; // Fallback color if not found
+}
 
 /** The function `insertTaskAssigned` populates the assigned task section with initials of assignees for a specific task type and index. */
 function insertTaskAssigned(i, j) {
@@ -85,8 +89,9 @@ function insertTaskAssigned(i, j) {
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
     if (taskAssigned && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
         tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
+            const color = getContactColor(assignee);
             taskAssigned.innerHTML += /*html*/`
-                <div class="taskAssigned d-flex justify-content-center align-items-center">
+                <div class="taskAssigned d-flex justify-content-center align-items-center" style="background-color: ${color};">
                     ${getInitials(assignee)}
                 </div>
             `;

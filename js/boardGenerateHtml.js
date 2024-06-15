@@ -32,7 +32,7 @@ function generateNoTasksHtml() {
 
 
 /** The function `generateTaskOverlayHtml` returns HTML markup for displaying task details based on the task type, index `i`, and index `j`. */
-function generateTaskOverlayHtml(taskType, i, j) {
+function generateTaskOverlayHtml(taskType, i, j,) {
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
