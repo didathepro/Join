@@ -279,7 +279,7 @@ function editTask() {
     const selectedTask = taskType[selectedTaskIndex];
     selectedType = taskTypeKey;
 
-    showAddTaskFloating();
+    showAddTaskFloating(taskTypeKey);
 
     document.getElementById('newTaskTitle').value = selectedTask.title;
     document.getElementById('newTaskDescription').value = selectedTask.description;

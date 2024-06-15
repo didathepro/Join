@@ -44,9 +44,11 @@ async function addNewTask() {
         "date": document.getElementById('newTaskDate').value,
         "subtasks": getAddedSubtasks()
     };
+
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
-    addedTaskAnimation();
+
+    // addedTaskAnimation();
     boardInit();
 }
 
@@ -250,7 +252,9 @@ function updateSelectedContacts() {
 /** The `editSubtask` function allows users to edit a subtask by replacing the text element with an input field. */
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
-    let imgCheck = document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
+    if (document.getElementById(`deleteSubtask${id}`)) {
+        document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
+    }
     const currentText = subtaskElement.innerText;
     subtaskElement.outerHTML = `<input type="text" id="subtaskInput${id}" value="${currentText}" onblur="saveSubtask(${id})" onkeypress="handleKeyPress(event, ${id})" />`;
     document.getElementById(`subtaskInput${id}`).focus();
