@@ -115,14 +115,6 @@ function addSubTask() {
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
 
-    // Log the input value for debugging
-    console.log(`Adding subtask: "${subtaskText}"`);
-
-    if (subtaskText === '') {
-        alert('Please enter a subtask.');
-        return;
-    }
-
     // Add the subtask text to the subtasks array
     subtasks[selectedSubtask] = subtaskText;
 
