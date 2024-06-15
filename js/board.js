@@ -1,4 +1,4 @@
-const subtasks = [];
+let subtasks = [];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
@@ -158,6 +158,7 @@ function showAddTaskFloating(type) {
 
 /** The function `hideAddTaskFloating` hides the floating add task element and background. */
 function hideAddTaskFloating() {
+    subtasks = [];
     document.getElementById('addTaskFloating').classList.add('d-none');
     document.getElementById('addTaskFloatingBg').classList.add('d-none');
     enableScrolling();
@@ -259,6 +260,7 @@ async function deleteTask() {
 
 /** The `editTask` function is used to populate a form with the details of a selected task for editing. */
 function editTask() {
+    document.getElementById('addedSubTasks').innerHTML = '';
     hideTaskOverlay();
 
     if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
@@ -293,11 +295,17 @@ function editTask() {
     });
 
     if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
+        console.log("selectedTask.subtasks : ", selectedTask.subtasks)
+
         selectedSubtask = selectedTask.subtasks.length;
         selectedTask.subtasks.forEach(subtask => {
             subtasks.push(subtask);
-            addSubTask();
+            // addSubTask();
         });
+
+        initSubTask();
+
+        console.log("subtasks before : ", subtasks)
     }
 
     const saveButton = document.getElementById('createTaskButton');
@@ -400,13 +408,47 @@ function insertOverlaySubtasks(taskType, i, j) {
 }
 
 
+
+// /** The function generates HTML code for displaying completed subtasks within an overlay for a specific task type. */
+// function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
+//     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
+//     <div class="d-flex align-items-center gap-2 mb-1">
+//         <img src="/img/icon/checkbox-checked.svg" alt="Clear checkbox">
+//         <p>${taskType[j].subtasks[k].title}</p>
+//     </div>
+//         `
+// }
+
+
+// /** The function generates HTML elements for displaying subtasks that are not done, using data from a specific task type. */
+// function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
+//     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
+//     <div class="d-flex align-items-center gap-2 mb-1">
+//         <img src="/img/icon/checkbox.svg" alt="Clear checkbox">
+//         <p>${taskType[j].subtasks[k].title}</p>
+//     </div>
+//         `
+// }
+
+
+async function handle_subtask (event,i,j,k) {
+
+    let task_temp = tasks;
+    task_temp[taskTypesKeys[i]][j].subtasks[k].done = event.target.checked;
+    await setItem('tasks', task_temp);
+    boardInit();
+    
+}
+
 /** The function generates HTML code for displaying completed subtasks within an overlay for a specific task type. */
 function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
-    <div class="d-flex align-items-center gap-2 mb-1">
-        <img src="/img/icon/checkbox-checked.svg" alt="Clear checkbox">
-        <p>${taskType[j].subtasks[k].title}</p>
-    </div>
+        <div class="form-check">
+            <input style="position: static;" onchange="handle_subtask(event,${i},${j},${k})" checked class="form-check-input" type="checkbox" value="" id="subtask${k}"></input>
+            <label class="form-check-label" for="subtask${k}">
+            ${taskType[j].subtasks[k].title}
+            </label>
+        </div>
         `
 }
 
@@ -414,12 +456,15 @@ function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
 /** The function generates HTML elements for displaying subtasks that are not done, using data from a specific task type. */
 function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
-    <div class="d-flex align-items-center gap-2 mb-1">
-        <img src="/img/icon/checkbox.svg" alt="Clear checkbox">
-        <p>${taskType[j].subtasks[k].title}</p>
-    </div>
+        <div class="form-check">
+            <input style="position: static;" onchange="handle_subtask(event,${i},${j},${k})" class="form-check-input" type="checkbox" value="" id="subtask${k}"></input>
+            <label class="form-check-label" for="subtask${k}">
+            ${taskType[j].subtasks[k].title}
+            </label>
+        </div>
         `
 }
+
 
 
 /** The function `disableScrolling` disables scrolling on a webpage by setting the overflow style of the document element to 'hidden' and the scroll property of the body to 'no'. */
