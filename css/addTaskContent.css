@@ -294,6 +294,14 @@ p {
     cursor: pointer;
 } 
 
+.subtasksField {
+    border: none;
+}
+
+.subtasksField:focus {
+    outline: none;
+}
+
 input[type='checkbox'] {
 position: absolute;
 right: 32px;

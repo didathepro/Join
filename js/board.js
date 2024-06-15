@@ -1,4 +1,4 @@
-const subtasks = ['Contact Form', 'Write Legal Imprint'];
+const subtasks = [];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
