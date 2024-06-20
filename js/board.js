@@ -479,3 +479,13 @@ function enableScrolling() {
     document.documentElement.style.overflow = 'scroll';
     document.body.scroll = "yes";
 }
+
+/** The function `highlightColumn` alters the background color of a column. */
+function highlightColumn(type) {
+    document.getElementById(`boardCategory-${type}`).background = 'darkgray';
+}
+
+/** The function `resetColumn` resets the background color of a column. */
+function resetColumn(type) {
+    document.getElementById(`boardCategory-${type}`).background = '#f6f7f8';
+}
