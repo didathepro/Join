@@ -135,8 +135,8 @@ function initSubTask() {
                 <span id="subtaskText${index_subtask}">${current_subtask.title}</span>
                 <div class="subImg">
                     <img id="editSubtask${index_subtask}" onclick="editSubtask(${index_subtask})" src="assets/img/edit.png">
-                    <img src="/assets/img/Vector 19.png">
-                    <img id="deleteSubtask${index_subtask}" onclick="deleteSubTask(${index_subtask})" src="/assets/img/delete.png">
+                    <img src="assets/img/Vector 19.png">
+                    <img id="deleteSubtask${index_subtask}" onclick="deleteSubTask(${index_subtask})" src="assets/img/delete.png">
                 </div>
             </li>`;
     
@@ -161,8 +161,8 @@ function addSubTask() {
                 <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
                 <div class="subImg">
                     <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
-                    <img src="/assets/img/Vector 19.png">
-                    <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="/assets/img/delete.png">
+                    <img src="assets/img/Vector 19.png">
+                    <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
                 </div>
             </li>`;
 
@@ -319,8 +319,8 @@ function saveSubtask(id) {
     liElement.innerHTML = `<span id="subtaskText${id}" onclick="editSubtask(${id})">${newText}</span>
                            <div class="subImg">
                                <img src="assets/img/edit.png" onclick="editSubtask(${id})">
-                               <img src="/assets/img/Vector 19.png">
-                               <img src="/assets/img/delete.png" onclick="deleteSubTask(${id})">
+                               <img src="assets/img/Vector 19.png">
+                               <img src="assets/img/delete.png" onclick="deleteSubTask(${id})">
                            </div>`;
     subtasks[id] = newText;
 }
