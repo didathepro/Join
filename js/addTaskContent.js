@@ -60,7 +60,6 @@ function addTaskClear() {
     document.getElementById('newTaskAssigned').selectedIndex = 0;
     document.getElementById('newTaskDescription').value = '';
     document.getElementById('newTaskDate').value = '';
-    document.getElementById('newTaskAssigned').selectedIndex = 0;
     document.getElementById('addedSubTasks').innerHTML = '';
     document.getElementById('newTaskCategory').value = 'Select task category';
     selectedSubtask = 0;
