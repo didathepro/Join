@@ -267,6 +267,7 @@ function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
+    const footnotes = document.getElementById('footnotes');
 
     selectedContactsDiv.innerHTML = '';
 
@@ -284,6 +285,15 @@ function updateSelectedContacts() {
 
         selectedContactsDiv.appendChild(contactDiv);
     });
+
+    // Update the visibility of footnotes based on the selectedOptions length
+    if (footnotes) {
+        if (selectedOptions.length > 0) {
+            footnotes.style.visibility = 'hidden';
+        } else {
+            footnotes.style.visibility = 'visible';
+        }
+    }
 }
 
 
