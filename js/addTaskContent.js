@@ -244,6 +244,11 @@ function insertContacts() {
         });
 
         dropdownMenu.appendChild(optionDiv);
+        document.addEventListener('mouseup', function (e) {
+            if (!dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
     });
 }
 
@@ -381,7 +386,7 @@ function toggleDropdown() {
     if (dropdownMenu) {
         dropdownMenu.classList.toggle('show');
     } else {
-    }
+    } 
 }
 
 
