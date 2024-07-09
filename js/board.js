@@ -377,8 +377,9 @@ function insertTaskOverlayAssigned(i, j) {
     const taskAssigned = document.getElementById(`taskOverlayAssigned`);
     if (tasks[taskTypeString][j].assigned) {
         tasks[taskTypeString][j].assigned.forEach(function (assignee, k) {
+            const color = getContactColor(assignee);
             taskAssigned.innerHTML += /*html*/`
-                <div class="taskAssigned d-flex justify-content-center align-items-center">
+                <div class="taskAssigned d-flex justify-content-center align-items-center" style="background-color: ${color};">
                     ${getInitials(tasks[taskTypeString][j].assigned[k])}
                 </div>
             `
