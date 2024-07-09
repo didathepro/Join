@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="boardContent d-flex" id="boardContent">
-        <div class="boardCategory" ondrop="changeCategory('tasksToDo')"  ondragover="allowDrop(event); highlightColumn('tasksToDo')" ondragleave="resetColumn('tasksToDo')" id="boardCategory-tasksToDo">
+        <div class="boardCategory" ondrop="changeCategory('tasksToDo');resetColumn('tasksToDo')" ondragleave="resetColumn('tasksToDo')" ondragover="allowDrop(event); highlightColumn('tasksToDo')" id="boardCategory-tasksToDo">
             <div class="addCategory">
                 <p>To do</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksToDo')">
@@ -72,7 +72,7 @@
             </div>
             <div class="boardColumn scroll-horizontal overflow-auto" id="tasksToDo"></div>
         </div>
-        <div class="boardCategory" ondrop="changeCategory('tasksInProgress')"  ondragover="allowDrop(event); highlightColumn('tasksInProgress')" ondragleave="resetColumn('tasksInProgress')" id="boardCategory-tasksInProgress">
+        <div class="boardCategory" ondrop="changeCategory('tasksInProgress');resetColumn('tasksInProgress')"  ondragleave="resetColumn('tasksInProgress')" ondragover="allowDrop(event); highlightColumn('tasksInProgress')"  id="boardCategory-tasksInProgress">
             <div class="addCategory">
                 <p>In progress</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksInProgress')">
@@ -85,8 +85,8 @@
             <div class="boardColumn scroll-horizontal overflow-auto" id="tasksInProgress">
             </div>
         </div>
-        <div class="boardCategory" ondrop="changeCategory('tasksAwaitFeedback')"
-        ondragover="allowDrop(event); highlightColumn('tasksAwaitFeedback')" ondragleave="resetColumn('tasksAwaitFeedback')" id="boardCategory-tasksAwaitFeedback">
+        <div class="boardCategory" ondrop="changeCategory('tasksAwaitFeedback');resetColumn('tasksAwaitFeedback')" ondragleave="resetColumn('tasksAwaitFeedback')"
+        ondragover="allowDrop(event); highlightColumn('tasksAwaitFeedback')"  id="boardCategory-tasksAwaitFeedback">
             <div class="addCategory">
                 <p>Await feedback</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksAwaitFeedback')">
@@ -98,7 +98,7 @@
             </div>
             <div class="boardColumn scroll-horizontal overflow-auto" id="tasksAwaitFeedback"></div>
         </div>
-        <div class="boardCategory" ondrop="changeCategory('tasksDone')" ondragover="allowDrop(event); highlightColumn('tasksDone')" ondragleave="resetColumn('tasksDone')" id="boardCategory-tasksDone">
+        <div class="boardCategory" ondrop="changeCategory('tasksDone');resetColumn('tasksDone')" ondragleave="resetColumn('tasksDone')" ondragover="allowDrop(event); highlightColumn('tasksDone')"  id="boardCategory-tasksDone">
             <div class="addCategory">
                 <p>Done</p>
                 <button class="addButton" onclick="showAddTaskFloating('tasksDone')">

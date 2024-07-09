@@ -483,10 +483,10 @@ function enableScrolling() {
 
 /** The function `highlightColumn` alters the background color of a column. */
 function highlightColumn(type) {
-    document.getElementById(`boardCategory-${type}`).background = 'darkgray';
+    document.getElementById(`boardCategory-${type}`).classList.add('drag-area-highlight');
 }
 
 /** The function `resetColumn` resets the background color of a column. */
 function resetColumn(type) {
-    document.getElementById(`boardCategory-${type}`).background = '#f6f7f8';
+    document.getElementById(`boardCategory-${type}`).classList.remove('drag-area-highlight');
 }
