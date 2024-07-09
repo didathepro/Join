@@ -152,27 +152,36 @@ function addSubTask() {
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
 
+    if(subtaskText.length==0){
+        alert('Cannot add an empty subtask')
+    }else {
+            // Create a new list item with the subtask text
+            const newSubTaskHTML = `
+            <li id="liSub${selectedSubtask}" class="liSub">
+                <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
+                <div class="subImg">
+                    <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
+                    <img src="/assets/img/Vector 19.png">
+                    <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="/assets/img/delete.png">
+                </div>
+            </li>`;
+
+                // Log the generated HTML for debugging
+                console.log(`Generated HTML: ${newSubTaskHTML}`);
+                // Append the new list item to the addedSubTasks element
+                document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
+    }
+
     // Add the subtask text to the subtasks array
     console.log("subtasks : ", subtasks);
     // subtasks[selectedSubtask] = subtaskText;
 
 
-    // Create a new list item with the subtask text
-    const newSubTaskHTML = `
-        <li id="liSub${selectedSubtask}" class="liSub">
-            <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
-            <div class="subImg">
-                <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
-                <img src="/assets/img/Vector 19.png">
-                <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="/assets/img/delete.png">
-            </div>
-        </li>`;
 
-    // Log the generated HTML for debugging
-    console.log(`Generated HTML: ${newSubTaskHTML}`);
 
-    // Append the new list item to the addedSubTasks element
-    document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
+
+
+
 
     // Clear the input field
     subtaskInput.value = '';
