@@ -1,6 +1,7 @@
 async function initSummary() {
     await init();
     showSummaryName();
+    greet();
 }
  
 async function init() {
