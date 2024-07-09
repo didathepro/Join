@@ -2,13 +2,19 @@ async function initSummary() {
     await init();
     showSummaryName();
 }
-
+ 
 async function init() {
     await includeHTML();
     addBg();
     await loadUsers();
     await loadOnlineStatus();
     currentUser();
+}
+
+function showSummaryName (){
+    let name = document.getElementById('nameSummary');
+    name.innerHTML = loggedInUsers[0];
+
 }
 
 function addBg() {
