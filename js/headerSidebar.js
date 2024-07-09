@@ -72,10 +72,10 @@ function dropDown() {
     }
     content.innerHTML += `
         <div class="dropdown-container">
-            <a href="./help.html">Help</a>
-            <a href="../legalNotice.html">Legal Notice</a>     
-            <a href="../privacyPolicy.html">Privacy Policy</a>     
-            <a id="logOut" onclick="logOut()"href="../login.html">Log out</a>     
+            <a href="help.html">Help</a>
+            <a href="legalNotice.html">Legal Notice</a>     
+            <a href="privacyPolicy.html">Privacy Policy</a>     
+            <a id="logOut" onclick="logOut()"href="login.html">Log out</a>     
         </div>
     `;
 
