@@ -210,12 +210,13 @@ function getAddedSubtasks() {
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     dropdownMenu.innerHTML = ''; // Clear any existing options
+
     addTaskContacts.forEach(contact => {
         const optionDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
         const checkbox = document.createElement('input');
         const label = document.createElement('label');
-        label.className = 'labelEl'
+        label.className = 'labelEl';
 
         initialsDiv.className = 'contact-initials';
         initialsDiv.style.backgroundColor = contact.color;
@@ -233,6 +234,14 @@ function insertContacts() {
         optionDiv.appendChild(initialsDiv);
         optionDiv.appendChild(label);
         optionDiv.appendChild(checkbox);
+
+        // Add event listener to the optionDiv to check/uncheck the checkbox
+        optionDiv.addEventListener('click', function(e) {
+            if (e.target !== checkbox) {
+                checkbox.checked = !checkbox.checked;
+                updateSelectedContacts(); // Call the update function to update the selected contacts list
+            }
+        });
 
         dropdownMenu.appendChild(optionDiv);
     });
