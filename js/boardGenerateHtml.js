@@ -37,7 +37,7 @@ function generateTaskOverlayHtml(taskType, i, j,) {
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="taskOverlayCategory" id="taskOverlayCategory">${taskType[j].category}</div>
-                <img src="/img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
+                <img src="img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
             </div>    
             <p class="taskOverlayTitle text-break">${taskType[j].title}</p>
             <p class="taskOverlayDescription text-break">${taskType[j].description}</p>
@@ -66,9 +66,9 @@ function generateTaskOverlayHtml(taskType, i, j,) {
                 <div id="taskOverlaySubtasks"></div>
             </div>
             <div class="overlaytasksBtns">
-            <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="./assets/img/delete.png"></button>
-            <img src="./assets/img/Vector 3.png">
-            <button class="overlayEdit" onclick="editTask()" id="editTaskButton">Edit  <img class="overlayEditImg" src="./assets/img/edit.png"></button>
+            <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="assets/img/delete.png"></button>
+            <img src="assets/img/Vector 3.png">
+            <button class="overlayEdit" onclick="editTask()" id="editTaskButton">Edit  <img class="overlayEditImg" src="assets/img/edit.png"></button>
             </div>
         </div>
     `
