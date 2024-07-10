@@ -282,3 +282,21 @@ body.animation .imgJoin {
 									   color-stop(0.72, #4c617f),
 									   color-stop(0.86, #2b3646));
 }
+
+@media (min-width: 375px) {
+  .inputs {
+    width:100%;
+  }
+  .registry {
+    margin-top:58px;
+  }
+  .terms {
+    padding-bottom:15px;
+  }
+  #email {
+    font-size:14px;
+  }
+  #password {
+    font-size:14px;
+  }
+}
