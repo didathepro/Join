@@ -27,9 +27,9 @@ function clearActivePriority() {
     document.getElementById('addTaskPriorityUrgent').classList.remove('priorityUrgentActive');
     document.getElementById('addTaskPriorityMedium').classList.remove('priorityMediumActive');
     document.getElementById('addTaskPriorityLow').classList.remove('priorityLowActive');
-    document.getElementById('addTaskPriorityUrgentIcon').src = '/img/icon/priorityUrgent.svg';
-    document.getElementById('addTaskPriorityMediumIcon').src = '/img/icon/priorityMedium.svg';
-    document.getElementById('addTaskPriorityLowIcon').src = '/img/icon/priorityLow.svg';
+    document.getElementById('addTaskPriorityUrgentIcon').src = 'img/icon/priorityUrgent.svg';
+    document.getElementById('addTaskPriorityMediumIcon').src = 'img/icon/priorityMedium.svg';
+    document.getElementById('addTaskPriorityLowIcon').src = 'img/icon/priorityLow.svg';
 }
 
 
@@ -114,8 +114,8 @@ async function addNewTask() {
 //             <span id="subtaskText${selectedSubtask}">${subtasks[selectedSubtask]}</span>
 //             <div class="subImg">
 //                 <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
-//                 <img src="/assets/img/Vector 19.png">
-//                 <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="/assets/img/delete.png">
+//                 <img src="assets/img/Vector 19.png">
+//                 <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
 //             </div>
 //         </li>`;
 //     document.getElementById('subtasksField').style.color = '#D1D1D1';
@@ -302,7 +302,7 @@ function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
 
     if (document.getElementById(`deleteSubtask${id}`)) {
-        document.getElementById(`deleteSubtask${id}`).src = "/assets/img/check.png"
+        document.getElementById(`deleteSubtask${id}`).src = "assets/img/check.png"
     }
 
     const currentText = subtaskElement.innerText;
@@ -351,7 +351,7 @@ function insertContactsHtml(i) {
                 </div>
                 <p>${addTaskContacts[i].name}</p>
             </div>
-            <img src="/img/icon/checkbox.svg" alt="Checkbox">
+            <img src="img/icon/checkbox.svg" alt="Checkbox">
         </option>
     `
 }

@@ -414,7 +414,7 @@ function insertOverlaySubtasks(taskType, i, j) {
 // function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
 //     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
 //     <div class="d-flex align-items-center gap-2 mb-1">
-//         <img src="/img/icon/checkbox-checked.svg" alt="Clear checkbox">
+//         <img src="img/icon/checkbox-checked.svg" alt="Clear checkbox">
 //         <p>${taskType[j].subtasks[k].title}</p>
 //     </div>
 //         `
@@ -425,7 +425,7 @@ function insertOverlaySubtasks(taskType, i, j) {
 // function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
 //     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
 //     <div class="d-flex align-items-center gap-2 mb-1">
-//         <img src="/img/icon/checkbox.svg" alt="Clear checkbox">
+//         <img src="img/icon/checkbox.svg" alt="Clear checkbox">
 //         <p>${taskType[j].subtasks[k].title}</p>
 //     </div>
 //         `
