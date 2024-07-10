@@ -96,15 +96,20 @@ body {
   margin: 16px;
 }
 
+.password img:hover {
+  cursor: pointer !important;
+}
+
 .inputs {
   width: 70%;
   height: 48px;
   border-radius: 10px;
   outline: none;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .inputs::placeholder {
+  padding-left:5px;
   color: #d1d1d1;
   font-family: 'Inter';
 }
@@ -176,7 +181,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom:32px;
 }
 
 .terms a {
@@ -212,10 +217,27 @@ body {
   .content {
     width: 598px;
   }
+}
 
+@media (max-width:376px) {
   .imgJoin {
-    width: 100.03px;
-    height: 121.97px;
+    width:40px !important;
+    height:40px !important;
+  }
+  .content {
+    margin-top:100px;
+  }
+  .inputs {
+    font-size:14px;
+  }
+  .btns {
+    margin-top:50px;
+  }
+  .mainSection {
+    height:100vh;
+  }
+  .terms {
+    margin-top:100px;
   }
 }
 
@@ -241,4 +263,9 @@ body {
 									   color-stop(0.44, #6380aa),
 									   color-stop(0.72, #4c617f),
 									   color-stop(0.86, #2b3646));
+}
+
+.person-icon {
+  height:20px !important;
+  width: 20px !important;
 }
