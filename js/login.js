@@ -72,6 +72,7 @@ async function login() {
         document.getElementById('msgBoxLogin').innerHTML = 'Password Incorrect!!!';
         document.getElementById('msgBoxLogin').style.display = 'flex';
         document.getElementById('pwError').classList.add('pwError');
+        localStorage.setItem('isLoggedIn', 'false'); 
     }
 
     rememberMe()

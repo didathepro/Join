@@ -71,3 +71,15 @@ b {
 .legal-notice {
     padding-bottom: 150px;
 }
+
+@media (max-width: 1500px) {
+    .help-wrapper {
+        margin-left:20px;
+        margin-top:150px !important;
+        padding-bottom:100px;
+    }
+    .help-wrapper h2 {
+        margin-bottom: 20px;
+        margin-top:10px;
+    }
+}
