@@ -79,10 +79,12 @@ function setTaskColor(i, j) {
     }
 }
 
+
 function getContactColor(name) {
     const contact = addTaskContacts.find(contact => contact.name === name);
     return contact ? contact.color : '#000'; // Fallback color if not found
 }
+
 
 /** The function `insertTaskAssigned` populates the assigned task section with initials of assignees for a specific task type and index. */
 function insertTaskAssigned(i, j) {
@@ -410,7 +412,6 @@ function insertOverlaySubtasks(taskType, i, j) {
 }
 
 
-
 // /** The function generates HTML code for displaying completed subtasks within an overlay for a specific task type. */
 // function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
 //     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
@@ -442,6 +443,7 @@ async function handle_subtask (event,i,j,k) {
     
 }
 
+
 /** The function generates HTML code for displaying completed subtasks within an overlay for a specific task type. */
 function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
@@ -468,7 +470,6 @@ function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
 }
 
 
-
 /** The function `disableScrolling` disables scrolling on a webpage by setting the overflow style of the document element to 'hidden' and the scroll property of the body to 'no'. */
 function disableScrolling() {
     document.documentElement.style.overflow = 'hidden';
@@ -482,10 +483,12 @@ function enableScrolling() {
     document.body.scroll = "yes";
 }
 
+
 /** The function `highlightColumn` alters the background color of a column. */
 function highlightColumn(type) {
     document.getElementById(`boardCategory-${type}`).classList.add('drag-area-highlight');
 }
+
 
 /** The function `resetColumn` resets the background color of a column. */
 function resetColumn(type) {
