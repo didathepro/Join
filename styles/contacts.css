@@ -428,6 +428,9 @@ body {
     .contacts-wrapper {
         margin-left: 0;
     }
+    .contact-info h5  {
+        font-size:14px;
+    }
     .addContact {
         display: none;
     }
@@ -529,6 +532,7 @@ body {
     }
     #contactsMenu {
         margin-bottom: 150px;
+        margin-right:27px;
     }
     .closeIcon {
         cursor: pointer;
