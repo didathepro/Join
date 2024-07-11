@@ -419,6 +419,9 @@ body {
         z-index: 1;
         padding-top: 20px;
     }
+    .filter {
+        margin-left:30px;
+    }
     .contacts-bar {
         width:100%;
     }
@@ -430,7 +433,7 @@ body {
     }
     .addContactIcon {
         position:absolute;
-        bottom:15vh;
+        bottom:20vh;
         right:10vw;
         border-radius: 50%;
         padding:15px;
@@ -476,7 +479,7 @@ body {
     }
     .editContactIcon {
         position: absolute;
-        bottom: 25vh;
+        bottom: 32vh;
         right: 8vw;
         border-radius: 50%;
         padding: 15px 25px;
@@ -496,7 +499,7 @@ body {
         height:40vh;
         border-radius:0;
     }
-    .left-add img {
+    .left-add .logoCapa {
         display: none;
     }
     .right-add {
@@ -527,6 +530,14 @@ body {
     #contactsMenu {
         margin-bottom: 150px;
     }
+    .closeIcon {
+        cursor: pointer;
+        position:absolute;
+        top:40px;
+        right:30px;
+        width:20px !important;
+        height: 20px !important;
+    }
 }
 
 @media (min-width:1150px) {
@@ -537,6 +548,9 @@ body {
         display:none;
     }
     .resArrow {
+        display:none;
+    }
+    .closeIcon {
         display:none;
     }
 }

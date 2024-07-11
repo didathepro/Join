@@ -80,35 +80,35 @@ let contactsDefaultArray = [
         name: 'John Smith',
         email: 'john.smith@example.com',
         img: '../assets/img/person.png',
-        color: 'lightblue',
+        color: 'blue',
         phone: '+2345678901'
     },
     {
         name: 'Maria Garcia',
         email: 'maria.garcia@example.com',
         img: '../assets/img/person.png',
-        color: 'lightgreen',
+        color: 'green',
         phone: '+3456789012'
     },
     {
         name: 'Ahmed Khan',
         email: 'ahmed.khan@example.com',
         img: '../assets/img/person.png',
-        color: 'lightred',
+        color: 'red',
         phone: '+4567890123'
     },
     {
         name: 'Sophie Martin',
         email: 'sophie.martin@example.com',
         img: '../assets/img/person.png',
-        color: 'lightyellow',
+        color: 'yellow',
         phone: '+5678901234'
     },
     {
         name: 'David Lee',
         email: 'david.lee@example.com',
         img: '../assets/img/person.png',
-        color: 'lightpurple',
+        color: 'purple',
         phone: '+6789012345'
     }
 ];
@@ -234,9 +234,10 @@ function editContact(contact) {
 }
 
 function showContactHTML(contact,firstLetter,secondLetter) {
-    return `
+    return /*html*/`
     <div class="left-add">
-        <img src="assets/img/Capa 1.png">
+        <img class="logoCapa" src="assets/img/Capa 1.png">
+        <img class="closeIcon" onclick="closeContainer('editContactContainer');" src="../assets/img/close.png" alt="">
         <h4>Edit contact</h4>
     </div>
     <div class="right-add contact-img">
@@ -303,6 +304,7 @@ function addNewContactHTML() {
     return /*html*/`
     <div class="left-add">
         <img src="assets/img/Capa 1.png">
+        <img class="closeIcon" onclick="closeContainer('addContactContainer');" src="../assets/img/close.png" alt="">
         <h4>Add contact</h4>
         <h6>Tasks are better with a team!</h6>
     </div>
