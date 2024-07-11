@@ -47,7 +47,6 @@ async function addNewTask() {
 
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
-
     // addedTaskAnimation();
     boardInit();
 }

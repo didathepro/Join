@@ -16,6 +16,7 @@ async function boardInit() {
     clearBoard();
     iterateTaskTypes();
     insertContacts();
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 

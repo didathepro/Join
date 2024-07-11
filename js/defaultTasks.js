@@ -61,3 +61,35 @@ let tasks = {
             },
         ],
 };
+
+let localTasks = JSON.parse(localStorage.getItem('tasks'));
+
+async function showNumbers(){
+    showNumberOfTasks();
+    showNumberOfTasksInProgress();
+    showNumberOfDoneTasks();
+};
+
+function showNumberOfTasks(){
+    let totalTasks = 0;
+    for (let key in localTasks) {
+        if (localTasks.hasOwnProperty(key)) {
+            totalTasks += localTasks[key].length;
+        }
+    }
+    let noT = document.getElementById('numberOfTasks');
+    noT.innerHTML = totalTasks;
+}
+
+function showNumberOfTasksInProgress(){
+    let tasksInProgressCount = localTasks.tasksInProgress.length;
+    let noTInProgress = document.getElementById('numberOfTasksInProgress');
+    noTInProgress.innerHTML = tasksInProgressCount;
+}
+
+
+function showNumberOfTasksAwaitingFeedback(){
+    let tasksAwaitingFeedbackCount = localTasks.tasksAwaitFeedback.length;
+    let noTDone = document.getElementById('numberOfDoneTasks');
+    noTDone.innerHTML = tasksAwaitingFeedbackCount;
+}
