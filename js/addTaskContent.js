@@ -88,11 +88,11 @@ function initSubTask() {
 function addSubTask() {
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
-    if(subtaskText.length==0){
+    if (subtaskText.length == 0) {
         alert('Cannot add an empty subtask')
-    }else {
-            // Create a new list item with the subtask text
-            const newSubTaskHTML = `
+    } else {
+        // Create a new list item with the subtask text
+        const newSubTaskHTML = `
             <li id="liSub${selectedSubtask}" class="liSub">
                 <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
                 <div class="subImg">
@@ -101,8 +101,8 @@ function addSubTask() {
                     <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
                 </div>
             </li>`;
-                // Append the new list item to the addedSubTasks element
-                document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
+        // Append the new list item to the addedSubTasks element
+        document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
     }
     // Clear the input field
     subtaskInput.value = '';
@@ -156,7 +156,7 @@ function insertContacts() {
         optionDiv.appendChild(checkbox);
 
         // Add event listener to the optionDiv to check/uncheck the checkbox
-        optionDiv.addEventListener('click', function(e) {
+        optionDiv.addEventListener('click', function (e) {
             if (e.target !== checkbox) {
                 checkbox.checked = !checkbox.checked;
                 updateSelectedContacts(); // Call the update function to update the selected contacts list
@@ -315,7 +315,7 @@ function toggleDropdown() {
     if (dropdownMenu) {
         dropdownMenu.classList.toggle('show');
     } else {
-    } 
+    }
 }
 
 

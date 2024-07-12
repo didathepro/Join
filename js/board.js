@@ -7,7 +7,7 @@ let selectedType = 'tasksToDo';
 let selectedTaskTypeIndex;
 let selectedTaskIndex;
 let editedTaskIndex;
-let isEditing = false; 
+let isEditing = false;
 
 
 /** The function `boardInit` initializes a board by loading tasks, clearing the board, iterating through task types, and inserting contacts. */
@@ -23,7 +23,9 @@ async function boardInit() {
 /** The `clearBoard` function clears the content of HTML elements identified by keys in the `taskTypesKeys` array. */
 function clearBoard() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
-        document.getElementById(taskTypesKeys[i]).innerHTML = '';
+        if (document.getElementById(taskTypesKeys[i])) {
+            document.getElementById(taskTypesKeys[i]).innerHTML = '';
+        }
     }
 }
 
@@ -160,10 +162,12 @@ function showAddTaskFloating(type) {
 
 /** The function `hideAddTaskFloating` hides the floating add task element and background. */
 function hideAddTaskFloating() {
-    subtasks = [];
-    document.getElementById('addTaskFloating').classList.add('d-none');
-    document.getElementById('addTaskFloatingBg').classList.add('d-none');
-    enableScrolling();
+    if (document.getElementById('addTaskFloating')) {
+        subtasks = [];
+        document.getElementById('addTaskFloating').classList.add('d-none');
+        document.getElementById('addTaskFloatingBg').classList.add('d-none');
+        enableScrolling();
+    }
 }
 
 
@@ -312,14 +316,14 @@ function editTask() {
 
     const saveButton = document.getElementById('createTaskButton');
     saveButton.innerText = 'Save Task';
-    saveButton.onclick = function() {
+    saveButton.onclick = function () {
         saveEditedTask(taskTypeKey, selectedTaskIndex);
     };
 
     const cancelButton = document.createElement('button');
     cancelButton.innerText = 'Cancel';
     cancelButton.classList.add('cancelButton');
-    cancelButton.onclick = function() {
+    cancelButton.onclick = function () {
         hideAddTaskFloating();
     };
 }
@@ -433,13 +437,13 @@ function insertOverlaySubtasks(taskType, i, j) {
 // }
 
 
-async function handle_subtask (event,i,j,k) {
+async function handle_subtask(event, i, j, k) {
 
     let task_temp = tasks;
     task_temp[taskTypesKeys[i]][j].subtasks[k].done = event.target.checked;
     await setItem('tasks', task_temp);
     boardInit();
-    
+
 }
 
 
