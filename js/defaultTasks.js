@@ -67,7 +67,7 @@ let localTasks = JSON.parse(localStorage.getItem('tasks'));
 async function showNumbers(){
     showNumberOfTasks();
     showNumberOfTasksInProgress();
-    showNumberOfDoneTasks();
+    showNumberOfTasksAwaitingFeedback();
 };
 
 function showNumberOfTasks(){
