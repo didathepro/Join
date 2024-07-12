@@ -33,39 +33,21 @@ function clearActivePriority() {
 }
 
 
-/** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
-async function addNewTask() {
-    let newTask = {
-        "title": document.getElementById('newTaskTitle').value,
-        "description": document.getElementById('newTaskDescription').value,
-        "category": document.getElementById('newTaskCategory').value,
-        "assigned": getSelectedAssigned(),
-        "priority": selectedPriority,
-        "date": document.getElementById('newTaskDate').value,
-        "subtasks": getAddedSubtasks()
-    };
-
-    tasks[selectedType].push(newTask);
-    await setItem('tasks', tasks);
-    // addedTaskAnimation();
-    boardInit();
-}
-
-
 /** The function `addTaskClear` resets all input fields and selections related to adding a new task. */
 function addTaskClear() {
     document.getElementById('newTaskTitle').value = '';
     document.getElementById('newTaskDescription').value = '';
-    document.getElementById('newTaskAssigned').selectedIndex = 0;
+    // document.getElementById('newTaskAssigned').selectedIndex = 0;
     document.getElementById('newTaskDescription').value = '';
     document.getElementById('newTaskDate').value = '';
     document.getElementById('addedSubTasks').innerHTML = '';
     document.getElementById('newTaskCategory').value = 'Select task category';
     selectedSubtask = 0;
     clearSubTask();
-    resetSubtaskIcons();
     selectActivePriority('Medium');
+    document.getElementById('selectedContacts').innerHTML = '';
 }
+
 
 /** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
 async function addNewTask() {
@@ -80,52 +62,11 @@ async function addNewTask() {
     };
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
-    // addedTaskAnimation();
+    addTaskClear();
+    hideAddTaskFloating();
     boardInit();
 }
 
-/** The function `loadSubTask` adds a subtast text to the input field and updates the visible buttons. */
-// function loadSubTask() {
-//     if (subtasks[selectedSubtask]) {
-//         document.getElementById('subtasksField').style.color = '#000';
-//         document.getElementById('subtasksField').innerHTML = `${subtasks[selectedSubtask]}`;
-//         document.getElementById('subtasksPlus').classList.add('d-none');
-//         document.getElementById('subtasksCross').classList.remove('d-none');
-//         document.getElementById('subtasksCheckmark').classList.remove('d-none');
-//     }
-// }
-
-
-/** The function `resetSubtaskIcons` restores the add button if there are subtasks left and hides the other buttons. */
-// function resetSubtaskIcons() {
-//     if (selectedSubtask < (subtasks.length - 1)) {
-//         document.getElementById('subtasksPlus').classList.remove('d-none');
-//     }
-//     document.getElementById('subtasksCross').classList.add('d-none');
-//     document.getElementById('subtasksCheckmark').classList.add('d-none');
-// }
-
-
-/** The `addSubTask` function dynamically adds a new subtask to a list with corresponding edit and delete icons. */
-// function addSubTask() {
-//     document.getElementById('addedSubTasks').innerHTML += `
-//         <li id="liSub${selectedSubtask}" class="liSub">
-//             <span id="subtaskText${selectedSubtask}">${subtasks[selectedSubtask]}</span>
-//             <div class="subImg">
-//                 <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
-//                 <img src="assets/img/Vector 19.png">
-//                 <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
-//             </div>
-//         </li>`;
-//     document.getElementById('subtasksField').style.color = '#D1D1D1';
-//     document.getElementById('subtasksField').innerHTML = `Add new task`;
-//     if (typeof resetSubtaskIcons === 'function') {
-//         resetSubtaskIcons();
-//     } else {
-//         console.error("resetSubtaskIcons is not defined or not a function");
-//     }
-//     selectedSubtask++;
-// }
 
 function initSubTask() {
     for (let [index_subtask, current_subtask] of Object.entries(subtasks)) {
@@ -138,19 +79,15 @@ function initSubTask() {
                     <img id="deleteSubtask${index_subtask}" onclick="deleteSubTask(${index_subtask})" src="assets/img/delete.png">
                 </div>
             </li>`;
-    
-        // Log the generated HTML for debugging
-        console.log(`Generated HTML: ${newSubTaskHTML}`);
-    
         // Append the new list item to the addedSubTasks element
         document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
     }
 }
 
+
 function addSubTask() {
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
-
     if(subtaskText.length==0){
         alert('Cannot add an empty subtask')
     }else {
@@ -164,45 +101,20 @@ function addSubTask() {
                     <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
                 </div>
             </li>`;
-
-                // Log the generated HTML for debugging
-                console.log(`Generated HTML: ${newSubTaskHTML}`);
                 // Append the new list item to the addedSubTasks element
                 document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
     }
-
-    // Add the subtask text to the subtasks array
-    console.log("subtasks : ", subtasks);
-    // subtasks[selectedSubtask] = subtaskText;
-
-
-
-
-
-
-
-
     // Clear the input field
     subtaskInput.value = '';
     subtaskInput.style.color = '#D1D1D1';
     subtaskInput.placeholder = 'Add new task';
-
-    // Call resetSubtaskIcons if it is defined
-    // if (typeof resetSubtaskIcons === 'function') {
-    //     resetSubtaskIcons();
-    // } else {
-    //     console.error("resetSubtaskIcons is not defined or not a function");
-    // }
-
     // Increment the selectedSubtask index
     selectedSubtask++;
 }
 
 
-
 /** The function clearSubTask resets subtask icons, changes the text color to gray, and sets the inner HTML to "Add new task". */
 function clearSubTask() {
-    resetSubtaskIcons();
     document.getElementById('subtasksField').style.color = '#D1D1D1';
     document.getElementById('subtasksField').innerHTML = `Add new task`;
 }
@@ -379,7 +291,6 @@ function getSelectedAssigned() {
 
         selectedContactsDiv.appendChild(contactDiv);
     });
-    console.log(selectedOptions);
     return selectedOptions;
 }
 
