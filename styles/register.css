@@ -105,7 +105,7 @@ body {
   height: 48px;
   border-radius: 10px;
   outline: none;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .inputs::placeholder {
@@ -224,20 +224,17 @@ body {
     width:40px !important;
     height:40px !important;
   }
-  .content {
-    margin-top:100px;
-  }
   .inputs {
     font-size:14px;
   }
   .btns {
-    margin-top:50px;
-  }
-  .mainSection {
-    height:100vh;
+    margin-top:10px;
   }
   .terms {
     margin-top:100px;
+  }
+  .content {
+    margin-top:20vh;
   }
 }
 
@@ -268,4 +265,57 @@ body {
 .person-icon {
   height:20px !important;
   width: 20px !important;
+}
+
+@media (max-width:431px) {
+  .imgJoin {
+    width:40px;
+    height: 40px;
+  }
+  .headline h1 {
+    font-size:30px;
+  }
+  .content {
+    width:300px;
+    height:590px;
+  }
+  .email, .password {
+    margin-bottom:16px;
+  }
+  .terms a {
+    font-size: 12px;
+  }
+  .terms {
+    margin-top:150px;
+  }
+}
+
+@media (max-width:340px) {
+  .content {
+    width:240px !important;
+    height:58vh;
+  }
+  .mainSection {
+    height:68vh;
+  }
+  .headline h1 {
+    font-size:20px;
+  }
+  .email,.password {
+    font-size: 12px;
+  }
+  .labelCheckbox {
+    font-size:12px;
+  }
+  .btnLog {
+    width:100px;
+    font-size:12px;
+    padding:15px;
+  }
+  .inputs {
+    font-size:12px;
+  }
+  .terms {
+    margin-top:120px;
+  }
 }
