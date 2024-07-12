@@ -121,7 +121,7 @@ function currentUser() {
 }
 
 function contentToBoard() {
-    window.location.href = '../board.html';
+    window.location.href = 'board.html';
 }
 
 async function loadUsers() {

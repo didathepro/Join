@@ -315,7 +315,7 @@ function addNewContactHTML() {
     
         <div class="add-contact">
             <section class="logInContainer">
-                <form id="addContactForm">
+                <form id="addContactForm" onsubmit="addContactToArray();closeContainer('addContactContainer');">
                     <div class="email-container">
                         <input id="name" class="input_field name" placeholder="Name" required type="text">
                         <img class="lock-icon" src="assets/img/person.png" alt="">
@@ -334,7 +334,7 @@ function addNewContactHTML() {
                         <path d="M7.001 6.50008L12.244 11.7431M1.758 11.7431L7.001 6.50008L1.758 11.7431ZM12.244 1.25708L7 6.50008L12.244 1.25708ZM7 6.50008L1.758 1.25708L7 6.50008Z" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         </button>
-                        <button type="button" class="create" onclick="addContactToArray();closeContainer('addContactContainer');">Create contact<img src="assets/img/Vector (2).png"></button>
+                        <button type="submit" class="create">Create contact<img src="assets/img/Vector (2).png"></button>
                     </div>
                 </form>
             </section>
