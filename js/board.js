@@ -36,7 +36,6 @@ function iterateTaskTypes() {
         } else {
             iterateTasks(tasks[taskTypesKeys[i]], i);
         }
-
     }
 }
 
