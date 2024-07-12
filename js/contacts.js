@@ -211,7 +211,7 @@ function returnContactInfo(name,email,phone,color,firstLetter,secondLetter,conta
             <p>${phone}</p>
         </div>
     </div>
-    <button class="editContactIcon" onclick="editContact(${contact});"><img src="assets/img/more_vert.png"></button>
+    <button class="editContactIcon" onclick="editContact(${contact});"><img src="./assets/img/more_vert.png"></button>
     `;
 }
 
@@ -236,8 +236,8 @@ function editContact(contact) {
 function showContactHTML(contact,firstLetter,secondLetter) {
     return /*html*/`
     <div class="left-add">
-        <img class="logoCapa" src="assets/img/Capa 1.png">
-        <img class="closeIcon" onclick="closeContainer('editContactContainer');" src="../assets/img/close.png" alt="">
+        <img class="logoCapa" src="./assets/img/Capa 1.png">
+        <img class="closeIcon" onclick="closeContainer('editContactContainer');" src="./assets/img/close.png" alt="">
         <h4>Edit contact</h4>
     </div>
     <div class="right-add contact-img">
@@ -248,20 +248,20 @@ function showContactHTML(contact,firstLetter,secondLetter) {
                 <form id="addContactForm">
                     <div class="email-container">
                         <input id="name" class="input_field name" placeholder="Name">
-                        <img class="lock-icon" src="assets/img/person.png" alt="">
+                        <img class="lock-icon" src="./assets/img/person.png" alt="">
                     </div>
                     <div class="email-container">
                         <input id="email" class="input_field email" required type="email" placeholder="Email">
-                        <img class="mail-icon" src="assets/img/mail.png">
+                        <img class="mail-icon" src="./assets/img/mail.png">
                     </div>
                     <div class="email-container">
                         <input id="phone" class="input_field email" required type="phone" placeholder="Phone">
-                        <img class="mail-icon" src="assets/img/call.png">
+                        <img class="mail-icon" src="./assets/img/call.png">
                     </div>
 
                     <div class="buttons-container">
                         <button class="cancel" onclick="closeContainer('editContactContainer');deleteContact(${contact})">Delete</button>
-                        <button type="button" class="create" onclick="editContactInfo(${contact});closeContainer('editContactContainer');">Save<img src="assets/img/Vector (2).png"></button>
+                        <button type="button" class="create" onclick="editContactInfo(${contact});closeContainer('editContactContainer');">Save<img src="./assets/img/Vector (2).png"></button>
                     </div>
                 </form>
             </section>
@@ -303,8 +303,8 @@ function addNewContact() {
 function addNewContactHTML() {
     return /*html*/`
     <div class="left-add">
-        <img src="assets/img/Capa 1.png">
-        <img class="closeIcon" onclick="closeContainer('addContactContainer');" src="../assets/img/close.png" alt="">
+        <img src="./assets/img/Capa 1.png">
+        <img class="closeIcon" onclick="closeContainer('addContactContainer');" src="./assets/img/close.png" alt="">
         <h4>Add contact</h4>
         <h6>Tasks are better with a team!</h6>
     </div>
@@ -318,23 +318,23 @@ function addNewContactHTML() {
                 <form id="addContactForm" onsubmit="addContactToArray();closeContainer('addContactContainer');">
                     <div class="email-container">
                         <input id="name" class="input_field name" placeholder="Name" required type="text">
-                        <img class="lock-icon" src="assets/img/person.png" alt="">
+                        <img class="lock-icon" src="./assets/img/person.png" alt="">
                     </div>
                     <div class="email-container">
                         <input id="email" class="input_field email" required type="email" placeholder="Email">
-                        <img class="mail-icon" src="assets/img/mail.png">
+                        <img class="mail-icon" src="./assets/img/mail.png">
                     </div>
                     <div class="email-container">
                         <input id="phone" class="input_field email" required type="number" placeholder="Phone">
-                        <img class="mail-icon" src="assets/img/call.png">
+                        <img class="mail-icon" src="./assets/img/call.png">
                     </div>
 
                     <div class="buttons-container">
-                        <button class="cancel" onclick="closeContainer('addContactContainer');">Cancel <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button type="button" class="cancel" onclick="closeContainer('addContactContainer');">Cancel <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.001 6.50008L12.244 11.7431M1.758 11.7431L7.001 6.50008L1.758 11.7431ZM12.244 1.25708L7 6.50008L12.244 1.25708ZM7 6.50008L1.758 1.25708L7 6.50008Z" stroke="#2A3647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         </button>
-                        <button type="submit" class="create">Create contact<img src="assets/img/Vector (2).png"></button>
+                        <button type="submit" class="create">Create contact<img src="./assets/img/Vector (2).png"></button>
                     </div>
                 </form>
             </section>
@@ -361,7 +361,7 @@ function addContactToArray() {
         name: name,
         email: email,
         phone: phone,
-        img: '../assets/img/person.png',
+        img: './assets/img/person.png',
         color: 'blue' 
     };
 
