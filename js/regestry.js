@@ -58,7 +58,7 @@ function msg() {
  */
 function backToLogin() {
     setTimeout(function () {
-        window.location.href = "login.html";
+        window.location.href = "logIn.html";
     }, 3000);
 
 }
