@@ -424,6 +424,7 @@ body {
     }
     .contacts-bar {
         width:100%;
+        padding-left:0;
     }
     .contacts-wrapper {
         margin-left: 0;
@@ -531,7 +532,7 @@ body {
         padding:5px;
     }
     #contactsMenu {
-        margin-bottom: 150px;
+        margin-bottom: 10px;
         margin-right:27px;
     }
     .closeIcon {
@@ -556,5 +557,23 @@ body {
     }
     .closeIcon {
         display:none;
+    }
+}
+
+@media (max-width:1500px){
+    .contacts-wrapper {
+        margin-left:0px;
+    }
+    #contactsMenu {
+        padding-bottom:150px;
+    }
+}
+
+@media (max-width:450px){
+    .contact-info h3 {
+        font-size:12px;
+    }
+    .contact {
+        margin-bottom:0px;
     }
 }
