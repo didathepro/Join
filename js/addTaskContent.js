@@ -190,14 +190,14 @@ function updateSelectedContacts() {
     const footnotes = document.getElementById('footnotes');
     selectedContactsDiv.innerHTML = '';
     selectedOptions.forEach(name => {
-        updateSelectedContactsAttributes(selectedContactsDiv);
+        updateSelectedContactsAttributes(selectedContactsDiv,name);
     });
     updateFootnotesVisibility(footnotes, selectedOptions)
 }
 
 
 /**M The function `updateSelectedContactsAttributes` adds a contact's initials and name to a specified div element. */
-function updateSelectedContactsAttributes(selectedContactsDiv) {
+function updateSelectedContactsAttributes(selectedContactsDiv,name) {
     const contact = addTaskContacts.find(contact => contact.name === name);
     const contactDiv = document.createElement('div');
     const initialsDiv = document.createElement('div');
