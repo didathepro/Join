@@ -297,6 +297,7 @@ p {
 .labelEl {
     font-size: 24px;
     cursor: pointer;
+    width:100%;
 }
 
 .subtasksField {

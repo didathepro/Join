@@ -146,7 +146,7 @@ function insertContacts() {
         optionDiv.id = `optionDiv-${index}`;
 
         insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
-        insertContactsListeners(dropdownMenu, optionDiv, checkbox, label,index);
+        insertContactsListeners(dropdownMenu, optionDiv, checkbox, label, index);
     });
 }
 
@@ -185,6 +185,7 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
             dropdownMenu.classList.remove('show');
         }
     });
+    updateSelectedContacts();
 }
 
 
