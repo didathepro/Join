@@ -76,11 +76,8 @@ async function includeHTML() {
         const element = includeElements[i];
         file = element.getAttribute("w3-include-html");
         let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = 'Page not found';
-        }
+        if (resp.ok) { element.innerHTML = await resp.text(); }
+        else { element.innerHTML = 'Page not found'; }
     }
 }
 
@@ -91,9 +88,8 @@ async function logOut() {
         loggedInUsers.length = 0;
         await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
         window.location.href = "../login.html";
-    } catch (error) {
-        console.error("Logout failed:", error);
     }
+    catch (error) { console.error("Logout failed:", error); }
 }
 
 
