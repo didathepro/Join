@@ -1,3 +1,4 @@
+/* The `tasks` object is storing information about different tasks for join. These are only some basic imcomplete default tasks.*/
 let tasks = {
     "tasksToDo": [],
     "tasksInProgress":
@@ -62,33 +63,40 @@ let tasks = {
         ],
 };
 
+
+/* The line is retrieving the value stored in the 'tasks' key from the localStorage, parsing it from a JSON string to a JavaScript object, and assigning it to the variable `localTasks`. This allows the script to access and workwith the tasks data stored in the browser's localStorage. */
 let localTasks = JSON.parse(localStorage.getItem('tasks'));
 
-async function showNumbers(){
+
+/** The function `showNumbers` displays the number of tasks, tasks in progress, and tasks awaiting feedback. */
+async function showNumbers() {
     showNumberOfTasks();
     showNumberOfTasksInProgress();
     showNumberOfTasksAwaitingFeedback();
 };
 
-function showNumberOfTasks(){
+
+/** The function `showNumberOfTasks` calculates the total number of tasks stored in the `localTasks` object and displays it on the webpage. */
+function showNumberOfTasks() {
     let totalTasks = 0;
     for (let key in localTasks) {
-        if (localTasks.hasOwnProperty(key)) {
-            totalTasks += localTasks[key].length;
-        }
+        if (localTasks.hasOwnProperty(key)) { totalTasks += localTasks[key].length; }
     }
     let noT = document.getElementById('numberOfTasks');
     noT.innerHTML = totalTasks;
 }
 
-function showNumberOfTasksInProgress(){
+
+/** The function `showNumberOfTasksInProgress` retrieves the number of tasks in progress from a local variable and displays it on the webpage. */
+function showNumberOfTasksInProgress() {
     let tasksInProgressCount = localTasks.tasksInProgress.length;
     let noTInProgress = document.getElementById('numberOfTasksInProgress');
     noTInProgress.innerHTML = tasksInProgressCount;
 }
 
 
-function showNumberOfTasksAwaitingFeedback(){
+/** The function `showNumberOfTasksAwaitingFeedback` updates the number of tasks awaiting feedback on a webpage. */
+function showNumberOfTasksAwaitingFeedback() {
     let tasksAwaitingFeedbackCount = localTasks.tasksAwaitFeedback.length;
     let noTDone = document.getElementById('numberOfDoneTasks');
     noTDone.innerHTML = tasksAwaitingFeedbackCount;
