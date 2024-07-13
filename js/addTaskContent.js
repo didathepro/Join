@@ -15,7 +15,7 @@ let addTaskContacts = [
     { name: 'Tatjana Wolf', color: '#ff4646' }
 ]
 
-
+clearSelectedContacts();
 /** The function `selectActivePriority` is used to set a priority as active by updating its styling and icon. */
 function selectActivePriority(priority) {
     clearActivePriority();
@@ -69,6 +69,9 @@ async function addNewTask() {
     boardInit();
 }
 
+function clearSelectedContacts() {
+    localStorage.removeItem('selectedContacts');
+}
 
 /**M The function `initSubTask` dynamically generates HTML elements for each subtask in the `subtasks` object and appends them to the 'addedSubTasks' element. */
 function initSubTask() {
