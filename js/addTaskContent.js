@@ -136,13 +136,17 @@ function getAddedSubtasks() {
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     dropdownMenu.innerHTML = '';
-    addTaskContacts.forEach(contact => {
+    addTaskContacts.forEach((contact, index) => {
         const optionDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
         const checkbox = document.createElement('input');
         const label = document.createElement('label');
+
+    
+        optionDiv.id = `optionDiv-${index}`;
+
         insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
-        insertContactsListeners(dropdownMenu, optionDiv, checkbox);
+        insertContactsListeners(dropdownMenu, optionDiv, checkbox, label,index);
     });
 }
 
@@ -166,10 +170,12 @@ function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, lab
 
 
 /**M The function `insertContactsListeners` adds event listeners to a dropdown menu option div and a checkbox, updating selected contacts when the option div is clicked. */
-function insertContactsListeners(dropdownMenu, optionDiv, checkbox) {
+function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
     optionDiv.addEventListener('click', function (e) {
-        if (e.target !== checkbox) {
-            checkbox.checked = !checkbox.checked;
+        // Get the checkbox based on the index
+        const checkboxAtIndex = document.getElementById(`optionDiv-${index}`);
+        if (checkboxAtIndex) {
+            checkboxAtIndex.checked = !checkboxAtIndex.checked;
             updateSelectedContacts();
         }
     });
