@@ -28,7 +28,7 @@ p {
 
 .addTaskContent {
     height: 100%;
-    position:relative;
+    position: relative;
 }
 
 .addTaskContent p {
@@ -218,7 +218,7 @@ p {
 }
 
 .subImg img {
-    cursor:pointer;
+    cursor: pointer;
     margin-left: 8px;
 }
 
@@ -247,13 +247,13 @@ p {
     display: none;
     position: absolute;
     background-color: white;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    z-index: 1000;
     max-height: 200px;
     overflow-y: auto;
     width: 100%;
+    z-index: 1;
 }
 
 .dropdownMenu div {
@@ -297,7 +297,7 @@ p {
 .labelEl {
     font-size: 24px;
     cursor: pointer;
-} 
+}
 
 .subtasksField {
     border: none;
@@ -308,38 +308,41 @@ p {
 }
 
 input[type='checkbox'] {
-position: absolute;
-right: 32px;
-cursor: pointer;
+    position: absolute;
+    right: 32px;
+    cursor: pointer;
 }
 
 .selectedContacts {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
-    justify-content: space-between; /* Ensure equal space between items */
+    justify-content: space-between;
+    /* Ensure equal space between items */
 }
 
-.selectedContacts > div {
+.selectedContacts>div {
     display: flex;
     align-items: center;
-    width: calc(50% - 2.5px); /* Adjust width to ensure two columns */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    width: calc(50% - 2.5px);
+    /* Adjust width to ensure two columns */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
 }
 
 .contact-initials {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px; 
-    height: 40px; 
-    margin-right: 10px; 
-    border-radius: 50%; 
-    color: white; 
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    color: white;
 }
 
 .selectedContacts div {
-    height:40px;
+    height: 40px;
     border-radius: 50%;
     padding: 5px 10px;
     display: flex;
@@ -371,5 +374,5 @@ cursor: pointer;
 }
 
 .addTaskContent {
-    margin-top:120px;
+    margin-top: 120px;
 }
