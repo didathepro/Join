@@ -142,14 +142,18 @@ function insertContacts() {
         const checkbox = document.createElement('input');
         const label = document.createElement('label');
 
-    
         optionDiv.id = `optionDiv-${index}`;
 
         insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
         insertContactsListeners(dropdownMenu, optionDiv, checkbox, label, index);
+
+        const selectedContacts = JSON.parse(localStorage.getItem('selectedContacts')) || [];
+        if (selectedContacts.includes(contact.name)) {
+            checkbox.checked = true;
+        }
+        dropdownMenu.appendChild(optionDiv);
     });
 }
-
 
 /**M The function `insertContactsAttributes` is used to dynamically create and insert contact attributes like initials, checkboxes, and labels into a specified HTML element. */
 function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label) {
@@ -183,7 +187,6 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
             dropdownMenu.classList.remove('show');
         }
     });
-    updateSelectedContacts();
 }
 
 
@@ -191,13 +194,15 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
 function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
+    localStorage.setItem('selectedContacts', JSON.stringify(selectedOptions));
+
     const selectedContactsDiv = document.getElementById('selectedContacts');
     const footnotes = document.getElementById('footnotes');
     selectedContactsDiv.innerHTML = '';
     selectedOptions.forEach(name => {
-        updateSelectedContactsAttributes(selectedContactsDiv,name);
+        updateSelectedContactsAttributes(selectedContactsDiv, name);
     });
-    updateFootnotesVisibility(footnotes, selectedOptions)
+    updateFootnotesVisibility(footnotes, selectedOptions);
 }
 
 
