@@ -1,3 +1,6 @@
+/* The code blow initializes variables for a task management system. It sets the
+selected priority to 'Medium', the selected subtask to 0, and creates an array of task contacts with
+names and colors. */
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
 let addTaskContacts = [
@@ -37,7 +40,6 @@ function clearActivePriority() {
 function addTaskClear() {
     document.getElementById('newTaskTitle').value = '';
     document.getElementById('newTaskDescription').value = '';
-    // document.getElementById('newTaskAssigned').selectedIndex = 0;
     document.getElementById('newTaskDescription').value = '';
     document.getElementById('newTaskDate').value = '';
     document.getElementById('addedSubTasks').innerHTML = '';
@@ -68,6 +70,7 @@ async function addNewTask() {
 }
 
 
+/**M The function `initSubTask` dynamically generates HTML elements for each subtask in the `subtasks` object and appends them to the 'addedSubTasks' element. */
 function initSubTask() {
     for (let [index_subtask, current_subtask] of Object.entries(subtasks)) {
         const newSubTaskHTML = `
@@ -79,37 +82,40 @@ function initSubTask() {
                     <img id="deleteSubtask${index_subtask}" onclick="deleteSubTask(${index_subtask})" src="assets/img/delete.png">
                 </div>
             </li>`;
-        // Append the new list item to the addedSubTasks element
         document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
     }
 }
 
 
+/**M The function `addSubTask` adds a new subtask to a list of subtasks on a webpage. */
 function addSubTask() {
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
     if (subtaskText.length == 0) {
         alert('Cannot add an empty subtask')
-    } else {
-        // Create a new list item with the subtask text
-        const newSubTaskHTML = `
-            <li id="liSub${selectedSubtask}" class="liSub">
+    }
+    else {
+        document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML(selectedSubtask, subtaskText));
+    }
+    subtaskInput.value = '';
+    subtaskInput.style.color = '#D1D1D1';
+    subtaskInput.placeholder = 'Add new task';
+    selectedSubtask++;
+}
+
+
+/**M The function `newSubTaskHTML` generates and returns HTML code for a new subtask element with specified text and unique identifier. */
+function newSubTaskHTML(selectedSubtask, subtaskText) {
+    return /*html*/`
+                    <li id="liSub${selectedSubtask}" class="liSub">
                 <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
                 <div class="subImg">
                     <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
                     <img src="assets/img/Vector 19.png">
                     <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
                 </div>
-            </li>`;
-        // Append the new list item to the addedSubTasks element
-        document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
-    }
-    // Clear the input field
-    subtaskInput.value = '';
-    subtaskInput.style.color = '#D1D1D1';
-    subtaskInput.placeholder = 'Add new task';
-    // Increment the selectedSubtask index
-    selectedSubtask++;
+            </li>
+    `
 }
 
 
@@ -126,78 +132,86 @@ function getAddedSubtasks() {
 }
 
 
-/** The function `insertContacts` dynamically populates a dropdown menu with contacts, displaying their initials, names, and checkboxes. */
+/**M The function `insertContacts` dynamically populates a dropdown menu with contacts, displaying their initials, names, and checkboxes. */
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
-    dropdownMenu.innerHTML = ''; // Clear any existing options
-
+    dropdownMenu.innerHTML = '';
     addTaskContacts.forEach(contact => {
         const optionDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
         const checkbox = document.createElement('input');
         const label = document.createElement('label');
-        label.className = 'labelEl';
-
-        initialsDiv.className = 'contact-initials';
-        initialsDiv.style.backgroundColor = contact.color;
-        initialsDiv.innerText = getInitials(contact.name);
-
-        checkbox.type = 'checkbox';
-        checkbox.value = contact.name;
-        checkbox.id = contact.name;
-
-        checkbox.addEventListener('change', updateSelectedContacts);
-
-        label.htmlFor = contact.name;
-        label.innerText = contact.name;
-
-        optionDiv.appendChild(initialsDiv);
-        optionDiv.appendChild(label);
-        optionDiv.appendChild(checkbox);
-
-        // Add event listener to the optionDiv to check/uncheck the checkbox
-        optionDiv.addEventListener('click', function (e) {
-            if (e.target !== checkbox) {
-                checkbox.checked = !checkbox.checked;
-                updateSelectedContacts(); // Call the update function to update the selected contacts list
-            }
-        });
-
-        dropdownMenu.appendChild(optionDiv);
-        document.addEventListener('mouseup', function (e) {
-            if (!dropdownMenu.contains(e.target)) {
-                dropdownMenu.classList.remove('show');
-            }
-        });
+        insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
+        insertContactsListeners(dropdownMenu, optionDiv, checkbox);
     });
 }
 
 
-/** The function `updateSelectedContacts` updates the list of selected contacts displayed on the webpage based on the checkboxes that are checked. */
+/**M The function `insertContactsAttributes` is used to dynamically create and insert contact attributes like initials, checkboxes, and labels into a specified HTML element. */
+function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label) {
+    label.className = 'labelEl';
+    initialsDiv.className = 'contact-initials';
+    initialsDiv.style.backgroundColor = contact.color;
+    initialsDiv.innerText = getInitials(contact.name);
+    checkbox.type = 'checkbox';
+    checkbox.value = contact.name;
+    checkbox.id = contact.name;
+    checkbox.addEventListener('change', updateSelectedContacts);
+    label.htmlFor = contact.name;
+    label.innerText = contact.name;
+    optionDiv.appendChild(initialsDiv);
+    optionDiv.appendChild(label);
+    optionDiv.appendChild(checkbox);
+}
+
+
+/**M The function `insertContactsListeners` adds event listeners to a dropdown menu option div and a checkbox, updating selected contacts when the option div is clicked. */
+function insertContactsListeners(dropdownMenu, optionDiv, checkbox) {
+    optionDiv.addEventListener('click', function (e) {
+        if (e.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+            updateSelectedContacts();
+        }
+    });
+    dropdownMenu.appendChild(optionDiv);
+    document.addEventListener('mouseup', function (e) {
+        if (!dropdownMenu.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+}
+
+
+/**M The function `updateSelectedContacts` updates the list of selected contacts displayed on the webpage based on the checkboxes that are checked. */
 function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
     const footnotes = document.getElementById('footnotes');
-
     selectedContactsDiv.innerHTML = '';
-
     selectedOptions.forEach(name => {
-        const contact = addTaskContacts.find(contact => contact.name === name);
-        const contactDiv = document.createElement('div');
-        const initialsDiv = document.createElement('div');
-
-        initialsDiv.className = 'contact-initials';
-        initialsDiv.style.backgroundColor = contact.color;
-        initialsDiv.innerText = getInitials(contact.name);
-
-        contactDiv.appendChild(initialsDiv);
-        contactDiv.appendChild(document.createTextNode(contact.name));
-
-        selectedContactsDiv.appendChild(contactDiv);
+        updateSelectedContactsAttributes(selectedContactsDiv);
     });
+    updateFootnotesVisibility(footnotes, selectedOptions)
+}
 
-    // Update the visibility of footnotes based on the selectedOptions length
+
+/**M The function `updateSelectedContactsAttributes` adds a contact's initials and name to a specified div element. */
+function updateSelectedContactsAttributes(selectedContactsDiv) {
+    const contact = addTaskContacts.find(contact => contact.name === name);
+    const contactDiv = document.createElement('div');
+    const initialsDiv = document.createElement('div');
+    initialsDiv.className = 'contact-initials';
+    initialsDiv.style.backgroundColor = contact.color;
+    initialsDiv.innerText = getInitials(contact.name);
+    contactDiv.appendChild(initialsDiv);
+    contactDiv.appendChild(document.createTextNode(contact.name));
+    selectedContactsDiv.appendChild(contactDiv);
+}
+
+
+/**M The function `updateFootnotesVisibility` toggles the visibility of a given element based on the length of selected options. */
+function updateFootnotesVisibility(footnotes, selectedOptions) {
     if (footnotes) {
         if (selectedOptions.length > 0) {
             footnotes.style.visibility = 'hidden';
@@ -208,36 +222,36 @@ function updateSelectedContacts() {
 }
 
 
-/** The `editSubtask` function allows users to edit a subtask by replacing the text element with an input field. */
+/**M The `editSubtask` function allows users to edit a subtask by replacing the text element with an input field. */
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
-
     if (document.getElementById(`deleteSubtask${id}`)) {
         document.getElementById(`deleteSubtask${id}`).src = "assets/img/check.png"
     }
-
     const currentText = subtaskElement.innerText;
     subtaskElement.outerHTML = `<input type="text" id="subtaskInput${id}" value="${currentText}" onblur="saveSubtask(${id})" onkeypress="handleKeyPress(event, ${id})" />`;
     document.getElementById(`subtaskInput${id}`).focus();
 }
 
 
-/** The `saveSubtask` function updates the text of a subtask element based on user input and saves the changes. */
+/**M The `saveSubtask` function updates the text of a subtask element based on user input and saves the changes. */
 function saveSubtask(id) {
     const inputElement = document.getElementById(`subtaskInput${id}`);
     const newText = inputElement.value;
     const liElement = inputElement.closest('li');
-    liElement.innerHTML = `<span id="subtaskText${id}" onclick="editSubtask(${id})">${newText}</span>
-                           <div class="subImg">
-                               <img src="assets/img/edit.png" onclick="editSubtask(${id})">
-                               <img src="assets/img/Vector 19.png">
-                               <img src="assets/img/delete.png" onclick="deleteSubTask(${id})">
-                           </div>`;
+    liElement.innerHTML = /*html*/`
+        <span id="subtaskText${id}" onclick="editSubtask(${id})">${newText}</span>
+        <div class="subImg">
+            <img src="assets/img/edit.png" onclick="editSubtask(${id})">
+            <img src="assets/img/Vector 19.png">
+            <img src="assets/img/delete.png" onclick="deleteSubTask(${id})">
+        </div>
+    `;
     subtasks[id] = newText;
 }
 
 
-/** The function `handleKeyPress` takes an event and an id as parameters, and if the key pressed is* equal to `imgCheck`, it calls the `saveSubtask` function with the provided id. */
+/**M The function `handleKeyPress` takes an event and an id as parameters, and if the key pressed is* equal to `imgCheck`, it calls the `saveSubtask` function with the provided id. */
 function handleKeyPress(event, id) {
     if (event.key === imgCheck) {
         saveSubtask(id);
@@ -245,7 +259,7 @@ function handleKeyPress(event, id) {
 }
 
 
-/** The function `deleteSubTask` removes a subtask element from the DOM based on its ID. */
+/**M The function `deleteSubTask` removes a subtask element from the DOM based on its ID. */
 function deleteSubTask(id) {
     const liElement = document.getElementById(`liSub${id}`);
     liElement.parentNode.removeChild(liElement);
@@ -268,30 +282,30 @@ function insertContactsHtml(i) {
 }
 
 
-/** The function `getSelectedAssigned` retrieves the selected contacts from a dropdown menu and displays them with their initials in a separate div. */
+/**M The function `getSelectedAssigned` retrieves the selected contacts from a dropdown menu and displays them with their initials in a separate div. */
 function getSelectedAssigned() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
     const selectedOptions = Array.from(checkboxes).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
-    // Clear previous selections
     selectedContactsDiv.innerHTML = '';
-
-    // Display selected contacts
     selectedOptions.forEach(name => {
-        const contact = addTaskContacts.find(contact => contact.name === name);
-        const contactDiv = document.createElement('div');
-        const initialsDiv = document.createElement('div');
-
-        initialsDiv.className = 'contact-initials';
-        initialsDiv.style.backgroundColor = contact.color;
-        initialsDiv.innerText = getInitials(contact.name);
-
-        contactDiv.appendChild(initialsDiv);
-        contactDiv.appendChild(document.createTextNode(contact.name));
-
-        selectedContactsDiv.appendChild(contactDiv);
+        getSelectedAssignedAttributes(selectedContactsDiv);
     });
     return selectedOptions;
+}
+
+
+/**M The function `getSelectedAssignedAttributes` creates a new div element with contact information and appends it to a specified div. */
+function getSelectedAssignedAttributes(selectedContactsDiv) {
+    const contact = addTaskContacts.find(contact => contact.name === name);
+    const contactDiv = document.createElement('div');
+    const initialsDiv = document.createElement('div');
+    initialsDiv.className = 'contact-initials';
+    initialsDiv.style.backgroundColor = contact.color;
+    initialsDiv.innerText = getInitials(contact.name);
+    contactDiv.appendChild(initialsDiv);
+    contactDiv.appendChild(document.createTextNode(contact.name));
+    selectedContactsDiv.appendChild(contactDiv);
 }
 
 
@@ -309,12 +323,11 @@ function getInitials(name) {
 }
 
 
-/** * The function `toggleDropdown` toggles the visibility of a dropdown menu by adding or removing the 'show' class. */
+/**M The function `toggleDropdown` toggles the visibility of a dropdown menu by adding or removing the 'show' class. */
 function toggleDropdown() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     if (dropdownMenu) {
         dropdownMenu.classList.toggle('show');
-    } else {
     }
 }
 
