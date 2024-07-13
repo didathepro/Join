@@ -1,3 +1,5 @@
+/* The code below is defining an array called `contactsDefaultArray` which contains objects
+representing contact information. */
 let contactsDefaultArray = [
     {
         name: 'Anja Schulz',
@@ -113,26 +115,30 @@ let contactsDefaultArray = [
     }
 ];
 
+
+/** * The function `showContacts` retrieves contacts from local storage, displays them sorted alphabetically with a filter for each letter, and generates HTML content for each contact. */
 function showContacts() {
     contacts = JSON.parse(localStorage.getItem('ContactsArray'));
-    if (!contacts || contacts.length === 0) {
-        contacts = contactsDefaultArray;
-    }
+    if (!contacts || contacts.length === 0) { contacts = contactsDefaultArray; }
     localStorage.setItem('ContactsArray', JSON.stringify(contacts));
     let content = document.getElementById('contactsMenu');
     content.innerHTML = '';
     sortContacts();
-    
     let currentLetter = '';
     contacts.forEach((contact, index) => {
-        const [firstLetter, secondLetter] = findFirstLetters(index); // Destructuring assignment to get firstLetter and secondLetter
-
+        const [firstLetter, secondLetter] = findFirstLetters(index);
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
             content.innerHTML += `<div class="filter">${firstLetter}</div>`;
         }
+        content.innerHTML += showContactContentHtml(index, contact, firstLetter, secondLetter);
+    });
+}
 
-        content.innerHTML += `
+
+/** The function `showContactContentHtml` returns an HTML template for displaying contact information with dynamic data. */
+function showContactContentHtml(index, contact, firstLetter, secondLetter) {
+    return /*html*/`
         <div class="contact" id="contact${index}" onclick="showInfo(${index});addBgColor(${index});">
             <h6 class="orange-cn" style="background-color:${contact.color}">${firstLetter}${secondLetter}</h6>
             <div class="contact-info">
@@ -140,57 +146,55 @@ function showContacts() {
                 <h5>${contact.email}</h5>
             </div>
         </div>
-        `;
-    });
-    
+    `;
 }
 
-function sortContacts(){
-    
+
+/** The function `sortContacts` sorts an array of contacts alphabetically by their names. */
+function sortContacts() {
     contacts.sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
-        
-        if (nameA < nameB) {
-            return -1;
-        }
-        if (nameA > nameB) {
-            return 1;
-        }
-        return 0; 
+        if (nameA < nameB) { return -1; }
+        if (nameA > nameB) { return 1; }
+        return 0;
     });
 }
 
+
+/** The function `findFirstLetters` extracts the first letters of the first and last names of a contact from an array of contacts. */
 function findFirstLetters(contactIndex) {
     const nameParts = contacts[contactIndex].name.split(' ');
     const firstName = nameParts[0];
     const lastName = nameParts[1];
     const firstLetter = firstName[0];
-    const secondLetter = lastName ? lastName[0] : ''; // Handle cases where lastName might be undefined
-    return [firstLetter.toUpperCase(), secondLetter.toUpperCase()]; // Return as an array
+    const secondLetter = lastName ? lastName[0] : '';
+    return [firstLetter.toUpperCase(), secondLetter.toUpperCase()];
 }
 
+
+/** The function `showInfo` displays contact information on a webpage based on the provided contact details. */
 function showInfo(contact) {
     const [firstLetter, secondLetter] = findFirstLetters(contact);
     const name = contacts[contact].name;
     const email = contacts[contact].email;
     const phone = contacts[contact].phone;
     const color = contacts[contact].color;
-
     let content = document.getElementById('contact-container');
     content.classList.remove('hidden');
     document.getElementById('right-contacts').style.display = 'block';
-    content.innerHTML ='';
-
-    content.innerHTML += returnContactInfo(name,email,phone,color,firstLetter,secondLetter,contact);
+    content.innerHTML = '';
+    content.innerHTML += returnContactInfo(name, email, phone, color, firstLetter, secondLetter, contact);
 }
 
-function returnContactInfo(name,email,phone,color,firstLetter,secondLetter,contact) {
-    return `<div class="contact-name">
+
+/** The function `returnContactInfo` generates HTML markup for displaying contact information with options to edit or delete the contact. */
+function returnContactInfo(name, email, phone, color, firstLetter, secondLetter, contact) {
+    return /*html*/`<div class="contact-name">
         <div class="contact-img">
             <h2 style="background-color:${color}">${firstLetter}${secondLetter}</h2>
             <div class="name-container">
-                <h3>${name.charAt(0).toUpperCase()+name.slice(1)}</h3>
+                <h3>${name.charAt(0).toUpperCase() + name.slice(1)}</h3>
                 <div class="edit-delete">
                     <div class="edit" onclick="editContact(${contact})"><svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 17H3.4L12.025 8.375L10.625 6.975L2 15.6V17ZM16.3 6.925L12.05 2.725L13.45 1.325C13.8333 0.941667 14.3042 0.75 14.8625 0.75C15.4208 0.75 15.8917 0.941667 16.275 1.325L17.675 2.725C18.0583 3.10833 18.2583 3.57083 18.275 4.1125C18.2917 4.65417 18.1083 5.11667 17.725 5.5L16.3 6.925ZM14.85 8.4L4.25 19H0V14.75L10.6 4.15L14.85 8.4Z" fill="#2A3647"/>
@@ -215,25 +219,26 @@ function returnContactInfo(name,email,phone,color,firstLetter,secondLetter,conta
     `;
 }
 
+
+/** The function `editContact` is used to display and edit contact information on a webpage. */
 function editContact(contact) {
     const [firstLetter, secondLetter] = findFirstLetters(contact);
     let content = document.getElementById('editContactContainer');
-    
     content.classList.remove('hidden');
     content.innerHTML = "";
-    content.innerHTML += showContactHTML(contact,firstLetter,secondLetter);
+    content.innerHTML += showContactHTML(contact, firstLetter, secondLetter);
     document.getElementById('name').value = contacts[contact].name;
     document.getElementById('email').value = contacts[contact].email;
     document.getElementById('phone').value = contacts[contact].phone;
-    document.addEventListener('mouseup', function(e) {
-        if (!content.contains(e.target)) {
-        content.classList.add('hidden');
-        }
+    document.addEventListener('mouseup', function (e) {
+        if (!content.contains(e.target)) { content.classList.add('hidden'); }
     });
     showContacts();
 }
 
-function showContactHTML(contact,firstLetter,secondLetter) {
+
+/** The function `showContactHTML` generates HTML code for editing a contact with specified initials and contact information. */
+function showContactHTML(contact, firstLetter, secondLetter) {
     return /*html*/`
     <div class="left-add">
         <img class="logoCapa" src="./assets/img/Capa 1.png">
@@ -242,7 +247,6 @@ function showContactHTML(contact,firstLetter,secondLetter) {
     </div>
     <div class="right-add contact-img">
     <h2 style="background-color:${contacts[contact].color};margin-left:12%;">${firstLetter}${secondLetter}</h2>
-    
         <div class="add-contact">
             <section class="logInContainer">
                 <form id="addContactForm">
@@ -270,36 +274,33 @@ function showContactHTML(contact,firstLetter,secondLetter) {
     `;
 }
 
+
+/** The function `addBgColor` changes the background color and text color of a specific contact element based on the index provided. */
 function addBgColor(index) {
-    // Remove background color from all elements with IDs starting with 'contact' followed by the index
     let elements = document.querySelectorAll('[id^="contact"]');
-    elements.forEach(element => {
-        element.style.backgroundColor = "transparent";
-    });
+    elements.forEach(element => { element.style.backgroundColor = "transparent"; });
 
     let names = document.querySelectorAll('[id^="contact-name"]');
-    names.forEach(element => {
-        element.style.color="black";
-    })
-    // Set background color for the newly clicked element
-    document.getElementById(`contact${index}`).style.cssText= `background-color:#2a3647;border-radius:10px;`;
+    names.forEach(element => { element.style.color = "black"; })
+    document.getElementById(`contact${index}`).style.cssText = `background-color:#2a3647;border-radius:10px;`;
     let contactNameElement = document.getElementById(`contact-name${index}`);
     contactNameElement.style.color = "white";
 }
 
+
+/** The function `addNewContact` displays a form for adding a new contact and hides it when clicking outside the form. */
 function addNewContact() {
     let content = document.getElementById('addContactContainer');
     content.classList.remove('hidden');
     content.innerHTML = "";
-
     content.innerHTML += addNewContactHTML();
-    document.addEventListener('mouseup', function(e) {
-        if (!content.contains(e.target)) {
-        content.classList.add('hidden');
-        }
+    document.addEventListener('mouseup', function (e) {
+        if (!content.contains(e.target)) { content.classList.add('hidden'); }
     });
 }
 
+
+/** The function `addNewContactHTML` returns HTML code for adding a new contact form with input fields for name, email, and phone number. */
 function addNewContactHTML() {
     return /*html*/`
     <div class="left-add">
@@ -343,55 +344,48 @@ function addNewContactHTML() {
     `;
 }
 
+
+/** The function `closeContainer` hides the HTML element with the specified `id` by adding a "hidden"* class to it. */
 function closeContainer(id) {
     document.getElementById(id).classList.add("hidden");
 }
 
+
+/** The function `addContactToArray` adds a new contact with name, email, phone, image, and color to a local storage array if all required fields are filled. */
 function addContactToArray() {
     let name = document.getElementById("name").value;
     let email = document.getElementById("email").value;
     let phone = document.getElementById("phone").value;
-
-    if(name.length === 0 || email.length === 0 || phone.length === 0) {
+    if (name.length === 0 || email.length === 0 || phone.length === 0) {
         alert("Please fill in all fields.");
         return;
     }
-    // Create a new contact object
-    let newContact = {
-        name: name,
-        email: email,
-        phone: phone,
-        img: './assets/img/person.png',
-        color: 'blue' 
-    };
-
+    let newContact = { name: name, email: email, phone: phone, img: './assets/img/person.png', color: 'blue' };
     let contacts = JSON.parse(localStorage.getItem('ContactsArray') || '[]');
-    // Push the new contact to the array
     contacts.push(newContact);
-    localStorage.setItem('ContactsArray', JSON.stringify(contacts)); 
-
+    localStorage.setItem('ContactsArray', JSON.stringify(contacts));
     showContacts();
 }
 
+
+/** The function `deleteContact` removes a contact from an array, updates the local storage, hides the contact container element, and then displays the updated list of contacts. */
 function deleteContact(contact) {
-    contacts.splice(contact,1);
+    contacts.splice(contact, 1);
     localStorage.setItem('ContactsArray', JSON.stringify(contacts));
     document.getElementById("contact-container").classList.add("hidden");
     showContacts();
 }
 
+
+/** The function `editContactInfo` updates the contact information for a specific contact ID and saves the changes to local storage. */
 function editContactInfo(contactId) {
-    
     const newName = document.getElementById('name').value;
     const newEmail = document.getElementById('email').value;
     const newPhone = document.getElementById('phone').value;
-
-    // Update the contact object with the new values
     contacts[contactId].name = newName;
     contacts[contactId].email = newEmail;
     contacts[contactId].phone = newPhone;
     localStorage.setItem('ContactsArray', JSON.stringify(contacts));
-
     showContacts();
     showInfo(contactId);
 }
