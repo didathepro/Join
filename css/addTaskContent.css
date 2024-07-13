@@ -213,7 +213,12 @@ p {
     align-items: center;
 }
 
+.subImg {
+    display: flex;
+}
+
 .subImg img {
+    cursor:pointer;
     margin-left: 8px;
 }
 
@@ -254,7 +259,6 @@ p {
 .dropdownMenu div {
     display: flex;
     align-items: center;
-    justify-content: left;
     padding: 8px 16px;
     cursor: pointer;
 }
@@ -313,6 +317,25 @@ cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
+    justify-content: space-between; /* Ensure equal space between items */
+}
+
+.selectedContacts > div {
+    display: flex;
+    align-items: center;
+    width: calc(50% - 2.5px); /* Adjust width to ensure two columns */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.contact-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; 
+    height: 40px; 
+    margin-right: 10px; 
+    border-radius: 50%; 
+    color: white; 
 }
 
 .selectedContacts div {
