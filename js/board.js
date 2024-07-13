@@ -1,3 +1,4 @@
+/* The code below is initializing variables and constants. */
 let subtasks = [];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
@@ -62,28 +63,22 @@ function setTaskColor(i, j) {
     if (taskCategoryBg && tasks[taskTypeString] && tasks[taskTypeString][j]) {
         const taskPriority = tasks[taskTypeString][j].priority;
         if (taskPriority !== undefined) {
-            if (taskPriority === 'Urgent') {
-                taskCategoryBg.style.background = '#1CD7C1';
-            } else if (taskPriority === 'Medium') {
-                taskCategoryBg.style.background = '#0038FF';
-            } else {
+            if (taskPriority === 'Urgent') { taskCategoryBg.style.background = '#1CD7C1'; }
+            else if (taskPriority === 'Medium') { taskCategoryBg.style.background = '#0038FF'; }
+            else {
                 const taskCategory = tasks[taskTypeString][j].category;
-                if (taskCategory === 'User Story') {
-                    taskCategoryBg.style.background = '#0038FF';
-                } else {
-                    taskCategoryBg.style.background = '#1CD7C1';
-                }
+                if (taskCategory === 'User Story') { taskCategoryBg.style.background = '#0038FF'; }
+                else { taskCategoryBg.style.background = '#1CD7C1'; }
             }
-        } else {
-            taskCategoryBg.style.background = '#CCCCCC';
-        }
+        } else { taskCategoryBg.style.background = '#CCCCCC'; }
     }
 }
 
 
+/** The function `getContactColor` retrieves the color associated with a contact's name from a list of contacts, with a fallback color if the contact is not found. */
 function getContactColor(name) {
     const contact = addTaskContacts.find(contact => contact.name === name);
-    return contact ? contact.color : '#000'; // Fallback color if not found
+    return contact ? contact.color : '#000';
 }
 
 
@@ -113,17 +108,11 @@ function insertTaskProgress(i, j) {
         if (task && task.subtasks) {
             let subtasksDone = 0;
             taskProgress.classList.add('progress');
-            for (let k = 0; k < task.subtasks.length; k++) {
-                if (task.subtasks[k].done === true) { subtasksDone++; }
-            }
+            for (let k = 0; k < task.subtasks.length; k++) { if (task.subtasks[k].done === true) { subtasksDone++; } }
             const progressPercent = (subtasksDone / task.subtasks.length) * 100;
-            taskProgress.innerHTML = `
-                <div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="${progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>
-            `;
+            taskProgress.innerHTML = `<div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="${progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>`;
             const progressTextElement = document.getElementById(`${taskTypeString}ProgressText${j}`);
-            if (progressTextElement) {
-                progressTextElement.innerHTML = `${subtasksDone}/${task.subtasks.length} Subtasks`;
-            }
+            if (progressTextElement) { progressTextElement.innerHTML = `${subtasksDone}/${task.subtasks.length} Subtasks`; }
         }
     }
 }
@@ -171,7 +160,7 @@ function hideAddTaskFloating() {
 }
 
 
-/** The `search` function filters tasks based on a search input and displays matching tasks on the webpage. */
+/**M The `search` function filters tasks based on a search input and displays matching tasks on the webpage. */
 function search() {
     let search = document.getElementById('searchInput').value.trim().toLowerCase();
     clearBoard();
@@ -181,26 +170,7 @@ function search() {
         taskTypesKeys.forEach(function (taskTypeKey) {
             tasks[taskTypeKey].forEach(function (task, index) {
                 if (task.title.toLowerCase().includes(search) || (task.description && task.description.toLowerCase().includes(search))) {
-                    const taskHtml = generateTaskHtml(tasks[taskTypeKey], taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                    document.getElementById(taskTypeKey).innerHTML += taskHtml;
-
-                    // Task-Element-ID generieren
-                    const taskElementId = `${taskTypeKey}Category${index}`;
-                    const taskElement = document.getElementById(taskElementId);
-
-                    // Prüfen, ob das Task-Element bereits eine Farbe hat
-                    if (taskElement && !taskElement.dataset.colorSet) {
-                        setTaskColor(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                        taskElement.dataset.colorSet = 'true'; // Markieren, dass die Farbe gesetzt wurde
-                    }
-
-                    // Sicherstellen, dass die Task-Eigenschaften existieren, bevor sie verwendet werden
-                    if (task.assigned) {
-                        insertTaskAssigned(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                    }
-                    if (task.progress) {
-                        insertTaskProgress(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
-                    }
+                    searchResults(taskTypeKey, task, index, tasks);
                 }
             });
         });
@@ -208,29 +178,31 @@ function search() {
 }
 
 
+/**M The function `searchResults` generates HTML for a task, sets its color, and inserts assigned and progress information based on the task type and index.*/
+function searchResults(taskTypeKey, task, index, tasks) {
+    const taskHtml = generateTaskHtml(tasks[taskTypeKey], taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+    document.getElementById(taskTypeKey).innerHTML += taskHtml;
+    const taskElementId = `${taskTypeKey}Category${index}`;
+    const taskElement = document.getElementById(taskElementId);
+    if (taskElement && !taskElement.dataset.colorSet) {
+        setTaskColor(taskTypeKey === 'tasksToDo' ? 0 : 1, index);
+        taskElement.dataset.colorSet = 'true';
+    };
+    if (task.assigned) { insertTaskAssigned(taskTypeKey === 'tasksToDo' ? 0 : 1, index); };
+    if (task.progress) { insertTaskProgress(taskTypeKey === 'tasksToDo' ? 0 : 1, index); };
+}
+
+
 /** The function `showTaskOverlay` displays task details based on the task type and index provided. */
 function showTaskOverlay(taskTypeString, i, j) {
-    if (!tasks || !taskTypesKeys || i >= taskTypesKeys.length || !tasks[taskTypesKeys[i]]) {
-        console.error('Invalid task type or index');
-        return;
-    }
-
     const taskType = tasks[taskTypesKeys[i]];
-    if (j >= taskType.length) {
-        console.error('Invalid task index');
-        return;
-    }
-
     selectedTaskTypeIndex = i;
     selectedTaskIndex = j;
-
     document.getElementById('taskOverlay').innerHTML = generateTaskOverlayHtml(taskType, i, j);
     document.getElementById('taskOverlay').classList.remove('d-none');
-
     setTaskOverlayColor(i, j);
     insertTaskOverlayAssigned(i, j);
     insertOverlaySubtasks(taskType, i, j);
-
     disableScrolling();
 }
 
@@ -242,21 +214,18 @@ function hideTaskOverlay() {
 }
 
 
-/** The `deleteTask` function deletes a selected task from the tasks list and updates the board display. */
+/**M The `deleteTask` function deletes a selected task from the tasks list and updates the board display. */
 async function deleteTask() {
     if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
         console.error('Invalid task selection');
         return;
     }
-
     const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
     const taskType = tasks[taskTypeKey];
-
     if (!taskType || selectedTaskIndex >= taskType.length) {
         console.error('Invalid task index');
         return;
     }
-
     taskType.splice(selectedTaskIndex, 1);
     await setItem('tasks', tasks);
     boardInit();
@@ -264,87 +233,70 @@ async function deleteTask() {
 }
 
 
-/** The `editTask` function is used to populate a form with the details of a selected task for editing. */
+/**M The `editTask` function is used to populate a form with the details of a selected task for editing. */
 function editTask() {
     document.getElementById('addedSubTasks').innerHTML = '';
     hideTaskOverlay();
-
-    if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
-        console.error('Ungültige Auswahl des Tasks');
-        return;
-    }
-
     const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
     const taskType = tasks[taskTypeKey];
-
-    if (!taskType || selectedTaskIndex >= taskType.length) {
-        console.error('Ungültiger Task-Index');
-        return;
-    }
-
     const selectedTask = taskType[selectedTaskIndex];
     selectedType = taskTypeKey;
-    document.getElementById('editTaskTitle').innerHTML ="Edit Task";
-    document.getElementById('addTaskContent').style.marginTop = 0;
+    editTaskHtml(selectedTask);
     showAddTaskFloating(taskTypeKey);
+    selectActivePriority(selectedTask.priority);
+    selectedTask.assigned.forEach(name => {
+        const checkbox = document.getElementById(name);
+        if (checkbox) { checkbox.checked = true; }
+    });
+    editTaskPush(selectedTask);
+    editTaskButtons(taskTypeKey);
+}
 
+
+/**M The function `editTaskHtml` updates the HTML elements with the details of a selected task for editing.*/
+function editTaskHtml(selectedTask) {
+    document.getElementById('editTaskTitle').innerHTML = "Edit Task";
+    document.getElementById('addTaskContent').style.marginTop = 0;
     document.getElementById('newTaskTitle').value = selectedTask.title;
     document.getElementById('newTaskDescription').value = selectedTask.description;
     document.getElementById('newTaskCategory').value = selectedTask.category;
     document.getElementById('newTaskDate').value = selectedTask.date;
-    selectActivePriority(selectedTask.priority);
-
-    selectedTask.assigned.forEach(name => {
-        const checkbox = document.getElementById(name);
-        if (checkbox) {
-            checkbox.checked = true;
-        }
-    });
-
-    if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
-        console.log("selectedTask.subtasks : ", selectedTask.subtasks)
-
-        selectedSubtask = selectedTask.subtasks.length;
-        selectedTask.subtasks.forEach(subtask => {
-            subtasks.push(subtask);
-            // addSubTask();
-        });
-
-        initSubTask();
-
-        console.log("subtasks before : ", subtasks)
-    }
-
-    const saveButton = document.getElementById('createTaskButton');
-    saveButton.innerText = 'Save Task';
-    saveButton.onclick = function () {
-        saveEditedTask(taskTypeKey, selectedTaskIndex);
-    };
-
-    const cancelButton = document.createElement('button');
-    cancelButton.innerText = 'Cancel';
-    cancelButton.classList.add('cancelButton');
-    cancelButton.onclick = function () {
-        hideAddTaskFloating();
-    };
 }
 
 
-/** The function `saveEditedTask` updates the properties of a task object based on user input and saves the changes to local storage. */
+/**M The function `editTaskButtons` updates the text and functionality of save and cancel buttons for editing a task. */
+function editTaskButtons(taskTypeKey) {
+    const saveButton = document.getElementById('createTaskButton');
+    saveButton.innerText = 'Save Task';
+    saveButton.onclick = function () { saveEditedTask(taskTypeKey, selectedTaskIndex); };
+    const cancelButton = document.createElement('button');
+    cancelButton.innerText = 'Cancel';
+    cancelButton.classList.add('cancelButton');
+    cancelButton.onclick = function () { hideAddTaskFloating(); };
+}
+
+
+/**M The function `editTaskPush` iterates over the subtasks of a selected task and pushes them into a global `subtasks` array. */
+function editTaskPush(selectedTask) {
+    if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
+        selectedSubtask = selectedTask.subtasks.length;
+        selectedTask.subtasks.forEach(subtask => { subtasks.push(subtask); });
+        initSubTask();
+    }
+}
+
+
+/**M The function `saveEditedTask` updates the properties of a task object based on user input and saves the changes to local storage. */
 async function saveEditedTask(taskTypeKey, taskIndex) {
     const task = tasks[taskTypeKey][taskIndex];
-
     task.title = document.getElementById('newTaskTitle').value;
     task.description = document.getElementById('newTaskDescription').value;
     task.category = document.getElementById('newTaskCategory').value;
     task.date = document.getElementById('newTaskDate').value;
     task.priority = selectedPriority;
-
     const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
     task.assigned = Array.from(assignedCheckboxes).map(checkbox => checkbox.value);
-
     task.subtasks = getAddedSubtasks();
-
     await setItem('tasks', tasks);
     boardInit();
     hideAddTaskFloating();
@@ -358,22 +310,14 @@ function setTaskOverlayColor(i, j) {
     if (taskCategoryBg && tasks[taskTypeString] && tasks[taskTypeString][j]) {
         const taskPriority = tasks[taskTypeString][j].priority;
         if (taskPriority !== undefined) {
-            if (taskPriority === 'Urgent') {
-                taskCategoryBg.style.background = '#1CD7C1';
-            } else if (taskPriority === 'Medium') {
-                taskCategoryBg.style.background = '#0038FF';
-            } else {
+            if (taskPriority === 'Urgent') { taskCategoryBg.style.background = '#1CD7C1'; }
+            else if (taskPriority === 'Medium') { taskCategoryBg.style.background = '#0038FF'; }
+            else {
                 const taskCategory = tasks[taskTypeString][j].category;
-                if (taskCategory === 'User Story') {
-                    taskCategoryBg.style.background = '#0038FF';
-                } else {
-                    taskCategoryBg.style.background = '#1CD7C1';
-                }
+                if (taskCategory === 'User Story') { taskCategoryBg.style.background = '#0038FF'; }
+                else { taskCategoryBg.style.background = '#1CD7C1'; }
             }
-        }
-        else {
-            taskCategoryBg.style.background = '#CCCCCC';
-        }
+        } else { taskCategoryBg.style.background = '#CCCCCC'; }
     }
 }
 
@@ -390,8 +334,7 @@ function insertTaskOverlayAssigned(i, j) {
                     ${getInitials(tasks[taskTypeString][j].assigned[k])}
                 </div>
             `
-        }
-        );
+        });
     }
 }
 
@@ -400,51 +343,21 @@ function insertTaskOverlayAssigned(i, j) {
 function insertOverlaySubtasks(taskType, i, j) {
     if (taskType[j].subtasks.length >= 1) {
         for (let k = 0; k < taskType[j].subtasks.length; k++) {
-            if (taskType[j].subtasks[k].done == true) {
-                generateOverlaySubtasksHtmlDone(taskType, i, j, k);
-            }
-            else {
-                generateOverlaySubtasksHtmlNotDone(taskType, i, j, k);
-            }
+            if (taskType[j].subtasks[k].done == true) { generateOverlaySubtasksHtmlDone(taskType, i, j, k); }
+            else { generateOverlaySubtasksHtmlNotDone(taskType, i, j, k); }
         }
         document.getElementById('taskOverlaySubtasksTitle').classList.remove('d-none');
     }
-    else {
-        document.getElementById('taskOverlaySubtasksTitle').classList.add('d-none');
-
-    }
+    else { document.getElementById('taskOverlaySubtasksTitle').classList.add('d-none'); }
 }
 
 
-// /** The function generates HTML code for displaying completed subtasks within an overlay for a specific task type. */
-// function generateOverlaySubtasksHtmlDone(taskType, i, j, k) {
-//     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
-//     <div class="d-flex align-items-center gap-2 mb-1">
-//         <img src="img/icon/checkbox-checked.svg" alt="Clear checkbox">
-//         <p>${taskType[j].subtasks[k].title}</p>
-//     </div>
-//         `
-// }
-
-
-// /** The function generates HTML elements for displaying subtasks that are not done, using data from a specific task type. */
-// function generateOverlaySubtasksHtmlNotDone(taskType, i, j, k) {
-//     document.getElementById('taskOverlaySubtasks').innerHTML += /*html*/`
-//     <div class="d-flex align-items-center gap-2 mb-1">
-//         <img src="img/icon/checkbox.svg" alt="Clear checkbox">
-//         <p>${taskType[j].subtasks[k].title}</p>
-//     </div>
-//         `
-// }
-
-
+/**M The function `handle_subtask` updates the status of a subtask in a task list based on a checkbox event. */
 async function handle_subtask(event, i, j, k) {
-
     let task_temp = tasks;
     task_temp[taskTypesKeys[i]][j].subtasks[k].done = event.target.checked;
     await setItem('tasks', task_temp);
     boardInit();
-
 }
 
 
