@@ -1,11 +1,8 @@
+/* This line is creating a new URLSearchParams object named `urlParams` by parsing the query string parameters from the current URL of the window. */
 const urlParams = new URLSearchParams(window.location.search);
-/**
- * Initialiert body onload
- * start Intro Animation of Join Logo
- * load User from Localstorage
- * load Autofill when already have account and set up "RememberMe"
- */
 
+
+/** The `init` function asynchronously initializes the webpage by adding a CSS class for animation, loading user data and online status, and autofilling a form. */
 async function init() {
     document.getElementById('imgJoin');
     document.body.classList.add('animation');
@@ -15,50 +12,40 @@ async function init() {
     autoFillForm();
 }
 
-/**
- * loading Animation with a TimeOut Function for Desktop and Mobile
- */
+
+/** This function is responsible for displaying or hiding certain elements on the webpage based on the screen size. */
 function show() {
     let box = document.getElementById('topBox');
     let bodyAnimation = document.getElementById('bodyAnimation');
     let img = document.getElementById('imgJoin');
     const mediaQuery = window.matchMedia('(max-width: 768px)')
     if (mediaQuery.matches) {
-        setTimeout(() => {
-            bodyAnimation.style.display = 'none'
-
-        }, 0);
-        setTimeout(() => {
-            document.body.style.backgroundColor = "#2b3646";
-            img.src = './assets/img/joinwhite.png'
-        }, 10);
-        setTimeout(() => {
-            box.style.display = 'flex';
-            document.body.style.backgroundColor = '#f6f7f8';
-            img.src = './assets/img/joinblue.png'
-
-        }, 1000);
-        setTimeout(() => {
-            bodyAnimation.style.display = 'block'
-        }, 1500)
-
+        showMatchingTimeouts(box, bodyAnimation, img);
     } else {
-        setTimeout(() => {
-            bodyAnimation.style.display = 'none'
-        }, 0)
-        setTimeout(() => {
-            box.style.display = 'flex';
-        }, 1000);
-        setTimeout(() => {
-            bodyAnimation.style.display = 'block'
-        }, 1500)
+        setTimeout(() => { bodyAnimation.style.display = 'none' }, 0)
+        setTimeout(() => { box.style.display = 'flex'; }, 1000);
+        setTimeout(() => { bodyAnimation.style.display = 'block' }, 1500)
     }
-
 };
 
-/**
- * this function checks when User already SignUp and is email and password correct
- */
+
+/** This function adds style properties to specified elements. */
+function showMatchingTimeouts(box, bodyAnimation, img) {
+    setTimeout(() => { bodyAnimation.style.display = 'none' }, 0);
+    setTimeout(() => {
+        document.body.style.backgroundColor = "#2b3646";
+        img.src = './assets/img/joinwhite.png'
+    }, 10);
+    setTimeout(() => {
+        box.style.display = 'flex';
+        document.body.style.backgroundColor = '#f6f7f8';
+        img.src = './assets/img/joinblue.png'
+    }, 1000);
+    setTimeout(() => { bodyAnimation.style.display = 'block' }, 1500)
+}
+
+
+/** This function checks if a user has already signed up and verifies whether email and password are correct. */
 async function login() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
@@ -67,21 +54,17 @@ async function login() {
         loggedInUsers.unshift(user.name);
         await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
         window.location.href = "summary.html";
-
     } else {
         document.getElementById('msgBoxLogin').innerHTML = 'Password Incorrect!!!';
         document.getElementById('msgBoxLogin').style.display = 'flex';
         document.getElementById('pwError').classList.add('pwError');
-        localStorage.setItem('isLoggedIn', 'false'); 
+        localStorage.setItem('isLoggedIn', 'false');
     }
-
-    rememberMe()
-    // emptyForm();
+    rememberMe();
 }
 
-/**
- * when you choose the Guest LogIn then you will directly come to the Board.html
- */
+
+/** This function redirects to the board page when using the guest login. */
 async function loginGuest() {
     const guestEmail = 'guest123@da.de';
     const guestPassword = '123';
@@ -94,31 +77,28 @@ async function loginGuest() {
     emptyForm();
 }
 
-/**
- * clears all Input after submit the Form
- */
+
+/** This function clears all input after submitting the form. */
 function emptyForm() {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
 }
 
-/**
- * first check when rememberMe is checked, when yes then save Data in LocalStorage, otherwise none
- */
+/** This function checks if rememberMe is selected and if so it saves the credentials in the local storage. */
 function rememberMe() {
     let rememberCheckbox = document.getElementById('checkbox');
     if (rememberCheckbox.checked) {
         localStorage.setItem('rememberEmail', document.getElementById('email').value);
         localStorage.setItem('rememberPassword', document.getElementById('password').value);
-    } else {
+    }
+    else {
         localStorage.removeItem('rememberEmail');
         localStorage.removeItem('rememberPassword');
     }
 }
 
-/**
- * when remeberMe was Checked the Autofill will automatic saved on your Computer LocalStorage
- */
+
+/** This function autmatically fills in the saved credentials if they were saved beforehand. */
 function autoFillForm() {
     let rememberedEmail = localStorage.getItem('rememberEmail');
     let rememberedPassword = localStorage.getItem('rememberPassword');
@@ -129,16 +109,13 @@ function autoFillForm() {
     }
 }
 
-/**
- * this function show up and visible your password while you type onclick on the Image
- */
+
+/** This function changes the visibility of the password. */
 function showPassword() {
     let password = document.getElementById('password');
-
     if (password.type === 'password') {
         password.type = 'text';
         document.getElementById('passwordImg').src = "./assets/img/visibility_off.png"
-
     }
     else {
         password.type = 'password';
@@ -146,12 +123,10 @@ function showPassword() {
     }
 }
 
-/**
- * this function is Similar to showPassword() function but only for the ConfirmPassword
- */
+
+/** This function changes the visibility of the confirm password. */
 function showPasswordConfirm() {
     let passwordConfirm = document.getElementById('passwordConfirm');
-
     if (passwordConfirm.type === 'password') {
         passwordConfirm.type = 'text';
         document.getElementById('passwordImgConfirm').src = "./assets/img/visibility_off.png"
