@@ -346,3 +346,7 @@ cursor: pointer;
 .addTaskTop {
     justify-content: space-between;
 }
+
+.addTaskContent {
+    margin-top:120px;
+}
