@@ -66,7 +66,6 @@ async function addNewTask() {
     await setItem('tasks', tasks);
     addTaskClear();
     hideAddTaskFloating();
-    boardInit();
 }
 
 /**M The function `initSubTask` dynamically generates HTML elements for each subtask in the `subtasks` object and appends them to the 'addedSubTasks' element. */
