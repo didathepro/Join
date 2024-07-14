@@ -134,7 +134,11 @@ function getAddedSubtasks() {
 /**M The function `insertContacts` dynamically populates a dropdown menu with contacts, displaying their initials, names, and checkboxes. */
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
+    const selectedContacts = getSelectedContactNames();
+    
     dropdownMenu.innerHTML = '';
+    
+    // Repopulate dropdown with contacts
     addTaskContacts.forEach((contact, index) => {
         const optionDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
@@ -142,10 +146,31 @@ function insertContacts() {
         const label = document.createElement('label');
 
         optionDiv.id = `optionDiv-${index}`;
-
+        
         insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
         insertContactsListeners(dropdownMenu, optionDiv, checkbox, label, index);
         dropdownMenu.appendChild(optionDiv);
+    });
+    restoreSelectedContactNames(selectedContacts);
+}
+
+// Function to get currently selected contact names
+function getSelectedContactNames() {
+    const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
+    return Array.from(checkboxes)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+}
+
+// Function to restore selected contact names
+function restoreSelectedContactNames(selectedContacts) {
+    const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        if (selectedContacts.includes(checkbox.value)) {
+            checkbox.checked = true;
+        } else {
+            checkbox.checked = false;
+        }
     });
 }
 
@@ -349,6 +374,6 @@ function redirectBoard() {
 
 /** When the window loads, it calls the `insertContacts()` function and then awaits the completion of the `loadTasks()` function. */
 window.onload = async function () {
-    insertContacts();
+    
     await loadTasks();
 };
