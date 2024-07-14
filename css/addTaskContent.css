@@ -220,6 +220,7 @@ p {
 .subImg img {
     cursor: pointer;
     margin-left: 8px;
+    height:20px;
 }
 
 .taskAdded {
