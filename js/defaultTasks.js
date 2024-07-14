@@ -73,6 +73,9 @@ async function showNumbers() {
     showNumberOfTasks();
     showNumberOfTasksInProgress();
     showNumberOfTasksAwaitingFeedback();
+    showNumberOfTasksToDo();
+    showNumberOfDoneTasks();
+    showNumberOfUrgentTasks();
 };
 
 
@@ -98,6 +101,47 @@ function showNumberOfTasksInProgress() {
 /** The function `showNumberOfTasksAwaitingFeedback` updates the number of tasks awaiting feedback on a webpage. */
 function showNumberOfTasksAwaitingFeedback() {
     let tasksAwaitingFeedbackCount = localTasks.tasksAwaitFeedback.length;
-    let noTDone = document.getElementById('numberOfDoneTasks');
+    let noTDone = document.getElementById('numberOfTasksAwaitingFeedback');
     noTDone.innerHTML = tasksAwaitingFeedbackCount;
+}
+
+function showNumberOfTasksToDo(){
+    let tasksToDo = document.getElementById('numberOfTasksToDo');
+    let tasksToDoCount = localTasks.tasksToDo.length;
+    tasksToDo.innerHTML = tasksToDoCount;
+}
+
+function showNumberOfDoneTasks(){
+    let doneTasks = document.getElementById('numberOfDoneTasks');
+    let doneTasksCount = localTasks.tasksDone.length;
+    doneTasks.innerHTML = doneTasksCount;
+}
+
+function showNumberOfUrgentTasks(){
+    let urgentTasks = document.getElementById('numberOfUrgentTasks');
+    let urgentDate = document.getElementById('urgentTaskDate');
+    let urgentTasksCount = countUrgentTasks(localTasks).count;
+    let urgentTasksDate = countUrgentTasks(localTasks).dates[0];
+    urgentTasks.innerHTML = urgentTasksCount;
+    urgentDate.innerHTML = urgentTasksDate; 
+}
+
+function countUrgentTasks(tasks) {
+    let urgentCount = 0;
+    let urgentDates = [];
+
+    for (let category in tasks) {
+        tasks[category].forEach(task => {
+            if (task.priority === 'Urgent') {
+                urgentCount++;
+                if (task.date) {
+                    urgentDates.push(task.date);
+                } 
+            }
+        });
+    }
+    return {
+        count: urgentCount,
+        dates: urgentDates
+    };
 }
