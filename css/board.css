@@ -407,6 +407,15 @@ button {
         justify-content: center;
         align-items: center;
     }
+    #taskOverlay {
+        z-index:2;
+        margin-top:35vh !important;
+        overflow:auto;
+        max-height: 80vh;
+    }
+    .taskOverlay {
+        overflow: auto !important;
+    }
 
 }
 
