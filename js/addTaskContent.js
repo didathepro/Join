@@ -15,7 +15,7 @@ let addTaskContacts = [
     { name: 'Tatjana Wolf', color: '#ff4646' }
 ]
 
-clearSelectedContacts();
+
 /** The function `selectActivePriority` is used to set a priority as active by updating its styling and icon. */
 function selectActivePriority(priority) {
     clearActivePriority();
@@ -67,10 +67,6 @@ async function addNewTask() {
     addTaskClear();
     hideAddTaskFloating();
     boardInit();
-}
-
-function clearSelectedContacts() {
-    localStorage.removeItem('selectedContacts');
 }
 
 /**M The function `initSubTask` dynamically generates HTML elements for each subtask in the `subtasks` object and appends them to the 'addedSubTasks' element. */
@@ -149,11 +145,6 @@ function insertContacts() {
 
         insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
         insertContactsListeners(dropdownMenu, optionDiv, checkbox, label, index);
-
-        const selectedContacts = JSON.parse(localStorage.getItem('selectedContacts')) || [];
-        if (selectedContacts.includes(contact.name)) {
-            checkbox.checked = true;
-        }
         dropdownMenu.appendChild(optionDiv);
     });
 }
@@ -197,8 +188,6 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
 function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
-    localStorage.setItem('selectedContacts', JSON.stringify(selectedOptions));
-
     const selectedContactsDiv = document.getElementById('selectedContacts');
     const footnotes = document.getElementById('footnotes');
     selectedContactsDiv.innerHTML = '';

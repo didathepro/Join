@@ -35,13 +35,12 @@ function addBg() {
     let ids = maps[currentPage] || { 'default': [], 'responsive': [] };
     let defaultIds = ids['default'];
     let responsiveIds = ids['responsive'];
-    defaultIds.forEach(element => { addBgCss(); });
-    responsiveIds.forEach(element => { addBgCss(); });
+    defaultIds.forEach(element => { addBgCss(element); });
+    responsiveIds.forEach(element => { addBgCss(element); });
 }
 
-
-/** The function `abc` adds a class and disables pointer events on a specified element in the document. */
-function addBgCss() {
+/** The function `addBgCss` adds a class and disables pointer events on a specified element in the document. */
+function addBgCss(element) {
     let elementRef = document.getElementById(element);
     if (elementRef) {
         elementRef.classList.add("dark-blueBg");
