@@ -164,9 +164,8 @@ function hideAddTaskFloating() {
 function search() {
     let search = document.getElementById('searchInput').value.trim().toLowerCase();
     clearBoard();
-    if (search === '') {
-        iterateTaskTypes();
-    } else {
+    if (search === '') { iterateTaskTypes(); }
+    else {
         taskTypesKeys.forEach(function (taskTypeKey) {
             tasks[taskTypeKey].forEach(function (task, index) {
                 if (task.title.toLowerCase().includes(search) || (task.description && task.description.toLowerCase().includes(search))) {
@@ -203,7 +202,7 @@ function showTaskOverlay(taskTypeString, i, j) {
     setTaskOverlayColor(i, j);
     insertTaskOverlayAssigned(i, j);
     insertOverlaySubtasks(taskType, i, j);
-    if (window.innerHeight > 800) {disableScrolling()};
+    disableScrolling();
 }
 
 
