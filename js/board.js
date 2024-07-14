@@ -110,7 +110,7 @@ function insertTaskProgress(i, j) {
             taskProgress.classList.add('progress');
             for (let k = 0; k < task.subtasks.length; k++) { if (task.subtasks[k].done === true) { subtasksDone++; } }
             const progressPercent = (subtasksDone / task.subtasks.length) * 100;
-            taskProgress.innerHTML = `<div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="${progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>`;
+            taskProgress.innerHTML = /*html*/`<div class="progress-bar" style="width: ${progressPercent}%" role="progressbar" valuenow="${progressPercent}" aria-valuemin="0" aria-valuemax="100"></div>`;
             const progressTextElement = document.getElementById(`${taskTypeString}ProgressText${j}`);
             if (progressTextElement) { progressTextElement.innerHTML = `${subtasksDone}/${task.subtasks.length} Subtasks`; }
         }
@@ -203,7 +203,7 @@ function showTaskOverlay(taskTypeString, i, j) {
     setTaskOverlayColor(i, j);
     insertTaskOverlayAssigned(i, j);
     insertOverlaySubtasks(taskType, i, j);
-    disableScrolling();
+    if (window.innerHeight > 800) {disableScrolling()};
 }
 
 
