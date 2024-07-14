@@ -32,25 +32,27 @@ function generateNoTasksHtml() {
 
 
 /** The function `generateTaskOverlayHtml` returns HTML markup for displaying task details based on the task type, index `i`, and index `j`. */
-function generateTaskOverlayHtml(taskType, i, j,) {
+function generateTaskOverlayHtml(taskType, i, j) {
+    const task = taskType[j]; // Accessing the specific task
+
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="taskOverlayCategory" id="taskOverlayCategory">${taskType[j].category}</div>
+                <div class="taskOverlayCategory" id="taskOverlayCategory">${task.category}</div>
                 <img src="img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
             </div>    
-            <p class="taskOverlayTitle text-break">${taskType[j].title}</p>
-            <p class="taskOverlayDescription text-break">${taskType[j].description}</p>
+            <p class="taskOverlayTitle text-break">${task.title}</p>
+            <p class="taskOverlayDescription text-break">${task.description}</p>
             <div class="d-flex gap-3">
                 <p class="taskOverlayTextGray">Due date:</p>
-                <p class="taskOverlayDate">${taskType[j].date}</p>
+                <p class="taskOverlayDate">${task.date}</p>
             </div>
             <div class="d-flex gap-4">
                 <p class="taskOverlayTextGray">Priority:</p>
                 <div class="d-flex">
-                    <p>${taskType[j].priority}</p>
+                    <p>${task.priority}</p>
                     <div class="iconBox32">
-                        <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+                        <img src="img/icon/priority${task.priority}.svg" alt="Priority">
                     </div>
                 </div>
             </div>
@@ -66,10 +68,10 @@ function generateTaskOverlayHtml(taskType, i, j,) {
                 <div id="taskOverlaySubtasks"></div>
             </div>
             <div class="overlaytasksBtns">
-            <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="assets/img/delete.png"></button>
-            <img src="assets/img/Vector 3.png">
-            <button class="overlayEdit" onclick="editTask()" id="editTaskButton">Edit  <img class="overlayEditImg" src="assets/img/edit.png"></button>
+                <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="assets/img/delete.png"></button>
+                <img src="assets/img/Vector 3.png">
+                <button class="overlayEdit" onclick="editTask(); selectedTask(${i}, ${j});" id="editTaskButton">Edit  <img class="overlayEditImg" src="assets/img/edit.png"></button>
             </div>
         </div>
-    `
+    `;
 }

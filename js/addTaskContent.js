@@ -169,18 +169,18 @@ function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, lab
 
 /**M The function `insertContactsListeners` adds event listeners to a dropdown menu option div and a checkbox, updating selected contacts when the option div is clicked. */
 function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
-    optionDiv.addEventListener('click', function (e) {
-        const checkboxAtIndex = document.getElementById(`optionDiv-${index}`);
-        if (checkboxAtIndex) {
-            checkboxAtIndex.checked = !checkboxAtIndex.checked;
-        }
-    });
     dropdownMenu.appendChild(optionDiv);
     document.addEventListener('mouseup', function (e) {
         if (!dropdownMenu.contains(e.target)) {
             dropdownMenu.classList.remove('show');
         }
     });
+}
+
+function selectedTask(i, j) {
+    const taskType = taskTypesKeys[i];
+    const assignedContacts = tasks[taskType][j].assigned; 
+    updateSelectedContacts(assignedContacts);
 }
 
 
