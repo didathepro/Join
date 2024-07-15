@@ -298,7 +298,6 @@ async function saveEditedTask(taskTypeKey, taskIndex) {
     task.subtasks = getAddedSubtasks();
     await setItem('tasks', tasks);
     boardInit();
-    clearBoard();
     hideAddTaskFloating();
 }
 
