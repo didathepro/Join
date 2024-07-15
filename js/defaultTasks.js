@@ -65,7 +65,7 @@ let tasks = {
 
 
 /* The line is retrieving the value stored in the 'tasks' key from the localStorage, parsing it from a JSON string to a JavaScript object, and assigning it to the variable `localTasks`. This allows the script to access and workwith the tasks data stored in the browser's localStorage. */
-let localTasks = JSON.parse(localStorage.getItem('tasks'));
+let localTasks = getItem('tasks');
 
 
 /** The function `showNumbers` displays the number of tasks, tasks in progress, and tasks awaiting feedback. */
