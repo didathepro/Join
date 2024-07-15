@@ -64,10 +64,6 @@ let tasks = {
 };
 
 
-/* The line is retrieving the value stored in the 'tasks' key from the localStorage, parsing it from a JSON string to a JavaScript object, and assigning it to the variable `localTasks`. This allows the script to access and workwith the tasks data stored in the browser's localStorage. */
-let localTasks = getItem('tasks');
-
-
 /** The function `showNumbers` displays the number of tasks, tasks in progress, and tasks awaiting feedback. */
 async function showNumbers() {
     showNumberOfTasks();
@@ -79,11 +75,11 @@ async function showNumbers() {
 };
 
 
-/** The function `showNumberOfTasks` calculates the total number of tasks stored in the `localTasks` object and displays it on the webpage. */
+/** The function `showNumberOfTasks` calculates the total number of tasks stored in the `tasks` object and displays it on the webpage. */
 function showNumberOfTasks() {
     let totalTasks = 0;
-    for (let key in localTasks) {
-        if (localTasks.hasOwnProperty(key)) { totalTasks += localTasks[key].length; }
+    for (let key in tasks) {
+        if (tasks.hasOwnProperty(key)) { totalTasks += tasks[key].length; }
     }
     let noT = document.getElementById('numberOfTasks');
     noT.innerHTML = totalTasks;
@@ -92,51 +88,53 @@ function showNumberOfTasks() {
 
 /** The function `showNumberOfTasksInProgress` retrieves the number of tasks in progress from a local variable and displays it on the webpage. */
 function showNumberOfTasksInProgress() {
-    let tasksInProgressCount = localTasks.tasksInProgress.length;
-    let noTInProgress = document.getElementById('numberOfTasksInProgress');
-    noTInProgress.innerHTML = tasksInProgressCount;
+    let tasksInProgressCount = tasks.tasksInProgress.length;
+    document.getElementById('numberOfTasksInProgress').innerHTML = tasksInProgressCount;
 }
 
 
 /** The function `showNumberOfTasksAwaitingFeedback` updates the number of tasks awaiting feedback on a webpage. */
 function showNumberOfTasksAwaitingFeedback() {
-    let tasksAwaitingFeedbackCount = localTasks.tasksAwaitFeedback.length;
-    let noTDone = document.getElementById('numberOfTasksAwaitingFeedback');
-    noTDone.innerHTML = tasksAwaitingFeedbackCount;
+    let tasksAwaitingFeedbackCount = tasks.tasksAwaitFeedback.length;
+    document.getElementById('numberOfTasksAwaitingFeedback').innerHTML = tasksAwaitingFeedbackCount;
 }
 
-function showNumberOfTasksToDo(){
+/** This function updates the number of tasks to do. */
+function showNumberOfTasksToDo() {
     let tasksToDo = document.getElementById('numberOfTasksToDo');
-    let tasksToDoCount = localTasks.tasksToDo.length;
+    let tasksToDoCount = tasks.tasksToDo.length;
     tasksToDo.innerHTML = tasksToDoCount;
 }
 
-function showNumberOfDoneTasks(){
+
+/** This function updates the number of done tasks. */
+function showNumberOfDoneTasks() {
     let doneTasks = document.getElementById('numberOfDoneTasks');
-    let doneTasksCount = localTasks.tasksDone.length;
+    let doneTasksCount = tasks.tasksDone.length;
     doneTasks.innerHTML = doneTasksCount;
 }
 
-function showNumberOfUrgentTasks(){
+
+/** This function updates the number of urgent tasks. */
+function showNumberOfUrgentTasks() {
     let urgentTasks = document.getElementById('numberOfUrgentTasks');
     let urgentDate = document.getElementById('urgentTaskDate');
-    let urgentTasksCount = countUrgentTasks(localTasks).count;
-    let urgentTasksDate = countUrgentTasks(localTasks).dates[0];
+    let urgentTasksCount = countUrgentTasks(tasks).count;
+    let urgentTasksDate = countUrgentTasks(tasks).dates[0];
     urgentTasks.innerHTML = urgentTasksCount;
-    urgentDate.innerHTML = urgentTasksDate; 
+    urgentDate.innerHTML = urgentTasksDate;
 }
 
+
+/** This function counts and reutrns the number of urgent tasks.  */
 function countUrgentTasks(tasks) {
     let urgentCount = 0;
     let urgentDates = [];
-
     for (let category in tasks) {
         tasks[category].forEach(task => {
             if (task.priority === 'Urgent') {
                 urgentCount++;
-                if (task.date) {
-                    urgentDates.push(task.date);
-                } 
+                if (task.date) { urgentDates.push(task.date) };
             }
         });
     }
