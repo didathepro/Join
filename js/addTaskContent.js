@@ -339,6 +339,9 @@ function getSelectedAssignedAttributes(selectedContactsDiv,name) {
 async function loadTasks() {
     const loadedTasks = await getItem('tasks');
     tasks = await JSON.parse(loadedTasks);
+    if(tasks.length==0){
+        setDefaultTasks();
+    }
 }
 
 

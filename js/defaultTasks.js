@@ -63,4 +63,7 @@ let tasks = {
         ],
 };
 
-
+async function setDefaultTasks() {
+    await setItem('tasks', tasks);
+    const storedTasks = await getItem('tasks'); 
+}

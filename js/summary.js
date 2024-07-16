@@ -1,5 +1,6 @@
 /** The function `showNumbers` displays the number of tasks, tasks in progress, and tasks awaiting feedback. */
 async function showNumbers() {
+    await loadTasks();
     showNumberOfTasks();
     showNumberOfTasksInProgress();
     showNumberOfTasksAwaitingFeedback();
