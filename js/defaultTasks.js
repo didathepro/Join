@@ -1,89 +1,113 @@
 /* The `tasks` object is storing information about different tasks for join. These are only some basic imcomplete default tasks.*/
 let tasks = {
-    "tasksToDo": [],
+    "tasksToDo": [
+        {
+            "title": "Search Functionality",
+            "description": "Implement site-wide search functionality...",
+            "category": "Technical Task",
+            "subtasks": [
+              {"title": "Setup search API"   , "done": false},
+              {"title": "Integrate search UI", "done": true }
+            ],
+            "assigned": ["Tatjana Wolf", "Benedikt Ziegler"],
+            "priority": "Medium",
+            "date": "2024-11-30"
+          },
+          {
+            "title": "Order History",
+            "description": "Develop the order history page for users...",
+            "category": "User Story",
+            "subtasks": [
+              {"title": "Design order history UI", "done": false},
+              {"title": "Integrate with backend" , "done": false}
+            ],
+            "assigned": ["Eva Fischer", "David Eisenberg"],
+            "priority": "Low",
+            "date": "2024-07-14"
+          }
+    ],
     "tasksInProgress":
         [
             {
-                "title": 'Contact Form & Imprint',
-                "description": 'Create a contact form and imprint page...',
-                "category": 'User Story',
+                "title": "Email Notifications",
+                "description": "Setup email notifications for various events...",
+                "category": "Technical Task",
                 "subtasks": [
-                    {
-                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: true
-                    },
-                    {
-                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: false
-                    }
+                  {"title": "Configure email server", "done": false},
+                  {"title": "Design email templates", "done": true }
                 ],
-                "assigned": ['Anja Schulz', 'David Eisenberg', 'Eva Fischer'],
-                "priority": 'Urgent',
-                "date": '03/02/2025'
-            },
+                "assigned": ["Anja Schulz", "David Eisenberg"],
+                "priority": "Medium",
+                "date": "2024-07-22"
+              },
+              {
+                "title": "Admin Panel",
+                "description": "Develop an admin panel for managing the application...",
+                "category": "Technical Task",
+                "subtasks": [],
+                "assigned": ["David Eisenberg", "Benedikt Ziegler"],
+                "priority": "Urgent",
+                "date": "2024-09-03"
+              }
         ],
     "tasksAwaitFeedback":
         [
             {
-                "title": 'HTML Base Template Creation',
-                "description": 'Create reusable HTML base templates...',
-                "category": 'Technical Task',
+                "title": "User Profile Page",
+                "description": "Create user profile management page...",
+                "category": "User Story",
                 "subtasks": [
-                    {
-                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: true
-                    },
-                    {
-                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: false
-                    }
+                  {"title": "Design profile UI"             , "done": false},
+                  {"title": "Develop profile update feature", "done": false}
                 ],
-                "assigned": ['David Eisenberg', 'Benedikt Ziegler', 'Anja Schulz'],
-                "priority": 'Low',
-                "date": '04/05/2024'
-            },
-            {
-                "title": 'Daily Kochwelt Recipe',
-                "description": 'Implement daily recipe and portion calculator...',
-                "category": 'User Story',
+                "assigned": ["Anja Schulz", "Eva Fischer"],
+                "priority": "Urgent",
+                "date": "2024-08-18"
+              },
+              {
+                "title": "Live Chat Support",
+                "description": "Implement live chat support for user assistance...",
+                "category": "User Story",
                 "subtasks": [
-                    {
-                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: true
-                    },
-                    {
-                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-                        done: false
-                    }
+                  {"title": "Setup chat backend", "done": true},
+                  {"title": "Integrate chat UI" , "done": true}
                 ],
-                "assigned": ['Eva Fischer', 'Anja Schulz', 'Tatjana Wolf'],
-                "priority": 'Medium',
-                "date": '03/07/2024'
-            },
+                "assigned": ["Anja Schulz", "Eva Fischer"],
+                "priority": "Medium",
+                "date": "2024-11-11"
+              }
         ],
     "tasksDone":
         [
             {
-                "title": 'CSS Architecture Planning',
-                "description": 'Define CSS naming conventions and structure...',
-                "category": 'Technical Task',
+                "title": "User Profile Page",
+                "description": "Create user profile management page...",
+                "category": "User Story",
                 "subtasks": [
-                    {
-                        title: 'Establish CSS Methodology',
-                        done: true
-                    },
-                    {
-                        title: 'Setup Base Styles',
-                        done: true
-                    }
+                  {"title": "Design profile UI"             , "done": false},
+                  {"title": "Develop profile update feature", "done": false}
                 ],
-                "assigned": ['Sofia Müller', 'Benedikt Ziegler'],
-                "priority": 'Urgent',
-                "date": '02/09/2023'
-            },
+                "assigned": ["Anja Schulz", "Eva Fischer"],
+                "priority": "Urgent",
+                "date": "2024-08-18"
+              },
+              {
+                "title": "Live Chat Support",
+                "description": "Implement live chat support for user assistance...",
+                "category": "User Story",
+                "subtasks": [
+                  {"title": "Setup chat backend", "done": true},
+                  {"title": "Integrate chat UI" , "done": true}
+                ],
+                "assigned": ["Anja Schulz", "Eva Fischer"],
+                "priority": "Medium",
+                "date": "2024-11-11"
+              }
         ],
 };
-/*Setting default tasks if not specified*/
+
+
+/* Setting default tasks if no task is specified*/
 async function setDefaultTasks() {
     await setItem('tasks', tasks);
 }
