@@ -338,9 +338,16 @@ function getSelectedAssignedAttributes(selectedContactsDiv,name) {
 /** The function `loadTasks` asynchronously loads tasks from local storage and parses them as JSON. */
 async function loadTasks() {
     const loadedTasks = await getItem('tasks');
-    tasks = await JSON.parse(loadedTasks);
-    if(tasks.length==0){
-        setDefaultTasks();
+    tasks = JSON.parse(loadedTasks);
+
+    // Check if all task categories are empty
+    if (
+        tasks.tasksToDo.length === 0 &&
+        tasks.tasksInProgress.length === 0 &&
+        tasks.tasksAwaitFeedback.length === 0 &&
+        tasks.tasksDone.length === 0
+    ) {
+        await setDefaultTasks();
     }
 }
 
@@ -374,7 +381,7 @@ function redirectBoard() {
 }
 
 
-/** When the window loads, it calls the `insertContacts()` function and then awaits the completion of the `loadTasks()` function. */
+/** When the window loads, awaits the completion of the `loadTasks()` function. */
 window.onload = async function () {
     
     await loadTasks();

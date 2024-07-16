@@ -18,7 +18,8 @@ let tasks = {
                     }
                 ],
                 "assigned": ['Anja Schulz', 'David Eisenberg', 'Eva Fischer'],
-                "priority": 'Urgent'
+                "priority": 'Urgent',
+                "date": '03/02/2025'
             },
         ],
     "tasksAwaitFeedback":
@@ -27,17 +28,37 @@ let tasks = {
                 "title": 'HTML Base Template Creation',
                 "description": 'Create reusable HTML base templates...',
                 "category": 'Technical Task',
-                "subtasks": undefined,
+                "subtasks": [
+                    {
+                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+                        done: true
+                    },
+                    {
+                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+                        done: false
+                    }
+                ],
                 "assigned": ['David Eisenberg', 'Benedikt Ziegler', 'Anja Schulz'],
-                "priority": 'Low'
+                "priority": 'Low',
+                "date": '04/05/2024'
             },
             {
                 "title": 'Daily Kochwelt Recipe',
                 "description": 'Implement daily recipe and portion calculator...',
                 "category": 'User Story',
-                "subtasks": undefined,
+                "subtasks": [
+                    {
+                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+                        done: true
+                    },
+                    {
+                        title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+                        done: false
+                    }
+                ],
                 "assigned": ['Eva Fischer', 'Anja Schulz', 'Tatjana Wolf'],
-                "priority": 'Medium'
+                "priority": 'Medium',
+                "date": '03/07/2024'
             },
         ],
     "tasksDone":
