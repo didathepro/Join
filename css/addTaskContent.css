@@ -378,3 +378,13 @@ input[type='checkbox'] {
 .addTaskContent {
     margin-top: 120px;
 }
+
+#saveTaskButton {
+    cursor: pointer;
+}
+
+.save-button {
+    display:flex;
+    justify-content: right;
+    margin-bottom:10vh;
+}

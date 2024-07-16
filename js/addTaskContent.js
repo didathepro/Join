@@ -67,7 +67,6 @@ async function addNewTask() {
     };
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
-    console.log(tasks);
     addTaskClear();
     hideAddTaskFloating();
 }
