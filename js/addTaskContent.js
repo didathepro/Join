@@ -382,7 +382,3 @@ function redirectBoard() {
 
 
 /** When the window loads, awaits the completion of the `loadTasks()` function. */
-window.onload = async function () {
-    
-    await loadTasks();
-};
