@@ -205,40 +205,54 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
     });
 }
 
-function selectedTask(i, j) {
-    const taskType = taskTypesKeys[i];
-    const assignedContacts = tasks[taskType][j].assigned; 
-    updateSelectedContacts(assignedContacts);
+function clearAllCheckboxes() {
+    const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
 }
 
+// Modified function to update selected contacts based on a specific task
+function selectedTask(i, j) {
+    clearAllCheckboxes(); 
+
+    const taskType = taskTypesKeys[i];
+    const assignedContacts = tasks[taskType][j].assigned;
+    
+    assignedContacts.forEach(contactName => {
+        const checkbox = document.querySelector(`#dropdownMenu input[value="${contactName}"]`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+
+    updateSelectedContacts();
+}
 
 /**M The function `updateSelectedContacts` updates the list of selected contacts displayed on the webpage based on the checkboxes that are checked. */
 function updateSelectedContacts() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
-    const footnotes = document.getElementById('footnotes');
     selectedContactsDiv.innerHTML = '';
     selectedOptions.forEach(name => {
         updateSelectedContactsAttributes(selectedContactsDiv, name);
     });
-    updateFootnotesVisibility(footnotes, selectedOptions);
 }
 
-
+// Ensure this function correctly updates the contact display attributes
 /**M The function `updateSelectedContactsAttributes` adds a contact's initials and name to a specified div element. */
-function updateSelectedContactsAttributes(selectedContactsDiv,name) {
+function updateSelectedContactsAttributes(selectedContactsDiv, name) {
     const contact = addTaskContacts.find(contact => contact.name === name);
-    const contactDiv = document.createElement('div');
-    const initialsDiv = document.createElement('div');
-    initialsDiv.className = 'contact-initials';
-    initialsDiv.style.backgroundColor = contact.color;
-    initialsDiv.innerText = getInitials(contact.name);
-    contactDiv.appendChild(initialsDiv);
-    contactDiv.appendChild(document.createTextNode(contact.name));
-    selectedContactsDiv.appendChild(contactDiv);
+    if (contact) {
+        const contactDiv = document.createElement('div');
+        const initialsDiv = document.createElement('div');
+        initialsDiv.className = 'contact-initials';
+        initialsDiv.style.backgroundColor = contact.color;
+        initialsDiv.innerText = getInitials(contact.name);
+        contactDiv.appendChild(initialsDiv);
+        contactDiv.appendChild(document.createTextNode(contact.name));
+        selectedContactsDiv.appendChild(contactDiv);
+    }
 }
-
 
 /**M The function `updateFootnotesVisibility` toggles the visibility of a given element based on the length of selected options. */
 function updateFootnotesVisibility(footnotes, selectedOptions) {
