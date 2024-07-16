@@ -1,6 +1,9 @@
 /* The code blow initializes variables for a task management system. It sets the
 selected priority to 'Medium', the selected subtask to 0, and creates an array of task contacts with
 names and colors. */
+async function addTaskInit(){
+    await loadTasks();
+}
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
 let addTaskContacts = [
@@ -64,6 +67,7 @@ async function addNewTask() {
     };
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
+    console.log(tasks);
     addTaskClear();
     hideAddTaskFloating();
 }
@@ -379,6 +383,3 @@ function addedTaskAnimation() {
 function redirectBoard() {
     window.location.href = "board.html";
 }
-
-
-/** When the window loads, awaits the completion of the `loadTasks()` function. */
