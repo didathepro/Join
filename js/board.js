@@ -264,8 +264,10 @@ function editTaskHtml(selectedTask) {
 
 /**M The function `editTaskButtons` updates the text and functionality of save and cancel buttons for editing a task. */
 function editTaskButtons(taskTypeKey) {
-    const saveButton = document.getElementById('createTaskButton');
-    saveButton.innerText = 'Save Task';
+    const createButton = document.getElementById('createTaskButton');
+    createButton.classList.add('d-none');
+    const saveButton = document.getElementById('saveTaskButton');
+    saveButton.classList.remove('d-none');
     saveButton.onclick = function () { saveEditedTask(taskTypeKey, selectedTaskIndex); };
     const cancelButton = document.createElement('button');
     cancelButton.innerText = 'Cancel';
