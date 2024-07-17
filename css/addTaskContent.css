@@ -148,8 +148,15 @@ p {
     width: 877px;
 }
 
+.closeIcon {
+    padding:10px;
+}
+
 .closeIcon:hover {
     cursor: pointer;
+    padding:10px;
+    background-color: #dbdbdb;
+    border-radius: 50%;
 }
 
 .clearButton:hover {
