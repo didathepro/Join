@@ -152,6 +152,46 @@ async function changeCategory(category) {
 }
 
 
+/** Initiates touch dragging and adds event listeners */
+function startTouchDragging(event, i, j) {
+    event.preventDefault();
+    startDragging(i, j);
+    draggedElement = event.target;
+    document.addEventListener('touchmove', handleTouchMove);
+    document.addEventListener('touchend', handleTouchEnd);
+}
+
+
+/** Simulates dragover event during touch move */
+function handleTouchMove(event) {
+    const touch = event.touches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (element) {
+        const dragoverEvent = new Event('dragover', {
+            bubbles: true,
+            cancelable: true,
+        });
+        element.dispatchEvent(dragoverEvent);
+    }
+}
+
+
+/** Simulates drop event at the end of touch dragging */
+function handleTouchEnd(event) {
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
+    const touch = event.changedTouches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (element) {
+        const dropEvent = new Event('drop', {
+            bubbles: true,
+            cancelable: true,
+        });
+        element.dispatchEvent(dropEvent);
+    }
+}
+
+
 /** The function `showAddTaskFloating` displays a floating element for adding a task based on the specified type. */
 function showAddTaskFloating(type) {
     document.getElementById('addTaskFloating').classList.remove('d-none');
