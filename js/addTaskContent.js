@@ -55,6 +55,7 @@ function addTaskClear() {
 
 
 /** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
+// Function to add a new task
 async function addNewTask() {
     let newTask = {
         "title": document.getElementById('newTaskTitle').value,
@@ -63,15 +64,17 @@ async function addNewTask() {
         "assigned": getSelectedAssigned(),
         "priority": selectedPriority,
         "date": document.getElementById('newTaskDate').value,
-        "subtasks": getAddedSubtasks()
+        "subtasks": subtasks // Use the global subtasks array here
     };
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
     addTaskClear();
     hideAddTaskFloating();
+    // Clear the global subtasks array after adding the task
+    subtasks = [];
 }
 
-/**M The function `initSubTask` dynamically generates HTML elements for each subtask in the `subtasks` object and appends them to the 'addedSubTasks' element. */
+// Function to initialize subtasks in the UI
 function initSubTask() {
     for (let [index_subtask, current_subtask] of Object.entries(subtasks)) {
         const newSubTaskHTML = `
@@ -87,21 +90,35 @@ function initSubTask() {
     }
 }
 
-
-/**M The function `addSubTask` adds a new subtask to a list of subtasks on a webpage. */
+// Function to add a new subtask
 function addSubTask() {
+    getAddedSubtasks();
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
     if (subtaskText.length == 0) {
-        alert('Cannot add an empty subtask')
-    }
-    else {
-        document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML(selectedSubtask, subtaskText));
+        alert('Cannot add an empty subtask');
+    } else {
+        // Add the subtask to the global subtasks array
+        subtasks.push({ "title": subtaskText });
+
+        // Update the UI
+        const newSubTaskHTML = `
+            <li id="liSub${selectedSubtask}" class="liSub">
+                <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
+                <div class="subImg">
+                    <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
+                    <img src="assets/img/Vector 19.png">
+                    <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
+                </div>
+            </li>`;
+        document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
+
+        // Increment the subtask index
+        selectedSubtask++;
     }
     subtaskInput.value = '';
     subtaskInput.style.color = '#D1D1D1';
     subtaskInput.placeholder = 'Add new task';
-    selectedSubtask++;
 }
 
 
@@ -302,12 +319,32 @@ function handleKeyPress(event, id) {
 }
 
 
-/**M The function `deleteSubTask` removes a subtask element from the DOM based on its ID. */
+// Function to delete a subtask
 function deleteSubTask(id) {
     const liElement = document.getElementById(`liSub${id}`);
     liElement.parentNode.removeChild(liElement);
+    subtasks.splice(id, 1);
+    updateSubtaskElements();
 }
 
+// Function to update the subtask elements in the DOM after a deletion
+function updateSubtaskElements() {
+    const subTasksContainer = document.getElementById('addedSubTasks');
+    subTasksContainer.innerHTML = '';
+    
+    subtasks.forEach((subtask, index) => {
+        const newSubTaskHTML = `
+            <li id="liSub${index}" class="liSub">
+                <span id="subtaskText${index}">${subtask.title}</span>
+                <div class="subImg">
+                    <img id="editSubtask${index}" onclick="editSubtask(${index})" src="assets/img/edit.png">
+                    <img src="assets/img/Vector 19.png">
+                    <img id="deleteSubtask${index}" onclick="deleteSubTask(${index})" src="assets/img/delete.png">
+                </div>
+            </li>`;
+        subTasksContainer.insertAdjacentHTML('beforeend', newSubTaskHTML);
+    });
+}
 
 /** The function `insertContactsHtml` generates HTML options for a select element based on contact data. */
 function insertContactsHtml(i) {
