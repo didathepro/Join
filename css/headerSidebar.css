@@ -97,6 +97,7 @@ header p {
     width: 104px;
     height: 56px;
     gap: 16px;
+    position: relative; /* Added this line */
 }
 
 .helpIcon {
@@ -119,11 +120,13 @@ header p {
     border-radius: 20px 0px 20px 20px;
     display: flex;
     flex-direction: column;
-    position: absolute;
-    right: 6vw;
-    top: 8vh;
     gap: 2px;
     padding: 10px 4px;
+    position: absolute;
+    top: 100%;
+    left: 50%; 
+    transform: translateX(-50%); 
+    margin-top: 10px; 
 }
 
 .dropdown-container a {
@@ -194,6 +197,9 @@ header p {
 }
 
 @media (max-width: 1500px) {
+    .headerProfile {
+        margin-right:10vw;
+    }
     .resLogo {
         margin-left: 50px;
         height: 50px;
@@ -273,4 +279,10 @@ header p {
             color-stop(0.44, #acaeb1),
             color-stop(0.72, #acaeb1),
             color-stop(0.86, #acaeb1));
+}
+
+@media (min-width:1500px){
+    .headerProfile {
+        margin-right:25vw;
+    }
 }
