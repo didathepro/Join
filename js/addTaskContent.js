@@ -393,8 +393,6 @@ function getSelectedAssignedAttributes(selectedContactsDiv,name) {
 async function loadTasks() {
     const loadedTasks = await getItem('tasks');
     tasks = JSON.parse(loadedTasks);
-
-    // Check if all task categories are empty
     if (
         tasks.tasksToDo.length === 0 &&
         tasks.tasksInProgress.length === 0 &&

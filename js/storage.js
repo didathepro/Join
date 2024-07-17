@@ -1,5 +1,5 @@
 /** These lines define the token and url for the remote storage. */
-const STORAGE_TOKEN = 'K9SFYBX0R1WD1NS9ZKIOB4W1CL157WB4C579A62K';
+const STORAGE_TOKEN = 'LA5T56URVNYBDNCBF5D43B8CC4QA37DMDUYTNDUC';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 
 
