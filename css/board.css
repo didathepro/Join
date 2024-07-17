@@ -171,7 +171,7 @@ button {
     font-size: 12px;
     border-radius: 100%;
     border: 1px solid #fff;
-    margin-right: -8px;
+    margin-left:-8px;
 }
 
 .progress {
@@ -420,4 +420,15 @@ button {
 
 .drag-area-highlight {
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.assignedContactsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+#taskOverlayAssigned {
+    display: flex;
+    flex-direction: column !important;
+    gap:20px;
 }

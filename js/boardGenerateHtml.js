@@ -59,7 +59,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
                 <p class="taskOverlayTextGray">Assigned to:</p>
             </div>
             <div id="selectedContacts" class="selectedContacts"></div>
-            <div class="d-flex justify-content-between">
+            <div class="assignedContactsContainer d-flex justify-content-between">
                 <div id="taskOverlayAssigned" class="d-flex"></div>
             </div>
             <div>
