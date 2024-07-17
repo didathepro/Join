@@ -85,29 +85,16 @@ function getContactColor(name) {
 function insertTaskAssigned(i, j) {
     const taskTypeString = taskTypesKeys[i];
     const taskAssigned = document.getElementById(`${taskTypeString}Assigned${j}`);
-    
     if (taskAssigned && tasks[taskTypeString][j] && tasks[taskTypeString][j].assigned) {
         const assignees = tasks[taskTypeString][j].assigned;
         const maxVisibleAssignees = 6;
         const assigneesToShow = assignees.slice(0, maxVisibleAssignees);
         const remainingAssigneesCount = assignees.length - maxVisibleAssignees;
-
         assigneesToShow.forEach(function (assignee, k) {
             const color = getContactColor(assignee);
-            taskAssigned.innerHTML += /*html*/`
-                <div class="taskAssigned d-flex justify-content-center align-items-center" style="background-color: ${color};">
-                    ${getInitials(assignee)}
-                </div>
-            `;
+            taskAssigned.innerHTML += generateAssigneesToShowHtml(color, assignee);
         });
-
-        if (remainingAssigneesCount > 0) {
-            taskAssigned.innerHTML += /*html*/`
-                <div class="taskAssigned d-flex justify-content-center align-items-center" style="background-color: grey;">
-                    +${remainingAssigneesCount}
-                </div>
-            `;
-        }
+        if (remainingAssigneesCount > 0) { taskAssigned.innerHTML += generateAssigneesRemainingHtml(remainingAssigneesCount); }
     }
 }
 

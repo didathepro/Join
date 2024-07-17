@@ -34,7 +34,6 @@ function generateNoTasksHtml() {
 /** The function `generateTaskOverlayHtml` returns HTML markup for displaying task details based on the task type, index `i`, and index `j`. */
 function generateTaskOverlayHtml(taskType, i, j) {
     const task = taskType[j]; // Accessing the specific task
-
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
             <div class="d-flex justify-content-between align-items-center">
@@ -74,4 +73,24 @@ function generateTaskOverlayHtml(taskType, i, j) {
             </div>
         </div>
     `;
+}
+
+
+/** This function generates and returns HTML for shown assignees. */
+function generateAssigneesToShowHtml(color, assignee) {
+    return /*html*/`
+        <div class="taskAssigned d-flex justify-content-center align-items-center" style="background-color: ${color};">
+        ${getInitials(assignee)}
+        </div>
+    `
+}
+
+
+/** This function generates and returns HTML for the remaining assignees. */
+function generateAssigneesRemainingHtml(remainingAssigneesCount) {
+    return /*html*/`
+        <div class="taskAssigned d-flex justify-content-center align-items-center" style="background-color: grey;">
+            +${remainingAssigneesCount}
+        </div>
+    `
 }
