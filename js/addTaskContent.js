@@ -1,9 +1,7 @@
 /* The code blow initializes variables for a task management system. It sets the
 selected priority to 'Medium', the selected subtask to 0, and creates an array of task contacts with
 names and colors. */
-async function addTaskInit(){
-    await loadTasks();
-}
+async function addTaskInit() { await loadTasks(); }
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
 let addTaskContacts = [
@@ -55,7 +53,6 @@ function addTaskClear() {
 
 
 /** The `addNewTask` function adds a new task with specified details to the task JSON and updates the remote storage, triggering an animation and reinitializing the board. */
-// Function to add a new task
 async function addNewTask() {
     let newTask = {
         "title": document.getElementById('newTaskTitle').value,
@@ -64,17 +61,17 @@ async function addNewTask() {
         "assigned": getSelectedAssigned(),
         "priority": selectedPriority,
         "date": document.getElementById('newTaskDate').value,
-        "subtasks": subtasks // Use the global subtasks array here
+        "subtasks": subtasks
     };
     tasks[selectedType].push(newTask);
     await setItem('tasks', tasks);
     addTaskClear();
     hideAddTaskFloating();
-    // Clear the global subtasks array after adding the task
     subtasks = [];
 }
 
-// Function to initialize subtasks in the UI
+
+/** This function initializes subtasks in the UI. */
 function initSubTask() {
     for (let [index_subtask, current_subtask] of Object.entries(subtasks)) {
         const newSubTaskHTML = `
@@ -90,7 +87,8 @@ function initSubTask() {
     }
 }
 
-// Function to add a new subtask
+
+/** This function adds a new subtask. */
 function addSubTask() {
     getAddedSubtasks();
     const subtaskInput = document.getElementById('subtasksField');
@@ -98,22 +96,9 @@ function addSubTask() {
     if (subtaskText.length == 0) {
         alert('Cannot add an empty subtask');
     } else {
-        // Add the subtask to the global subtasks array
         subtasks.push({ "title": subtaskText });
-
-        // Update the UI
-        const newSubTaskHTML = `
-            <li id="liSub${selectedSubtask}" class="liSub">
-                <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
-                <div class="subImg">
-                    <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
-                    <img src="assets/img/Vector 19.png">
-                    <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
-                </div>
-            </li>`;
+        const newSubTaskHTML = generateAddSubTaskHtml();
         document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
-
-        // Increment the subtask index
         selectedSubtask++;
     }
     subtaskInput.value = '';
@@ -122,17 +107,32 @@ function addSubTask() {
 }
 
 
+/** This function generates and return the HTML for the addSubTask funtion.  */
+function generateAddSubTaskHtml() {
+    return /*html*/`
+        <li id="liSub${selectedSubtask}" class="liSub">
+            <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
+            <div class="subImg">
+                <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
+                <img src="assets/img/Vector 19.png">
+                <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
+            </div>
+        </li>
+    `
+}
+
+
 /**M The function `newSubTaskHTML` generates and returns HTML code for a new subtask element with specified text and unique identifier. */
 function newSubTaskHTML(selectedSubtask, subtaskText) {
     return /*html*/`
-                    <li id="liSub${selectedSubtask}" class="liSub">
-                <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
-                <div class="subImg">
-                    <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
-                    <img src="assets/img/Vector 19.png">
-                    <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
-                </div>
-            </li>
+        <li id="liSub${selectedSubtask}" class="liSub">
+        <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
+        <div class="subImg">
+            <img id="editSubtask${selectedSubtask}" onclick="editSubtask(${selectedSubtask})" src="assets/img/edit.png">
+            <img src="assets/img/Vector 19.png">
+            <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
+        </div>
+        </li>
     `
 }
 
@@ -154,24 +154,20 @@ function getAddedSubtasks() {
 function insertContacts() {
     const dropdownMenu = document.getElementById('dropdownMenu');
     const selectedContacts = getSelectedContactNames();
-    
     dropdownMenu.innerHTML = '';
-    
-    // Repopulate dropdown with contacts
     addTaskContacts.forEach((contact, index) => {
         const optionDiv = document.createElement('div');
         const initialsDiv = document.createElement('div');
         const checkbox = document.createElement('input');
         const label = document.createElement('label');
-
         optionDiv.id = `optionDiv-${index}`;
-        
         insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label);
         insertContactsListeners(dropdownMenu, optionDiv, checkbox, label, index);
         dropdownMenu.appendChild(optionDiv);
     });
     restoreSelectedContactNames(selectedContacts);
 }
+
 
 // Function to get currently selected contact names
 function getSelectedContactNames() {
@@ -180,6 +176,7 @@ function getSelectedContactNames() {
         .filter(checkbox => checkbox.checked)
         .map(checkbox => checkbox.value);
 }
+
 
 // Function to restore selected contact names
 function restoreSelectedContactNames(selectedContacts) {
@@ -192,6 +189,7 @@ function restoreSelectedContactNames(selectedContacts) {
         }
     });
 }
+
 
 /**M The function `insertContactsAttributes` is used to dynamically create and insert contact attributes like initials, checkboxes, and labels into a specified HTML element. */
 function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, label) {
@@ -212,7 +210,7 @@ function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, lab
 
 
 /**M The function `insertContactsListeners` adds event listeners to a dropdown menu option div and a checkbox, updating selected contacts when the option div is clicked. */
-function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
+function insertContactsListeners(dropdownMenu, optionDiv, checkbox, index) {
     dropdownMenu.appendChild(optionDiv);
     document.addEventListener('mouseup', function (e) {
         if (!dropdownMenu.contains(e.target)) {
@@ -221,27 +219,25 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox,index) {
     });
 }
 
+
 function clearAllCheckboxes() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     checkboxes.forEach(checkbox => checkbox.checked = false);
 }
 
-// Modified function to update selected contacts based on a specific task
-function selectedTask(i, j) {
-    clearAllCheckboxes(); 
 
+/** This function updates selected contacts based on a specific task */
+function selectedTask(i, j) {
+    clearAllCheckboxes();
     const taskType = taskTypesKeys[i];
     const assignedContacts = tasks[taskType][j].assigned;
-    
     assignedContacts.forEach(contactName => {
         const checkbox = document.querySelector(`#dropdownMenu input[value="${contactName}"]`);
-        if (checkbox) {
-            checkbox.checked = true;
-        }
+        if (checkbox) { checkbox.checked = true; }
     });
-
     updateSelectedContacts();
 }
+
 
 /**M The function `updateSelectedContacts` updates the list of selected contacts displayed on the webpage based on the checkboxes that are checked. */
 function updateSelectedContacts() {
@@ -254,7 +250,7 @@ function updateSelectedContacts() {
     });
 }
 
-// Ensure this function correctly updates the contact display attributes
+
 /**M The function `updateSelectedContactsAttributes` adds a contact's initials and name to a specified div element. */
 function updateSelectedContactsAttributes(selectedContactsDiv, name) {
     const contact = addTaskContacts.find(contact => contact.name === name);
@@ -269,6 +265,7 @@ function updateSelectedContactsAttributes(selectedContactsDiv, name) {
         selectedContactsDiv.appendChild(contactDiv);
     }
 }
+
 
 /**M The function `updateFootnotesVisibility` toggles the visibility of a given element based on the length of selected options. */
 function updateFootnotesVisibility(footnotes, selectedOptions) {
@@ -319,7 +316,7 @@ function handleKeyPress(event, id) {
 }
 
 
-// Function to delete a subtask
+/** This function deletes a subtask. */
 function deleteSubTask(id) {
     const liElement = document.getElementById(`liSub${id}`);
     liElement.parentNode.removeChild(liElement);
@@ -327,11 +324,11 @@ function deleteSubTask(id) {
     updateSubtaskElements();
 }
 
-// Function to update the subtask elements in the DOM after a deletion
+
+/** This funktion updates the subtasks after a deletion. */
 function updateSubtaskElements() {
     const subTasksContainer = document.getElementById('addedSubTasks');
     subTasksContainer.innerHTML = '';
-    
     subtasks.forEach((subtask, index) => {
         const newSubTaskHTML = `
             <li id="liSub${index}" class="liSub">
@@ -345,6 +342,7 @@ function updateSubtaskElements() {
         subTasksContainer.insertAdjacentHTML('beforeend', newSubTaskHTML);
     });
 }
+
 
 /** The function `insertContactsHtml` generates HTML options for a select element based on contact data. */
 function insertContactsHtml(i) {
@@ -369,14 +367,14 @@ function getSelectedAssigned() {
     const selectedContactsDiv = document.getElementById('selectedContacts');
     selectedContactsDiv.innerHTML = '';
     selectedOptions.forEach(name => {
-        getSelectedAssignedAttributes(selectedContactsDiv,name);
+        getSelectedAssignedAttributes(selectedContactsDiv, name);
     });
     return selectedOptions;
 }
 
 
 /**M The function `getSelectedAssignedAttributes` creates a new div element with contact information and appends it to a specified div. */
-function getSelectedAssignedAttributes(selectedContactsDiv,name) {
+function getSelectedAssignedAttributes(selectedContactsDiv, name) {
     const contact = addTaskContacts.find(contact => contact.name === name);
     const contactDiv = document.createElement('div');
     const initialsDiv = document.createElement('div');
@@ -398,9 +396,7 @@ async function loadTasks() {
         tasks.tasksInProgress.length === 0 &&
         tasks.tasksAwaitFeedback.length === 0 &&
         tasks.tasksDone.length === 0
-    ) {
-        await setDefaultTasks();
-    }
+    ) { await setDefaultTasks(); }
 }
 
 
