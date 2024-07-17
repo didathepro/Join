@@ -144,8 +144,8 @@ function startTouchDragging(event, i, j) {
     event.preventDefault();
     startDragging(i, j);
     draggedElement = event.target;
-    document.addEventListener('touchmove', handleTouchMove);
-    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchmove', handleTouchMove, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
 }
 
 
