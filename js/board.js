@@ -9,6 +9,7 @@ let selectedTaskTypeIndex;
 let selectedTaskIndex;
 let editedTaskIndex;
 let isEditing = false;
+let touchStartTime;
 
 
 /** The function `boardInit` initializes a board by loading tasks, clearing the board, iterating through task types, and inserting contacts. */
@@ -141,7 +142,7 @@ async function changeCategory(category) {
 
 /** Initiates touch dragging and adds event listeners */
 function startTouchDragging(event, i, j) {
-    event.preventDefault();
+    touchStartTime = Date.now();
     startDragging(i, j);
     draggedElement = event.target;
     document.addEventListener('touchmove', handleTouchMove, { passive: true });
@@ -167,14 +168,28 @@ function handleTouchMove(event) {
 function handleTouchEnd(event) {
     document.removeEventListener('touchmove', handleTouchMove);
     document.removeEventListener('touchend', handleTouchEnd);
-    const touch = event.changedTouches[0];
-    const element = document.elementFromPoint(touch.clientX, touch.clientY);
-    if (element) {
-        const dropEvent = new Event('drop', {
-            bubbles: true,
-            cancelable: true,
-        });
-        element.dispatchEvent(dropEvent);
+    const touchEndTime = Date.now();
+    const touchDuration = touchEndTime - touchStartTime;
+
+    if (touchDuration < 300) {
+        // Considered a tap
+        const touch = event.changedTouches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element && draggedElement.contains(element)) {
+            const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
+            showTaskOverlay(taskTypeString, selectedTaskTypeIndex, selectedTaskIndex);
+        }
+    } else {
+        // Considered a drag
+        const touch = event.changedTouches[0];
+        const element = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (element) {
+            const dropEvent = new Event('drop', {
+                bubbles: true,
+                cancelable: true,
+            });
+            element.dispatchEvent(dropEvent);
+        }
     }
 }
 
