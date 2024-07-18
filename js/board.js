@@ -178,12 +178,12 @@ function handleTouchEnd(event) {
             showTaskOverlay(taskTypeString, selectedTaskTypeIndex, selectedTaskIndex);
         }
     }
-    else { handleTouchEndElse(event, element) };
+    else { handleTouchEndElse(event) };
 }
 
 
 /** Simulates drop event at the end of touch dragging - part 2 */
-function handleTouchEndElse(event, element) {
+function handleTouchEndElse(event) {
     const touch = event.changedTouches[0];
     const element = document.elementFromPoint(touch.clientX, touch.clientY);
     if (element) {
