@@ -1,4 +1,4 @@
-/* The code below is initializing variables and constants. */
+/** The code below is initializing variables and constants. */
 let subtasks = [];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
@@ -170,26 +170,28 @@ function handleTouchEnd(event) {
     document.removeEventListener('touchend', handleTouchEnd);
     const touchEndTime = Date.now();
     const touchDuration = touchEndTime - touchStartTime;
-
     if (touchDuration < 300) {
-        // Considered a tap
         const touch = event.changedTouches[0];
         const element = document.elementFromPoint(touch.clientX, touch.clientY);
         if (element && draggedElement.contains(element)) {
             const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
             showTaskOverlay(taskTypeString, selectedTaskTypeIndex, selectedTaskIndex);
         }
-    } else {
-        // Considered a drag
-        const touch = event.changedTouches[0];
-        const element = document.elementFromPoint(touch.clientX, touch.clientY);
-        if (element) {
-            const dropEvent = new Event('drop', {
-                bubbles: true,
-                cancelable: true,
-            });
-            element.dispatchEvent(dropEvent);
-        }
+    }
+    else { handleTouchEndElse(event, element) };
+}
+
+
+/** Simulates drop event at the end of touch dragging - part 2 */
+function handleTouchEndElse(event, element) {
+    const touch = event.changedTouches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (element) {
+        const dropEvent = new Event('drop', {
+            bubbles: true,
+            cancelable: true,
+        });
+        element.dispatchEvent(dropEvent);
     }
 }
 
