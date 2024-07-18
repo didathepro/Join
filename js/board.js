@@ -139,14 +139,17 @@ async function changeCategory(category) {
     boardInit();
 }
 
-
 /** Initiates touch dragging and adds event listeners */
 function startTouchDragging(event, i, j) {
     touchStartTime = Date.now();
     startDragging(i, j);
     draggedElement = event.target;
-    document.addEventListener('touchmove', handleTouchMove, { passive: true });
-    document.addEventListener('touchend', handleTouchEnd, { passive: true });
+    setTimeout(() => {
+        if (Date.now() - touchStartTime >= 300) {
+            document.addEventListener('touchmove', handleTouchMove, { passive: true });
+            document.addEventListener('touchend', handleTouchEnd, { passive: true });
+        }
+    }, 300);
 }
 
 
@@ -163,22 +166,21 @@ function handleTouchMove(event) {
     }
 }
 
-
 /** Simulates drop event at the end of touch dragging */
 function handleTouchEnd(event) {
     document.removeEventListener('touchmove', handleTouchMove);
     document.removeEventListener('touchend', handleTouchEnd);
     const touchEndTime = Date.now();
     const touchDuration = touchEndTime - touchStartTime;
-    if (touchDuration < 300) {
-        const touch = event.changedTouches[0];
-        const element = document.elementFromPoint(touch.clientX, touch.clientY);
-        if (element && draggedElement.contains(element)) {
-            const taskTypeString = taskTypesKeys[selectedTaskTypeIndex];
-            showTaskOverlay(taskTypeString, selectedTaskTypeIndex, selectedTaskIndex);
-        }
+    const touch = event.changedTouches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    if (touchDuration < 300 && element && draggedElement.contains(element)) {
+        showTaskOverlay(taskTypesKeys[selectedTaskTypeIndex], selectedTaskTypeIndex, selectedTaskIndex);
+    } else if (element) {
+        const dropEvent = new Event('drop', { bubbles: true, cancelable: true });
+        element.dispatchEvent(dropEvent);
     }
-    else { handleTouchEndElse(event) };
 }
 
 

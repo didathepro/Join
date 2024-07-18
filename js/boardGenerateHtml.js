@@ -2,22 +2,22 @@
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-    <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" ontouchstart="startTouchDragging(event, ${i}, ${j})" onclick="showTaskOverlay(${taskTypeString}, ${i}, ${j});">
-    <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
-    <p class="taskTitle text-break">${taskType[j].title}</p>
-    <p class="taskDescription text-break">${taskType[j].description}</p>
-    <div class="d-flex gap-3 align-items-baseline">
-        <div id="${taskTypeString}Progress${j}" style="width: 128px;"></div>
-        <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
-    </div>
-    <div class="d-flex justify-content-between">
-        <div id="${taskTypeString}Assigned${j}" class="d-flex"></div>
-        <div class="iconBox32">
-            <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+    <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" ontouchstart="startTouchDragging(event, ${i}, ${j})" onclick="showTaskOverlay('${taskTypeString}', ${i}, ${j});">
+        <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
+        <p class="taskTitle text-break">${taskType[j].title}</p>
+        <p class="taskDescription text-break">${taskType[j].description}</p>
+        <div class="d-flex gap-3 align-items-baseline">
+            <div id="${taskTypeString}Progress${j}" style="width: 128px;"></div>
+            <p class="m-0 progressText" id="${taskTypeString}ProgressText${j}"></p>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div id="${taskTypeString}Assigned${j}" class="d-flex"></div>
+            <div class="iconBox32">
+                <img src="img/icon/priority${taskType[j].priority}.svg" alt="Priority">
+            </div>
         </div>
     </div>
-</div>
-    `
+    `;
 }
 
 
