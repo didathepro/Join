@@ -400,13 +400,6 @@ async function loadTasks() {
 }
 
 
-/** The function `getInitials` takes a name as input and returns the initials of each word in the name. */
-function getInitials(name) {
-    const names = name.split(' ');
-    return names.map(n => n[0]).join('');
-}
-
-
 /**M The function `toggleDropdown` toggles the visibility of a dropdown menu by adding or removing the 'show' class. */
 function toggleDropdown() {
     const dropdownMenu = document.getElementById('dropdownMenu');

@@ -1,3 +1,12 @@
+/** The `initSummary` function initializes, shows a summary name, and greets the user asynchronously. */
+async function initSummary() {
+    // await init();
+    showSummaryName();
+    greet();
+}
+
+
+
 /** The function `showNumbers` displays the number of tasks, tasks in progress, and tasks awaiting feedback. */
 async function showNumbers() {
     await loadTasks();
@@ -78,3 +87,39 @@ function countUrgentTasks(tasks) {
         dates: urgentDates
     };
 }
+
+
+/** Function to show left-content and hide right-content. */
+function showLeftContent() {
+    document.querySelector('.left-content').style.display = 'block';
+    document.querySelector('.main-header').style.display = 'flex';
+    document.querySelector('.right-content').style.display = 'none';
+}
+
+
+/** Function to show right-content for 3 seconds and then switch to left-content */
+function showRightContentForThreeSeconds() {
+    document.querySelector('.left-content').style.display = 'none';
+    document.querySelector('.right-content').style.display = 'flex';
+    document.querySelector('.main-header').style.display = 'none';
+    setTimeout(showLeftContent, 800);
+}
+
+
+/** Check if viewport width is less than 1150px (mobile view) */
+function checkMobileView() {
+    if (window.innerWidth < 1150) {
+        showRightContentForThreeSeconds();
+    } else {
+        showLeftContent();
+        document.querySelector('.right-content').style.display = 'flex';
+    }
+}
+
+
+/** Call checkMobileView initially when the page loads */
+checkMobileView();
+
+
+/** Listen for window resize events to handle changes in viewport width */
+window.addEventListener('resize', checkMobileView);

@@ -1,12 +1,5 @@
-/** The `initSummary` function initializes, shows a summary name, and greets the user asynchronously. */
-async function initSummary() {
-    await init();
-    showSummaryName();
-    greet();
-}
-
 /** The `init` function includes HTML, adds background, loads users and online status, and sets the current user. */
-async function init() {
+async function initHeaderSidebar() {
     await includeHTML();
     addBg();
     await loadUsers();
@@ -38,6 +31,7 @@ function addBg() {
     defaultIds.forEach(element => { addBgCss(element); });
     responsiveIds.forEach(element => { addBgCss(element); });
 }
+
 
 /** The function `addBgCss` adds a class and disables pointer events on a specified element in the document. */
 function addBgCss(element) {
@@ -96,8 +90,9 @@ async function logOut() {
 function currentUser() {
     let iconName = document.getElementById('navHeader');
     if (loggedInUsers && loggedInUsers.length > 0 && loggedInUsers[0]) {
-        iconName.innerHTML = loggedInUsers[0].charAt(0).toUpperCase();
-    } else {
+        iconName.innerHTML = getInitials(loggedInUsers[0]);
+    }
+    else {
         console.error("No logged in user found");
     }
 }
@@ -109,13 +104,8 @@ function contentToBoard() {
 }
 
 
-/** The function `loadUsers` asynchronously loads a list of logged-in users with a default user initially set. */
-async function loadUsers() {
-    loggedInUsers = ['defaultUser'];
-}
-
-
-/** The function `loadOnlineStatus` is designed to asynchronously load the online status. */
-async function loadOnlineStatus() {
-    // Load online status here
+/** The function `getInitials` takes a name as input and returns the initials of each word in the name. */
+function getInitials(name) {
+    const names = name.split(' ');
+    return names.map(n => n[0]).join('');
 }

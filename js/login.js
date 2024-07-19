@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 
 
 /** The `init` function asynchronously initializes the webpage by adding a CSS class for animation, loading user data and online status, and autofilling a form. */
-async function init() {
+async function initLogin() {
     document.getElementById('imgJoin');
     document.body.classList.add('animation');
     show();
