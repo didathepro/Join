@@ -36,7 +36,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
     const task = taskType[j];
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center titleOfOverlay">
                 <div class="taskOverlayCategory" id="taskOverlayCategory">${task.category}</div>
                 <img src="img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
             </div>    

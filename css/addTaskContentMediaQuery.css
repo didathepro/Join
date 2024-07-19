@@ -176,3 +176,9 @@
         font-size: 2vw;
     }
 }
+
+@media (min-width:1500px){
+    .titleOfOverlay {
+        padding-top:20vh;
+    }
+}

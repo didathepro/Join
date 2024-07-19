@@ -437,7 +437,6 @@ button {
 @media (min-width: 1500px) {
     .taskOverlay {
         height: 80vh;
-        padding: 35vh 40px 10vh 40px;
         overflow-y: auto !important;
     }
 }
