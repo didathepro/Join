@@ -30,37 +30,19 @@
                 <form onsubmit="login(); return false" id="logIn" class="logInForm">
                     <div class="formInputs">
                         <div class="email">
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="Email"
-                                class="inputs emaiInput"
-                                style="border: none;padding-left:10px;"
-                                autocomplete="username"
-                                required />
+                            <input id="email" type="email" placeholder="Email" class="inputs emaiInput"
+                                style="border: none;padding-left:10px;" autocomplete="username" required />
                             <img src="assets/img/mail.png" alt="email" />
                         </div>
                         <div class="password" id="pwError">
-                            <input
-                                id="password"
-                                type="password"
-                                placeholder="Password"
-                                class="inputs passwordInput"
-                                style="border: none;padding-left: 10px;"
-                                autocomplete="current-password"
-                                required />
-                            <img
-                                id="passwordImg"
-                                src="assets/img/lock.png"
-                                alt="lock"
-                                onclick="showPassword()" />
+                            <input id="password" type="password" placeholder="Password" class="inputs passwordInput"
+                                style="border: none;padding-left: 10px;" autocomplete="current-password" required />
+                            <img id="passwordImg" src="assets/img/lock.png" alt="lock" onclick="showPassword()" />
                         </div>
                         <span id="msgBoxLogin" class="msgBoxLogin" style="display: none"></span>
                         <div class="checkbox">
-                            <input
-                                type="checkbox"
-                                id="checkbox"
-                                class="inputCheckbox" /><label class="labelCheckbox" for="checkbox">Remember me</label>
+                            <input type="checkbox" id="checkbox" class="inputCheckbox" /><label class="labelCheckbox"
+                                for="checkbox">Remember me</label>
                         </div>
                     </div>
                     <div class="btns">
