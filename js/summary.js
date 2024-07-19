@@ -3,6 +3,7 @@ async function initSummary() {
     // await init();
     showSummaryName();
     greet();
+    checkMobileView();
 }
 
 
