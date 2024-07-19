@@ -1,11 +1,10 @@
 /** The `initSummary` function initializes, shows a summary name, and greets the user asynchronously. */
 async function initSummary() {
-    // await init();
-    showSummaryName();
+    await initHeaderSidebar()
     greet();
     checkMobileView();
+    showSummaryName();
 }
-
 
 
 /** The function `showNumbers` displays the number of tasks, tasks in progress, and tasks awaiting feedback. */
@@ -17,7 +16,7 @@ async function showNumbers() {
     showNumberOfTasksToDo();
     showNumberOfDoneTasks();
     showNumberOfUrgentTasks();
-};
+}
 
 
 /** The function `showNumberOfTasks` calculates the total number of tasks stored in the `tasks` object and displays it on the webpage. */
