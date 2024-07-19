@@ -189,6 +189,7 @@ button {
     background: #f6f7f8;
     height: 870px;
     border-radius: 30px;
+    overflow-y:auto !important;
 }
 
 .addTaskFloatingBg {
@@ -436,7 +437,7 @@ button {
 
 @media (min-width: 1500px) {
     .taskOverlay {
-        height: 80vh;
+        max-height: 80vh;
         overflow-y: auto !important;
     }
 }

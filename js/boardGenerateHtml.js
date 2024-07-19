@@ -2,7 +2,7 @@
 function generateTaskHtml(taskType, i, j) {
     const taskTypeString = taskTypesKeys[i];
     return /*html*/`
-    <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" ontouchstart="startTouchDragging(event, ${i}, ${j})" onclick="showTaskOverlay('${taskTypeString}', ${i}, ${j});">
+    <div class="task d-flex justify-content-center flex-column" draggable="true" ondragstart="startDragging(${i}, ${j})" ontouchstart="startTouchDragging(event, ${i}, ${j})" onclick="showTaskOverlay('${taskTypeString}', ${i}, ${j})">
         <div class="taskCategory d-flex align-items-center" id="${taskTypeString}Category${j}">${taskType[j].category}</div>
         <p class="taskTitle text-break">${taskType[j].title}</p>
         <p class="taskDescription text-break">${taskType[j].description}</p>
@@ -36,7 +36,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
     const task = taskType[j];
     return /*html*/`
         <div class="taskOverlay d-flex justify-content-center flex-column mb-3">
-            <div class="d-flex justify-content-between align-items-center titleOfOverlay">
+            <div class="d-flex justify-content-between align-items-center">
                 <div class="taskOverlayCategory" id="taskOverlayCategory">${task.category}</div>
                 <img src="img/icon/cross.svg" alt="Cross" onclick="hideTaskOverlay()" class="closeIcon">
             </div>    
