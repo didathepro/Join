@@ -15,6 +15,27 @@ function showSummaryName() {
 }
 
 
+/** The function `greet` sets the inner HTML of an element with the id 'greetingTime' to a greeting based on the current time of day. */
+function greet() {
+    let greeting = defineDayTime();
+    let message = document.getElementById('greetingTime');
+    message.innerHTML = greeting;
+}
+
+
+/** The function `defineDayTime` determines the appropriate greeting based on the current time of day. */
+function defineDayTime() {
+    let today = new Date();
+    let time = today.getHours();
+    let greeting;
+    if (time < 6) { greeting = 'Good night,&nbsp;'; }
+    else if (time < 12) { greeting = 'Good morning,&nbsp;'; }
+    else if (time < 18) { greeting = 'Good afternoon,&nbsp;'; }
+    else if (time < 24) { greeting = 'Good evening,&nbsp;'; };
+    return greeting;
+}
+
+
 /** The function `addBg` adds a dark-blue background and disables pointer events for specific elements on different pages based on the current page URL. */
 function addBg() {
     let currentPage = window.location.pathname;
