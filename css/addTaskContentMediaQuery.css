@@ -1,5 +1,4 @@
 @media only screen and (max-width: 1500px) {
-
     body {
         width: 100%;
         height: 926px;
@@ -127,45 +126,53 @@
         max-width: 428px;
         width: 100%;
     }
-
 }
 
 @media only screen and (max-width:560px) {
     .selectedContacts {
         flex-direction: column;
-        gap:10px;
+        gap: 10px;
     }
+
     .selectedContacts div {
         white-space: nowrap;
-        font-size:4vw;
+        font-size: 4vw;
     }
+
     .addNewTaskTitle {
-        font-size:6vw !important;
+        font-size: 6vw !important;
     }
+
     .createTaskButton {
-        width:30vw;
-        padding-left:4vw;
-        padding-right:2vw;
+        width: 30vw;
+        padding-left: 4vw;
+        padding-right: 2vw;
     }
+
     .createTaskButton p {
-        font-size:4vw;
+        font-size: 4vw;
         white-space: nowrap !important;
     }
+
     .addTaskPriority {
         flex-direction: column !important;
         justify-content: center;
         align-items: center;
     }
+
     .addTaskInput {
-        font-size:3vw;
+        font-size: 3vw;
     }
+
     .selectedContactsBtn {
-        font-size:3vw;
+        font-size: 3vw;
     }
+
     .addTaskRows {
         padding: 0;
     }
+
     .addTaskContentBottom {
-        font-size:2vw;
+        font-size: 2vw;
     }
 }

@@ -137,3 +137,14 @@ function showPasswordConfirm() {
     }
 }
 
+
+/** This event listener checks if you are logged in to get redirected on protected links. */
+document.querySelectorAll('.protected-link').forEach(link => {
+    link.addEventListener('click', function (event) {
+        let isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn !== 'true') {
+            event.preventDefault();
+            alert('You must be logged in to view this page!');
+        }
+    });
+});

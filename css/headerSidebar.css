@@ -37,7 +37,6 @@ header p {
     background-color: #091931;
 }
 
-
 .sidebarItem {
     width: 232px;
     gap: 8px;
@@ -97,7 +96,8 @@ header p {
     width: 104px;
     height: 56px;
     gap: 16px;
-    position: relative; /* Added this line */
+    position: relative;
+    /* Added this line */
 }
 
 .helpIcon {
@@ -124,9 +124,9 @@ header p {
     padding: 10px 4px;
     position: absolute;
     top: 100%;
-    left: 50%; 
-    transform: translateX(-50%); 
-    margin-top: 10px; 
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
 }
 
 .dropdown-container a {
@@ -198,8 +198,9 @@ header p {
 
 @media (max-width: 1500px) {
     .headerProfile {
-        margin-right:10vw;
+        margin-right: 10vw;
     }
+
     .resLogo {
         margin-left: 50px;
         height: 50px;
@@ -281,8 +282,8 @@ header p {
             color-stop(0.86, #acaeb1));
 }
 
-@media (min-width:1500px){
+@media (min-width:1500px) {
     .headerProfile {
-        margin-right:25vw;
+        margin-right: 25vw;
     }
 }

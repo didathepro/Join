@@ -1,5 +1,5 @@
 body {
-    margin:0;
+    margin: 0;
     background-color: #f6f7f8;
 }
 
@@ -22,17 +22,17 @@ body {
 }
 
 .contacts-wrapper {
-    margin-left:230px;
-    margin-top:100px !important;
+    margin-left: 230px;
+    margin-top: 100px !important;
     display: flex;
 }
 
 .contacts-bar {
-    padding-top:35px;
-    box-shadow:0px 2px 10px 0 rgba(0,0,0,0.2);
-    height:90vh;
+    padding-top: 35px;
+    box-shadow: 0px 2px 10px 0 rgba(0, 0, 0, 0.2);
+    height: 90vh;
     background-color: white;
-    padding-left:45px;
+    padding-left: 45px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,34 +53,35 @@ body {
     border: solid 4px transparent;
     border-radius: 14px;
 }
-  /* set button(top and bottom of the scrollbar) */
+
+/* set button(top and bottom of the scrollbar) */
 .contacts-bar::-webkit-scrollbar-button {
     display: none;
-} 
+}
 
 .right-contacts {
     margin-left: 50px;
-    margin-top:50px;
+    margin-top: 50px;
 }
 
 .addContact {
     background-color: #2a3647;
-    color:white;
-    height:40px;
+    color: white;
+    height: 40px;
     display: flex;
     align-items: center;
-    gap:15px;
-    font-size:16px;
+    gap: 15px;
+    font-size: 16px;
     font-weight: 500;
-    border:none;
+    border: none;
     border-radius: 10px;
-    padding:10px 40px;
+    padding: 10px 40px;
     cursor: pointer;
     margin-bottom: 30px;
 }
 
 .addContact img {
-    width:22px;
+    width: 22px;
 }
 
 .addContact:hover {
@@ -90,11 +91,11 @@ body {
 .contact {
     display: flex;
     align-items: center;
-    gap:25px;
-    cursor:pointer;
-    padding:30px 30px;
-    height:50px;
-    margin-bottom:15px;
+    gap: 25px;
+    cursor: pointer;
+    padding: 30px 30px;
+    height: 50px;
+    margin-bottom: 15px;
 }
 
 .contact:hover {
@@ -109,24 +110,24 @@ body {
 .contact-info h3 {
     margin-block-start: 0;
     margin-block-end: 0;
-    font-size:18px;
+    font-size: 18px;
 }
 
 .contact-info h5 {
     margin-block-start: 5px;
     margin-block-end: 0;
-    color:#007cee;
+    color: #007cee;
 }
 
 .right-contacts h1 {
-    border-right:4px solid #29abe2 !important;
+    border-right: 4px solid #29abe2 !important;
 }
 
 .filter {
-    width:100%;
-    border-bottom: 2px solid rgba(0,0,0,0.1);
+    width: 100%;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     padding-bottom: 20px;
-    margin-bottom:8px;
+    margin-bottom: 8px;
 }
 
 .contact-img h2 {
@@ -134,21 +135,21 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color:white;
-    padding:15px;
+    color: white;
+    padding: 15px;
     border-radius: 50%;
-    width:70px;
+    width: 70px;
     height: 70px;
     margin-block-start: 0;
     margin-block-end: 0;
-    outline:5px solid rgba(255, 255, 255, 1);
-    box-shadow:1px 1px 10px rgb(152, 152, 152);
+    outline: 5px solid rgba(255, 255, 255, 1);
+    box-shadow: 1px 1px 10px rgb(152, 152, 152);
 }
 
 .contact-img {
     display: flex;
     align-items: center;
-    gap:50px;
+    gap: 50px;
 }
 
 .name-container {
@@ -164,30 +165,33 @@ body {
 
 .edit-delete {
     display: flex;
-    gap:30px;
+    gap: 30px;
 }
 
-.edit , .delete {
-    display:flex;
-    align-items:center;
-    gap:10px;
-    cursor:pointer;
+.edit,
+.delete {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
 
 .edit:hover svg path,
 .delete:hover svg path,
 .edit:hover h5,
 .delete:hover h5 {
-    fill: #29abe2; /* Change to your desired hover color */
-    color: #29abe2; /* Change to your desired hover color */
+    fill: #29abe2;
+    /* Change to your desired hover color */
+    color: #29abe2;
+    /* Change to your desired hover color */
 }
 
 .blue {
-    color:#007cee !important;
+    color: #007cee !important;
 }
 
 .contact-information h6 {
-    font-size:17px;
+    font-size: 17px;
     margin-block-start: 0;
     margin-block-end: 0;
 }
@@ -195,17 +199,19 @@ body {
 .contact-information h5 {
     padding-bottom: 15px;
     font-size: 18px;
-    padding-top:18px;
+    padding-top: 18px;
 }
 
 .contacts-bar:after {
     content: '';
     display: block;
-    height: calc(100% + 20px); /* Adjusted height */
-    margin-bottom: 40px; /* Negative margin to overlap padding */
-    pointer-events: none; /* Ensure the pseudo-element doesn't interfere with scrolling */
+    height: calc(100% + 20px);
+    /* Adjusted height */
+    margin-bottom: 40px;
+    /* Negative margin to overlap padding */
+    pointer-events: none;
+    /* Ensure the pseudo-element doesn't interfere with scrolling */
 }
-
 
 #contact-container {
     transition: right 0.5s ease-in-out;
@@ -232,27 +238,27 @@ body {
 }
 
 .left-add {
-    width:400px;
+    width: 400px;
     background-color: #2a3647;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-left:40px;
+    padding-left: 40px;
     padding-right: 40px;
     border-radius: 20px 0 0 20px;
 }
 
 .left-add img {
-    width:50px;
+    width: 50px;
     margin-bottom: 20px;
 }
 
 .left-add h4 {
-    font-size:50px;
+    font-size: 50px;
     font-weight: bold !important;
     white-space: nowrap;
-    color:white;
-    padding-top:10px;
+    color: white;
+    padding-top: 10px;
     margin-block-start: 0;
     margin-block-end: 0.3em;
 }
@@ -267,18 +273,18 @@ body {
 }
 
 .left-add::after {
-    content:"";
-    height:3px;
-    width:30%;
+    content: "";
+    height: 3px;
+    width: 30%;
     background-color: #29abe2;
     border-radius: 20px;
 }
 
 .right-add {
-    width:600px;
+    width: 600px;
     display: flex;
     align-items: center;
-    gap:50px;
+    gap: 50px;
 }
 
 .right-add svg {
@@ -286,12 +292,12 @@ body {
     background-color: #d1d1d1;
     padding: 5px;
     border-radius: 50%;
-    outline:5px solid rgba(255, 255, 255, 1);
-    box-shadow:1px 1px 10px rgb(152, 152, 152);
+    outline: 5px solid rgba(255, 255, 255, 1);
+    box-shadow: 1px 1px 10px rgb(152, 152, 152);
 }
 
 .email-container {
-    display:flex;
+    display: flex;
     cursor: pointer;
     margin-top: 10px;
     border-radius: 10px;
@@ -304,11 +310,11 @@ body {
 }
 
 .input_field {
-    border:none;
+    border: none;
 }
 
 .input_field:focus {
-    outline:none;
+    outline: none;
 }
 
 .email-container:focus,
@@ -317,10 +323,10 @@ body {
 }
 
 .buttons-container {
-    margin-top:40px;
+    margin-top: 40px;
     display: flex;
     align-items: center;
-    gap:20px;
+    gap: 20px;
 }
 
 .cancel {
@@ -329,32 +335,32 @@ body {
     background-color: transparent;
     font-size: 20px;
     cursor: pointer;
-    border-radius:8px;
-    border:1px solid #2a3647;
-    padding:10px 15px;
+    border-radius: 8px;
+    border: 1px solid #2a3647;
+    padding: 10px 15px;
 }
 
 .cancel svg {
-    margin-left:10px;
-    height:12px;
-    padding:0;
-    outline:none;
+    margin-left: 10px;
+    height: 12px;
+    padding: 0;
+    outline: none;
     background-color: white;
-    box-shadow:none;
+    box-shadow: none;
 }
 
 .create {
     background-color: #2a3647;
     color: white;
-    font-size:20px;
+    font-size: 20px;
     display: flex;
     align-items: center;
-    gap:10px;
+    gap: 10px;
     cursor: pointer;
-    border-radius:8px;
-    border:none;
-    height:44px;
-    padding:26px 20px;
+    border-radius: 8px;
+    border: none;
+    height: 44px;
+    padding: 26px 20px;
 }
 
 .create:hover {
@@ -362,22 +368,23 @@ body {
 }
 
 .create img {
-    width:15px;
+    width: 15px;
 }
 
-.cancel:hover, .cancel:hover svg path {
-    border:1px solid #29abe2;
-    color:#29abe2;
-    stroke:#29abe2;
+.cancel:hover,
+.cancel:hover svg path {
+    border: 1px solid #29abe2;
+    color: #29abe2;
+    stroke: #29abe2;
 }
 
 .orange-cn {
     background-color: orange;
     font-size: 15px;
     font-weight: 400;
-    color:white;
+    color: white;
     border-radius: 50%;
-    padding:8px;
+    padding: 8px;
 }
 
 #editContactContainer {
@@ -397,7 +404,7 @@ body {
 }
 
 .add-contact {
-    width:28vw;
+    width: 28vw;
 }
 
 @media (max-width:1150px) {
@@ -405,6 +412,7 @@ body {
         overflow-y: hidden;
         overflow-x: hidden;
     }
+
     .right-contacts {
         display: none;
         position: absolute;
@@ -419,68 +427,82 @@ body {
         z-index: 1;
         padding-top: 20px;
     }
+
     .filter {
-        margin-left:30px;
+        margin-left: 30px;
     }
+
     .contacts-bar {
-        width:100%;
-        padding-left:0;
+        width: 100%;
+        padding-left: 0;
     }
+
     .contacts-wrapper {
         margin-left: 0;
     }
-    .contact-info h5  {
-        font-size:14px;
+
+    .contact-info h5 {
+        font-size: 14px;
     }
+
     .addContact {
         display: none;
     }
+
     .addContactIcon {
-        position:absolute;
-        bottom:20vh;
-        right:10vw;
+        position: absolute;
+        bottom: 20vh;
+        right: 10vw;
         border-radius: 50%;
-        padding:15px;
-        border:none;
+        padding: 15px;
+        border: none;
         background-color: #2a3647;
-        cursor:pointer;
+        cursor: pointer;
     }
+
     .right-contacts h1 {
-        font-size:36px;
-        border-right:none !important;
+        font-size: 36px;
+        border-right: none !important;
         margin-block-end: 0.2em;
     }
+
     .contacts-header {
         display: flex;
         flex-direction: column;
         align-items: start;
         margin-bottom: 60px;
     }
+
     .contacts-header h4 {
         padding-left: 0;
     }
+
     .contacts-header h4:after {
         content: "";
-        position:absolute;
-        top:130px;
-        left:21px;
-        height:3px;
+        position: absolute;
+        top: 130px;
+        left: 21px;
+        height: 3px;
         background-color: #29abe2;
-        width:90px;
+        width: 90px;
     }
+
     .arrowBack {
-        position:absolute;
-        right:25px;
-        top:45px;
+        position: absolute;
+        right: 25px;
+        top: 45px;
     }
+
     h5 {
-        font-size:14px;
+        font-size: 14px;
         font-weight: 400;
         margin-block-end: 0;
     }
+
     .edit-delete {
-        display:none;
+        display: none;
     }
+
     .editContactIcon {
         position: absolute;
         bottom: 32vh;
@@ -491,89 +513,106 @@ body {
         background-color: #2a3647;
         cursor: pointer;
     }
-    #editContactContainer, #addContactContainer {
-        width:100vw;
-        height:100vh;
-        top:0;
+
+    #editContactContainer,
+    #addContactContainer {
+        width: 100vw;
+        height: 100vh;
+        top: 0;
         flex-direction: column;
-        overflow-y:hidden;
+        overflow-y: hidden;
     }
+
     .left-add {
-        width:100%;
-        height:40vh;
-        border-radius:0;
+        width: 100%;
+        height: 40vh;
+        border-radius: 0;
     }
+
     .left-add .logoCapa {
         display: none;
     }
+
     .right-add {
         flex-direction: column;
-        width:100%;
-        margin-top:-50px;
+        width: 100%;
+        margin-top: -50px;
     }
+
     .add-contact {
-        width:80vw;
+        width: 80vw;
     }
 
     .buttons-container {
-        margin-top:30px;
+        margin-top: 30px;
         justify-content: center;
     }
+
     .cancel {
         display: none;
     }
+
     .right-add svg {
-        margin-left:0;
+        margin-left: 0;
     }
+
     .contact-img {
-        gap:18px;
+        gap: 18px;
     }
+
     .contact-img h2 {
-        padding:5px;
+        padding: 5px;
     }
+
     #contactsMenu {
         margin-bottom: 10px;
-        margin-right:27px;
+        margin-right: 27px;
     }
+
     .closeIcon {
         cursor: pointer;
-        position:absolute;
-        top:40px;
-        right:30px;
-        width:20px !important;
+        position: absolute;
+        top: 40px;
+        right: 30px;
+        width: 20px !important;
         height: 20px !important;
     }
 }
 
 @media (min-width:1150px) {
     .addContactIcon {
-        display:none;
+        display: none;
     }
+
     .editContactIcon {
-        display:none;
+        display: none;
     }
+
     .resArrow {
-        display:none;
+        display: none;
     }
+
     .closeIcon {
-        display:none;
+        display: none;
     }
 }
 
-@media (max-width:1500px){
+@media (max-width:1500px) {
     .contacts-wrapper {
-        margin-left:0px;
+        margin-left: 0px;
     }
+
     #contactsMenu {
-        padding-bottom:150px;
+        padding-bottom: 150px;
     }
 }
 
-@media (max-width:450px){
+@media (max-width:450px) {
     .contact-info h3 {
-        font-size:12px;
+        font-size: 12px;
     }
+
     .contact {
-        margin-bottom:0px;
+        margin-bottom: 0px;
     }
 }

@@ -1,13 +1,13 @@
 body {
-    margin:0;
-    overflow-x:hidden;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 .help-wrapper {
-    margin-left:300px;
-    margin-top:50px;
+    margin-left: 300px;
+    margin-top: 50px;
     margin-right: 6%;
-    margin-bottom:80px;
+    margin-bottom: 80px;
 }
 
 .help-header h1 {
@@ -15,19 +15,19 @@ body {
 }
 
 .help-header {
-    width:100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.help-header img {    
-    width:40px;
+.help-header img {
+    width: 40px;
     cursor: pointer;
 }
 
 .help-header img:hover {
-    padding:3px;
+    padding: 3px;
     border-radius: 50%;
     background-color: #eeeeee;
 }
@@ -35,14 +35,14 @@ body {
 .how-to {
     display: flex;
     align-items: center;
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 .number {
-    font-size:45px;
+    font-size: 45px;
     font-weight: bold;
     display: flex;
-    align-self:start;
+    align-self: start;
 }
 
 .how-to p {
@@ -56,15 +56,15 @@ body {
 }
 
 .bottom-h2 {
-    font-size:35px;
+    font-size: 35px;
 }
 
 .text-right {
-    padding-left:35px;
+    padding-left: 35px;
 }
 
 b {
-    color:#29abe2;
+    color: #29abe2;
     font-weight: 500;
 }
 
@@ -74,12 +74,13 @@ b {
 
 @media (max-width: 1500px) {
     .help-wrapper {
-        margin-left:20px;
-        margin-top:150px !important;
-        padding-bottom:100px;
+        margin-left: 20px;
+        margin-top: 150px !important;
+        padding-bottom: 100px;
     }
+
     .help-wrapper h2 {
         margin-bottom: 20px;
-        margin-top:10px;
+        margin-top: 10px;
     }
 }

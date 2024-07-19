@@ -1,14 +1,17 @@
-<div id="taskAdded" class="taskAdded position-absolute top-50 start-50 translate-middle d-none d-flex justify-content-between align-items-center">
+<div id="taskAdded"
+    class="taskAdded position-absolute top-50 start-50 translate-middle d-none d-flex justify-content-between align-items-center">
     <p>Task added to board</p>
     <img src="img/icon/board.svg" alt="Board">
 </div>
 <div class="addTaskContent" id="addTaskContent">
     <div class="d-flex align-items-start addTaskTop">
         <h1 class="addNewTaskTitle" id="editTaskTitle">Add Task</h1>
-        <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon d-none" onclick="hideAddTaskFloating()">
+        <img src="img/icon/cross.svg" alt="Cross" id="closeIcon" class="closeIcon d-none"
+            onclick="hideAddTaskFloating()">
     </div>
     <div class="d-flex flex-column justify-content-center">
-        <form onsubmit="addNewTask(); return false;" class="d-flex justify-content-center flex-column align-items-center">
+        <form onsubmit="addNewTask(); return false;"
+            class="d-flex justify-content-center flex-column align-items-center">
             <div class="d-flex addTaskRows">
                 <div class="addTaskContentLeft d-flex flex-column gap-4">
                     <div>
@@ -27,12 +30,14 @@
                     <div>
                         <p>Assigned to</p>
                         <div id="customDropdown" class="customDropdown">
-                            <button type = button onclick="toggleDropdown();updateSelectedContacts();insertContacts()" class="selectedContactsBtn">Select contacts to assign<img  src="./assets/img/arrow_drop_down.png"></button>
+                            <button type=button onclick="toggleDropdown();updateSelectedContacts();insertContacts()"
+                                class="selectedContactsBtn">Select contacts to assign<img
+                                    src="./assets/img/arrow_drop_down.png"></button>
                             <div id="dropdownMenu" class="dropdownMenu">
                             </div>
                         </div>
-                    </div>    
-                    <div id="selectedContacts" class="selectedContacts"></div>                
+                    </div>
+                    <div id="selectedContacts" class="selectedContacts"></div>
                 </div>
                 <div class="addTaskSeperator"></div>
                 <div class="addTaskContentRight d-flex flex-column gap-4">
@@ -46,15 +51,18 @@
                     <div>
                         <p>Prio</p>
                         <div class="d-flex justify-content-between addTaskPriority">
-                            <div class="addTaskPriorityButton" id="addTaskPriorityUrgent" onclick="selectActivePriority('Urgent')">
+                            <div class="addTaskPriorityButton" id="addTaskPriorityUrgent"
+                                onclick="selectActivePriority('Urgent')">
                                 <p>Urgent</p>
                                 <img src="img/icon/priorityUrgent.svg" alt="Urgent" id="addTaskPriorityUrgentIcon">
                             </div>
-                            <div class="addTaskPriorityButton priorityMediumActive" id="addTaskPriorityMedium" onclick="selectActivePriority('Medium')">
+                            <div class="addTaskPriorityButton priorityMediumActive" id="addTaskPriorityMedium"
+                                onclick="selectActivePriority('Medium')">
                                 <p>Medium</p>
                                 <img src="img/icon/priorityMediumWhite.svg" alt="Medium" id="addTaskPriorityMediumIcon">
                             </div>
-                            <div class="addTaskPriorityButton" id="addTaskPriorityLow" onclick="selectActivePriority('Low')">
+                            <div class="addTaskPriorityButton" id="addTaskPriorityLow"
+                                onclick="selectActivePriority('Low')">
                                 <p>Low</p>
                                 <img src="img/icon/priorityLow.svg" alt="Low" id="addTaskPriorityLowIcon">
                             </div>
@@ -74,9 +82,11 @@
                     <div>
                         <p>Subtasks</p>
                         <div class="addTaskInput addTaskSubtasks d-flex justify-content-between align-items-center">
-                            <input id="subtasksField" type="text" placeholder="Add new task" style="border:none;outline:none;">
+                            <input id="subtasksField" type="text" placeholder="Add new task"
+                                style="border:none;outline:none;">
                             <div>
-                                <img src="img/icon/cross.svg" alt="Cross" onclick="clearSubTask()" class="d-none" id="subtasksCross">
+                                <img src="img/icon/cross.svg" alt="Cross" onclick="clearSubTask()" class="d-none"
+                                    id="subtasksCross">
                                 <!-- <img src="img/icon/checkmark_dark.svg" alt="Checkmark" onclick="addSubTask()" class="d-none" id="subtasksCheckmark"> -->
                                 <img src="img/icon/plus-dark.svg" alt="Plus" onclick="addSubTask()" id="subtasksPlus">
                             </div>
@@ -97,7 +107,8 @@
                         <p>Clear</p>
                         <img src="img/icon/cross.svg" alt="Cross">
                     </a>
-                    <button class="d-flex justify-content-center align-items-center createTaskButton gap-2" id="createTaskButton">
+                    <button class="d-flex justify-content-center align-items-center createTaskButton gap-2"
+                        id="createTaskButton">
                         <p>Create Task</p>
                         <img src="img/icon/checkmark.svg" alt="Checkmark">
                     </button>
@@ -105,9 +116,11 @@
             </div>
         </form>
         <div class="save-button">
-        <button class="d-none d-flex justify-content-center align-items-center createTaskButton gap-2" id="saveTaskButton">
-            <p>Save Task</p>
-            <img src="img/icon/checkmark.svg" alt="Checkmark">
-        </button></div>
+            <button class="d-none d-flex justify-content-center align-items-center createTaskButton gap-2"
+                id="saveTaskButton">
+                <p>Save Task</p>
+                <img src="img/icon/checkmark.svg" alt="Checkmark">
+            </button>
+        </div>
     </div>
 </div>

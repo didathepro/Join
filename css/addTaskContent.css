@@ -1,6 +1,5 @@
 body {
     background: #f6f7f8 !important;
-    /* height: 1024px; */
     width: 1440px;
 }
 
@@ -149,12 +148,12 @@ p {
 }
 
 .closeIcon {
-    padding:10px;
+    padding: 10px;
 }
 
 .closeIcon:hover {
     cursor: pointer;
-    padding:10px;
+    padding: 10px;
     background-color: #dbdbdb;
     border-radius: 50%;
 }
@@ -227,7 +226,7 @@ p {
 .subImg img {
     cursor: pointer;
     margin-left: 8px;
-    height:20px;
+    height: 20px;
 }
 
 .taskAdded {
@@ -305,7 +304,7 @@ p {
 .labelEl {
     font-size: 24px;
     cursor: pointer;
-    width:100%;
+    width: 100%;
 }
 
 .subtasksField {
@@ -391,7 +390,7 @@ input[type='checkbox'] {
 }
 
 .save-button {
-    display:flex;
+    display: flex;
     justify-content: right;
-    margin-bottom:15vh;
+    margin-bottom: 15vh;
 }
