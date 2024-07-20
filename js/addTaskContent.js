@@ -66,6 +66,7 @@ async function addNewTask() {
     addTaskClear();
     hideAddTaskFloating();
     subtasks = [];
+    addedTaskAnimation();
 }
 
 
@@ -114,8 +115,7 @@ function generateAddSubTaskHtml() {
                 <img src="assets/img/Vector 19.png">
                 <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
             </div>
-        </li>
-    `
+        </li>`
 }
 
 
@@ -129,8 +129,7 @@ function newSubTaskHTML(selectedSubtask, subtaskText) {
             <img src="assets/img/Vector 19.png">
             <img id="deleteSubtask${selectedSubtask}" onclick="deleteSubTask(${selectedSubtask})" src="assets/img/delete.png">
         </div>
-        </li>
-    `
+        </li>`
 }
 
 
@@ -212,6 +211,7 @@ function insertContactsListeners(dropdownMenu, optionDiv, checkbox, index) {
 }
 
 
+/**M This function resets all checkboxes in the dropDownMenu. */
 function clearAllCheckboxes() {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     checkboxes.forEach(checkbox => checkbox.checked = false);
@@ -339,8 +339,7 @@ function insertContactsHtml(i) {
                 <p>${addTaskContacts[i].name}</p>
             </div>
             <img src="img/icon/checkbox.svg" alt="Checkbox">
-        </option>
-    `
+        </option>`
 }
 
 
@@ -392,7 +391,7 @@ function toggleDropdown() {
 /** The `addedTaskAnimation` function removes the 'd-none' class from an element with the id 'taskAdded' to display it, and then calls the `redirectBoard` function after a delay of 1000 milliseconds. */
 function addedTaskAnimation() {
     document.getElementById('taskAdded').classList.remove('d-none');
-    setTimeout(redirectBoard, 1000);
+    setTimeout(redirectBoard(), 1000);
 }
 
 
