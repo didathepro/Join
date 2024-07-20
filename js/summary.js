@@ -117,9 +117,5 @@ function checkMobileView() {
 }
 
 
-/** Call checkMobileView initially when the page loads */
-
-
-
 /** Listen for window resize events to handle changes in viewport width */
 window.addEventListener('resize', checkMobileView);

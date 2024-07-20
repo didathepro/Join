@@ -83,4 +83,3 @@ function showPasswordConfirm() {
         document.getElementById('passwordImgConfirm').src = "./assets/img/lock.png";
     }
 }
-

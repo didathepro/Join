@@ -1,6 +1,4 @@
-/* The code blow initializes variables for a task management system. It sets the
-selected priority to 'Medium', the selected subtask to 0, and creates an array of task contacts with
-names and colors. */
+/* The code blow initializes variables for a task management system. It sets the selected priority to 'Medium', the selected subtask to 0, and creates an array of task contacts with names and colors. */
 async function addTaskInit() { await loadTasks(); }
 let selectedPriority = 'Medium';
 let selectedSubtask = 0;
@@ -74,7 +72,7 @@ async function addNewTask() {
 /** This function initializes subtasks in the UI. */
 function initSubTask() {
     for (let [index_subtask, current_subtask] of Object.entries(subtasks)) {
-        const newSubTaskHTML = `
+        const newSubTaskHTML = /*html*/`
             <li id="liSub${index_subtask}" class="liSub">
                 <span id="subtaskText${index_subtask}">${current_subtask.title}</span>
                 <div class="subImg">
@@ -93,9 +91,8 @@ function addSubTask() {
     getAddedSubtasks();
     const subtaskInput = document.getElementById('subtasksField');
     const subtaskText = subtaskInput.value.trim();
-    if (subtaskText.length == 0) {
-        alert('Cannot add an empty subtask');
-    } else {
+    if (subtaskText.length == 0) { alert('Cannot add an empty subtask'); }
+    else {
         subtasks.push({ "title": subtaskText });
         const newSubTaskHTML = generateAddSubTaskHtml();
         document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
@@ -145,9 +142,7 @@ function clearSubTask() {
 
 
 /** This function returns a subset of subtasks up to the selected subtask index. */
-function getAddedSubtasks() {
-    return subtasks.slice(0, selectedSubtask);
-}
+function getAddedSubtasks() { return subtasks.slice(0, selectedSubtask); }
 
 
 /**M The function `insertContacts` dynamically populates a dropdown menu with contacts, displaying their initials, names, and checkboxes. */
@@ -182,11 +177,8 @@ function getSelectedContactNames() {
 function restoreSelectedContactNames(selectedContacts) {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
-        if (selectedContacts.includes(checkbox.value)) {
-            checkbox.checked = true;
-        } else {
-            checkbox.checked = false;
-        }
+        if (selectedContacts.includes(checkbox.value)) { checkbox.checked = true; }
+        else { checkbox.checked = false; }
     });
 }
 
@@ -245,9 +237,7 @@ function updateSelectedContacts() {
     const selectedOptions = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
     selectedContactsDiv.innerHTML = '';
-    selectedOptions.forEach(name => {
-        updateSelectedContactsAttributes(selectedContactsDiv, name);
-    });
+    selectedOptions.forEach(name => { updateSelectedContactsAttributes(selectedContactsDiv, name); });
 }
 
 
@@ -270,11 +260,8 @@ function updateSelectedContactsAttributes(selectedContactsDiv, name) {
 /**M The function `updateFootnotesVisibility` toggles the visibility of a given element based on the length of selected options. */
 function updateFootnotesVisibility(footnotes, selectedOptions) {
     if (footnotes) {
-        if (selectedOptions.length > 0) {
-            footnotes.style.visibility = 'hidden';
-        } else {
-            footnotes.style.visibility = 'visible';
-        }
+        if (selectedOptions.length > 0) { footnotes.style.visibility = 'hidden'; }
+        else { footnotes.style.visibility = 'visible'; }
     }
 }
 
@@ -302,17 +289,14 @@ function saveSubtask(id) {
             <img src="assets/img/edit.png" onclick="editSubtask(${id})">
             <img src="assets/img/Vector 19.png">
             <img src="assets/img/delete.png" onclick="deleteSubTask(${id})">
-        </div>
-    `;
+        </div>`;
     subtasks[id] = newText;
 }
 
 
 /**M The function `handleKeyPress` takes an event and an id as parameters, and if the key pressed is* equal to `imgCheck`, it calls the `saveSubtask` function with the provided id. */
 function handleKeyPress(event, id) {
-    if (event.key === imgCheck) {
-        saveSubtask(id);
-    }
+    if (event.key === imgCheck) { saveSubtask(id); }
 }
 
 
@@ -330,7 +314,7 @@ function updateSubtaskElements() {
     const subTasksContainer = document.getElementById('addedSubTasks');
     subTasksContainer.innerHTML = '';
     subtasks.forEach((subtask, index) => {
-        const newSubTaskHTML = `
+        const newSubTaskHTML = /*html*/`
             <li id="liSub${index}" class="liSub">
                 <span id="subtaskText${index}">${subtask.title}</span>
                 <div class="subImg">
@@ -366,9 +350,7 @@ function getSelectedAssigned() {
     const selectedOptions = Array.from(checkboxes).map(checkbox => checkbox.value);
     const selectedContactsDiv = document.getElementById('selectedContacts');
     selectedContactsDiv.innerHTML = '';
-    selectedOptions.forEach(name => {
-        getSelectedAssignedAttributes(selectedContactsDiv, name);
-    });
+    selectedOptions.forEach(name => { getSelectedAssignedAttributes(selectedContactsDiv, name); });
     return selectedOptions;
 }
 
@@ -403,9 +385,7 @@ async function loadTasks() {
 /**M The function `toggleDropdown` toggles the visibility of a dropdown menu by adding or removing the 'show' class. */
 function toggleDropdown() {
     const dropdownMenu = document.getElementById('dropdownMenu');
-    if (dropdownMenu) {
-        dropdownMenu.classList.toggle('show');
-    }
+    if (dropdownMenu) { dropdownMenu.classList.toggle('show'); }
 }
 
 
@@ -417,6 +397,4 @@ function addedTaskAnimation() {
 
 
 /** The function `redirectBoard` redirects the user to the "board.html" page. */
-function redirectBoard() {
-    window.location.href = "board.html";
-}
+function redirectBoard() { window.location.href = "board.html"; }

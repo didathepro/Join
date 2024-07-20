@@ -3,7 +3,6 @@ let subtasks = [];
 const taskTypesKeys = Object.keys(tasks);
 let currentlyDraggedCategory;
 let currentlyDraggedId;
-let isDragging = false;
 let selectedType = 'tasksToDo';
 let selectedTaskTypeIndex;
 let selectedTaskIndex;
@@ -24,9 +23,7 @@ async function boardInit() {
 /** The `clearBoard` function clears the content of HTML elements identified by keys in the `taskTypesKeys` array. */
 function clearBoard() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
-        if (document.getElementById(taskTypesKeys[i])) {
-            document.getElementById(taskTypesKeys[i]).innerHTML = '';
-        }
+        if (document.getElementById(taskTypesKeys[i])) { document.getElementById(taskTypesKeys[i]).innerHTML = ''; }
     }
 }
 
@@ -36,9 +33,8 @@ function iterateTaskTypes() {
     for (let i = 0; i < taskTypesKeys.length; i++) {
         if (tasks[taskTypesKeys[i]].length <= 0) {
             document.getElementById(`${taskTypesKeys[i]}`).innerHTML = generateNoTasksHtml();
-        } else {
-            iterateTasks(tasks[taskTypesKeys[i]], i);
         }
+        else { iterateTasks(tasks[taskTypesKeys[i]], i); }
     }
 }
 
@@ -120,10 +116,7 @@ function insertTaskProgress(i, j) {
 
 
 /** The function `startDragging` sets the currently dragged category and ID when an item is being dragged. */
-function startDragging(i, j) {
-    currentlyDraggedCategory = i;
-    currentlyDraggedId = j;
-}
+function startDragging(i, j) { currentlyDraggedCategory, currentlyDraggedId = i, j; }
 
 
 /** The function `allowDrop` prevents the default behavior of an event. */
@@ -138,6 +131,7 @@ async function changeCategory(category) {
     await setItem('tasks', tasks);
     boardInit();
 }
+
 
 /** Initiates touch dragging and adds event listeners */
 function startTouchDragging(event, i, j) {
@@ -166,6 +160,7 @@ function handleTouchMove(event) {
     }
 }
 
+
 /** Simulates drop event at the end of touch dragging */
 function handleTouchEnd(event) {
     document.removeEventListener('touchmove', handleTouchMove);
@@ -174,7 +169,6 @@ function handleTouchEnd(event) {
     const touchDuration = touchEndTime - touchStartTime;
     const touch = event.changedTouches[0];
     const element = document.elementFromPoint(touch.clientX, touch.clientY);
-
     if (touchDuration < 300 && element && draggedElement.contains(element)) {
         showTaskOverlay(taskTypesKeys[selectedTaskTypeIndex], selectedTaskTypeIndex, selectedTaskIndex);
     } else if (element) {
@@ -272,97 +266,6 @@ function hideTaskOverlay() {
 }
 
 
-/**M The `deleteTask` function deletes a selected task from the tasks list and updates the board display. */
-async function deleteTask() {
-    if (typeof selectedTaskTypeIndex !== 'number' || typeof selectedTaskIndex !== 'number') {
-        console.error('Invalid task selection');
-        return;
-    }
-    const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
-    const taskType = tasks[taskTypeKey];
-    if (!taskType || selectedTaskIndex >= taskType.length) {
-        console.error('Invalid task index');
-        return;
-    }
-    taskType.splice(selectedTaskIndex, 1);
-    await setItem('tasks', tasks);
-    boardInit();
-    hideTaskOverlay();
-}
-
-
-/**M The `editTask` function is used to populate a form with the details of a selected task for editing. */
-function editTask() {
-    document.getElementById('addedSubTasks').innerHTML = '';
-    hideTaskOverlay();
-    const taskTypeKey = taskTypesKeys[selectedTaskTypeIndex];
-    const taskType = tasks[taskTypeKey];
-    const selectedTask = taskType[selectedTaskIndex];
-    selectedType = taskTypeKey;
-    editTaskHtml(selectedTask);
-    showAddTaskFloating(taskTypeKey);
-    selectActivePriority(selectedTask.priority);
-    selectedTask.assigned.forEach(name => {
-        const checkbox = document.getElementById(name);
-        if (checkbox) { checkbox.checked = true; }
-    });
-    editTaskPush(selectedTask);
-    editTaskButtons(taskTypeKey);
-}
-
-
-/**M The function `editTaskHtml` updates the HTML elements with the details of a selected task for editing.*/
-function editTaskHtml(selectedTask) {
-    document.getElementById('editTaskTitle').innerHTML = "Edit Task";
-    document.getElementById('addTaskContent').style.marginTop = 0;
-    document.getElementById('newTaskTitle').value = selectedTask.title;
-    document.getElementById('newTaskDescription').value = selectedTask.description;
-    document.getElementById('newTaskCategory').value = selectedTask.category;
-    document.getElementById('newTaskDate').value = selectedTask.date;
-}
-
-
-/**M The function `editTaskButtons` updates the text and functionality of save and cancel buttons for editing a task. */
-function editTaskButtons(taskTypeKey) {
-    const createButton = document.getElementById('createTaskButton');
-    createButton.classList.add('d-none');
-    const saveButton = document.getElementById('saveTaskButton');
-    saveButton.classList.remove('d-none');
-    saveButton.onclick = function () { saveEditedTask(taskTypeKey, selectedTaskIndex); };
-    const cancelButton = document.createElement('button');
-    cancelButton.innerText = 'Cancel';
-    cancelButton.classList.add('cancelButton');
-    cancelButton.onclick = function () { hideAddTaskFloating(); };
-}
-
-
-/**M The function `editTaskPush` iterates over the subtasks of a selected task and pushes them into a global `subtasks` array. */
-function editTaskPush(selectedTask) {
-    if (selectedTask.subtasks && selectedTask.subtasks.length > 0) {
-        selectedSubtask = selectedTask.subtasks.length;
-        selectedTask.subtasks.forEach(subtask => { subtasks.push(subtask); });
-        initSubTask();
-    }
-}
-
-
-/**M The function `saveEditedTask` updates the properties of a task object based on user input and saves the changes to local storage. */
-async function saveEditedTask(taskTypeKey, taskIndex) {
-    const task = tasks[taskTypeKey][taskIndex];
-    task.title = document.getElementById('newTaskTitle').value;
-    task.description = document.getElementById('newTaskDescription').value;
-    task.category = document.getElementById('newTaskCategory').value;
-    task.date = document.getElementById('newTaskDate').value;
-    task.priority = selectedPriority;
-    const assignedCheckboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]:checked');
-    task.assigned = Array.from(assignedCheckboxes).map(checkbox => checkbox.value);
-    task.subtasks = getAddedSubtasks();
-    await setItem('tasks', tasks);
-    boardInit();
-    hideAddTaskFloating();
-}
-
-
 /** The function `setTaskOverlayColor` sets the background color of a task overlay based on its priority and category. */
 function setTaskOverlayColor(i, j) {
     const taskTypeString = taskTypesKeys[i];
@@ -395,9 +298,7 @@ function insertTaskOverlayAssigned(i, j) {
                     ${getInitials(tasks[taskTypeString][j].assigned[k])}
                 </div>
                 <div><h5 class="fw-normal">${assignee}</h5></div>
-            </div>
-            `
-        });
+            </div>`});
     }
 }
 
@@ -465,12 +366,8 @@ function enableScrolling() {
 
 
 /** The function `highlightColumn` alters the background color of a column. */
-function highlightColumn(type) {
-    document.getElementById(`boardCategory-${type}`).classList.add('drag-area-highlight');
-}
+function highlightColumn(type) { document.getElementById(`boardCategory-${type}`).classList.add('drag-area-highlight'); }
 
 
 /** The function `resetColumn` resets the background color of a column. */
-function resetColumn(type) {
-    document.getElementById(`boardCategory-${type}`).classList.remove('drag-area-highlight');
-}
+function resetColumn(type) { document.getElementById(`boardCategory-${type}`).classList.remove('drag-area-highlight'); }

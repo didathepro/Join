@@ -189,7 +189,7 @@ button {
     background: #f6f7f8;
     height: 870px;
     border-radius: 30px;
-    overflow-y:auto !important;
+    overflow-y: auto !important;
 }
 
 .addTaskFloatingBg {
@@ -221,7 +221,6 @@ button {
     font-size: 23px !important;
     border-radius: 8px;
     color: #fff;
-    width: auto;
     width: fit-content;
     padding: 4px 24px 4px 24px;
 }
@@ -277,135 +276,6 @@ button {
 
 .addButtonMobile {
     display: none;
-}
-
-@media only screen and (max-width: 1500px) {
-    .boardHeader {
-        margin: 128px 0 32px 0;
-        padding: 0 16px 0 16px;
-        height: 144px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-    }
-
-    .boardContent {
-        margin: 0;
-        height: auto;
-        flex-direction: column;
-        padding: 0 16px 128px 16px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .boardHeaderMiddle {
-        align-items: start;
-        gap: 16px;
-        flex-direction: column;
-        width: 100%;
-        max-width: 960px;
-    }
-
-    .addTask {
-        display: none;
-    }
-
-    .addTaskSmall {
-        display: flex;
-    }
-
-    .searchAddArea {
-        flex-direction: column-reverse;
-        gap: 32px
-    }
-
-    .addTaskFloatingBg {
-        width: 100%;
-    }
-
-    .addTaskFloating {
-        overflow: scroll;
-        height: 72vh;
-    }
-
-    .titleAddTaskSmall {
-        justify-content: space-between;
-        width: 100%;
-        max-width: 428px;
-    }
-
-    .searchAddArea {
-        width: 100%;
-    }
-
-    .searchBackground {
-        width: 100%;
-        margin: 0;
-        max-width: 428px;
-    }
-
-    .searchContent {
-        justify-content: space-between;
-        width: 100%;
-        padding: 0 8px 0 8px;
-    }
-
-    .boardColumn {
-        display: flex;
-        max-width: 960px;
-        width: 100%;
-        margin-bottom: 8px;
-        border: 1px solid rgba(0, 0, 0, 0.02);
-    }
-
-    .task {
-        min-width: 252px;
-        max-width: 252px;
-        user-select: none;
-        margin: 8px;
-        justify-content: start;
-    }
-
-    .emptyTask {
-        margin: 8px;
-    }
-
-    .searchBar {
-        width: 100%;
-    }
-
-    .addTaskButtonText {
-        display: none;
-    }
-
-    .addCategory {
-        max-width: 428px;
-    }
-
-    .boardCategory {
-        width: 100%;
-        max-width: 960px;
-        align-items: start;
-    }
-
-    .addButton {
-        display: none;
-    }
-
-    .addButtonMobile {
-        display: flex;
-        height: 24px;
-        width: 24px;
-        border: 2px solid #2a3647;
-        border-radius: 8px;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #taskOverlay {
-        max-width: 98%;
-    }
 }
 
 .drag-area-highlight {
