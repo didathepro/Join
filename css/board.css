@@ -202,7 +202,7 @@ button {
     z-index: 1000;
 }
 
-.taskOverlay {
+#taskOverlay {
     width: 525px;
     background: #fff;
     border-radius: 30px;
@@ -210,10 +210,10 @@ button {
     padding: 48px 40px 48px 40px;
     gap: 24px;
     overflow-y: auto !important;
+    max-height: 75vh;
 }
 
-.taskOverlay p {
-    margin: 0;
+#taskOverlay p {
     font-size: 20px;
 }
 
@@ -329,11 +329,6 @@ button {
         height: 72vh;
     }
 
-    .taskOverlay {
-        min-width: 320px;
-        width: 100%;
-    }
-
     .titleAddTaskSmall {
         justify-content: space-between;
         width: 100%;
@@ -409,14 +404,7 @@ button {
     }
 
     #taskOverlay {
-        z-index: 2;
-        margin-top: 35vh !important;
-        overflow: auto;
-        max-height: 80vh;
-    }
-
-    .taskOverlay {
-        overflow: auto !important;
+        max-width: 98%;
     }
 }
 
@@ -433,11 +421,4 @@ button {
     display: flex;
     flex-direction: column !important;
     gap: 20px;
-}
-
-@media (min-width: 1500px) {
-    .taskOverlay {
-        max-height: 80vh;
-        overflow-y: auto !important;
-    }
 }
