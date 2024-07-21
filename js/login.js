@@ -34,12 +34,12 @@ function showMatchingTimeouts(box, bodyAnimation, img) {
     setTimeout(() => { bodyAnimation.style.display = 'none' }, 0);
     setTimeout(() => {
         document.body.style.backgroundColor = "#2b3646";
-        img.src = './assets/img/joinwhite.png'
+        img.src = 'img/logo.svg'
     }, 10);
     setTimeout(() => {
         box.style.display = 'flex';
         document.body.style.backgroundColor = '#f6f7f8';
-        img.src = './assets/img/joinblue.png'
+        img.src = 'img/logoBlue.svg'
     }, 1000);
     setTimeout(() => { bodyAnimation.style.display = 'block' }, 1500)
 }
@@ -55,7 +55,7 @@ async function login() {
         await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
         window.location.href = "summary.html";
     } else {
-        document.getElementById('msgBoxLogin').innerHTML = 'Password Incorrect!!!';
+        document.getElementById('msgBoxLogin').innerHTML = 'Password Incorrect!';
         document.getElementById('msgBoxLogin').style.display = 'flex';
         document.getElementById('pwError').classList.add('pwError');
         localStorage.setItem('isLoggedIn', 'false');
