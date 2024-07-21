@@ -95,7 +95,7 @@ function addSubTask() {
     if (subtaskText.length == 0) { alert('Cannot add an empty subtask'); }
     else {
         subtasks.push({ "title": subtaskText });
-        const newSubTaskHTML = generateAddSubTaskHtml();
+        const newSubTaskHTML = generateAddSubTaskHtml(subtaskText);
         document.getElementById('addedSubTasks').insertAdjacentHTML('beforeend', newSubTaskHTML);
         selectedSubtask++;
     }
@@ -106,7 +106,7 @@ function addSubTask() {
 
 
 /** This function generates and return the HTML for the addSubTask funtion.  */
-function generateAddSubTaskHtml() {
+function generateAddSubTaskHtml(subtaskText) {
     return /*html*/`
         <li id="liSub${selectedSubtask}" class="liSub">
             <span id="subtaskText${selectedSubtask}">${subtaskText}</span>
