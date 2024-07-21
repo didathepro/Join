@@ -171,6 +171,12 @@
 }
 
 @media (min-width:1150px) {
+    #editContactContainer {
+        left:18vw;
+        width:50vw;
+        min-width:980px;
+        max-width: 1000px;
+    }
     .addContactIcon {
         display: none;
     }
