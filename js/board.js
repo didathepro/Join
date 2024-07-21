@@ -212,6 +212,12 @@ function hideAddTaskFloating() {
         document.getElementById('addTaskFloating').classList.add('d-none');
         document.getElementById('addTaskFloatingBg').classList.add('d-none');
         enableScrolling();
+        addTaskClear();
+        document.getElementById('editTaskTitle').innerHTML = "Add Task";
+        const createButton = document.getElementById('createTaskButton');
+        createButton.classList.remove('d-none');
+        const saveButton = document.getElementById('saveTaskButton');
+        saveButton.classList.add('d-none');
     }
 }
 
