@@ -13,9 +13,8 @@ p {
 }
 
 .addTaskTemplate {
-    margin-left: 232px;
-    padding: 128px 0px 0px 128px;
-    /* background: #f6f7f8; */
+    margin-left: 176px;
+    padding: 64px 0 0 128px;
     height: 924px;
 }
 
@@ -207,6 +206,7 @@ p {
 
 .addNewTaskTitle {
     margin-bottom: 64px;
+    margin-top: 0;
 }
 
 .addTaskRows {

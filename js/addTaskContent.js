@@ -391,9 +391,5 @@ function toggleDropdown() {
 /** The `addedTaskAnimation` function removes the 'd-none' class from an element with the id 'taskAdded' to display it, and then calls the `redirectBoard` function after a delay of 1000 milliseconds. */
 function addedTaskAnimation() {
     document.getElementById('taskAdded').classList.remove('d-none');
-    setTimeout(redirectBoard(), 1000);
+    setTimeout(window.location.href = "board.html", 1000);
 }
-
-
-/** The function `redirectBoard` redirects the user to the "board.html" page. */
-function redirectBoard() { window.location.href = "board.html"; }

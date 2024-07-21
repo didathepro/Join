@@ -116,7 +116,10 @@ function insertTaskProgress(i, j) {
 
 
 /** The function `startDragging` sets the currently dragged category and ID when an item is being dragged. */
-function startDragging(i, j) { currentlyDraggedCategory, currentlyDraggedId = i, j; }
+function startDragging(i, j) {
+    currentlyDraggedCategory = i;
+    currentlyDraggedId = j;
+}
 
 
 /** The function `allowDrop` prevents the default behavior of an event. */
