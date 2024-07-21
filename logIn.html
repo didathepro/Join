@@ -62,6 +62,11 @@
         </section>
     </section>
     <span id="msgBoxLogin" class="msgBoxLogin" style="display: none"></span>
+    <script>
+        document.querySelectorAll('.protected-link').forEach(link => {
+            link.removeAttribute('href');
+        });
+    </script>
 </body>
 
 </html>
