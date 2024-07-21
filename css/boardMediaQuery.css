@@ -124,5 +124,6 @@
 
     #taskOverlay {
         max-width: 98%;
+        max-height:72vh;
     }
 }
