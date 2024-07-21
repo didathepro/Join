@@ -181,7 +181,7 @@ function getSelectedContactNames() {
 }
 
 
-// Function to restore selected contact names
+/** This function is used to restore the selected contact names. */
 function restoreSelectedContactNames(selectedContacts) {
     const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
     checkboxes.forEach(checkbox => {
@@ -213,9 +213,7 @@ function insertContactsAttributes(contact, optionDiv, initialsDiv, checkbox, lab
 function insertContactsListeners(dropdownMenu, optionDiv, checkbox, index) {
     dropdownMenu.appendChild(optionDiv);
     document.addEventListener('mouseup', function (e) {
-        if (!dropdownMenu.contains(e.target)) {
-            dropdownMenu.classList.remove('show');
-        }
+        if (!dropdownMenu.contains(e.target)) { dropdownMenu.classList.remove('show'); }
     });
 }
 
@@ -304,9 +302,7 @@ function saveSubtask(id) {
 
 
 /**M The function `handleKeyPress` takes an event and an id as parameters, and if the key pressed is* equal to `imgCheck`, it calls the `saveSubtask` function with the provided id. */
-function handleKeyPress(event, id) {
-    if (event.key === imgCheck) { saveSubtask(id); }
-}
+function handleKeyPress(event, id) { if (event.key === imgCheck) { saveSubtask(id); } }
 
 
 /** This function deletes a subtask. */
