@@ -162,6 +162,13 @@ function insertContacts() {
     restoreSelectedContactNames(selectedContacts);
 }
 
+function clearSelectedContacts() {
+    // Clear the checkboxes in the dropdown menu
+    const checkboxes = document.querySelectorAll('#dropdownMenu input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+}
 
 // Function to get currently selected contact names
 function getSelectedContactNames() {

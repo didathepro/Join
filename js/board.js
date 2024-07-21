@@ -213,6 +213,7 @@ function hideAddTaskFloating() {
         document.getElementById('addTaskFloatingBg').classList.add('d-none');
         enableScrolling();
         addTaskClear();
+        clearSelectedContacts();
         document.getElementById('editTaskTitle').innerHTML = "Add Task";
         const createButton = document.getElementById('createTaskButton');
         createButton.classList.remove('d-none');
