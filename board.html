@@ -25,10 +25,10 @@
 </head>
 
 <body class="m-0" onload="boardInit(); initHeaderSidebar();">
-    <div w3-include-html="headerSidebar.html"></div>
+    <div w3-include-html="htmlTemplates/headerSidebar.html"></div>
     <div class="d-none addTaskFloatingBg d-flex justify-content-center align-items-center position-fixed"
         id="addTaskFloatingBg">
-        <div w3-include-html="addTaskContent.html" class="d-none addTaskFloating" id="addTaskFloating"></div>
+        <div w3-include-html="htmlTemplates/addTaskContent.html" class="d-none addTaskFloating" id="addTaskFloating"></div>
     </div>
     <div class="d-none position-fixed top-50 start-50 translate-middle" id="taskOverlay"></div>
     <div class="boardHeader">

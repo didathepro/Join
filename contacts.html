@@ -19,25 +19,25 @@
 </head>
 
 <body onload="showContacts(); initHeaderSidebar()">
-    <div w3-include-html="./headerSidebar.html"></div>
+    <div w3-include-html="htmlTemplates/headerSidebar.html"></div>
     <div id="addContactContainer" class="hidden"></div>
     <div id="editContactContainer" class="hidden"></div>
     <div class="contacts-wrapper">
         <div id="contacts-bar" class="contacts-bar">
             <button class="addContact" onclick="addNewContact();"> Add new contact <img
-                    src="./assets/img/person_add.png" />
+                    src="assets/img/person_add.png" />
             </button>
             <div id="contactsMenu"></div>
         </div>
         <button class="addContactIcon" onclick="addNewContact();">
-            <img src="./assets/img/person_add.png" />
+            <img src="assets/img/person_add.png" />
         </button>
         <div id="right-contacts" class="right-contacts">
             <div class="contacts-header">
                 <h1>Contacts</h1>
                 <h4>Better with a team</h4>
             </div>
-            <a class="arrowBack" href="./contacts.html"><img class="resArrow" src="./assets/img/arrow-left-line.png"
+            <a class="arrowBack" href="contacts.html"><img class="resArrow" src="assets/img/arrow-left-line.png"
                     alt="" /></a>
             <div id="contact-container"></div>
         </div>
