@@ -101,7 +101,7 @@ function addSubTask() {
         selectedSubtask++;
     }
     subtaskInput.value = '';
-    subtaskInput.style.color = '#D1D1D1';
+    subtaskInput.style.color = '#000';
     subtaskInput.placeholder = 'Add new task';
 }
 
