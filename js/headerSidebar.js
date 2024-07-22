@@ -114,7 +114,6 @@ function currentUser() {
         iconName.innerHTML = getInitials(loggedInUsers[0]);
     }
     else {
-        console.error("No logged in user found");
         hideSidebarLinks();
     }
 }
