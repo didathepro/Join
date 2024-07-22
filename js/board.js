@@ -16,7 +16,6 @@ async function boardInit() {
     await loadTasks();
     clearBoard();
     iterateTaskTypes();
-    insertContacts();
 }
 
 

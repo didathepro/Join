@@ -69,7 +69,7 @@ function generateTaskOverlayHtml(taskType, i, j) {
             <div class="overlaytasksBtns">
                 <button class="overlayDelete" onclick="deleteTask()">Delete  <img class="overlayDeleteImg" src="assets/img/delete.png"></button>
                 <img src="assets/img/Vector 3.png">
-                <button class="overlayEdit" onclick="editTask(); selectedTask(${i}, ${j});" id="editTaskButton">Edit  <img class="overlayEditImg" src="assets/img/edit.png"></button>
+                <button class="overlayEdit" onclick="editTask(); selectedTask(${i}, ${j});insertContacts();" id="editTaskButton">Edit  <img class="overlayEditImg" src="assets/img/edit.png"></button>
             </div>
         </div>
     `;
