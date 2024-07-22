@@ -101,7 +101,7 @@ async function logOut() {
     try {
         loggedInUsers.length = 0;
         await setItem('loggedInUsers', JSON.stringify(loggedInUsers));
-        window.location.href = "../logIn.html";
+        window.location.href = "logIn.html";
     }
     catch (error) { console.error("Logout failed:", error); }
 }
