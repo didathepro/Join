@@ -133,7 +133,6 @@ function newSubTaskHTML(selectedSubtask, subtaskText) {
         </li>`
 }
 
-
 /** The function clearSubTask resets subtask icons, changes the text color to gray, and sets the inner HTML to "Add new task". */
 function clearSubTask() {
     document.getElementById('subtasksField').style.color = '#D1D1D1';
@@ -277,14 +276,15 @@ function updateFootnotesVisibility(footnotes, selectedOptions) {
 /**M The `editSubtask` function allows users to edit a subtask by replacing the text element with an input field. */
 function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
-    if (document.getElementById(`deleteSubtask${id}`)) {
-        document.getElementById(`deleteSubtask${id}`).src = "assets/img/check.png"
-    }
+    const editIcon = document.getElementById(`editSubtask${id}`);
+    editIcon.src = "assets/img/check.png";
+    editIcon.style.height ="18px";
+    editIcon.style.width ="auto";
+    
     const currentText = subtaskElement.innerText;
     subtaskElement.outerHTML = `<input type="text" id="subtaskInput${id}" value="${currentText}" onblur="saveSubtask(${id})" onkeypress="handleKeyPress(event, ${id})" />`;
     document.getElementById(`subtaskInput${id}`).focus();
 }
-
 
 /**M The `saveSubtask` function updates the text of a subtask element based on user input and saves the changes. */
 function saveSubtask(id) {
@@ -294,17 +294,19 @@ function saveSubtask(id) {
     liElement.innerHTML = /*html*/`
         <span id="subtaskText${id}" onclick="editSubtask(${id})">${newText}</span>
         <div class="subImg">
-            <img src="assets/img/edit.png" onclick="editSubtask(${id})">
+            <img id="editSubtask${id}" src="assets/img/edit.png" onclick="editSubtask(${id})">
             <img src="assets/img/Vector 19.png">
-            <img src="assets/img/delete.png" onclick="deleteSubTask(${id})">
+            <img id="deleteSubtask${id}" onclick="deleteSubTask(${id})" src="assets/img/delete.png">
         </div>`;
-    subtasks[id] = newText;
+    subtasks[id].title = newText;
 }
 
-
-/**M The function `handleKeyPress` takes an event and an id as parameters, and if the key pressed is* equal to `imgCheck`, it calls the `saveSubtask` function with the provided id. */
-function handleKeyPress(event, id) { if (event.key === imgCheck) { saveSubtask(id); } }
-
+// Function to handle key press events
+function handleKeyPress(event, id) {
+    if (event.key === 'Enter') {
+        saveSubtask(id);
+    }
+}
 
 /** This function deletes a subtask. */
 function deleteSubTask(id) {
@@ -324,15 +326,14 @@ function updateSubtaskElements() {
             <li id="liSub${index}" class="liSub">
                 <span id="subtaskText${index}">${subtask.title}</span>
                 <div class="subImg">
-                    <img id="editSubtask${index}" onclick="editSubtask(${index})" src="assets/img/edit.png">
+                    <img id="editSubtask${index}" src="assets/img/edit.png" onclick="editSubtask(${index})">
                     <img src="assets/img/Vector 19.png">
-                    <img id="deleteSubtask${index}" onclick="deleteSubTask(${index})" src="assets/img/delete.png">
+                    <img id="deleteSubtask${index}" src="assets/img/delete.png" onclick="deleteSubTask(${index})">
                 </div>
             </li>`;
         subTasksContainer.insertAdjacentHTML('beforeend', newSubTaskHTML);
     });
 }
-
 
 /** The function `insertContactsHtml` generates HTML options for a select element based on contact data. */
 function insertContactsHtml(i) {
