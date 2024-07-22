@@ -115,6 +115,7 @@ function currentUser() {
     }
     else {
         console.error("No logged in user found");
+        hideSidebarLinks();
     }
 }
 
@@ -129,4 +130,10 @@ function contentToBoard() {
 function getInitials(name) {
     const names = name.split(' ');
     return names.map(n => n[0]).join('');
+}
+
+function hideSidebarLinks () {
+    document.getElementById('headerProfile').classList.add('d-none');
+    document.getElementById('sidebarItems').classList.add('d-none');
+    document.getElementById('resContainer').classList.add('d-none');
 }

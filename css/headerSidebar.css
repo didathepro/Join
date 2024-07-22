@@ -287,3 +287,7 @@ header p {
         margin-right: 25vw;
     }
 }
+
+.d-none {
+    display:none;
+}

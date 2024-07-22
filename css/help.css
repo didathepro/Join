@@ -15,6 +15,7 @@ body {
 }
 
 .help-header {
+    margin-top:15vh;
     width: 100%;
     display: flex;
     justify-content: space-between;
