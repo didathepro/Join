@@ -13,10 +13,13 @@ async function initReg() {
 
 /** This function checks if both passwords are identical and then saves the information. */
 async function register() {
+    const errorMsg = document.getElementById('errorMsg');
     if (passwordReg.value !== passwordConfirmReg.value) {
-        alert('Passwords are not the same');
+        errorMsg.innerHTML = 'Passwords do not match';
+        errorMsg.style.display = 'block';
         return;
     }
+    errorMsg.style.display = 'none';  // Hide error message if passwords match
     signBtn.disabled = true;
     users.push({
         name: namesReg.value,
@@ -28,6 +31,7 @@ async function register() {
     resetForm();
     backToLogin();
 }
+
 
 /** This function generates a message if the signup was successful. */
 function msg() {
