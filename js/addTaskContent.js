@@ -47,6 +47,7 @@ function addTaskClear() {
     clearSubTask();
     selectActivePriority('Medium');
     document.getElementById('selectedContacts').innerHTML = '';
+    clearSelectedContacts();
 }
 
 
