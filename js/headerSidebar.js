@@ -132,6 +132,8 @@ function getInitials(name) {
     return names.map(n => n[0]).join('');
 }
 
+
+/** This function hides the profile, sidebar and other items. */
 function hideSidebarLinks () {
     document.getElementById('headerProfile').classList.add('d-none');
     document.getElementById('sidebarItems').classList.add('d-none');

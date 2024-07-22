@@ -133,6 +133,7 @@ function newSubTaskHTML(selectedSubtask, subtaskText) {
         </li>`
 }
 
+
 /** The function clearSubTask resets subtask icons, changes the text color to gray, and sets the inner HTML to "Add new task". */
 function clearSubTask() {
     document.getElementById('subtasksField').style.color = '#D1D1D1';
@@ -278,13 +279,13 @@ function editSubtask(id) {
     const subtaskElement = document.getElementById(`subtaskText${id}`);
     const editIcon = document.getElementById(`editSubtask${id}`);
     editIcon.src = "assets/img/check.png";
-    editIcon.style.height ="18px";
-    editIcon.style.width ="auto";
-    
+    editIcon.style.height = "18px";
+    editIcon.style.width = "auto";
     const currentText = subtaskElement.innerText;
     subtaskElement.outerHTML = `<input type="text" id="subtaskInput${id}" value="${currentText}" onblur="saveSubtask(${id})" onkeypress="handleKeyPress(event, ${id})" />`;
     document.getElementById(`subtaskInput${id}`).focus();
 }
+
 
 /**M The `saveSubtask` function updates the text of a subtask element based on user input and saves the changes. */
 function saveSubtask(id) {
@@ -301,12 +302,12 @@ function saveSubtask(id) {
     subtasks[id].title = newText;
 }
 
-// Function to handle key press events
+
+/** This function handles key press events. */
 function handleKeyPress(event, id) {
-    if (event.key === 'Enter') {
-        saveSubtask(id);
-    }
+    if (event.key === 'Enter') { saveSubtask(id); }
 }
+
 
 /** This function deletes a subtask. */
 function deleteSubTask(id) {
@@ -334,6 +335,7 @@ function updateSubtaskElements() {
         subTasksContainer.insertAdjacentHTML('beforeend', newSubTaskHTML);
     });
 }
+
 
 /** The function `insertContactsHtml` generates HTML options for a select element based on contact data. */
 function insertContactsHtml(i) {

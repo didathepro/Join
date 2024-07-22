@@ -327,16 +327,13 @@ input[type='checkbox'] {
     flex-wrap: wrap;
     gap: 5px;
     justify-content: space-between;
-    /* Ensure equal space between items */
 }
 
 .selectedContacts>div {
     display: flex;
     align-items: center;
     width: calc(50% - 2.5px);
-    /* Adjust width to ensure two columns */
     box-sizing: border-box;
-    /* Include padding and border in the element's total width and height */
 }
 
 .contact-initials {
